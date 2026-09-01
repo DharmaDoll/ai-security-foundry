@@ -2,6 +2,8 @@
 
 This directory is the requirement-oriented entry point.
 
+See [`plan.md`](plan.md) for the incremental plan for developing the controls knowledge base.
+
 ## Primary backbone
 
 OWASP AISVS is the primary verification/control backbone.
