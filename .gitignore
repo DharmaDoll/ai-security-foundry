@@ -1,0 +1,21 @@
+# OS / editors
+.DS_Store
+.idea/
+.vscode/
+
+# Local environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Common build/cache artifacts
+__pycache__/
+.pytest_cache/
+node_modules/
+dist/
+build/
+coverage/
+.tmp/
+tmp/

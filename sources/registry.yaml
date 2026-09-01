@@ -1,0 +1,80 @@
+# Canonical external knowledge sources.
+#
+# IMPORTANT:
+# - This file records the source state last VERIFIED by this repository.
+# - It is not proof that the source has not changed since `last_verified`.
+# - Re-verify primary sources before claiming alignment with "latest" guidance.
+#
+# Initialized: 2026-09-01
+
+schema_version: 1
+last_registry_review: "2026-09-01"
+
+sources:
+  owasp-aisvs:
+    name: "OWASP Artificial Intelligence Security Verification Standard (AISVS)"
+    role: "control"
+    canonical_url: "https://github.com/OWASP/AISVS"
+    status: "stable"
+    current_version: "1.0"
+    development_version: "1.01-dev"
+    identifier_guidance: "Prefer versioned IDs such as v1.0-C9.4.3"
+    last_verified: "2026-09-01"
+    notes: "Primary verification/control backbone. Stable release directories are intended to remain fixed while development continues in a new version directory."
+
+  mitre-atlas:
+    name: "MITRE ATLAS"
+    role: "adversary"
+    canonical_url: "https://atlas.mitre.org/"
+    status: "rolling"
+    current_version: "rolling"
+    last_verified: "2026-09-01"
+    notes: "Primary adversary behavior/TTP taxonomy for AI-enabled systems. Treat technique/tactic changes as taxonomy changes requiring mapping review."
+
+  owasp-genai-llm-top10:
+    name: "OWASP GenAI LLM Top 10 2026"
+    role: "risk"
+    canonical_url: "https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/"
+    status: "stable"
+    current_version: "2026"
+    published: "2026-08-03"
+    last_verified: "2026-09-01"
+    notes: "LLM application risk taxonomy; do not use as the physical repository taxonomy."
+
+  owasp-agentic-top10:
+    name: "OWASP Top 10 for Agentic Applications 2026"
+    role: "risk"
+    canonical_url: "https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/"
+    status: "stable"
+    current_version: "2026"
+    published: "2025-12-09"
+    last_verified: "2026-09-01"
+    notes: "Agentic application risk taxonomy."
+
+  owasp-mcp-top10:
+    name: "OWASP MCP Top 10"
+    role: "risk"
+    canonical_url: "https://owasp.org/www-project-mcp-top-10/"
+    status: "beta"
+    current_version: "beta; published risk identifiers are labeled 2025"
+    next_planned_release: "2026-10"
+    last_verified: "2026-09-01"
+    notes: "Living MCP-specific risk taxonomy. Because it is beta, do not present its classifications as a stable verification standard."
+
+  owasp-agentic-skills-top10:
+    name: "OWASP Agentic Skills Top 10"
+    role: "risk"
+    canonical_url: "https://owasp.org/www-project-agentic-skills-top-10/"
+    status: "public-review"
+    current_version: "v1 draft/public review"
+    last_verified: "2026-09-01"
+    notes: "Agent-skill and behavior-layer risk taxonomy. Particularly relevant to Codex/Claude Code/Cursor-style reusable agent instructions and tool orchestration."
+
+  owasp-ai-exchange:
+    name: "OWASP AI Exchange"
+    role: "reference"
+    canonical_url: "https://owasp.org/www-project-ai-security-and-privacy-guide/"
+    status: "rolling"
+    current_version: "rolling"
+    last_verified: "2026-09-01"
+    notes: "Broad supporting AI security and privacy knowledge base. Use as research/context rather than a control backbone."
