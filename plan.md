@@ -12,7 +12,7 @@ Keep the repository small until the pattern format and maintenance workflow are 
 - [x] Create security-pattern template
 - [x] Create upstream-update review template
 - [ ] Choose repository license
-- [ ] Define ownership/reviewer policy for `recommended` status
+- [x] Define ownership/reviewer policy for `recommended` status
 
 ## Phase 1 — Prove the pattern model
 

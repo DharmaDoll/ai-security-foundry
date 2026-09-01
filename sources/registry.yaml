@@ -4,6 +4,8 @@
 # - This file records the source state last VERIFIED by this repository.
 # - It is not proof that the source has not changed since `last_verified`.
 # - Re-verify primary sources before claiming alignment with "latest" guidance.
+# - `current_version: "rolling"` is valid for sources without discrete releases.
+# - Record `published` only when a publication or release date exists and can be established.
 #
 # Initialized: 2026-09-01
 

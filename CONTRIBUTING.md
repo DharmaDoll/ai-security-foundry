@@ -52,4 +52,9 @@ Patterns should move through:
 
 `draft -> reviewed -> recommended -> deprecated`
 
+- `reviewed` requires at least one human reviewer with relevant engineering or security expertise.
+- `recommended` additionally requires a named owner and approval from a human product-security reviewer who did not author the latest substantive change.
+- Record the review date, reviewer, scope, and durable evidence in the pattern front matter.
+- Agents may prepare review materials but do not count as the required human reviewer.
+
 Deprecation should name a replacement when one exists.

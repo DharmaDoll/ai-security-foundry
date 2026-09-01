@@ -1,13 +1,15 @@
 ---
 id: "PATTERN-TBD"
 title: "Pattern title"
-status: "draft" # draft | reviewed | recommended | deprecated
+status: "draft" # draft | reviewed | recommended | deprecated; see AGENTS.md
 category: "agents"
 created: "YYYY-MM-DD"
-last_reviewed: "YYYY-MM-DD"
+last_reviewed: null # YYYY-MM-DD after human review
 owners: []
+reviewed_by: [] # Non-sensitive human reviewer handles; required for reviewed/recommended
+review_scope: null # Scope covered by the recorded review
+review_evidence: null # Durable PR URL or review record
 tags: []
-framework_mappings: []
 ---
 
 # Pattern title
@@ -116,14 +118,18 @@ Do not claim complete prevention of prompt injection or agent compromise unless 
 
 ## Framework mappings
 
-| Source | ID | Strength | Rationale | Last reviewed |
-|---|---|---|---|---|
-| OWASP AISVS | `vX.Y-C...` | direct/partial/context | TBD | YYYY-MM-DD |
-| MITRE ATLAS | TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| OWASP GenAI LLM Top 10 | TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| OWASP Agentic Top 10 | TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| OWASP MCP Top 10 | TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| OWASP Agentic Skills Top 10 | TBD | direct/partial/context | TBD | YYYY-MM-DD |
+This table is the canonical mapping record for the pattern. Do not duplicate mappings in front matter unless the repository adopts a machine-readable mapping schema.
+
+Use the source key from `sources/registry.yaml`. Record the source version and maturity/status as reviewed; this is a snapshot and does not inherit future registry changes automatically.
+
+| Source key | Source | ID | Version / status | Strength | Rationale | Last reviewed |
+|---|---|---|---|---|---|---|
+| `owasp-aisvs` | OWASP AISVS | `vX.Y-C...` | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
+| `mitre-atlas` | MITRE ATLAS | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
+| `owasp-genai-llm-top10` | OWASP GenAI LLM Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
+| `owasp-agentic-top10` | OWASP Agentic Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
+| `owasp-mcp-top10` | OWASP MCP Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
+| `owasp-agentic-skills-top10` | OWASP Agentic Skills Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
 
 Delete irrelevant rows rather than forcing mappings.
 

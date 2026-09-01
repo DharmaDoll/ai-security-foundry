@@ -49,6 +49,26 @@ Do not treat these sources as interchangeable.
 - Keep commits narrowly scoped when asked to commit.
 - Prefer showing a concise diff summary before proposing a commit.
 
+## Git branch and worktree safety
+
+This repository may be operated by multiple Codex sessions concurrently.
+
+- Operate only within the current worktree, branch, and assigned task.
+- Do not run `git switch`, `git checkout`, or otherwise change branches.
+- Do not create, move, remove, or modify worktrees unless explicitly requested.
+- Before editing or performing Git operations, verify:
+  - `git branch --show-current`
+  - `git status --short --branch`
+- Before commit, rebase, merge, or push, also verify:
+  - `git worktree list`
+- If the branch or repository state changes unexpectedly, stop and report it.
+- Treat unrelated changes as belonging to the user or another session.
+- Do not stage, commit, stash, restore, or discard unrelated changes.
+- Stage explicit file paths; do not use `git add .` or `git add -A`.
+- Do not use destructive Git commands such as `git reset --hard`,
+  `git clean`, or broad `git restore` unless explicitly authorized.
+- Commit or push only when explicitly requested.
+
 ## Engineering taxonomy
 
 Use these stable top-level categories unless a strong architectural reason requires another category:
@@ -97,14 +117,15 @@ For new guidance, reason in this order:
 
 ```text
 Use case
+  -> scope and assumptions
   -> assets and trust boundaries
-  -> threat / attacker capability
+  -> threat / attacker capability / abuse paths
   -> security invariant
   -> architecture / control placement
   -> secure implementation
-  -> abuse case
   -> negative and positive tests
   -> observability / response
+  -> residual risk and limitations
   -> framework mappings
 ```
 
@@ -129,7 +150,7 @@ Never reverse this process into "find a framework item and generate code that ap
 When a task depends on a current external framework, protocol, product, or standard:
 
 1. Verify the upstream primary source.
-2. Determine the exact version, publication date, and maturity state.
+2. Determine the exact version or rolling state, the publication date when one exists or can be established, and the maturity state.
 3. Record or update that state in `sources/registry.yaml` when appropriate.
 4. Prefer versioned identifiers.
 5. Separate facts taken from upstream sources from this repository's engineering interpretation.
@@ -231,7 +252,7 @@ If two authoritative sources disagree:
 - Do not introduce a dependency solely to make an example look realistic.
 - Pin or constrain dependencies when reproducibility or supply-chain integrity matters.
 
-## Definition of done for a new pattern
+## Definition of ready for review for a new pattern
 
 A pattern is ready for review when:
 
@@ -245,7 +266,16 @@ A pattern is ready for review when:
 - primary references are present;
 - no secrets, internal identifiers, or organization-specific confidential details are present.
 
-A pattern should be marked `recommended` only after human security review.
+Meeting these criteria means the pattern is ready for human review. It does not by itself make the pattern `reviewed` or `recommended`.
+
+## Pattern review lifecycle
+
+- `draft`: useful content that has not completed human technical/security review.
+- `reviewed`: at least one human reviewer with relevant engineering or security expertise has reviewed the pattern for the stated scope.
+- `recommended`: a named owner accepts maintenance responsibility, and at least one human product-security reviewer who did not author the latest substantive change accepts the pattern as a default/golden pattern for the stated scope.
+- `deprecated`: retained for traceability; link a replacement when one exists.
+
+For transitions to `reviewed` or `recommended`, record the review date, a non-sensitive reviewer identity such as a public repository handle, review scope, and durable review evidence such as a merged pull request or review record. Agents may prepare a pattern and its review materials, but they do not count as the required human reviewer. If the required approval or evidence is missing, keep the pattern at its previous status.
 
 ## Preferred change style
 

@@ -54,15 +54,25 @@ Attack scenarios and recommended design live in the same pattern.
 ```text
 Use case
   |
-Threat / abuse path
+Scope and assumptions
+  |
+Assets and trust boundaries
+  |
+Threat / attacker capability / abuse path
   |
 Security invariant
   |
-Recommended architecture
+Recommended architecture / control placement
   |
 Implementation
   |
-Security tests
+Negative and positive tests
+  |
+Observability / response
+  |
+Residual risk and limitations
+  |
+Framework mappings
 ```
 
 This avoids a common failure mode where an attack catalog and a reference-architecture catalog become disconnected.
@@ -149,3 +159,5 @@ The repository should distinguish:
 - `deprecated`: retained for historical traceability; replacement should be linked
 
 Framework alignment alone is never sufficient to mark a pattern `recommended`.
+
+Transitions to `reviewed` and `recommended` require recorded human review as defined in `AGENTS.md`. A `recommended` pattern must also have a named owner and independent human product-security approval for its stated scope. The review metadata belongs in the pattern front matter defined by `templates/security-pattern.md`.

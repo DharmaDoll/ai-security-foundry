@@ -35,9 +35,9 @@ The goal is not to copy standards into this repository. The goal is to connect s
 
 `engineering/` is organized by relatively stable technology and architecture concepts rather than by the chapter structure of an external framework.
 
-Each pattern should explain:
+Each substantive engineering pattern must explain:
 
-> Use case → Threat → Security invariant → Trust boundary → Recommended architecture → Implementation → Abuse case → Security test → Framework mappings
+> Use case → Scope and assumptions → Assets and trust boundaries → Threat and abuse paths → Security invariant → Recommended architecture and control placement → Implementation → Negative and positive tests → Observability and response → Residual risk → Framework mappings
 
 Attack and defense live together. A developer should not need to jump between a separate attack catalog and a separate architecture catalog to understand one engineering problem.
 
@@ -121,7 +121,9 @@ engineering/agents/secure-tool-execution/
 
 The pattern may map to several frameworks at once. That is expected.
 
-## Initial recommended patterns
+New patterns start as `draft`. The `reviewed` and `recommended` states require recorded human review; see the pattern review lifecycle in `AGENTS.md`.
+
+## Initial priority patterns
 
 A practical starting sequence is:
 
