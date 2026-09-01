@@ -9,3 +9,5 @@ Engineering-facing entry point. Organize by relatively stable technologies/trust
 Do not add a document that merely restates a framework item. A concrete pattern should start from a system use case and threat, define testable security invariants, recommend an architecture/implementation, provide verification, and then map to applicable frameworks.
 
 Use `templates/security-pattern.md` for new patterns.
+
+段階的な開発優先順位とドメインの責務は [`plan.md`](plan.md) に定義する。
