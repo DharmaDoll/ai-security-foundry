@@ -111,6 +111,25 @@ Preferred model:
 
 This makes upstream upgrades easier and reduces the risk of stale copied standard text.
 
+## Mapping as a derived artifact
+
+Develop controls and engineering patterns independently. Create a mapping only
+after both endpoints are sufficiently understood to compare a control's security
+property with a pattern's invariants, enforcement points, verification, and
+limitations.
+
+Track mapping assessment separately from control maturity and pattern lifecycle:
+
+- `not-assessed`: no comparison has been performed;
+- `assessed-no-match`: comparison found no meaningful relationship;
+- `gap`: a useful relationship is expected, but an adequate endpoint is absent;
+- `proposed`: a relationship and strength have been argued but not reviewed;
+- `validated`: the relationship, strength, and scope have been reviewed;
+- `re-review-required`: an endpoint or upstream source changed materially.
+
+Only `proposed` and `validated` assessments assert a mapping. Mapping absence must
+not block an otherwise mature control or pattern.
+
 ## Automation boundary
 
 The desirable automation target is:

@@ -1,6 +1,6 @@
 # Engineering Source and Mapping Policy
 
-## Framework Mappings
+## Framework Sources and Mapping Assessment
 
 Frameworks provide evidence and context for engineering decisions.
 
@@ -16,6 +16,15 @@ Relevant sources may include:
 * relevant primary technical specifications.
 
 Mappings are secondary outputs.
+
+They are derived only after a Pattern and the other endpoint have each been
+developed independently. Do not use a control inventory or framework coverage gap
+to discover Pattern candidates.
+
+Threat-taxonomy content is different from coverage-driven generation. Techniques,
+procedures, and case studies may supply evidence of attacker behavior and recurring
+attack paths during Pattern discovery. Analyze their technical content first; record
+identifier relationships as Mappings only after the Pattern boundary is stable.
 
 The engineering pattern must remain understandable without requiring the reader to interpret the external framework first.
 
@@ -45,6 +54,9 @@ Do not:
 * claim that one engineering pattern fully satisfies a control without sufficient evidence.
 
 Use explicit mappings to connect the two domains.
+
+Mapping success is not a Pattern maturity requirement. Record an assessed no-match
+or gap when no defensible relationship exists.
 
 If engineering work reveals a missing or unclear control mapping, record the gap for follow-up.
 

@@ -16,7 +16,8 @@ The domain should provide:
 - threat rationale and applicability boundaries;
 - testable security properties;
 - verification approaches and evidence expectations;
-- explicit, evidence-backed mappings to threats and engineering patterns;
+- explicit threat rationale and optional references to separately maintained
+  engineering-pattern mapping assessments;
 - historical traceability when an upstream identifier or requirement changes.
 
 The domain should not become:
@@ -80,7 +81,8 @@ The catalog should be a compact inventory and traceability layer, not a second c
 - How mature is this repository's interpretation?
 - Is human re-review required?
 - Where is the detailed control, if one exists?
-- Which threat and engineering mappings have been justified?
+- Which threat mappings have been justified?
+- Which separately maintained engineering-pattern mapping assessments refer to this requirement?
 
 Catalog entries do not require a corresponding Markdown file. Most requirements should initially exist only as catalog metadata; a detailed control document should be created only when that requirement is selected for maturation.
 
@@ -130,10 +132,9 @@ requirements:
     review_status: unreviewed
     development_priority: golden-control
     control_ref: null
-    mappings:
-      threats: []
-      engineering_patterns: []
-      related_requirements: []
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
     last_reviewed: null
     reviewed_by: []
     review_scope: null
@@ -159,7 +160,9 @@ This snippet defines a schema proposal; it is not a completed control record.
 | `review_status` | `unreviewed`, `reviewed`, or `re-review-required`; independent of maturity |
 | `development_priority` | Planning value such as `golden-control`, `next`, or `backlog`; not a coverage score |
 | `control_ref` | Path to a substantive control document, or `null` when none exists |
-| `mappings` | Justified threat, engineering, and related-requirement links |
+| `threat_mappings` | Justified threat relationships used in the control rationale |
+| `related_requirements` | Related, overlapping, superseding, or superseded requirements |
+| `mapping_assessment_refs` | Optional links to canonical assessments under `mappings/`; status and relationship details are not duplicated in the control catalog |
 | `last_reviewed` / `reviewed_by` / `review_scope` / `review_evidence` | Date, non-sensitive human reviewer identity, reviewed scope, and durable review record |
 
 ### 4.5 Schema invariants
@@ -170,9 +173,7 @@ The JSON Schema and catalog validation should enforce at least:
 - consistency between source version and versioned identifier;
 - enumerated source, requirement, maturity, and review states;
 - AISVS verification level limited to 1, 2, or 3;
-- no dangling `control_ref` or mapping target;
-- a rationale and `last_reviewed` value for every mapping;
-- a source version/status snapshot for external mappings;
+- no dangling `control_ref` or `mapping_assessment_refs` target;
 - preservation of deprecated, superseded, and removed records;
 - `review_status: reviewed` only when review date, human reviewer, review scope, and durable review evidence exist;
 - `maturity: verifiable` only when a substantive control document exists.
@@ -188,10 +189,9 @@ Maturity describes the depth of this repository's understanding. It does not des
 | `discovered` | Versioned ID, source/version/status, family/section, verification level, canonical link, and upstream revision are verified |
 | `understood` | Repository-authored interpretation, security objective, applicability, assumptions, ambiguity, and known exclusions are documented |
 | `threat-linked` | Relevant attacker capability, failure mode, affected assets, and justified threat mappings are documented; absence of a useful mapping is explicit |
-| `engineering-linked` | Candidate engineering patterns have been evaluated and either justified mappings with strength are recorded or an explicit engineering gap is recorded |
 | `verifiable` | Testable security properties, positive and negative verification, evidence expectations, limitations, and review metadata are complete |
 
-Progression is ordered: a record should not skip an earlier stage. `engineering-linked` does not require an existing engineering pattern; a reviewed and explicit gap satisfies the stage without inventing a weak link.
+Progression is ordered: a record should not skip an earlier stage.
 
 Human review is an orthogonal gate:
 
@@ -200,6 +200,11 @@ Human review is an orthogonal gate:
 - `re-review-required`: an upstream or repository change may have invalidated the prior review.
 
 A control is considered mature only when `maturity: verifiable` and `review_status: reviewed`. Upstream change detection may set `review_status: re-review-required`; it must not silently rewrite the interpretation or erase prior evidence.
+
+Engineering mapping assessment is maintained separately under `mappings/`. Its
+status may be `not-assessed`, `assessed-no-match`, `gap`, `proposed`, `validated`,
+or `re-review-required`. A control can reach `verifiable` and `reviewed` without an
+assessment or a successful mapping.
 
 ## 6. Definition of a complete control
 
@@ -214,12 +219,15 @@ A substantive control is ready for human review when it contains all of the foll
 7. Threat and failure-mode rationale with defensible mappings or an explicit statement that no mapping adds value.
 8. Verification guidance covering positive behavior, negative/abuse cases, expected results, and failure conditions.
 9. Evidence expectations identifying acceptable artifact types, producers, freshness, scope, and acceptance criteria.
-10. Engineering-pattern mappings with `direct`, `partial`, or `context` strength and a rationale, or an explicit gap.
-11. Related or overlapping requirements that must not be incorrectly collapsed.
-12. Known limitations, residual uncertainty, and implementation-dependent assumptions.
-13. Primary references, attribution, review metadata, and change history.
+10. Related or overlapping requirements that must not be incorrectly collapsed.
+11. Known limitations, residual uncertainty, and implementation-dependent assumptions.
+12. Primary references, attribution, review metadata, and change history.
 
 The control becomes mature only after human product-security review confirms that these elements are internally consistent and the verification/evidence expectations can evaluate the stated security properties. Documentation existence, compilation, a configuration flag, or a framework mapping alone is insufficient.
+
+Engineering mapping is assessed separately after a Pattern exists independently.
+The assessment may validly conclude `assessed-no-match` or `gap`; neither outcome
+reduces control maturity.
 
 ## 7. First family and Golden Control
 
@@ -250,25 +258,26 @@ It is a strong exemplar because it requires:
 - negative tests that attempt to bypass, tamper with, or fail open around the policy decision point;
 - multiple evidence types, including architecture review, policy configuration, decision logs, denial tests, and deployment isolation evidence;
 - careful relationship analysis with `v1.0-C9.5.3`, without assuming the two requirements are duplicates;
-- possible mappings to several future engineering patterns while allowing the current absence of a mature pattern to be recorded as a gap.
+- a stable security boundary that can later be compared with independently
+  discovered engineering patterns.
 
-The Golden Control phase should not pre-populate its mappings. Each threat, related requirement, and engineering link must be validated while the control is matured.
+The Golden Control phase should not pre-populate engineering mappings. Threat and
+related-requirement analysis belongs to control development; engineering links are
+assessed only after an independent Pattern endpoint exists.
 
 ## 8. Relationship model
 
-The intended relationship is:
+Controls and Patterns have separate origins. Mapping is a third artifact:
 
 ```text
-Threat / failure mode
-        |
-        | justified rationale
-        v
-Control security property
-        |
-        +--> verification method --> expected result --> evidence expectation
-        |
-        +<-> engineering pattern mapping
-                 direct / partial / context
+Authoritative requirement              Systems / attacks / recurring failures
+          |                                           |
+          v                                           v
+Control security property                  Engineering Pattern
+          |                                           |
+          +--> verification and evidence              |
+          \                                           /
+           +---------- mapping assessment -----------+
 ```
 
 ### Threats
@@ -280,6 +289,10 @@ Control security property
 
 ### Engineering patterns
 
+- Patterns are discovered from recurring system security problems and attack
+  scenarios, not from this control inventory.
+- Compare a control with a Pattern only after both are independently understandable
+  and reviewable.
 - Map by stable repository path and reviewed revision or review date.
 - Use `direct`, `partial`, or `context` consistently.
 - State which part of the control the pattern addresses and what remains outside it.
@@ -300,7 +313,7 @@ Control security property
 - Treat screenshots and configuration exports as point-in-time evidence, not proof of continuous enforcement.
 - Prefer repeatable test results and policy-decision records where the security property permits them.
 
-This model keeps `controls/` and `engineering/` independent: controls define the assurance claim and evaluation criteria, while engineering patterns independently describe practical designs. Neither side may rewrite the other merely to make a mapping appear complete.
+This model keeps `controls/` and `engineering/` independent: controls define the assurance claim and evaluation criteria, while engineering patterns independently describe recurring design problems and reusable solutions. Mapping records the reviewed relationship without rewriting either endpoint.
 
 ## 9. Information that remains upstream-only
 
@@ -348,9 +361,8 @@ Exit gate:
 
 Deliverables:
 
-- develop `v1.0-C5.2.5` through all five maturity stages;
+- develop `v1.0-C5.2.5` through all four control maturity stages;
 - validate threat and related-requirement mappings;
-- assess existing engineering patterns and record justified mappings or explicit gaps;
 - define verification and evidence expectations;
 - obtain human product-security review.
 
@@ -367,7 +379,7 @@ Deliverables:
 - select the next two or three C5 requirements based on distinct learning value, not numerical order;
 - mature one selected requirement at a time.
 
-Candidate learning areas include end-user authorization context in retrieval, policy-enforced resource access, and multi-tenant isolation. Selection requires a separate review of the exact requirement and current engineering gaps.
+Candidate learning areas include end-user authorization context in retrieval, policy-enforced resource access, and multi-tenant isolation. Selection requires a separate review of the exact requirement, assurance value, and threat evidence.
 
 Exit gate:
 
@@ -381,15 +393,17 @@ Prioritize one representative requirement at a time from:
 2. C10 MCP Security;
 3. C8 Memory, Embeddings & Vector Database Security.
 
-This wave tests authorization delegation, tool boundaries, protocol identity, retrieval isolation, and cross-family mappings. Do not ingest detailed content for all three chapters at once.
+This wave tests authorization delegation, tool boundaries, protocol identity, retrieval isolation, and cross-family control relationships. Do not ingest detailed content for all three chapters at once.
 
 Exit gate:
 
-- each selected control adds a distinct verification or evidence pattern and has reviewed mappings.
+- each selected control adds a distinct verification or evidence approach and is
+  mature on its own terms.
 
-### Phase 5 — Expand by engineering need
+### Phase 5 — Expand by assurance and risk need
 
-Use observed product-security demand to select representative controls from:
+Use observed product-security demand, threat evidence, assurance gaps, and review
+capacity to select representative controls from:
 
 - C2 and C12 for input boundaries and operational detection;
 - C1, C3, C4, and C6 for data/model lifecycle, infrastructure, and supply-chain assurance;
@@ -420,7 +434,7 @@ Do not use percentage of AISVS requirements documented as the primary success me
 - percentage of mature controls with executable or repeatable negative verification;
 - mapping rationale review quality and stale-mapping count;
 - time to identify and triage a relevant upstream change;
-- number of explicit engineering gaps converted into reviewed patterns;
+- quality and age of separate mapping assessments;
 - evidence expectations that engineering teams can actually produce;
 - recurring lessons incorporated into schema, template, and guidance.
 

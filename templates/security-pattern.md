@@ -116,22 +116,14 @@ State what this pattern does not solve.
 
 Do not claim complete prevention of prompt injection or agent compromise unless a proof-level guarantee genuinely exists.
 
-## Framework mappings
+## Related mapping assessments (optional)
 
-This table is the canonical mapping record for the pattern. Do not duplicate mappings in front matter unless the repository adopts a machine-readable mapping schema.
-
-Use the source key from `sources/registry.yaml`. Record the source version and maturity/status as reviewed; this is a snapshot and does not inherit future registry changes automatically.
-
-| Source key | Source | ID | Version / status | Strength | Rationale | Last reviewed |
-|---|---|---|---|---|---|---|
-| `owasp-aisvs` | OWASP AISVS | `vX.Y-C...` | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| `mitre-atlas` | MITRE ATLAS | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| `owasp-genai-llm-top10` | OWASP GenAI LLM Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| `owasp-agentic-top10` | OWASP Agentic Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| `owasp-mcp-top10` | OWASP MCP Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
-| `owasp-agentic-skills-top10` | OWASP Agentic Skills Top 10 | TBD | TBD / TBD | direct/partial/context | TBD | YYYY-MM-DD |
-
-Delete irrelevant rows rather than forcing mappings.
+Mapping is a derived relationship, not an input to Pattern discovery and not a
+measure of Pattern maturity. Do not record assessment status or relationship details
+here. After independently developing both endpoints, create the canonical assessment
+under `mappings/` and add a link here only when useful. Follow
+`mappings/README.md`; do not add placeholder links. Delete this section when no
+assessment link exists.
 
 ## References
 

@@ -13,6 +13,15 @@ Build practical security engineering patterns for secure AI systems.
 
 Optimize for secure-by-default architecture, testability, and real engineering value rather than framework coverage.
 
+An engineering pattern captures either a security design problem that recurs across
+systems or a real attack/failure scenario that generalizes beyond one product,
+together with reusable security invariants and solution principles. Discover
+patterns from systems and failures, not from control catalogs.
+
+Threat-taxonomy Techniques, procedures, and case studies—especially MITRE ATLAS—may
+be Pattern discovery evidence when their technical attack paths are analyzed. Do
+not create one Pattern per identifier; identifier Mapping remains a later step.
+
 ## Required reasoning
 
 For substantial patterns, reason in this order:
@@ -26,7 +35,6 @@ Use case
 → Implementation
 → Security tests
 → Operational considerations
-→ Framework mappings
 → Known limitations
 
 Do not jump directly from a framework requirement to code.
@@ -54,7 +62,13 @@ Controls answers:
 
 "What security property should be assured?"
 
-Connect them through mappings. Do not reorganize engineering content to maximize control coverage.
+When a defensible relationship exists, connect them through mappings only after
+both sides have been developed independently. Do not generate Pattern candidates
+from controls, define a Pattern to fit a requirement, or reorganize engineering
+content to maximize control coverage.
+
+Mapping assessment is orthogonal to Pattern maturity. A mature Pattern may have an
+assessed no-match or expose a control gap.
 
 ## Incremental development
 
@@ -73,7 +87,10 @@ A mature pattern should normally include:
 * security tests;
 * operational considerations;
 * known limitations;
-* justified mappings and references.
+* authoritative references.
+
+Mapping assessments live under `../mappings/` and are not part of Pattern maturity.
+Patterns may link to canonical assessments when they exist.
 
 ## Domain instructions
 
@@ -92,6 +109,7 @@ Domain-specific files may add requirements for areas such as:
 Read the relevant document when the task requires it:
 
 * `docs/security-principles.md`
+* `docs/pattern-discovery.md`
 * `docs/pattern-lifecycle.md`
 * `docs/testing-guidance.md`
 * `docs/source-policy.md`

@@ -18,6 +18,9 @@ Keep the repository small until the pattern format and maintenance workflow are 
 
 Build a small set of high-value patterns before expanding coverage.
 
+These candidates come from recurring system security problems and attack scenarios,
+not from framework or control coverage targets.
+
 - [ ] `agents/secure-tool-execution`
 - [ ] `rag/secure-multi-tenant-retrieval`
 - [ ] `llm/indirect-prompt-injection-containment`
@@ -33,12 +36,13 @@ For each pattern:
 - [ ] Minimal implementation example exists where useful
 - [ ] Negative/abuse test exists
 - [ ] Observability guidance exists
-- [ ] AISVS mapping exists where applicable
-- [ ] MITRE ATLAS mapping exists where applicable
-- [ ] Relevant OWASP Top 10 mappings exist
 - [ ] Source versions/maturity are recorded
 
 ## Phase 2 — Maintenance workflow
+
+- [ ] Assess mappings separately after independently developed endpoints are reviewable
+- [ ] Asserted mappings have technical rationale, strength, and source-state metadata
+- [ ] Preserve explicit no-match and gap outcomes without changing endpoint maturity
 
 - [ ] Validate the source-registry schema after first real framework update
 - [ ] Define a machine-readable mapping schema only after pattern metadata stabilizes

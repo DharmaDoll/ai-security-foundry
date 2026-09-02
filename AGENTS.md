@@ -17,6 +17,11 @@ This repository has two primary entry points:
 
 External frameworks are metadata and evidence sources. They do not dictate the physical repository structure.
 
+Controls and engineering patterns must be developed independently. Mappings are
+derived relationship artifacts created only after both sides are sufficiently
+understood; they are not inputs for discovering engineering patterns or defining
+control meaning.
+
 ### Source roles
 
 Treat sources according to their role:
@@ -88,6 +93,17 @@ Do not create a top-level directory for every threat, Top 10 edition, vendor, or
 
 Prompt injection, tool misuse, credential abuse, poisoning, exfiltration, etc. are generally **threats or failure modes**, not top-level repository taxonomy.
 
+## Pattern discovery
+
+An engineering pattern captures either a security design problem that recurs across
+systems or a real attack/failure scenario that generalizes beyond one product,
+together with reusable security invariants and solution principles.
+
+Discover pattern candidates from concrete system archetypes, assets, identities,
+trust boundaries, data flows, incidents, attack paths, and recurring failure modes.
+Do not generate pattern candidates from a control inventory or create a pattern
+merely because a framework requirement exists.
+
 ## Mandatory pattern structure
 
 Every substantive engineering pattern MUST cover, at minimum:
@@ -103,9 +119,8 @@ Every substantive engineering pattern MUST cover, at minimum:
 9. Verification and negative tests
 10. Logging / detection / operational considerations
 11. Known limitations and residual risk
-12. Framework mappings
-13. References
-14. Review metadata / changelog
+12. References
+13. Review metadata / changelog
 
 Use `templates/security-pattern.md`.
 
@@ -126,8 +141,10 @@ Use case
   -> negative and positive tests
   -> observability / response
   -> residual risk and limitations
-  -> framework mappings
 ```
+
+Assess mappings in a separate workflow after independently developed endpoints are
+understandable. Do not make that assessment a Pattern completion gate.
 
 Never reverse this process into "find a framework item and generate code that appears to satisfy it" without understanding the threat and trust boundary.
 
@@ -215,6 +232,11 @@ Do not reorganize `engineering/` solely to mirror an upstream taxonomy change.
 
 One engineering pattern may map to multiple frameworks. This is normal.
 
+Mappings are derived artifacts. Assess them only after the control interpretation
+and engineering pattern have each been developed on their own terms. A control or
+pattern may be mature without a successful mapping; record an assessed no-match or
+gap instead of inventing a relationship.
+
 Mappings must state their strength:
 
 - `direct`: the pattern materially implements/verifies the mapped requirement or risk mitigation.
@@ -262,7 +284,8 @@ A pattern is ready for review when:
 - insecure/failure modes are described;
 - positive and negative verification are provided;
 - residual risks are stated;
-- current framework mappings are version/status aware;
+- any linked mapping assessment is canonical, version/status aware, and does not
+  redefine the pattern;
 - primary references are present;
 - no secrets, internal identifiers, or organization-specific confidential details are present.
 

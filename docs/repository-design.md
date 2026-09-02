@@ -19,7 +19,7 @@ Therefore the physical structure is based on relatively stable technology and tr
 
 Threats and frameworks are attached as metadata/mappings.
 
-## Two views, one body of engineering knowledge
+## Two independent views and a derived mapping layer
 
 ### Controls view
 
@@ -31,16 +31,13 @@ OWASP AISVS is the primary control backbone because it is designed as a verifica
 
 This repository should not fork AISVS as its primary working model. Forking and modifying the standard directly would couple internal engineering content to upstream document structure and make maintenance, attribution, and version tracking harder.
 
-Instead:
+Instead, controls are developed independently from engineering patterns:
 
 ```text
 AISVS / other standards
         |
         v
-controls + mappings
-        |
-        v
-engineering patterns
+     controls
 ```
 
 ### Engineering view
@@ -50,6 +47,12 @@ The engineering view answers:
 > How can this system fail, and how should we build it safely?
 
 Attack scenarios and recommended design live in the same pattern.
+
+A pattern represents either a security design problem that recurs across systems or
+a real attack/failure scenario that generalizes beyond one product, plus reusable
+security invariants and solution principles. Discover patterns from systems, trust
+boundaries, incidents, attack paths, and repeated failure modes—not from a control
+inventory.
 
 ```text
 Use case
@@ -71,31 +74,45 @@ Negative and positive tests
 Observability / response
   |
 Residual risk and limitations
-  |
-Framework mappings
 ```
 
 This avoids a common failure mode where an attack catalog and a reference-architecture catalog become disconnected.
 
-## Framework layers
+### Mapping view
 
-A useful conceptual stack is:
+Mappings are a third, derived body of knowledge:
 
 ```text
-MITRE ATLAS
-  adversary behavior / TTP
-        |
-OWASP risk taxonomies
-  LLM / Agentic / MCP / Agentic Skills
-        |
-OWASP AISVS
-  verifiable control requirements
-        |
-This repository
-  concrete architecture, implementation, tests, operations
+Authoritative requirements         Systems / incidents / attack paths
+            |                                      |
+            v                                      v
+         Controls                    Engineering patterns
+            \                                      /
+             \                                    /
+              +------ mapping assessments ------+
 ```
 
-The layers overlap; they are not a strict hierarchy. Their roles are deliberately different.
+A mapping must not define either endpoint. A control or pattern can mature without
+a successful mapping. Record an assessed no-match or a gap when no defensible
+relationship exists.
+
+## Source roles
+
+A useful conceptual model is:
+
+```text
+OWASP AISVS ------------------------> control interpretation and verification
+MITRE ATLAS / risk taxonomies ------> threat and risk context
+Systems / incidents / specifications -> engineering pattern discovery
+
+Controls + engineering patterns + threat context
+                    |
+                    v
+            mapping assessments
+```
+
+These inputs overlap, but they are not a hierarchy and must not be treated as
+interchangeable.
 
 ## Category boundaries
 

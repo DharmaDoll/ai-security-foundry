@@ -23,23 +23,37 @@ The repository focuses on proactive engineering for systems using technologies s
 
 ## What this repository is
 
-This repository has two deliberately separate views.
+This repository has two deliberately separate primary views and a derived mapping
+layer.
 
 ### 1. Controls view — what must be satisfied?
 
 `controls/` interprets verification requirements and control frameworks. OWASP AISVS is the primary control backbone.
 
-The goal is not to copy standards into this repository. The goal is to connect stable, versioned control requirements to engineering patterns and evidence.
+The goal is not to copy standards into this repository. The goal is to define stable, versioned assurance expectations and verification evidence independently of any particular implementation.
 
 ### 2. Engineering view — how should we build it safely?
 
 `engineering/` is organized by relatively stable technology and architecture concepts rather than by the chapter structure of an external framework.
 
+An engineering pattern starts from either a security design problem that recurs
+across systems or a real attack/failure scenario that generalizes beyond one
+product. It captures reusable security invariants, architecture, implementation
+guidance, tests, and operational practices. Pattern candidates are not generated
+from a control inventory.
+
 Each substantive engineering pattern must explain:
 
-> Use case → Scope and assumptions → Assets and trust boundaries → Threat and abuse paths → Security invariant → Recommended architecture and control placement → Implementation → Negative and positive tests → Observability and response → Residual risk → Framework mappings
+> Use case → Scope and assumptions → Assets and trust boundaries → Threat and abuse paths → Security invariant → Recommended architecture and control placement → Implementation → Negative and positive tests → Observability and response → Residual risk
 
 Attack and defense live together. A developer should not need to jump between a separate attack catalog and a separate architecture catalog to understand one engineering problem.
+
+### 3. Mapping view — how do independently developed artifacts relate?
+
+`mappings/` records version-aware relationship assessments between controls,
+engineering patterns, risks, and adversary techniques. A mapping is derived only
+after its endpoints are understood. It does not define the meaning or maturity of
+either endpoint.
 
 ## Framework roles
 
@@ -96,7 +110,7 @@ See `sources/registry.yaml` for the version and maturity state currently used by
 
 ## Core design principles
 
-1. **Security engineering over framework coverage.** A mapping is useful only if it improves design, implementation, testing, or operations.
+1. **Independent discovery before mapping.** Controls come from assurance needs; patterns come from recurring system problems and attack scenarios. A mapping is a later, reviewed relationship.
 2. **Stable repository taxonomy.** Do not reorganize directories simply because a Top 10 or standard changes its taxonomy.
 3. **Version-aware evidence.** Use versioned requirement identifiers whenever the source supports them, e.g. `v1.0-C9.4.3` rather than an unversioned AISVS ID.
 4. **Threat and mitigation together.** Explain how a pattern fails before prescribing how it should be built.
@@ -119,7 +133,9 @@ engineering/agents/secure-tool-execution/
 └── tests/
 ```
 
-The pattern may map to several frameworks at once. That is expected.
+After the pattern is independently mature enough to compare, a separate assessment
+may map it to several controls or frameworks at once. A no-match or gap is also a
+valid assessment result.
 
 New patterns start as `draft`. The `reviewed` and `recommended` states require recorded human review; see the pattern review lifecycle in `AGENTS.md`.
 

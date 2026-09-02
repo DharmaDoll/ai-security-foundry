@@ -39,6 +39,21 @@ Organize content primarily around stable engineering concepts, system boundaries
 
 Do not reorganize the repository merely to mirror an external framework or Top 10 taxonomy.
 
+## What Constitutes a Pattern
+
+An engineering pattern captures either a security design problem that recurs across
+systems or a real attack/failure scenario that generalizes beyond one product,
+together with reusable security invariants, solution principles, verification, and
+limitations.
+
+Discover candidates by comparing concrete system archetypes, assets, identities,
+trust boundaries, data flows, incidents, attack paths, and recurring failure modes.
+Do not derive candidates from a control inventory or create a Pattern merely because
+a framework requirement exists. Threat-taxonomy Techniques, procedures, and case
+studies may provide primary attack-path evidence; their identifiers are mapped only
+later. Controls may inform later assurance analysis without becoming the Pattern's
+origin.
+
 ## Use Cases First
 
 Start with the actual engineering problem.

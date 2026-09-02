@@ -17,13 +17,26 @@ Use case
 → Secure implementation
 → Security tests
 → Operational considerations
-→ Framework mappings
 → Known limitations
 ```
 
 Do not skip directly from a framework requirement to implementation code.
 
 Do not start by asking how to maximize framework coverage.
+
+## Pattern Discovery
+
+A candidate Pattern should represent a security design problem or attack scenario
+observed across multiple systems or credibly reusable system contexts. Establish the
+recurring problem, trust boundaries, security invariants, and solution principles
+before assessing controls or framework mappings.
+
+Do not create candidate Patterns from a control catalog. Maintain a compact
+Landscape of candidates instead of placeholder directories or documents.
+
+Threat-taxonomy Techniques, procedures, and case studies may provide discovery
+evidence. Apply [`pattern-discovery.md`](pattern-discovery.md) to their technical
+content; do not translate identifiers one-to-one into Patterns.
 
 ## Known Limitations
 
@@ -63,11 +76,11 @@ Recommended lifecycle:
 5. implement a minimal pattern;
 6. implement security tests;
 7. document limitations;
-8. add framework mappings;
-9. review the result;
-10. improve templates or AGENTS.md based on lessons learned.
+8. review the result;
+9. improve templates or AGENTS.md based on lessons learned.
 
 A completed pattern should improve the repository's ability to produce the next pattern.
+Mapping assessment has its own lifecycle and may happen later.
 
 ## Domain-Specific AGENTS.md
 
@@ -107,12 +120,15 @@ A mature engineering pattern should usually contain:
 * verification or security tests;
 * operational considerations;
 * known limitations;
-* justified framework mappings;
 * authoritative references.
 
 Not every pattern requires executable code.
 
 Architecture and configuration guidance may be the correct implementation artifact when application code is not the relevant security boundary.
+
+Mapping assessment is a separate artifact under `../../mappings/`; it is not a
+Pattern maturity requirement. Link a canonical assessment when one exists rather
+than duplicating its status or relationship details in the Pattern.
 
 ## Scope Discipline
 

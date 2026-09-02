@@ -71,13 +71,17 @@ Control requirement
 → Applicability
 → Required security properties
 → Verification approach
-→ Engineering mappings
 → Evidence expectations
 → Known limitations
 
 Do not begin from implementation code.
 
 Do not infer that a specific implementation is mandatory merely because it is one possible way to satisfy a control.
+
+Assess engineering mappings separately and only after an engineering pattern has
+been developed independently. Mapping success is not a control maturity stage.
+Prioritize control development by assurance need, threat evidence, and verification
+value—not by planned Pattern coverage.
 
 ---
 
@@ -89,7 +93,11 @@ Do not infer that a specific implementation is mandatory merely because it is on
 
 Neither domain is subordinate to the other.
 
-Connect them through explicit mappings.
+When a defensible relationship exists, connect them through explicit mappings.
+
+Mappings are derived after both endpoints are understood. Do not use a control
+inventory to generate engineering pattern candidates, and do not define control
+meaning from a particular pattern.
 
 A control may map to:
 
@@ -160,13 +168,15 @@ Use the control maturity model defined in `plan.md`:
 * discovered;
 * understood;
 * threat-linked;
-* engineering-linked;
 * verifiable.
 
 Treat human review as an independent gate. A control is mature only when it is
 `verifiable` and its review status is `reviewed`.
 
 Do not mark a control mature merely because documentation exists.
+
+Mapping assessment has its own status defined in `../mappings/README.md`. A control
+may be mature with no matching pattern or with an explicit engineering gap.
 
 ---
 

@@ -6,6 +6,9 @@ Planning, autonomous/semi-autonomous action, tool execution, delegation, approva
 
 ## Pattern rule
 
-Do not add a document that merely restates a framework item. A concrete pattern should start from a system use case and threat, define testable security invariants, recommend an architecture/implementation, provide verification, and then map to applicable frameworks.
+Add a Pattern only for a security design problem or attack scenario that recurs
+across systems or credibly reusable contexts. Start from the system and threat, not
+from a control inventory. Develop the Pattern independently; any mapping is assessed
+later as a separate artifact under `mappings/`.
 
 Use `templates/security-pattern.md` for new patterns.
