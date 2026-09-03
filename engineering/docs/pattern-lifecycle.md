@@ -88,10 +88,10 @@ Subdirectories may define additional instructions.
 
 Examples:
 
-* `engineering/agents/AGENTS.md`
-* `engineering/mcp/AGENTS.md`
-* `engineering/rag/AGENTS.md`
-* `engineering/skills/AGENTS.md`
+* `engineering/domains/agents/AGENTS.md`
+* `engineering/domains/mcp/AGENTS.md`
+* `engineering/domains/rag/AGENTS.md`
+* `engineering/domains/skills/AGENTS.md`
 
 Use domain-specific instructions when the domain has:
 

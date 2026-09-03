@@ -85,7 +85,8 @@ Pattern候補は次の順序で発見する。
 ControlやAISVS Researchは、独立して発見されたPatternの脅威・検証を後から補強できるが、
 Controlが存在すること自体をPattern作成理由にしない。
 
-現在の候補比較とPattern化前のGateは[`pattern-landscape.md`](pattern-landscape.md)に記録する。
+現在の候補比較とPattern化前のGateは
+[`docs/pattern-landscape.md`](docs/pattern-landscape.md)に記録する。
 候補の抽出、cluster、split／merge、再利用性検証には、
 [`docs/pattern-discovery.md`](docs/pattern-discovery.md)を使用する。
 
@@ -218,7 +219,7 @@ skill の導入・更新ガバナンスを扱う。行動、identity、data、ob
 
 ## 8. 初期 Golden Pattern
 
-初期 Golden Pattern として `engineering/agents/secure-tool-execution/` を選ぶ。最初の計画範囲は、
+初期 Golden Pattern として `engineering/domains/agents/secure-tool-execution/` を選ぶ。最初の計画範囲は、
 認証済みユーザーに代わってエージェントが内部ツールの行動を提案し、その行動が機微情報を
 読み取るか外部副作用を起こし得るユースケースとする。詳細なパターン内容と実装は次の
 開発フェーズまで作らない。
@@ -308,7 +309,7 @@ Controlは別経路で要件解釈、保証特性、検証、証拠期待を成�
 
 - 領域の責務、成熟度、Definition of Done、優先順位について合意する。
 - システム類型、攻撃シナリオ、反復する設計問題から、
-  [`pattern-landscape.md`](pattern-landscape.md)を更新する。
+  [`docs/pattern-landscape.md`](docs/pattern-landscape.md)を更新する。
 - 候補LandscapeにはControl由来の候補やPatternプレースホルダーを作らない。
 - Landscapeの根拠からGolden Patternの暫定選定を検証し、必要なら再選定する。
 - 既存のリポジトリ指示とテンプレートに矛盾せず、レビュー可能になった時点で終了する。
@@ -371,7 +372,8 @@ Controlは別経路で要件解釈、保証特性、検証、証拠期待を成�
 | ルート `AGENTS.md` | リポジトリ全体の目的、ソースの役割、Git・worktree 安全性、共通マッピング・レビュー規則、全体の Definition of Done | 領域固有の脅威詳細や一パターンのアーキテクチャ |
 | `engineering/AGENTS.md` | 簡潔で強制可能な手順、中心的なセキュリティ原則、スコープ規律、詳細指針への導線 | 長い解説、完全な脅威一覧、パターン内容の重複 |
 | 領域別 `AGENTS.md` | その領域で反復する固有要件、権威ある固有仕様、不変条件の種類、レビュー・テスト上の落とし穴 | 共通規則や、具体的な作業前に想像だけで作る指示 |
-| `engineering/docs/` | security principles、lifecycle、testing、sources など、複数領域で安定して使う解説 | 一つのユースケースの判断や外部標準のコピー |
+| `engineering/docs/` | security principles、lifecycle、testing、sources、候補Landscape、調査記録など、複数領域で安定して使う資料 | 個別Pattern本文や外部標準のコピー |
+| `engineering/domains/` | 安定したEngineering Domainと、そのDomainを主配置先とする個別Pattern | 横断資料、Framework別分類、同一Patternの重複配置 |
 | 領域別 `README.md` | 領域の範囲、責務境界、隣接領域との関係、実在するパターンの索引 | プレースホルダー一覧や完全なフレームワーク分類 |
 | `templates/security-pattern.md` | 必須構造、検討用の問い、メタデータ、レビューゲート、任意のcanonical mapping参照欄 | mapping評価の状態・関係詳細、一つのアーキテクチャへ全パターンを誘導する規範的回答・例 |
 | 個別パターン | 具体的なユースケース、脅威、不変条件、アーキテクチャ、指針、必要な例、テスト、運用、制約、参照、レビュー履歴 | mapping評価の正本、リポジトリ全体の方針、無関係な領域の指針 |
@@ -408,7 +410,7 @@ Controlは別経路で要件解釈、保証特性、検証、証拠期待を成�
 ## 参照
 
 - [`AGENTS.md`](AGENTS.md)
-- [`pattern-landscape.md`](pattern-landscape.md)
+- [`docs/pattern-landscape.md`](docs/pattern-landscape.md)
 - [`docs/security-principles.md`](docs/security-principles.md)
 - [`docs/pattern-discovery.md`](docs/pattern-discovery.md)
 - [`docs/mitre-atlas-pattern-discovery-2026-08.md`](docs/mitre-atlas-pattern-discovery-2026-08.md)

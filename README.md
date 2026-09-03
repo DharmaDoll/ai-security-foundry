@@ -83,17 +83,23 @@ See `sources/registry.yaml` for the version and maturity state currently used by
 ├── controls/
 │   └── README.md
 ├── engineering/
+│   ├── AGENTS.md
 │   ├── README.md
-│   ├── llm/
-│   ├── rag/
-│   ├── agents/
-│   ├── mcp/
-│   ├── skills/
-│   ├── memory/
-│   ├── identity-and-authorization/
-│   ├── data-security/
-│   ├── model-and-supply-chain/
-│   └── observability/
+│   ├── plan.md
+│   ├── docs/
+│   │   ├── README.md
+│   │   └── pattern-landscape.md
+│   └── domains/
+│       ├── llm/
+│       ├── rag/
+│       ├── agents/
+│       ├── mcp/
+│       ├── skills/
+│       ├── memory/
+│       ├── identity-and-authorization/
+│       ├── data-security/
+│       ├── model-and-supply-chain/
+│       └── observability/
 ├── mappings/
 │   └── README.md
 ├── sources/
@@ -126,7 +132,7 @@ See `sources/registry.yaml` for the version and maturity state currently used by
 Start from `templates/security-pattern.md` and place the pattern under the most natural engineering category, for example:
 
 ```text
-engineering/agents/secure-tool-execution/
+engineering/domains/agents/secure-tool-execution/
 ├── README.md
 ├── insecure/
 ├── secure/

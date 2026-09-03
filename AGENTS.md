@@ -76,20 +76,21 @@ This repository may be operated by multiple Codex sessions concurrently.
 
 ## Engineering taxonomy
 
-Use these stable top-level categories unless a strong architectural reason requires another category:
+Keep engineering content under `engineering/domains/` and use these stable domain
+categories unless a strong architectural reason requires another category:
 
-- `engineering/llm/`
-- `engineering/rag/`
-- `engineering/agents/`
-- `engineering/mcp/`
-- `engineering/skills/`
-- `engineering/memory/`
-- `engineering/identity-and-authorization/`
-- `engineering/data-security/`
-- `engineering/model-and-supply-chain/`
-- `engineering/observability/`
+- `engineering/domains/llm/`
+- `engineering/domains/rag/`
+- `engineering/domains/agents/`
+- `engineering/domains/mcp/`
+- `engineering/domains/skills/`
+- `engineering/domains/memory/`
+- `engineering/domains/identity-and-authorization/`
+- `engineering/domains/data-security/`
+- `engineering/domains/model-and-supply-chain/`
+- `engineering/domains/observability/`
 
-Do not create a top-level directory for every threat, Top 10 edition, vendor, or framework chapter.
+Do not create a domain directory for every threat, Top 10 edition, vendor, or framework chapter.
 
 Prompt injection, tool misuse, credential abuse, poisoning, exfiltration, etc. are generally **threats or failure modes**, not top-level repository taxonomy.
 

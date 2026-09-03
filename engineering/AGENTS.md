@@ -94,6 +94,10 @@ Patterns may link to canonical assessments when they exist.
 
 ## Domain instructions
 
+Engineering domain content lives under `domains/`. Keep cross-domain methods,
+research records, and candidate comparisons under `docs/` instead of mixing them
+with Pattern categories.
+
 Before working in a subdomain, read its local `AGENTS.md` when present.
 
 Domain-specific files may add requirements for areas such as:

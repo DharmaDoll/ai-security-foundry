@@ -2,7 +2,9 @@
 
 ## Scope
 
-Engineering-facing entry point. Organize by relatively stable technologies/trust boundaries, not external Top 10 chapter order. Threat and defense belong together inside each concrete pattern.
+Engineering-facing entry point. Organize Pattern content under [`domains/`](domains/)
+by relatively stable technologies and trust boundaries, not external Top 10 chapter
+order. Threat and defense belong together inside each concrete Pattern.
 
 ## Pattern rule
 
@@ -23,6 +25,10 @@ Pattern maturity requirement.
 
 Use `templates/security-pattern.md` for new patterns.
 
-Pattern化前の候補比較は [`pattern-landscape.md`](pattern-landscape.md)、段階的な開発優先順位と
-ドメインの責務は [`plan.md`](plan.md) に定義する。普遍的な候補発見手法は
-[`docs/pattern-discovery.md`](docs/pattern-discovery.md)を使用する。
+## Navigation
+
+- 横断的なEngineering資料と調査記録: [`docs/README.md`](docs/README.md)
+- Patternを配置するEngineering Domain: [`domains/README.md`](domains/README.md)
+- 段階的な開発計画とDomainの責務: [`plan.md`](plan.md)
+- Pattern化前の候補比較: [`docs/pattern-landscape.md`](docs/pattern-landscape.md)
+- 普遍的な候補発見手法: [`docs/pattern-discovery.md`](docs/pattern-discovery.md)

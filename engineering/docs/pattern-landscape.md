@@ -27,7 +27,7 @@ Control IDやFramework coverageを候補の発見根拠にせず、Controls／Fr
 
 これに加え、MITRE ATLAS v2026.08の全Technique、Mitigation、Case Study、relationshipを
 第二の発見入力としてscreeningした。Source snapshot、除外判断、各候補のATLAS evidenceは
-[`docs/mitre-atlas-pattern-discovery-2026-08.md`](docs/mitre-atlas-pattern-discovery-2026-08.md)
+[`mitre-atlas-pattern-discovery-2026-08.md`](mitre-atlas-pattern-discovery-2026-08.md)
 に記録する。ATLAS IDは発見根拠であり、この段階ではMappingではない。
 
 ## 抽出方法
@@ -280,7 +280,7 @@ P18 Resource budgets
 候補を個別Patternの`draft`へ昇格する前に、次を満たす。
 
 具体的な抽出、cluster、split／merge手順は
-[`docs/pattern-discovery.md`](docs/pattern-discovery.md)に従う。
+[`pattern-discovery.md`](pattern-discovery.md)に従う。
 
 1. 少なくとも二つの独立したsystem archetype、または一般化可能な実攻撃・incident evidenceで
    問題の反復性を確認する。

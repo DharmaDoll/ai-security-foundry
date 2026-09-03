@@ -494,7 +494,7 @@ predictive-AI runtime robustness.
 - No Control or Framework Mapping is asserted by this analysis.
 
 The canonical candidate summary is maintained in
-[`../pattern-landscape.md`](../pattern-landscape.md).
+[`pattern-landscape.md`](pattern-landscape.md).
 
 ## Primary references
 

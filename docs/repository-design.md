@@ -4,7 +4,8 @@
 
 External risk taxonomies change faster than engineering concepts. A Top 10 edition may rename, merge, split, or reorder risks without changing the underlying system architecture.
 
-Therefore the physical structure is based on relatively stable technology and trust-boundary concepts:
+Therefore the physical structure under `engineering/domains/` is based on relatively
+stable technology and trust-boundary concepts:
 
 - LLM
 - RAG
@@ -164,7 +165,9 @@ A pattern should live where a developer is most likely to look first. Cross-cutt
 
 Example:
 
-`engineering/agents/secure-tool-execution` may map to identity, MCP, supply chain, observability, AISVS, ATLAS, Agentic Top 10, MCP Top 10, and Agentic Skills Top 10 without being duplicated under each directory.
+`engineering/domains/agents/secure-tool-execution` may map to identity, MCP, supply
+chain, observability, AISVS, ATLAS, Agentic Top 10, MCP Top 10, and Agentic Skills
+Top 10 without being duplicated under each directory.
 
 ## Pattern quality model
 
