@@ -46,6 +46,32 @@ Do not treat threat taxonomies, risk lists, implementation guidance, and verific
 
 ---
 
+## Control Record Organization
+
+Organize substantive AISVS Control records by AISVS family using exactly one
+directory level:
+
+```text
+control-records/
+└── cNN-family-slug/
+    └── vX.Y-cN.N.N-descriptive-control-name.md
+```
+
+Use a zero-padded, lowercase family prefix such as
+`c05-access-control-and-identity/`. Begin the filename with the lowercase,
+versioned Requirement ID, followed by a stable descriptive slug.
+
+Do not create section-level directories or empty family placeholders. Create a
+family directory only when its first substantive Control is added.
+
+The directory layout supports navigation and AISVS traceability; `catalog.yaml`
+remains authoritative for versions, lifecycle, maturity, review state, and
+relationships. Preserve historical paths when upstream content is renamed,
+renumbered, deprecated, or superseded. Do not move or overwrite a historical
+Control solely to mirror a newer AISVS release.
+
+---
+
 ## Source Accuracy
 
 Before interpreting or modifying a control:

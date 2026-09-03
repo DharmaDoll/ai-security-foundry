@@ -69,10 +69,39 @@ class CatalogValidatorTest(unittest.TestCase):
     def test_rejects_dangling_control_reference(self) -> None:
         errors = self._validate_modified_catalog(
             lambda catalog: catalog["requirements"][0].update(
-                control_ref="controls/control-records/missing.md"
+                control_ref=(
+                    "controls/control-records/c05-access-control-and-identity/"
+                    "v1.0-c5.2.5-missing.md"
+                )
             )
         )
         self.assertTrue(any("dangling reference" in error for error in errors))
+
+    def test_rejects_control_reference_in_wrong_family_directory(self) -> None:
+        errors = self._validate_modified_catalog(
+            lambda catalog: catalog["requirements"][0].update(
+                control_ref=(
+                    "controls/control-records/c06-model-supply-chain/"
+                    "v1.0-c5.2.5-missing.md"
+                )
+            )
+        )
+        self.assertTrue(
+            any("family directory must start with c05-" in error for error in errors)
+        )
+
+    def test_rejects_control_filename_with_wrong_requirement_id(self) -> None:
+        errors = self._validate_modified_catalog(
+            lambda catalog: catalog["requirements"][0].update(
+                control_ref=(
+                    "controls/control-records/c05-access-control-and-identity/"
+                    "v1.0-c5.2.6-missing.md"
+                )
+            )
+        )
+        self.assertTrue(
+            any("filename must start with v1.0-c5.2.5-" in error for error in errors)
+        )
 
     def test_rejects_dangling_mapping_assessment_reference(self) -> None:
         errors = self._validate_modified_catalog(

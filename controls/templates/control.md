@@ -1,6 +1,8 @@
 ---
 title: "<stable repository title>"
 versioned_id: "vX.Y-Cn.n.n"
+requirement_id: "Cn.n.n"
+family_id: "Cn"
 source_key: "owasp-aisvs"
 source_version: "X.Y"
 source_status: "<stable|development|draft|public-review|beta|rolling|deprecated|superseded>"

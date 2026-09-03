@@ -12,7 +12,7 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
   structure and enumerated lifecycle states.
 - [`templates/control.md`](templates/control.md): required structure for a substantive
   Control document.
-- [`control-records/authorization-policy-boundary.md`](control-records/authorization-policy-boundary.md):
+- [Initial Golden Control](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md):
   initial Golden Control prepared for human product-security review.
 
 Validate the catalog and its repository-level invariants with:
@@ -26,6 +26,30 @@ python3 controls/tests/test_validate_catalog.py
 The current catalog contains only the initial Golden Control. Its content maturity is
 `verifiable`, but its review status remains `unreviewed`; it is not yet a mature
 Control. No Engineering Pattern Mapping is asserted.
+
+## Control record layout
+
+Store substantive AISVS Control records under one AISVS-family directory:
+
+```text
+control-records/
+└── cNN-family-slug/
+    └── vX.Y-cN.N.N-descriptive-control-name.md
+```
+
+For example, the Golden Control is stored under
+`c05-access-control-and-identity/`. The family number and versioned Requirement ID
+provide direct upstream traceability; the descriptive suffix keeps the security
+subject understandable without looking up the identifier.
+
+Use only the family level as a directory boundary. Do not create section-level
+directories such as `c05.2/`, and do not create empty family directories. Create a
+family directory only with its first substantive Control.
+
+The filesystem layout is a navigation aid. `catalog.yaml` remains authoritative for
+source version, lifecycle state, maturity, review status, related Requirements, and
+Mappings. When AISVS renames or renumbers content, preserve the historical record
+and perform a semantic change review; do not silently rename or overwrite it.
 
 ## Primary backbone
 

@@ -26,7 +26,7 @@ requirements:
     maturity: verifiable
     review_status: unreviewed
     development_priority: golden-control
-    control_ref: controls/control-records/authorization-policy-boundary.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md
     threat_mappings:
       - source_key: mitre-atlas
         source_version: "2026.08"

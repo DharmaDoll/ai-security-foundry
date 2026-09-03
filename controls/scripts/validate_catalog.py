@@ -7,7 +7,7 @@ import json
 import re
 import sys
 from datetime import date
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any
 
 try:
@@ -203,6 +203,7 @@ class CatalogValidator:
                 requirement, metadata["source_version"], path
             )
             self._validate_source_snapshot(requirement, metadata, path)
+            self._validate_control_record_location(requirement, path)
             self._validate_repository_reference(
                 requirement["control_ref"], f"{path}.control_ref"
             )
@@ -351,6 +352,32 @@ class CatalogValidator:
         if not resolved.is_file():
             self.errors.append(f"{path}: dangling reference {reference}")
 
+    def _validate_control_record_location(
+        self, requirement: dict[str, Any], path: str
+    ) -> None:
+        reference = requirement["control_ref"]
+        if reference is None:
+            return
+
+        location = PurePosixPath(reference)
+        family_match = re.fullmatch(r"C(\d+)", requirement["family"]["id"])
+        if family_match is None:
+            return
+
+        expected_directory_prefix = f"c{int(family_match.group(1)):02d}-"
+        if not location.parent.name.startswith(expected_directory_prefix):
+            self.errors.append(
+                f"{path}.control_ref: family directory must start with "
+                f"{expected_directory_prefix}"
+            )
+
+        expected_filename_prefix = f"{requirement['versioned_id'].lower()}-"
+        if not location.name.startswith(expected_filename_prefix):
+            self.errors.append(
+                f"{path}.control_ref: filename must start with "
+                f"{expected_filename_prefix}"
+            )
+
     def _validate_control_document_metadata(
         self,
         requirement: dict[str, Any],
@@ -405,6 +432,8 @@ class CatalogValidator:
 
         expected_metadata = {
             "versioned_id": requirement["versioned_id"],
+            "requirement_id": requirement["requirement_id"],
+            "family_id": requirement["family"]["id"],
             "source_key": catalog_metadata["source_key"],
             "source_version": catalog_metadata["source_version"],
             "source_status": catalog_metadata["source_status"],

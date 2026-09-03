@@ -104,10 +104,30 @@ controls/
     └── test_validate_catalog.py
 ```
 
-Phase 2 may add `control-records/authorization-policy-boundary.md` when substantive
-Golden Control development begins. Do not create the directory as a placeholder.
-Do not create chapter directories or one file per AISVS requirement during the
-schema experiment.
+Phase 2 adds the Golden Control at
+`control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md`.
+Do not create empty directories or one file per AISVS requirement during incremental
+development.
+
+Use exactly one family-directory level for substantive AISVS Control records:
+
+```text
+control-records/
+└── cNN-family-slug/
+    └── vX.Y-cN.N.N-descriptive-control-name.md
+```
+
+The family number makes the primary AISVS backbone directly traceable. The
+descriptive family and Control slugs keep paths understandable, while the versioned
+filename prevents historical Requirement interpretations from being overwritten.
+Do not create section-level directories. Create a family directory only when the
+first substantive Control in that family is added.
+
+This storage convention does not make other frameworks normative and does not apply
+to `engineering/`. `catalog.yaml` remains the source of truth for identity,
+lifecycle, maturity, review state, and relationships. An upstream rename or
+renumbering triggers semantic review and historical traceability; it does not cause
+automatic path rewrites.
 
 ### 4.3 Catalog shape
 
@@ -164,7 +184,7 @@ This snippet defines a schema proposal; it is not a completed control record.
 | `upstream_revision` | Immutable upstream revision inspected during ingestion |
 | `versioned_id` | Globally unique source/version requirement identifier, such as `v1.0-C5.2.5` |
 | `requirement_id` | Identifier within the source version |
-| `family` / `section` | Upstream grouping metadata; not a mandate for repository directory structure |
+| `family` / `section` | Upstream grouping metadata; the AISVS family selects the one-level Control-record directory, while sections remain catalog metadata and do not create nested directories |
 | `verification_level` | AISVS level 1, 2, or 3 where applicable |
 | `upstream_status` | `active`, `deprecated`, `superseded`, or `removed`; old rows remain for history |
 | `maturity` | Repository interpretation maturity defined in the next section |
