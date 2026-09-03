@@ -1,9 +1,9 @@
 # Controls Knowledge Base Incremental Plan
 
-- Status: proposal
+- Status: active
 - Scope: `controls/` only
 - Primary backbone: OWASP AISVS
-- Source state reviewed: 2026-09-01
+- AISVS source state reviewed: 2026-09-03
 
 ## 1. Purpose and boundaries
 
@@ -88,7 +88,7 @@ Catalog entries do not require a corresponding Markdown file. Most requirements 
 
 ### 4.2 Planned artifacts
 
-After the Golden Control plan is approved, introduce only these artifacts initially:
+Phase 1 introduces only these artifacts:
 
 ```text
 controls/
@@ -97,11 +97,17 @@ controls/
 │   └── control-catalog.schema.json
 ├── templates/
 │   └── control.md
-└── control-records/
-    └── authorization-policy-boundary.md
+├── requirements.txt
+├── scripts/
+│   └── validate_catalog.py
+└── tests/
+    └── test_validate_catalog.py
 ```
 
-Do not create chapter directories or one file per AISVS requirement during the schema experiment.
+Phase 2 may add `control-records/authorization-policy-boundary.md` when substantive
+Golden Control development begins. Do not create the directory as a placeholder.
+Do not create chapter directories or one file per AISVS requirement during the
+schema experiment.
 
 ### 4.3 Catalog shape
 
@@ -113,6 +119,7 @@ catalog:
   source_key: owasp-aisvs
   source_version: "1.0"
   source_status: stable
+  canonical_url: "<canonical stable-version URL>"
   last_verified: "YYYY-MM-DD"
   upstream_revision: "<verified upstream commit SHA>"
 
@@ -128,6 +135,9 @@ requirements:
     verification_level: 2
     upstream_status: active
     upstream_url: "<canonical requirement URL>"
+    research_source:
+      url: "<corresponding AISVS Research URL>"
+      last_verified: "YYYY-MM-DD"
     maturity: discovered
     review_status: unreviewed
     development_priority: golden-control
@@ -150,6 +160,7 @@ This snippet defines a schema proposal; it is not a completed control record.
 | `source_key` | Exact key from `sources/registry.yaml` |
 | `source_version` | Version or rolling state used for the catalog snapshot |
 | `source_status` | Source maturity such as stable, beta, public-review, or rolling |
+| `canonical_url` | Maintainer-owned location for the tracked source version; immutable per-requirement snapshots are recorded separately |
 | `upstream_revision` | Immutable upstream revision inspected during ingestion |
 | `versioned_id` | Globally unique source/version requirement identifier, such as `v1.0-C5.2.5` |
 | `requirement_id` | Identifier within the source version |
@@ -160,7 +171,8 @@ This snippet defines a schema proposal; it is not a completed control record.
 | `review_status` | `unreviewed`, `reviewed`, or `re-review-required`; independent of maturity |
 | `development_priority` | Planning value such as `golden-control`, `next`, or `backlog`; not a coverage score |
 | `control_ref` | Path to a substantive control document, or `null` when none exists |
-| `threat_mappings` | Justified threat relationships used in the control rationale |
+| `research_source` | Corresponding AISVS Research page pinned to `upstream_revision`, and the date that supporting material was reviewed |
+| `threat_mappings` | Justified, snapshot-aware threat relationships used in the control rationale; each records source/version/status/revision, identifier, relationship, strength, rationale, assessment date, and `proposed`/`validated`/`re-review-required` state |
 | `related_requirements` | Related, overlapping, superseding, or superseded requirements |
 | `mapping_assessment_refs` | Optional links to canonical assessments under `mappings/`; status and relationship details are not duplicated in the control catalog |
 | `last_reviewed` / `reviewed_by` / `review_scope` / `review_evidence` | Date, non-sensitive human reviewer identity, reviewed scope, and durable review record |
@@ -174,9 +186,15 @@ The JSON Schema and catalog validation should enforce at least:
 - enumerated source, requirement, maturity, and review states;
 - AISVS verification level limited to 1, 2, or 3;
 - no dangling `control_ref` or `mapping_assessment_refs` target;
+- consistency between catalog lifecycle/source metadata and Control-document front
+  matter when `control_ref` exists;
+- presence of the corresponding AISVS Research source for every tracked AISVS requirement;
 - preservation of deprecated, superseded, and removed records;
 - `review_status: reviewed` only when review date, human reviewer, review scope, and durable review evidence exist;
-- `maturity: verifiable` only when a substantive control document exists.
+- `maturity: verifiable` only when a substantive control document exists;
+- threat sources registered in `sources/registry.yaml`, immutable source snapshots,
+  unique mapping identities, and consistent `context` relationship/strength;
+- `review_status: reviewed` only when all included threat mappings are `validated`.
 
 The first schema should be intentionally small. Add fields only when the Golden Control demonstrates a real maintenance or assurance need.
 
@@ -351,7 +369,9 @@ Deliverables:
 - create `catalog.yaml` with source metadata and only the Golden Control record;
 - create a minimal JSON Schema enforcing the proposed invariants;
 - create a control template based on the completeness criteria;
-- add validation for schema errors, duplicate IDs, invalid states, and dangling references.
+- add Python validation with a pinned YAML parser for schema errors, duplicate IDs,
+  identifier consistency, invalid states, review gates, and dangling references;
+- add regression tests for the catalog validator.
 
 Exit gate:
 

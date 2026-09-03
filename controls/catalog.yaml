@@ -1,0 +1,72 @@
+schema_version: 1
+
+catalog:
+  source_key: owasp-aisvs
+  source_version: "1.0"
+  source_status: stable
+  canonical_url: https://github.com/OWASP/AISVS/tree/main/1.0
+  last_verified: "2026-09-03"
+  upstream_revision: 78775233666a2022dcfb82037e5e029116955c00
+
+requirements:
+  - versioned_id: v1.0-C5.2.5
+    requirement_id: C5.2.5
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-03"
+    maturity: verifiable
+    review_status: unreviewed
+    development_priority: golden-control
+    control_ref: controls/control-records/authorization-policy-boundary.md
+    threat_mappings:
+      - source_key: mitre-atlas
+        source_version: "2026.08"
+        source_status: rolling
+        upstream_revision: 41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5
+        identifier: AML.T0053
+        title: AI Agent Tool Invocation
+        relationship: mitigates
+        strength: partial
+        status: proposed
+        rationale: >-
+          An isolated policy decision point can deny Tool actions outside trusted
+          Policy when an Agent requests them, but isolation alone does not guarantee
+          complete enforcement coverage, restricted Tool capability, or correct
+          Policy.
+        source_url: https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml
+        last_assessed: "2026-09-03"
+      - source_key: mitre-atlas
+        source_version: "2026.08"
+        source_status: rolling
+        upstream_revision: 41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5
+        identifier: AML.T0051
+        title: LLM Prompt Injection
+        relationship: context
+        strength: context
+        status: proposed
+        rationale: >-
+          Prompt Injection is one route to Agent influence. PDP isolation contains
+          authorization impact after that influence but does not prevent or detect
+          Prompt Injection itself.
+        source_url: https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml
+        last_assessed: "2026-09-03"
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C9.5.1
+      - v1.0-C9.5.3
+      - v1.0-C9.5.6
+      - v1.0-C9.6.3
+    mapping_assessment_refs: []
+    last_reviewed: null
+    reviewed_by: []
+    review_scope: null
+    review_evidence: null

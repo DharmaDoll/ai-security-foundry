@@ -1,0 +1,309 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/DharmaDoll/ai-security-foundry/controls/schema/control-catalog.schema.json",
+  "title": "AI Security Foundry Control Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalog",
+    "requirements"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "catalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_key",
+        "source_version",
+        "source_status",
+        "canonical_url",
+        "last_verified",
+        "upstream_revision"
+      ],
+      "properties": {
+        "source_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "source_status": {
+          "enum": [
+            "stable",
+            "development",
+            "draft",
+            "public-review",
+            "beta",
+            "rolling",
+            "deprecated",
+            "superseded"
+          ]
+        },
+        "canonical_url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "last_verified": {
+          "type": "string",
+          "format": "date"
+        },
+        "upstream_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/requirement"
+      }
+    }
+  },
+  "$defs": {
+    "namedUpstreamGroup": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "researchSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "last_verified"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "last_verified": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "threatMapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_key",
+        "source_version",
+        "source_status",
+        "upstream_revision",
+        "identifier",
+        "title",
+        "relationship",
+        "strength",
+        "status",
+        "rationale",
+        "source_url",
+        "last_assessed"
+      ],
+      "properties": {
+        "source_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_status": {
+          "enum": [
+            "stable",
+            "development",
+            "draft",
+            "public-review",
+            "beta",
+            "rolling",
+            "deprecated",
+            "superseded"
+          ]
+        },
+        "upstream_revision": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "identifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relationship": {
+          "enum": ["mitigates", "detects", "context"]
+        },
+        "strength": {
+          "enum": ["direct", "partial", "context"]
+        },
+        "status": {
+          "enum": ["proposed", "validated", "re-review-required"]
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "last_assessed": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "versioned_id",
+        "requirement_id",
+        "family",
+        "section",
+        "verification_level",
+        "upstream_status",
+        "upstream_url",
+        "research_source",
+        "maturity",
+        "review_status",
+        "development_priority",
+        "control_ref",
+        "threat_mappings",
+        "related_requirements",
+        "mapping_assessment_refs",
+        "last_reviewed",
+        "reviewed_by",
+        "review_scope",
+        "review_evidence"
+      ],
+      "properties": {
+        "versioned_id": {
+          "type": "string",
+          "pattern": "^v[0-9]+\\.[0-9]+-C[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "requirement_id": {
+          "type": "string",
+          "pattern": "^C[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "family": {
+          "$ref": "#/$defs/namedUpstreamGroup"
+        },
+        "section": {
+          "$ref": "#/$defs/namedUpstreamGroup"
+        },
+        "verification_level": {
+          "type": "integer",
+          "enum": [1, 2, 3]
+        },
+        "upstream_status": {
+          "enum": [
+            "active",
+            "deprecated",
+            "superseded",
+            "removed"
+          ]
+        },
+        "upstream_url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "research_source": {
+          "$ref": "#/$defs/researchSource"
+        },
+        "maturity": {
+          "enum": [
+            "discovered",
+            "understood",
+            "threat-linked",
+            "verifiable"
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "unreviewed",
+            "reviewed",
+            "re-review-required"
+          ]
+        },
+        "development_priority": {
+          "enum": [
+            "golden-control",
+            "next",
+            "backlog"
+          ]
+        },
+        "control_ref": {
+          "type": ["string", "null"],
+          "pattern": "^controls/control-records/.+\\.md$"
+        },
+        "threat_mappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/threatMapping"
+          }
+        },
+        "related_requirements": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^v[0-9]+\\.[0-9]+-C[0-9]+\\.[0-9]+\\.[0-9]+$"
+          }
+        },
+        "mapping_assessment_refs": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^mappings/.+"
+          }
+        },
+        "last_reviewed": {
+          "type": ["string", "null"],
+          "format": "date"
+        },
+        "reviewed_by": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "review_scope": {
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "review_evidence": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

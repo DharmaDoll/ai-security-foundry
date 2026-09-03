@@ -4,6 +4,29 @@ This directory is the requirement-oriented entry point.
 
 See [`plan.md`](plan.md) for the incremental plan for developing the controls knowledge base.
 
+## Current artifacts
+
+- [`catalog.yaml`](catalog.yaml): machine-readable inventory containing only selected
+  requirements; it is not a copy of the standard.
+- [`schema/control-catalog.schema.json`](schema/control-catalog.schema.json): catalog
+  structure and enumerated lifecycle states.
+- [`templates/control.md`](templates/control.md): required structure for a substantive
+  Control document.
+- [`control-records/authorization-policy-boundary.md`](control-records/authorization-policy-boundary.md):
+  initial Golden Control prepared for human product-security review.
+
+Validate the catalog and its repository-level invariants with:
+
+```shell
+python3 -m pip install -r controls/requirements.txt
+python3 controls/scripts/validate_catalog.py
+python3 controls/tests/test_validate_catalog.py
+```
+
+The current catalog contains only the initial Golden Control. Its content maturity is
+`verifiable`, but its review status remains `unreviewed`; it is not yet a mature
+Control. No Engineering Pattern Mapping is asserted.
+
 ## Primary backbone
 
 OWASP AISVS is the primary verification/control backbone.
