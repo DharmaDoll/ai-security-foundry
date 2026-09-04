@@ -86,11 +86,21 @@ requirements:
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
       last_verified: "2026-09-04"
-    maturity: discovered
+    maturity: verifiable
     development_priority: next
-    control_ref: null
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C5.2.3
+      - v1.0-C5.2.4
+      - v1.0-C5.2.7
+      - v1.0-C5.3.1
+      - v1.0-C8.1.3
+      - v1.0-C9.5.2
+      - v1.0-C9.5.3
+      - v1.0-C9.5.6
+      - v1.0-C12.1.4
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.2.3
@@ -250,11 +260,32 @@ requirements:
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md
       last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
-    threat_mappings: []
-    related_requirements: []
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation.md
+    threat_mappings:
+      - source_key: mitre-atlas
+        source_version: "2026.08"
+        source_status: rolling
+        upstream_revision: 41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5
+        identifier: AML.T0057
+        title: LLM Data Leakage
+        relationship: mitigates
+        strength: partial
+        status: proposed
+        rationale: >-
+          The ATLAS snapshot includes information from other LLM users among the
+          possible leaked data. Tenant-isolated model-serving state reduces one
+          infrastructure path to that outcome, but AML.T0057 also covers leakage
+          through training data, connected data sources, Prompt Injection, and
+          failures outside shared serving infrastructure.
+        source_url: https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml
+        last_assessed: "2026-09-04"
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C5.2.2
+      - v1.0-C5.2.7
+      - v1.0-C5.3.2
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.3.2

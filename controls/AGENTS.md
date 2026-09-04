@@ -114,6 +114,34 @@ insights into the appropriate Control, template, AGENTS.md, or durable guidance.
 
 ---
 
+## Learning Documentation
+
+Use `docs/learning/README.md` as the common learning and persistence method for
+every AISVS Category or Family.
+
+- Begin every Requirement lesson with the versioned ID, AISVS Verification Level,
+  exact English Requirement, and a faithful Japanese translation.
+- Teach from a senior product-security perspective: identify attacker capability,
+  assets, Trust Boundaries, Security Invariants, deterministic Enforcement Points,
+  observable Pass/Fail conditions, and the assurance boundary.
+- Explain unfamiliar terms without removing security nuance.
+- Separate Normative text, AISVS Research, repository interpretation, and insights
+  derived from discussion.
+- Persist a meaningful session as a standalone lecture plus a faithful
+  reconstruction of important questions, uncertainty, corrections, and insights;
+  do not preserve raw chat noise merely for completeness.
+- Use one Family directory, a lightweight Family progress guide, and versioned
+  Requirement-note filenames. Do not create empty Family or Requirement
+  placeholders.
+- Never use learning completion to change Control maturity, Mapping status, or a
+  product conformance result.
+
+The C5.1.1 learning note linked from `docs/learning/README.md` is the initial
+reference for depth and structure, not a template whose topic-specific sections
+must be copied mechanically.
+
+---
+
 ## Control Development Workflow
 
 Develop controls in the following order:
