@@ -1,7 +1,7 @@
 # Engineering Pattern Candidate Landscape
 
 - Status: discovery
-- Last updated: 2026-09-03
+- Last updated: 2026-09-04
 - Scope: Pattern候補の比較のみ
 
 ## 目的と境界
@@ -24,6 +24,12 @@ Control IDやFramework coverageを候補の発見根拠にせず、Controls／Fr
 3. MCP Serverが下流APIへアクセスする。
 4. AgentがWebページを読んで操作を行う。
 5. 長期memoryへユーザー入力を保存する。
+6. Agent runtimeとAuthorization PDPが同じ管理IdentityまたはDeployment権限を
+   共有し、Agent侵害からPDPを再配置・変更できる。
+
+6番目の観察はAuthorization ControlのReview対話で発見したが、Control IDやRequirement
+coverageではなく、共有管理Identityによって実際のTrust Boundaryが消失するSystem failureを
+入力とする。Controlとの関係は候補の発見根拠にせず、両Endpointの開発後に別途評価する。
 
 これに加え、MITRE ATLAS v2026.08の全Technique、Mitigation、Case Study、relationshipを
 第二の発見入力としてscreeningした。Source snapshot、除外判断、各候補のATLAS evidenceは
@@ -73,6 +79,7 @@ Negative Testが必要なら、別候補として保持する。複数候補で�
 | P17 | Untrusted Model Output at Active Interpreter Boundaries | ATLASのcode execution、rendering、generated command cases | P4とはinput influenceとoutput sinkで分離 |
 | P18 | Abuse-Resistant AI Service Resource Budgets | ATLASのdenial／cost／agentic consumption Techniques | Production evidenceを追加確認 |
 | P19 | Minimum-Disclosure Inference API | ATLASのmodel extraction／inversion／data leakage cases | P18とはconfidentialityとavailabilityで分離 |
+| P20 | Isolated Agent Authorization Control Plane | Agent runtimeとAuthorization PDPが管理境界を共有する | P1、P12、P13とは保護対象とEnforcement Pointが異なる |
 
 P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする。ここでは候補の索引と
 横断比較だけを維持し、同じ分析を複製しない。
@@ -207,6 +214,43 @@ P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする�
   再生、provenance保持、削除、修復という時間的境界がある。単一実行内のWeb content
   containmentへ統合すると、蓄積、再生、回復のテストが埋没する。
 
+## P20: Isolated Agent Authorization Control Plane
+
+- 暫定配置: `identity-and-authorization/`。`agents/`を隣接Domainとする。
+- 繰り返し発生する設計問題: Agent runtimeとAuthorization PDPが同じService identity、
+  Policy storage、Deployment権限、管理Interface、またはLifecycle controlを共有し、Agent
+  runtimeの侵害が認可判断を行うControl Planeの侵害へ直結する。
+- 主なTrust Boundary: Agent runtimeからPDP execution boundary、Agent workload identityから
+  PDP administrative plane、Policy Administration PointからPolicy store、Deployment systemから
+  PDP workloadおよびrecovery configuration。
+- Abuse Case: Prompt Injection、Agent frameworkの脆弱性、悪意あるTool outputなどでAgent
+  runtimeを制御した攻撃者が、共有Identityや管理Interfaceを使ってPolicyを変更する、PDPを
+  攻撃者管理Imageへ再配置する、PDPを停止する、またはRecovery時に置き換える。
+- Security Invariant: Agent runtimeが完全に侵害されても、その実効Identityと到達可能な
+  Interfaceだけでは、PDP、Authoritative policy、Administrative credential、Deployment、
+  Lifecycle、Recovery stateを変更・置換・制御できない。
+- 決定論的なEnforcement Point: 分離されたWorkload／Administrative identity、IAM policy、
+  Policy administration path、Deployment admission、Process／Container／Host boundary、管理
+  Network、Secret store、および独立したRecovery control。
+- Negative Test: Agentの実効IdentityとNetwork位置から、Policy write、PDP debug／admin access、
+  Workload impersonation、Secret read、PDP停止、Image／Endpoint差替え、Rollback、Recovery
+  configuration変更を試し、すべて拒否またはAuthoritative PDPに影響しないことを確認する。
+- 他のユースケースへの再利用可能性: Internal APIを呼ぶAgentのTool gateway、Multi-tenant
+  RAGのRetrieval authorization service、MCP ServerのDownstream authorization、Memory
+  read／write policy serviceで、同じ管理境界、Invariant、Negative Testを再利用できる。
+- CounterexampleとScope外: Agentが偽のIdentity attributeをRequestへ入れる問題、PDP Response
+  の改ざん、PEPを通らないResource access、PolicyのRead-only参照、Decision logの削除は、
+  それだけでは本候補のInvariant違反としない。それぞれAuthorization context、Decision
+  binding、Complete mediation、Least disclosure、Evidence integrityの別問題として扱う。
+- 既存候補へ統合できない理由: P1は個々のTool actionを許可する判断と実行を扱い、P12は
+  Project contentからAgent自身のConfigurationへの遷移を扱い、P13はAgent runtimeからHost／
+  Networkへの到達範囲を扱う。本候補は、認可判断を行うAuthority自体の管理・Deployment・
+  Lifecycle boundaryを保護し、異なるNegative Testを必要とする。
+- Evidence gap: 複数System archetypeへの適用可能性は確認できるが、独立したProduction事例、
+  Incident、または再現可能なDemonstrationはまだ紐付いていない。候補選定前にEvidenceを
+  追加し、P1やP13の一部へ統合すべきでないか再評価する。
+- Decision: `retain`。Pattern本文やDirectoryはまだ作成しない。
+
 ## 候補間の関係
 
 ```text
@@ -235,6 +279,11 @@ P12 Agent control-plane integrity
   + P13 Runtime isolation
   + P14 Credential mediation
   -> P1 Authorized Tool execution
+
+P20 Authorization control-plane isolation
+  -> P1 Tool execution
+  -> P2 Retrieval isolation
+  -> P5 Authorized memory lifecycle
 
 P15 Autonomous scope continuity
   + P16 Inter-agent delegation
@@ -268,6 +317,8 @@ P18 Resource budgets
 - 計画候補のscopeと配置を再検討する: P4。
 - 新規候補としてLandscapeに保持する: P3、P5、P6。
 - ATLASから新規候補として保持する: P7〜P15、P17〜P19。
+- System boundary Reviewから新規候補として保持する: P20。ただし独立したEvidenceを追加するまで
+  Pattern開発対象には選定しない。
 - P16は、攻撃者側のmulti-agent infrastructureだけでなく、被害側systemのTrust Boundaryとして
   反復する証拠が増えるまで`hold`とする。
 - Predictive AIのadversarial input問題は反復性が高いが、modalityごとにEnforcement Pointと
