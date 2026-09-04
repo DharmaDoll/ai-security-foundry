@@ -29,10 +29,34 @@ class CatalogValidatorTest(unittest.TestCase):
             self._validator(self.catalog_path, REPOSITORY_ROOT).validate(),
         )
 
+    def test_c5_requirement_levels_match_pinned_source(self) -> None:
+        catalog = yaml.safe_load(self.catalog_path.read_text(encoding="utf-8"))
+        actual = {
+            requirement["requirement_id"]: requirement["verification_level"]
+            for requirement in catalog["requirements"]
+            if requirement["family"]["id"] == "C5"
+        }
+        self.assertEqual(
+            {
+                "C5.1.1": 3,
+                "C5.1.2": 3,
+                "C5.2.1": 2,
+                "C5.2.2": 2,
+                "C5.2.3": 2,
+                "C5.2.4": 2,
+                "C5.2.5": 2,
+                "C5.2.6": 3,
+                "C5.2.7": 3,
+                "C5.3.1": 2,
+                "C5.3.2": 3,
+            },
+            actual,
+        )
+
     def test_rejects_duplicate_versioned_ids(self) -> None:
         errors = self._validate_modified_catalog(
             lambda catalog: catalog["requirements"].append(
-                copy.deepcopy(catalog["requirements"][0])
+                copy.deepcopy(self._golden_requirement(catalog))
             )
         )
         self.assertTrue(
@@ -41,7 +65,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_invalid_maturity(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 maturity="documented"
             )
         )
@@ -49,7 +73,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_inconsistent_versioned_identifier(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 versioned_id="v1.0-C5.2.6"
             )
         )
@@ -57,7 +81,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_source_url_that_does_not_pin_catalog_revision(self) -> None:
         def change_research_url(catalog: dict[str, Any]) -> None:
-            catalog["requirements"][0]["research_source"]["url"] = (
+            self._golden_requirement(catalog)["research_source"]["url"] = (
                 "https://github.com/OWASP/AISVS/blob/main/1.0/research/README.md"
             )
 
@@ -68,7 +92,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_dangling_control_reference(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 control_ref=(
                     "controls/control-records/c05-access-control-and-identity/"
                     "v1.0-c5.2.5-missing.md"
@@ -79,7 +103,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_control_reference_in_wrong_family_directory(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 control_ref=(
                     "controls/control-records/c06-model-supply-chain/"
                     "v1.0-c5.2.5-missing.md"
@@ -92,7 +116,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_control_filename_with_wrong_requirement_id(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 control_ref=(
                     "controls/control-records/c05-access-control-and-identity/"
                     "v1.0-c5.2.6-missing.md"
@@ -105,7 +129,7 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_dangling_mapping_assessment_reference(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 mapping_assessment_refs=["mappings/missing.yaml"]
             )
         )
@@ -113,17 +137,15 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_control_document_metadata_drift(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
-                review_scope="Catalog-only review scope"
+            lambda catalog: self._golden_requirement(catalog).update(
+                maturity="understood"
             )
         )
-        self.assertTrue(
-            any("front matter review_scope" in error for error in errors)
-        )
+        self.assertTrue(any("front matter maturity" in error for error in errors))
 
     def test_verifiable_control_requires_control_document(self) -> None:
         errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
+            lambda catalog: self._golden_requirement(catalog).update(
                 maturity="verifiable", control_ref=None
             )
         )
@@ -133,9 +155,8 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_unregistered_threat_source(self) -> None:
         def change_source(catalog: dict[str, Any]) -> None:
-            catalog["requirements"][0]["threat_mappings"][0]["source_key"] = (
-                "unknown-source"
-            )
+            mapping = self._golden_requirement(catalog)["threat_mappings"][0]
+            mapping["source_key"] = "unknown-source"
 
         errors = self._validate_modified_catalog(change_source)
         self.assertTrue(
@@ -144,9 +165,8 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_threat_source_status_mismatch(self) -> None:
         def change_status(catalog: dict[str, Any]) -> None:
-            catalog["requirements"][0]["threat_mappings"][0]["source_status"] = (
-                "stable"
-            )
+            mapping = self._golden_requirement(catalog)["threat_mappings"][0]
+            mapping["source_status"] = "stable"
 
         errors = self._validate_modified_catalog(change_status)
         self.assertTrue(
@@ -158,7 +178,8 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_threat_url_without_mapping_revision(self) -> None:
         def change_source_url(catalog: dict[str, Any]) -> None:
-            catalog["requirements"][0]["threat_mappings"][0]["source_url"] = (
+            mapping = self._golden_requirement(catalog)["threat_mappings"][0]
+            mapping["source_url"] = (
                 "https://github.com/mitre-atlas/atlas-data/blob/main/dist/v6/"
                 "ATLAS-2026.08.yaml"
             )
@@ -170,9 +191,8 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_context_relationship_with_mitigation_strength(self) -> None:
         def change_strength(catalog: dict[str, Any]) -> None:
-            catalog["requirements"][0]["threat_mappings"][1]["strength"] = (
-                "partial"
-            )
+            mapping = self._golden_requirement(catalog)["threat_mappings"][1]
+            mapping["strength"] = "partial"
 
         errors = self._validate_modified_catalog(change_strength)
         self.assertTrue(
@@ -184,48 +204,13 @@ class CatalogValidatorTest(unittest.TestCase):
 
     def test_rejects_duplicate_threat_mapping_identity(self) -> None:
         def duplicate_mapping(catalog: dict[str, Any]) -> None:
-            catalog["requirements"][0]["threat_mappings"].append(
-                copy.deepcopy(catalog["requirements"][0]["threat_mappings"][0])
+            requirement = self._golden_requirement(catalog)
+            requirement["threat_mappings"].append(
+                copy.deepcopy(requirement["threat_mappings"][0])
             )
 
         errors = self._validate_modified_catalog(duplicate_mapping)
         self.assertTrue(any("duplicate threat mapping" in error for error in errors))
-
-    def test_reviewed_control_requires_human_review_metadata(self) -> None:
-        errors = self._validate_modified_catalog(
-            lambda catalog: catalog["requirements"][0].update(
-                review_status="reviewed"
-            )
-        )
-        for field in (
-            "last_reviewed",
-            "reviewed_by",
-            "review_scope",
-            "review_evidence",
-        ):
-            self.assertTrue(
-                any(f"{field}: required" in error for error in errors),
-                field,
-            )
-
-    def test_reviewed_control_requires_validated_threat_mappings(self) -> None:
-        def mark_reviewed(catalog: dict[str, Any]) -> None:
-            requirement = catalog["requirements"][0]
-            requirement.update(
-                review_status="reviewed",
-                last_reviewed="2026-09-03",
-                reviewed_by=["human-reviewer"],
-                review_scope="Complete Golden Control",
-                review_evidence="https://example.invalid/reviews/1",
-            )
-
-        errors = self._validate_modified_catalog(mark_reviewed)
-        self.assertTrue(
-            any(
-                "must be validated when review_status is reviewed" in error
-                for error in errors
-            )
-        )
 
     def _validator(
         self, catalog_path: Path, repository_root: Path
@@ -234,6 +219,14 @@ class CatalogValidatorTest(unittest.TestCase):
             catalog_path=catalog_path,
             schema_path=self.schema_path,
             repository_root=repository_root,
+        )
+
+    @staticmethod
+    def _golden_requirement(catalog: dict[str, Any]) -> dict[str, Any]:
+        return next(
+            requirement
+            for requirement in catalog["requirements"]
+            if requirement["versioned_id"] == "v1.0-C5.2.5"
         )
 
     def _validate_modified_catalog(
@@ -259,12 +252,14 @@ class CatalogValidatorTest(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            control_ref = catalog["requirements"][0]["control_ref"]
-            if control_ref is not None:
+            for requirement in catalog["requirements"]:
+                control_ref = requirement["control_ref"]
+                if control_ref is None:
+                    continue
                 temporary_control = repository_root / control_ref
                 original_control = REPOSITORY_ROOT / control_ref
                 if original_control.is_file():
-                    temporary_control.parent.mkdir(parents=True)
+                    temporary_control.parent.mkdir(parents=True, exist_ok=True)
                     temporary_control.write_text(
                         original_control.read_text(encoding="utf-8"),
                         encoding="utf-8",

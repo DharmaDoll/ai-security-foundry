@@ -65,7 +65,7 @@ Do not create section-level directories or empty family placeholders. Create a
 family directory only when its first substantive Control is added.
 
 The directory layout supports navigation and AISVS traceability; `catalog.yaml`
-remains authoritative for versions, lifecycle, maturity, review state, and
+remains authoritative for versions, lifecycle, maturity, and
 relationships. Preserve historical paths when upstream content is renamed,
 renumbered, deprecated, or superseded. Do not move or overwrite a historical
 Control solely to mirror a newer AISVS release.
@@ -224,10 +224,15 @@ Use the control maturity model defined in `plan.md`:
 * threat-linked;
 * verifiable.
 
-Treat human review as an independent gate. A control is mature only when it is
-`verifiable` and its review status is `reviewed`.
+`verifiable` is the current maturity target for a substantive Control. Do not add a
+separate reviewer-status lifecycle or mandatory reviewer identity/evidence fields
+unless future repository collaboration demonstrates a concrete need.
 
-Do not mark a control mature merely because documentation exists.
+Control maturity describes the quality and completeness of the repository artifact.
+Learning progress describes a person's understanding. Never advance, block, or
+complete either one based on the state of the other.
+
+Do not mark a Control `verifiable` merely because documentation exists.
 
 Mapping assessment has its own status defined in `../mappings/README.md`. A control
 may be mature with no matching pattern or with an explicit engineering gap.

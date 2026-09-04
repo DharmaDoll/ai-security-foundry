@@ -1,14 +1,140 @@
-schema_version: 1
+schema_version: 2
 
 catalog:
   source_key: owasp-aisvs
   source_version: "1.0"
   source_status: stable
   canonical_url: https://github.com/OWASP/AISVS/tree/main/1.0
-  last_verified: "2026-09-03"
+  last_verified: "2026-09-04"
   upstream_revision: 78775233666a2022dcfb82037e5e029116955c00
 
 requirements:
+  - versioned_id: v1.0-C5.1.1
+    requirement_id: C5.1.1
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.1
+      title: Authentication
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-01-Identity-Management-Authentication.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.1.2
+    requirement_id: C5.1.2
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.1
+      title: Authentication
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-01-Identity-Management-Authentication.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.2.1
+    requirement_id: C5.2.1
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.2.2
+    requirement_id: C5.2.2
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: next
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.2.3
+    requirement_id: C5.2.3
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.2.4
+    requirement_id: C5.2.4
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
   - versioned_id: v1.0-C5.2.5
     requirement_id: C5.2.5
     family:
@@ -22,9 +148,8 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
-      last_verified: "2026-09-03"
+      last_verified: "2026-09-04"
     maturity: verifiable
-    review_status: unreviewed
     development_priority: golden-control
     control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md
     threat_mappings:
@@ -68,7 +193,87 @@ requirements:
       - v1.0-C9.6.3
       - v1.0-C12.1.2
     mapping_assessment_refs: []
-    last_reviewed: null
-    reviewed_by: []
-    review_scope: null
-    review_evidence: null
+
+  - versioned_id: v1.0-C5.2.6
+    requirement_id: C5.2.6
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.2.7
+    requirement_id: C5.2.7
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.2
+      title: AI Resource Authorization & Classification
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.3.1
+    requirement_id: C5.3.1
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.3
+      title: Multi-Tenant Isolation
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C5.3.2
+    requirement_id: C5.3.2
+    family:
+      id: C5
+      title: Access Control & Identity for AI Components & Users
+    section:
+      id: C5.3
+      title: Multi-Tenant Isolation
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md
+      last_verified: "2026-09-04"
+    maturity: discovered
+    development_priority: backlog
+    control_ref: null
+    threat_mappings: []
+    related_requirements: []
+    mapping_assessment_refs: []

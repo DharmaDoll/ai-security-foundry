@@ -11,7 +11,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": 1
+      "const": 2
     },
     "catalog": {
       "type": "object",
@@ -190,16 +190,11 @@
         "upstream_url",
         "research_source",
         "maturity",
-        "review_status",
         "development_priority",
         "control_ref",
         "threat_mappings",
         "related_requirements",
-        "mapping_assessment_refs",
-        "last_reviewed",
-        "reviewed_by",
-        "review_scope",
-        "review_evidence"
+        "mapping_assessment_refs"
       ],
       "properties": {
         "versioned_id": {
@@ -243,13 +238,6 @@
             "verifiable"
           ]
         },
-        "review_status": {
-          "enum": [
-            "unreviewed",
-            "reviewed",
-            "re-review-required"
-          ]
-        },
         "development_priority": {
           "enum": [
             "golden-control",
@@ -282,26 +270,6 @@
             "type": "string",
             "pattern": "^mappings/.+"
           }
-        },
-        "last_reviewed": {
-          "type": ["string", "null"],
-          "format": "date"
-        },
-        "reviewed_by": {
-          "type": "array",
-          "uniqueItems": true,
-          "items": {
-            "type": "string",
-            "minLength": 1
-          }
-        },
-        "review_scope": {
-          "type": ["string", "null"],
-          "minLength": 1
-        },
-        "review_evidence": {
-          "type": ["string", "null"],
-          "minLength": 1
         }
       }
     }

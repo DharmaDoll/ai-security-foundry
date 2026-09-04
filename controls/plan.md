@@ -79,7 +79,6 @@ The catalog should be a compact inventory and traceability layer, not a second c
 - Which upstream requirement and exact version is being tracked?
 - What is its upstream lifecycle state?
 - How mature is this repository's interpretation?
-- Is human re-review required?
 - Where is the detailed control, if one exists?
 - Which threat mappings have been justified?
 - Which separately maintained engineering-pattern mapping assessments refer to this requirement?
@@ -125,7 +124,7 @@ first substantive Control in that family is added.
 
 This storage convention does not make other frameworks normative and does not apply
 to `engineering/`. `catalog.yaml` remains the source of truth for identity,
-lifecycle, maturity, review state, and relationships. An upstream rename or
+lifecycle, maturity, and relationships. An upstream rename or
 renumbering triggers semantic review and historical traceability; it does not cause
 automatic path rewrites.
 
@@ -134,7 +133,7 @@ automatic path rewrites.
 The initial YAML shape should be equivalent to the following proposal:
 
 ```yaml
-schema_version: 1
+schema_version: 2
 catalog:
   source_key: owasp-aisvs
   source_version: "1.0"
@@ -159,16 +158,11 @@ requirements:
       url: "<corresponding AISVS Research URL>"
       last_verified: "YYYY-MM-DD"
     maturity: discovered
-    review_status: unreviewed
     development_priority: golden-control
     control_ref: null
     threat_mappings: []
     related_requirements: []
     mapping_assessment_refs: []
-    last_reviewed: null
-    reviewed_by: []
-    review_scope: null
-    review_evidence: null
 ```
 
 This snippet defines a schema proposal; it is not a completed control record.
@@ -188,14 +182,12 @@ This snippet defines a schema proposal; it is not a completed control record.
 | `verification_level` | AISVS level 1, 2, or 3 where applicable |
 | `upstream_status` | `active`, `deprecated`, `superseded`, or `removed`; old rows remain for history |
 | `maturity` | Repository interpretation maturity defined in the next section |
-| `review_status` | `unreviewed`, `reviewed`, or `re-review-required`; independent of maturity |
 | `development_priority` | Planning value such as `golden-control`, `next`, or `backlog`; not a coverage score |
 | `control_ref` | Path to a substantive control document, or `null` when none exists |
-| `research_source` | Corresponding AISVS Research page pinned to `upstream_revision`, and the date that supporting material was reviewed |
+| `research_source` | Corresponding AISVS Research page pinned to `upstream_revision`, and the date that supporting material was inspected |
 | `threat_mappings` | Justified, snapshot-aware threat relationships used in the control rationale; each records source/version/status/revision, identifier, relationship, strength, rationale, assessment date, and `proposed`/`validated`/`re-review-required` state |
 | `related_requirements` | Related, overlapping, superseding, or superseded requirements |
 | `mapping_assessment_refs` | Optional links to canonical assessments under `mappings/`; status and relationship details are not duplicated in the control catalog |
-| `last_reviewed` / `reviewed_by` / `review_scope` / `review_evidence` | Date, non-sensitive human reviewer identity, reviewed scope, and durable review record |
 
 ### 4.5 Schema invariants
 
@@ -203,20 +195,27 @@ The JSON Schema and catalog validation should enforce at least:
 
 - uniqueness of `versioned_id` within the catalog;
 - consistency between source version and versioned identifier;
-- enumerated source, requirement, maturity, and review states;
+- enumerated source, requirement, maturity, and mapping states;
 - AISVS verification level limited to 1, 2, or 3;
 - no dangling `control_ref` or `mapping_assessment_refs` target;
 - consistency between catalog lifecycle/source metadata and Control-document front
   matter when `control_ref` exists;
 - presence of the corresponding AISVS Research source for every tracked AISVS requirement;
 - preservation of deprecated, superseded, and removed records;
-- `review_status: reviewed` only when review date, human reviewer, review scope, and durable review evidence exist;
 - `maturity: verifiable` only when a substantive control document exists;
 - threat sources registered in `sources/registry.yaml`, immutable source snapshots,
-  unique mapping identities, and consistent `context` relationship/strength;
-- `review_status: reviewed` only when all included threat mappings are `validated`.
+  unique mapping identities, and consistent `context` relationship/strength.
 
 The first schema should be intentionally small. Add fields only when the Golden Control demonstrates a real maintenance or assurance need.
+
+AISVS Verification Level is upstream metadata. It is not a repository maturity
+stage, a learning difficulty rating, or proof that an implementation satisfies the
+Requirement.
+
+Catalog schema version 2 deliberately omits a per-Control reviewer lifecycle. The
+current single-maintainer workflow does not benefit enough from reviewer identity,
+approval evidence, or separate review-state fields to justify their maintenance
+cost. These fields can be reconsidered if the collaboration model changes.
 
 ## 5. Control maturity model
 
@@ -227,26 +226,26 @@ Maturity describes the depth of this repository's understanding. It does not des
 | `discovered` | Versioned ID, source/version/status, family/section, verification level, canonical link, and upstream revision are verified |
 | `understood` | Repository-authored interpretation, security objective, applicability, assumptions, ambiguity, and known exclusions are documented |
 | `threat-linked` | Relevant attacker capability, failure mode, affected assets, and justified threat mappings are documented; absence of a useful mapping is explicit |
-| `verifiable` | Testable security properties, positive and negative verification, evidence expectations, limitations, and review metadata are complete |
+| `verifiable` | Testable security properties, positive and negative verification, evidence expectations, and limitations are complete |
 
 Progression is ordered: a record should not skip an earlier stage.
 
-Human review is an orthogonal gate:
+`verifiable` is the current target for a mature Control. Peer feedback and later
+revisions may improve it, but they are not modeled as a separate approval lifecycle.
 
-- `unreviewed`: agent- or author-prepared content;
-- `reviewed`: a human product-security reviewer has accepted the stated scope and evidence;
-- `re-review-required`: an upstream or repository change may have invalidated the prior review.
-
-A control is considered mature only when `maturity: verifiable` and `review_status: reviewed`. Upstream change detection may set `review_status: re-review-required`; it must not silently rewrite the interpretation or erase prior evidence.
+Control maturity describes the quality and usability of the repository artifact.
+Learning progress describes a person's understanding of the subject. They are
+independent: completing a learning step must not promote a Control, and maturing a
+Control must not mark a learning step complete.
 
 Engineering mapping assessment is maintained separately under `mappings/`. Its
 status may be `not-assessed`, `assessed-no-match`, `gap`, `proposed`, `validated`,
-or `re-review-required`. A control can reach `verifiable` and `reviewed` without an
-assessment or a successful mapping.
+or `re-review-required`. A Control can reach `verifiable` without an assessment or
+a successful mapping. Mapping state must not promote or demote Control maturity.
 
 ## 6. Definition of a complete control
 
-A substantive control is ready for human review when it contains all of the following:
+A substantive Control is mature at `verifiable` when it contains all of the following:
 
 1. Stable repository title and exact versioned upstream requirement ID.
 2. Source version, maturity/status, canonical URL, verified revision, and last-verified date.
@@ -259,9 +258,11 @@ A substantive control is ready for human review when it contains all of the foll
 9. Evidence expectations identifying acceptable artifact types, producers, freshness, scope, and acceptance criteria.
 10. Related or overlapping requirements that must not be incorrectly collapsed.
 11. Known limitations, residual uncertainty, and implementation-dependent assumptions.
-12. Primary references, attribution, review metadata, and change history.
+12. Primary references, attribution, and material change history.
 
-The control becomes mature only after human product-security review confirms that these elements are internally consistent and the verification/evidence expectations can evaluate the stated security properties. Documentation existence, compilation, a configuration flag, or a framework mapping alone is insufficient.
+These criteria—not the mere existence of documentation, a completed learning step,
+a configuration flag, or a framework mapping—define maturity. Peer feedback is
+useful but is not a separate lifecycle state in the current repository workflow.
 
 Engineering mapping is assessed separately after a Pattern exists independently.
 The assessment may validly conclude `assessed-no-match` or `gap`; neither outcome
@@ -321,7 +322,7 @@ Control security property                  Engineering Pattern
 ### Threats
 
 - Use MITRE ATLAS for adversary behavior and OWASP risk taxonomies for risk context.
-- Record source key, identifier, version/status, relationship, strength, rationale, and review date.
+- Record source key, identifier, version/status, relationship, strength, rationale, and assessment date.
 - Map only when the threat explains why the control is needed or what it mitigates/detects.
 - Do not infer a mapping from similar words.
 
@@ -331,7 +332,7 @@ Control security property                  Engineering Pattern
   scenarios, not from this control inventory.
 - Compare a control with a Pattern only after both are independently understandable
   and reviewable.
-- Map by stable repository path and reviewed revision or review date.
+- Map by stable repository path and endpoint/source revision.
 - Use `direct`, `partial`, or `context` consistently.
 - State which part of the control the pattern addresses and what remains outside it.
 - Allow zero, one, or many patterns per control and zero, one, or many controls per pattern.
@@ -351,7 +352,7 @@ Control security property                  Engineering Pattern
 - Treat screenshots and configuration exports as point-in-time evidence, not proof of continuous enforcement.
 - Prefer repeatable test results and policy-decision records where the security property permits them.
 
-This model keeps `controls/` and `engineering/` independent: controls define the assurance claim and evaluation criteria, while engineering patterns independently describe recurring design problems and reusable solutions. Mapping records the reviewed relationship without rewriting either endpoint.
+This model keeps `controls/` and `engineering/` independent: controls define the assurance claim and evaluation criteria, while engineering patterns independently describe recurring design problems and reusable solutions. Mapping records the assessed relationship without rewriting either endpoint.
 
 ## 9. Information that remains upstream-only
 
@@ -361,7 +362,7 @@ This model keeps `controls/` and `engineering/` independent: controls define the
 | Full Appendix B controls inventory | It is non-normative and duplicates every requirement in a different organization | Use it as an analysis aid; do not import it as repository structure |
 | AISVS Research Wiki pages and their full tooling/research notes | They are extensive, independently maintained, and may change separately | Link only to the relevant page and summarize material conclusions with attribution when needed |
 | Complete OWASP Top 10 risk descriptions and mitigations | They are risk taxonomies, not this repository's control model | Record IDs, version/status, short rationale, and links |
-| Complete MITRE ATLAS technique, mitigation, and case-study content | ATLAS is a rolling adversary knowledge base | Record stable identifiers where available, the reviewed state/date, and original mapping rationale |
+| Complete MITRE ATLAS technique, mitigation, and case-study content | ATLAS is a rolling adversary knowledge base | Record stable identifiers where available, the inspected state/date, and original mapping rationale |
 | Upstream diagrams, tables, logos, and substantial licensed prose | Copying creates licensing and maintenance obligations | Reference the primary source; check license compatibility before any substantial adaptation |
 | Upstream change history | Upstream owns the authoritative history | Preserve only repository impact reviews and links to the relevant upstream revisions |
 
@@ -380,7 +381,7 @@ Deliverables:
 
 Exit gate:
 
-- human agreement that the plan is narrow enough to execute and that C5/C5.2.5 is the correct first experiment.
+- maintainer decision that the plan is narrow enough to execute and that C5/C5.2.5 is the correct first experiment.
 
 ### Phase 1 — Catalog and template experiment
 
@@ -390,7 +391,7 @@ Deliverables:
 - create a minimal JSON Schema enforcing the proposed invariants;
 - create a control template based on the completeness criteria;
 - add Python validation with a pinned YAML parser for schema errors, duplicate IDs,
-  identifier consistency, invalid states, review gates, and dangling references;
+  identifier consistency, invalid states, maturity gates, and dangling references;
 - add regression tests for the catalog validator.
 
 Exit gate:
@@ -403,12 +404,11 @@ Deliverables:
 
 - develop `v1.0-C5.2.5` through all four control maturity stages;
 - validate threat and related-requirement mappings;
-- define verification and evidence expectations;
-- obtain human product-security review.
+- define verification and evidence expectations.
 
 Exit gate:
 
-- the control is `verifiable` and `reviewed`, and reviewers agree it is a reusable Golden Control.
+- the Control is `verifiable` and demonstrates a reusable Golden Control method.
 
 ### Phase 3 — Refine the method using C5
 
@@ -458,19 +458,19 @@ Only after the catalog and several controls are stable:
 - detect upstream version, identifier, level, and requirement changes;
 - compare immutable old/new source snapshots;
 - flag affected catalog records, controls, mappings, and evidence expectations;
-- set `review_status: re-review-required` where appropriate;
-- generate review proposals rather than rewriting controls automatically;
-- report stale reviews and mappings.
+- set Mapping assessments to `re-review-required` where appropriate;
+- generate change proposals rather than rewriting Controls automatically;
+- report stale source inspections and mappings.
 
 Exit gate:
 
-- automation preserves history, produces deterministic reports, and cannot promote maturity or approve security-significant changes.
+- automation preserves history, produces deterministic reports, and cannot silently promote Control maturity or validate security-significant Mapping changes.
 
 ## 11. Progress measures
 
 Do not use percentage of AISVS requirements documented as the primary success metric. Prefer:
 
-- number of `verifiable` and human-reviewed controls;
+- number of `verifiable` Controls with complete source, scope, verification, evidence, and limitations;
 - percentage of mature controls with executable or repeatable negative verification;
 - mapping rationale review quality and stale-mapping count;
 - time to identify and triage a relevant upstream change;

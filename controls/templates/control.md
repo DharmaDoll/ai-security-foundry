@@ -11,11 +11,6 @@ upstream_url: "<immutable normative requirement URL>"
 research_url: "<immutable corresponding AISVS Research URL>"
 last_verified: "YYYY-MM-DD"
 maturity: "<discovered|understood|threat-linked|verifiable>"
-review_status: "unreviewed"
-last_reviewed: null
-reviewed_by: []
-review_scope: null
-review_evidence: null
 mapping_assessment_refs: []
 ---
 
@@ -86,8 +81,7 @@ relationship is defensible. An explicit no-useful-mapping conclusion is valid.
 
 For each relationship, record the source snapshot, identifier, relationship,
 `direct`/`partial`/`context` strength, `proposed`/`validated` status, technical
-rationale, and assessment date. Agent-authored relationships remain `proposed` until
-human review.
+rationale, and assessment date. Mapping status is independent of Control maturity.
 
 ## Verification
 
@@ -144,11 +138,11 @@ Delete this section when no assessment exists.
 - AISVS Research: `<immutable URL>`
 - Additional primary sources: `<URL and reviewed version/date>`
 
-## Review record and changelog
+## Changelog
 
-Human review is separate from content maturity. Agents may prepare review material
-but do not count as the required human reviewer.
+Record material interpretation, scope, source, and verification changes without
+creating a separate reviewer lifecycle for the Control.
 
-| Date | Change or review scope | Author or reviewer | Evidence |
+| Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
-| YYYY-MM-DD | Initial draft | `<identity>` | `<commit, PR, or review record>` |
+| YYYY-MM-DD | Initial draft | `<source or maintainer>` | `<commit or change record>` |

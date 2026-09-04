@@ -216,7 +216,7 @@ class CatalogValidator:
                     f"{path}.mapping_assessment_refs[{reference_index}]",
                 )
             self._validate_threat_mappings(requirement, path)
-            self._validate_review_gate(requirement, path)
+            self._validate_maturity_gate(requirement, path)
 
     def _validate_source_registration(
         self, source_key: str, source_status: str, path: str
@@ -440,12 +440,8 @@ class CatalogValidator:
             "upstream_revision": catalog_metadata["upstream_revision"],
             "upstream_url": requirement["upstream_url"],
             "research_url": requirement["research_source"]["url"],
+            "last_verified": requirement["research_source"]["last_verified"],
             "maturity": requirement["maturity"],
-            "review_status": requirement["review_status"],
-            "last_reviewed": requirement["last_reviewed"],
-            "reviewed_by": requirement["reviewed_by"],
-            "review_scope": requirement["review_scope"],
-            "review_evidence": requirement["review_evidence"],
             "mapping_assessment_refs": requirement["mapping_assessment_refs"],
         }
 
@@ -457,7 +453,7 @@ class CatalogValidator:
                     f"{expected!r}, found {actual!r}"
                 )
 
-    def _validate_review_gate(
+    def _validate_maturity_gate(
         self, requirement: dict[str, Any], path: str
     ) -> None:
         if (
@@ -465,28 +461,6 @@ class CatalogValidator:
             and requirement["control_ref"] is None
         ):
             self.errors.append(f"{path}: verifiable maturity requires control_ref")
-
-        if requirement["review_status"] != "reviewed":
-            return
-
-        review_fields = {
-            "last_reviewed": requirement["last_reviewed"],
-            "reviewed_by": requirement["reviewed_by"],
-            "review_scope": requirement["review_scope"],
-            "review_evidence": requirement["review_evidence"],
-        }
-        for field, value in review_fields.items():
-            if value is None or value == "" or value == []:
-                self.errors.append(
-                    f"{path}.{field}: required when review_status is reviewed"
-                )
-
-        for index, mapping in enumerate(requirement["threat_mappings"]):
-            if mapping["status"] != "validated":
-                self.errors.append(
-                    f"{path}.threat_mappings[{index}].status: must be validated "
-                    "when review_status is reviewed"
-                )
 
 
 def main(argv: list[str]) -> int:

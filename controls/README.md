@@ -6,14 +6,14 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 
 ## Current artifacts
 
-- [`catalog.yaml`](catalog.yaml): machine-readable inventory containing only selected
-  requirements; it is not a copy of the standard.
+- [`catalog.yaml`](catalog.yaml): machine-readable C5 inventory with AISVS Verification
+  Levels and lifecycle metadata; it is not a copy of the standard.
 - [`schema/control-catalog.schema.json`](schema/control-catalog.schema.json): catalog
   structure and enumerated lifecycle states.
 - [`templates/control.md`](templates/control.md): required structure for a substantive
   Control document.
 - [Initial Golden Control](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md):
-  initial Golden Control prepared for human product-security review.
+  first `verifiable` Control demonstrating the repository's Control-development method.
 
 Validate the catalog and its repository-level invariants with:
 
@@ -23,14 +23,18 @@ python3 controls/scripts/validate_catalog.py
 python3 controls/tests/test_validate_catalog.py
 ```
 
-The current catalog contains only the initial Golden Control. Its content maturity is
-`verifiable`, but its review status remains `unreviewed`; it is not yet a mature
-Control. No Engineering Pattern Mapping is asserted.
+The current catalog contains metadata for all 11 C5 Requirements and a substantive
+document only for the initial Golden Control. `verification_level` records AISVS
+Level 1, 2, or 3; it is distinct from repository Control maturity. The Golden
+Control's maturity is `verifiable`, the current target for a mature repository
+Control. This describes the artifact, not a maintainer's learning progress or proof
+that a product implements the Control. No Engineering Pattern Mapping is asserted.
 
 ## Learning
 
 - [AISVS C5 Access Control and Identity learning plan](docs/learning/c05-access-control-and-identity.md):
-  six-module plan with completion criteria, progress tracking, and a session log.
+  lightweight, text-first lessons for one Requirement at a time, followed by two or
+  three short questions.
 
 ## Control record layout
 
@@ -52,7 +56,7 @@ directories such as `c05.2/`, and do not create empty family directories. Create
 family directory only with its first substantive Control.
 
 The filesystem layout is a navigation aid. `catalog.yaml` remains authoritative for
-source version, lifecycle state, maturity, review status, related Requirements, and
+source version, lifecycle state, Verification Level, maturity, related Requirements, and
 Mappings. When AISVS renames or renumbers content, preserve the historical record
 and perform a semantic change review; do not silently rename or overwrite it.
 
