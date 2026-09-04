@@ -38,10 +38,10 @@ requirements:
         strength: partial
         status: proposed
         rationale: >-
-          An isolated policy decision point can deny Tool actions outside trusted
-          Policy when an Agent requests them, but isolation alone does not guarantee
-          complete enforcement coverage, restricted Tool capability, or correct
-          Policy.
+          Tool invocation gives a compromised or manipulated Agent an opportunity
+          to attack its authorization boundary. PDP isolation limits the Agent's
+          ability to modify or replace the decision authority, but it does not
+          guarantee that every Tool is mediated or that Policy is correct.
         source_url: https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml
         last_assessed: "2026-09-03"
       - source_key: mitre-atlas
@@ -55,16 +55,18 @@ requirements:
         status: proposed
         rationale: >-
           Prompt Injection is one route to Agent influence. PDP isolation contains
-          authorization impact after that influence but does not prevent or detect
-          Prompt Injection itself.
+          compromise of the authorization control plane after that influence, but
+          does not prevent or detect Prompt Injection itself.
         source_url: https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml
         last_assessed: "2026-09-03"
     related_requirements:
       - v1.0-C5.2.1
       - v1.0-C9.5.1
+      - v1.0-C9.5.2
       - v1.0-C9.5.3
       - v1.0-C9.5.6
       - v1.0-C9.6.3
+      - v1.0-C12.1.2
     mapping_assessment_refs: []
     last_reviewed: null
     reviewed_by: []

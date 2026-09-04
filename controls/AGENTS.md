@@ -86,6 +86,34 @@ Do not copy large portions of upstream standards into this repository when a ref
 
 ---
 
+## Interpretation and Practical Translation
+
+AISVS is the primary assurance backbone, but it is not assumed to be a complete or
+perfect product-security design guide. The purpose of this domain is not to perform
+a line-by-line critique of AISVS or to paraphrase it into local files.
+
+For each selected Control:
+
+1. read the normative requirement and its corresponding AISVS Research material;
+2. distinguish upstream statements from this repository's interpretation;
+3. extract the essential assurance property and the failure it is intended to
+   prevent;
+4. translate that property into concrete trust boundaries, security invariants,
+   deterministic enforcement points, verification, and evidence expectations;
+5. review every Requirement and relevant case within the agreed learning or
+   development scope rather than skipping difficult or ambiguous cases for speed;
+6. record uncertainty, disagreement, and repository-specific judgment explicitly.
+
+AISVS Research material is required supporting input for developing an AISVS
+Control, but its examples and recommendations do not become normative requirements
+automatically.
+
+During a structured family-learning pass, record observations as learning evidence
+first. After the full selected scope has been traversed, consolidate reusable
+insights into the appropriate Control, template, AGENTS.md, or durable guidance.
+
+---
+
 ## Control Development Workflow
 
 Develop controls in the following order:

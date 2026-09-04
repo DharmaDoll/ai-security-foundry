@@ -62,7 +62,21 @@ environments, policy components, and boundaries that affect the assurance claim.
 ## Required security properties
 
 State testable properties that must remain true. Prefer properties that remain valid
-across multiple implementation technologies.
+across multiple implementation technologies. Each required property must be
+necessary to the upstream assurance claim or to making that claim effective. Do not
+silently turn adjacent secure-system properties into pass conditions for this
+Control.
+
+## Scope calibration and adjacent assurance
+
+When the boundary is not obvious, distinguish:
+
+- observations that directly pass or fail this Control;
+- supporting conditions needed to make the Control meaningful; and
+- important failures that belong to a different Control or assurance concern.
+
+State the separate impact of adjacent failures so that a narrow Control pass is not
+misrepresented as overall system security.
 
 ## Threat and failure-mode rationale
 
@@ -95,7 +109,9 @@ as applicable. State the expected denial or safe-failure result.
 ### Failure conditions
 
 State which observations fail the control, including missing evidence and paths that
-bypass the intended enforcement point.
+bypass the intended enforcement point when that enforcement point is part of this
+Control's assurance claim. Keep failures belonging to adjacent Controls in a
+separate-check section rather than broadening this Control implicitly.
 
 ## Evidence expectations
 

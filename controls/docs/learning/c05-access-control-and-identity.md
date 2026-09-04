@@ -40,6 +40,11 @@ AISVSのNormative chapterをRequirementのSource of Truthとし、対応するAI
 Research資料を必須の補助教材として読む。ResearchのImplementation例を、そのまま
 Normative requirementとして扱ってはならない。
 
+この学習では11 Requirementをすべて扱う。各Requirementについて、Normative本文だけで
+なく、対応するResearch資料に示された関連するUse case、Failure mode、Verification、
+Limitationも一度確認する。時間短縮のために難しいCaseを省略しない。一方、AISVSを無批判に
+正しいものとして再記述するのではなく、現場で有効な保証へ翻訳できるかを検討する。
+
 ## 進め方
 
 - 標準期間: 6週間
@@ -51,6 +56,19 @@ Normative requirementとして扱ってはならない。
 各Moduleでは、最初に前回内容を自分の言葉で説明し、その後に新しい概念、具体的な
 Use case、Abuse case、検証課題へ進む。読了や会話への参加だけではModuleを完了と
 しない。
+
+各Requirementは、少なくとも次の観点を一巡して理解する。
+
+1. Normative requirementが要求する保証のエッセンス
+2. Research資料が示す背景、脅威、実装上の論点
+3. 代表的なUse caseとTrust Boundary
+4. 繰り返し起こるFailure modeまたはAbuse case
+5. Security invariantと決定論的なEnforcement point
+6. Pass／Failの境界、Negative test、Evidence
+7. AISVSだけでは曖昧な点と、このRepositoryの解釈
+
+この一巡で得た洞察はまず学習Logに残す。C5全体を確認した後、再利用可能性を評価し、
+Control本文、Template、AGENTS.md、または永続的なGuidanceへ整理する。
 
 ## M1 — IdentityとAuthorizationの基礎
 
@@ -207,6 +225,7 @@ Multi-tenant RAG Agent、または同等にC5の複数Sectionを横断するSyst
 9. Evidence expectation
 10. Known limitationとResidual risk
 11. 関連するC5 Requirementと、その関係の根拠
+12. C5学習から得た洞察と、永続的な反映先の整理
 
 ### 完了条件
 
@@ -215,6 +234,28 @@ Multi-tenant RAG Agent、または同等にC5の複数Sectionを横断するSyst
 - EvidenceのProducer、Scope、Freshness、Integrity、Acceptance criteriaが明確である。
 - C5だけでは保証できない範囲を明記できる。
 - 総合成果物が本人による振り返りを完了している。
+- 全11 Requirementと関連するResearch上のCaseを一巡した記録がある。
+- 再利用可能な洞察について、永続化するもの、保留するもの、採用しないものを区別できる。
+
+## Requirement coverage tracker
+
+`completed`は、該当RequirementのNormative本文とResearch資料を読み、上記7観点を
+一巡した場合だけ記録する。ここでの完了はControl文書の成熟やHuman review完了を
+意味しない。
+
+| Requirement | Subject | Status | Evidence or insight | Next action |
+|---|---|---|---|---|
+| C5.1.1 | High-risk operationのStep-up authentication | not-started | — | M2で確認する |
+| C5.1.2 | Federated／Multi-system AgentのToken security | not-started | — | M2で確認する |
+| C5.2.1 | AI ResourceのAccess controlとDefault deny | not-started | — | M3で確認する |
+| C5.2.2 | Retrieval／AssemblyのEnd-user authorization | not-started | — | M3で確認する |
+| C5.2.3 | Sensitive dataとRetrieval architecture | not-started | — | M3で確認する |
+| C5.2.4 | Unauthorized dataのPost-inference filtering | not-started | — | M3で確認する |
+| C5.2.5 | Agent authorization PDPの隔離 | in-progress | Shared management identityとAgent-local allow fallbackは隔離を無効化する。Decision replay、PDPを通らないTool、Log削除は別の保証として区別する | Scope監査後のControlを確認する |
+| C5.2.6 | Privileged AI Resource accessのJIT付与 | not-started | — | C5.2.5の後に確認する |
+| C5.2.7 | Classification labelのDownstream伝播 | not-started | — | C5.2.6の後に確認する |
+| C5.3.1 | Shared model servingのTenant分離 | not-started | — | M5で確認する |
+| C5.3.2 | Shared computeを通じた観測・干渉の防止 | not-started | — | M5で確認する |
 
 ## Progress tracker
 
@@ -226,7 +267,7 @@ Statusは`not-started`、`in-progress`、`completed`、`blocked`のいずれか�
 | M1 | IdentityとAuthorizationの基礎 | not-started | — | 2026-09-03 | C5.2.5 Review後にIdentity chain演習を開始する |
 | M2 | C5.1 Authentication | not-started | — | 2026-09-03 | M1完了後に開始する |
 | M3 | C5.2.1〜C5.2.4 | not-started | — | 2026-09-03 | M2完了後に開始する |
-| M4 | C5.2.5〜C5.2.7 | in-progress | Shared identityによるPDP再配置を隔離失敗と正しく判定 | 2026-09-04 | C5.2.5の適用範囲をReviewする |
+| M4 | C5.2.5〜C5.2.7 | in-progress | C5.2.5の隔離と、Decision binding、完全仲介、Log完全性を区別 | 2026-09-04 | Scope監査後のC5.2.5 Controlを確認する |
 | M5 | C5.3 Multi-Tenant Isolation | not-started | — | 2026-09-03 | M4完了後に開始する |
 | M6 | 総合演習 | not-started | — | 2026-09-03 | M1〜M5完了後に開始する |
 
@@ -239,6 +280,8 @@ Statusは`not-started`、`in-progress`、`completed`、`blocked`のいずれか�
 |---|---|---|---|---|---|
 | 2026-09-03 | Planning | 6 Moduleの学習計画と進捗管理方法を作成 | 学習計画をRepositoryへ保存 | — | M1のIdentity chain演習を開始する |
 | 2026-09-04 | M4 | C5.2.5の平易な解釈とPass／Fail境界 | AgentとPDPが同じ再配置権限を共有する構成を、実効的な隔離がないためFailと正しく説明 | ApplicabilityとNon-applicabilityの確認が未完了 | C5.2.5の適用範囲をReviewする |
+| 2026-09-04 | Learning method | AISVSを現場向けResourceへ翻訳する学習方針を明確化 | C5全Requirementと関連Caseを一巡し、洞察を後で永続文書へ統合する方針を記録 | 永続化する洞察の選別基準はC5一巡後に評価する | C5.2.5の全SPとVerification caseを一巡する |
+| 2026-09-04 | M4 | C5.2.5 ControlのScope監査 | PDP支配に直結するFailureと、Decision binding、完全仲介、Trusted context、Log完全性などの隣接保証を分類 | 修正版ControlへのHuman acceptanceは未完了 | Scope監査後のC5.2.5 Controlを確認する |
 
 ## 進捗更新手順
 
@@ -247,10 +290,13 @@ Statusは`not-started`、`in-progress`、`completed`、`blocked`のいずれか�
 1. Session開始時にfront matter、Progress tracker、直近の学習Logを確認する。
 2. `current_module`の完了条件に沿って、一つのModuleだけを進める。
 3. 説明を読むだけでなく、Scenarioへの適用または成果物作成を含める。
-4. Session終了時にStatus、Completion evidence、Last updated、Next actionを更新する。
-5. `completed`へ変更する前に、すべての完了条件を確認する。
-6. Blockerがある場合は`blocked`とし、解除条件を学習Logへ記録する。
-7. 全Module完了時に`overall_status: completed`へ更新する。
+4. 対象Requirementについて、Normative本文、Research資料、上記7観点を省略せず確認する。
+5. Session終了時にRequirement coverage tracker、ModuleのStatus、Completion evidence、
+   Last updated、Next actionを更新する。
+6. 再利用できそうな洞察は学習Logへ記録し、C5一巡後に永続的な反映先を判断する。
+7. `completed`へ変更する前に、すべての完了条件を確認する。
+8. Blockerがある場合は`blocked`とし、解除条件を学習Logへ記録する。
+9. 全Module完了時に`overall_status: completed`へ更新する。
 
 ## Primary references
 
