@@ -27,6 +27,11 @@ The current catalog contains only the initial Golden Control. Its content maturi
 `verifiable`, but its review status remains `unreviewed`; it is not yet a mature
 Control. No Engineering Pattern Mapping is asserted.
 
+## Learning
+
+- [AISVS C5 Access Control and Identity learning plan](docs/learning/c05-access-control-and-identity.md):
+  six-module plan with completion criteria, progress tracking, and a session log.
+
 ## Control record layout
 
 Store substantive AISVS Control records under one AISVS-family directory:
