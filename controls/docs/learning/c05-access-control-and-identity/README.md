@@ -4,7 +4,7 @@ document_kind: "family-learning-guide"
 source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
-current_requirement: "C5.2.1"
+current_requirement: "C5.2.2"
 last_updated: "2026-09-05"
 ---
 
@@ -48,21 +48,21 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 
 ## 軽量な進捗記録
 
-現在はC5.2.1を学習中とする。C5.1から順に体系的に進める。完了は、学習者が
+現在はC5.2.2を学習中とする。C5.1から順に体系的に進める。完了は、学習者が
 次の3点を短く説明できた時点で記録する。
 
 - Requirementの本質
 - 具体的なPass／Failとその理由
 - このRequirementだけでは保証しない範囲
 
-完了後はC5.2.2へ進む。C5全11 Requirementを一巡したかどうかは、この一覧に
+完了後はC5.2.3へ進む。C5全11 Requirementを一巡したかどうかは、この一覧に
 チェックを付けるだけで管理し、Module、Evidence、Session Log、日付別Statusは
 管理しない。
 
 - [x] [C5.1.1](v1.0-c5.1.1-step-up-authentication.md)
 - [x] [C5.1.2](v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md)
-- [ ] C5.2.1（学習中）
-- [ ] C5.2.2
+- [x] [C5.2.1](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md)
+- [ ] C5.2.2（学習中）
 - [ ] C5.2.3
 - [ ] C5.2.4
 - [x] C5.2.5
@@ -75,6 +75,7 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 
 - [C5.1.1 Step-up Authentication：講義、対話、洞察](v1.0-c5.1.1-step-up-authentication.md)
 - [C5.1.2 Agent Token：講義、対話、mTLS／DPoP比較](v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md)
+- [C5.2.1 AI Resource Authorization：講義、対話、Complete Mediation](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md)
 
 ## Sources
 
