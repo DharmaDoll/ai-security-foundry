@@ -58,6 +58,10 @@ Stable等のStatusを必要に応じて記録する。
 EngineerがArchitecture Reviewを行う視座で構成する。
 
 - 必ずRequirement原文から開始し、途中で学習対象を見失わせない。
+- まずActor、Data、Actionが見える一つの具体Scenarioを最後まで追い、その後で
+  Security Invariantへ抽象化する。抽象概念だけを先に提示して理解を要求しない。
+- 数式、集合記号、略語、Protocol固有のClaim名を初めて使う前に、平易な言葉と
+  Scenario内の具体例で意味を説明する。記号を使う場合も、同じ内容を自然言語で併記する。
 - 「未認証の攻撃者」だけでなく、盗まれたSession、正規の低権限Tenant、侵害された
   Agent、悪意あるData、内部者など、Requirementに適したAttacker Capabilityを置く。
 - Controlの存在ではなく、守るべきOutcomeが成立するかを説明する。
@@ -248,6 +252,9 @@ Session Log、Evidence、Reviewer identity、理解度Score、日付ごとのSta
 - Pass／FailをComponentの有無ではなくOutcomeで説明している。
 - Control Scopeを隣接するSecurity best practiceで広げていない。
 - 初見の用語を説明している。
+- 具体Scenarioから抽象的な設計原則へ進み、抽象化した原則を別Scenarioにも適用できる
+  ことを示している。
+- 記号や略語だけでSecurity Propertyを表しておらず、平易な自然言語でも説明している。
 - 対話中の迷いと重要な訂正を残している。
 - 後の設計レビューに使える確認事項がある。
 - Primary source、Version、Revision、Statusが必要な精度で示されている。
