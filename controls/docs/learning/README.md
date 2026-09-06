@@ -62,6 +62,10 @@ EngineerがArchitecture Reviewを行う視座で構成する。
   Security Invariantへ抽象化する。抽象概念だけを先に提示して理解を要求しない。
 - 数式、集合記号、略語、Protocol固有のClaim名を初めて使う前に、平易な言葉と
   Scenario内の具体例で意味を説明する。記号を使う場合も、同じ内容を自然言語で併記する。
+- `sensitive`、`high-risk`、`appropriate`等、組織やContextによって境界が変わる用語は、
+  例を列挙するだけで終わらせない。Upstreamが定義する範囲と定義していない範囲を示し、
+  Repository interpretationとして実際のPass／Fail判断に使えるOperational definitionを
+  置く。
 - 「未認証の攻撃者」だけでなく、盗まれたSession、正規の低権限Tenant、侵害された
   Agent、悪意あるData、内部者など、Requirementに適したAttacker Capabilityを置く。
 - Controlの存在ではなく、守るべきOutcomeが成立するかを説明する。
@@ -252,6 +256,8 @@ Session Log、Evidence、Reviewer identity、理解度Score、日付ごとのSta
 - Pass／FailをComponentの有無ではなくOutcomeで説明している。
 - Control Scopeを隣接するSecurity best practiceで広げていない。
 - 初見の用語を説明している。
+- Context依存の用語について、Source上の定義とRepositoryのOperational definitionを
+  区別し、判定基準を示している。
 - 具体Scenarioから抽象的な設計原則へ進み、抽象化した原則を別Scenarioにも適用できる
   ことを示している。
 - 記号や略語だけでSecurity Propertyを表しておらず、平易な自然言語でも説明している。
