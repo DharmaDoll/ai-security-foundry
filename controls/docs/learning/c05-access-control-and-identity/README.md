@@ -4,7 +4,7 @@ document_kind: "family-learning-guide"
 source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
-current_requirement: "C5.2.4"
+current_requirement: "C5.2.6"
 last_updated: "2026-09-06"
 ---
 
@@ -48,14 +48,14 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 
 ## 軽量な進捗記録
 
-現在はC5.2.4を学習中とする。C5.1から順に体系的に進める。完了は、学習者が
+現在はC5.2.6を学習中とする。C5.1から順に体系的に進める。完了は、学習者が
 次の3点を短く説明できた時点で記録する。
 
 - Requirementの本質
 - 具体的なPass／Failとその理由
 - このRequirementだけでは保証しない範囲
 
-完了後は、既に一巡済みのC5.2.5を飛ばしてC5.2.6へ進む。C5全11 Requirementを
+完了後はC5.2.7へ進む。C5全11 Requirementを
 一巡したかどうかは、この一覧に
 チェックを付けるだけで管理し、Module、Evidence、Session Log、日付別Statusは
 管理しない。
@@ -65,9 +65,9 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [x] [C5.2.1](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md)
 - [x] [C5.2.2](v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md)
 - [x] [C5.2.3](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
-- [ ] C5.2.4（学習中）
+- [x] [C5.2.4](v1.0-c5.2.4-post-inference-authorization-filtering.md)
 - [x] C5.2.5
-- [ ] C5.2.6
+- [ ] C5.2.6（学習中）
 - [ ] C5.2.7
 - [ ] C5.3.1
 - [ ] C5.3.2
@@ -79,6 +79,7 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [C5.2.1 AI Resource Authorization：講義、対話、Complete Mediation](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md)
 - [C5.2.2 Retrieval Authorization：講義、対話、委任IdentityとVector検索](v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md)
 - [C5.2.3 Sensitive Data Retrieval：講義、対話、Data ClassificationとTraining Boundary](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
+- [C5.2.4 Post-inference Filtering：講義、対話、Trusted ProvenanceとAuthorized Response Assembly](v1.0-c5.2.4-post-inference-authorization-filtering.md)
 
 ## Sources
 
