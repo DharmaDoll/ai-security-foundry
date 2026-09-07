@@ -66,7 +66,7 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [x] [C5.2.2](v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md)
 - [x] [C5.2.3](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
 - [x] [C5.2.4](v1.0-c5.2.4-post-inference-authorization-filtering.md)
-- [x] C5.2.5
+- [x] [C5.2.5](v1.0-c5.2.5-agent-authorization-pdp-isolation.md)
 - [ ] C5.2.6（学習中）
 - [ ] C5.2.7
 - [ ] C5.3.1
@@ -80,6 +80,7 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [C5.2.2 Retrieval Authorization：講義、対話、委任IdentityとVector検索](v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md)
 - [C5.2.3 Sensitive Data Retrieval：講義、対話、Data ClassificationとTraining Boundary](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
 - [C5.2.4 Post-inference Filtering：講義、対話、Trusted ProvenanceとAuthorized Response Assembly](v1.0-c5.2.4-post-inference-authorization-filtering.md)
+- [C5.2.5 Agent Authorization PDP Isolation：講義、対話、Effective Control BoundaryとScope Calibration](v1.0-c5.2.5-agent-authorization-pdp-isolation.md)
 
 ## Sources
 
