@@ -4,8 +4,8 @@ document_kind: "family-learning-guide"
 source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
-current_requirement: "C5.2.6"
-last_updated: "2026-09-06"
+current_requirement: null
+last_updated: "2026-09-08"
 ---
 
 # AISVS C5 Access Control and Identity 学習ガイド
@@ -48,14 +48,14 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 
 ## 軽量な進捗記録
 
-現在はC5.2.6を学習中とする。C5.1から順に体系的に進める。完了は、学習者が
+現在学習中のRequirementはなし。C5全11 Requirementの学習を一巡した。完了は、学習者が
 次の3点を短く説明できた時点で記録する。
 
 - Requirementの本質
 - 具体的なPass／Failとその理由
 - このRequirementだけでは保証しない範囲
 
-完了後はC5.2.7へ進む。C5全11 Requirementを
+今後の候補は、C5一巡で得た再利用可能な洞察の整理である。Control成熟度とは別に扱う。C5全11 Requirementを
 一巡したかどうかは、この一覧に
 チェックを付けるだけで管理し、Module、Evidence、Session Log、日付別Statusは
 管理しない。
@@ -67,10 +67,10 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [x] [C5.2.3](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
 - [x] [C5.2.4](v1.0-c5.2.4-post-inference-authorization-filtering.md)
 - [x] [C5.2.5](v1.0-c5.2.5-agent-authorization-pdp-isolation.md)
-- [ ] C5.2.6（学習中）
-- [ ] C5.2.7
-- [ ] C5.3.1
-- [ ] C5.3.2
+- [x] [C5.2.6](v1.0-c5.2.6-just-in-time-privileged-access.md)
+- [x] [C5.2.7](v1.0-c5.2.7-downstream-classification-label-propagation.md)
+- [x] [C5.3.1](v1.0-c5.3.1-shared-model-serving-tenant-isolation.md)
+- [x] [C5.3.2](v1.0-c5.3.2-shared-compute-tenant-isolation.md)
 
 ## 永続化した学習ノート
 
@@ -81,6 +81,10 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [C5.2.3 Sensitive Data Retrieval：講義、対話、Data ClassificationとTraining Boundary](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
 - [C5.2.4 Post-inference Filtering：講義、対話、Trusted ProvenanceとAuthorized Response Assembly](v1.0-c5.2.4-post-inference-authorization-filtering.md)
 - [C5.2.5 Agent Authorization PDP Isolation：講義、対話、Effective Control BoundaryとScope Calibration](v1.0-c5.2.5-agent-authorization-pdp-isolation.md)
+- [C5.2.6 Just-in-time Privileged Access：講義、対話、CredentialとPrivilege Lifecycleの分離](v1.0-c5.2.6-just-in-time-privileged-access.md)
+- [C5.2.7 Classification Label Propagation：講義、対話、Derived ArtifactとN/A境界](v1.0-c5.2.7-downstream-classification-label-propagation.md)
+- [C5.3.1 Shared Model Serving：講義、対話、一般LLM Applicationへの適用と責任分界](v1.0-c5.3.1-shared-model-serving-tenant-isolation.md)
+- [C5.3.2 Shared Compute：講義、対話、共有基盤の観測・干渉と保証の裏付け](v1.0-c5.3.2-shared-compute-tenant-isolation.md)
 
 ## Sources
 
