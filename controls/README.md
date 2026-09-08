@@ -19,6 +19,9 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 - [Shared Model-serving Tenant Isolation](control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation.md):
   third `verifiable` Control, separating logical serving-state isolation from
   shared-compute assurance.
+- [Explicit Allow and Default Deny for AI Resources](control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md):
+  fourth `verifiable` Control, covering resource access across normal, alternate,
+  provisioning, and failure paths.
 
 Validate the catalog and its repository-level invariants with:
 
@@ -29,8 +32,8 @@ python3 controls/tests/test_validate_catalog.py
 ```
 
 The current catalog contains metadata for all 11 C5 Requirements and substantive
-documents for C5.2.2, C5.2.5, and C5.3.1. `verification_level` records AISVS Level
-1, 2, or 3; it is distinct from repository Control maturity. All three substantive
+documents for C5.2.1, C5.2.2, C5.2.5, and C5.3.1. `verification_level` records AISVS Level
+1, 2, or 3; it is distinct from repository Control maturity. All four substantive
 Controls are `verifiable`, the current target for a mature repository Control. This
 describes the artifacts, not a maintainer's learning progress or proof that a
 product implements them. No Engineering Pattern Mapping is asserted.
