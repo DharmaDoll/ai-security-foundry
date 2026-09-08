@@ -12,16 +12,25 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
   structure and enumerated lifecycle states.
 - [`templates/control.md`](templates/control.md): required structure for a substantive
   Control document.
-- [Initial Golden Control](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md):
-  first `verifiable` Control demonstrating the repository's Control-development method.
-- [End-user Authorization Across Retrieval and Assembly](control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md):
-  second `verifiable` Control, applying the method to authorization-aware retrieval.
-- [Shared Model-serving Tenant Isolation](control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation.md):
-  third `verifiable` Control, separating logical serving-state isolation from
-  shared-compute assurance.
-- [Explicit Allow and Default Deny for AI Resources](control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md):
-  fourth `verifiable` Control, covering resource access across normal, alternate,
-  provisioning, and failure paths.
+
+### C5 Control records
+
+C5の全11件について、解釈・適用範囲・脅威・検証・証拠期待値・限界を備えた
+`verifiable` Controlを整備した。初期Golden ControlはC5.2.5である。
+
+| Requirement | Level | Control |
+|---|---:|---|
+| C5.1.1 | 3 | [高Risk操作のStep-up](control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication.md) |
+| C5.1.2 | 3 | [Agentの短命・最小Scope・署名Token](control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md) |
+| C5.2.1 | 2 | [明示的AllowとDefault Deny](control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md) |
+| C5.2.2 | 2 | [検索・組立でのEnd-user認可](control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md) |
+| C5.2.3 | 2 | [Sensitive DataのModel固定回避](control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md) |
+| C5.2.4 | 2 | [推論後の受取権限制御](control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering.md) |
+| C5.2.5 | 2 | [Agent認可PDPの隔離](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md) |
+| C5.2.6 | 3 | [JIT特権と自動失効](control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access.md) |
+| C5.2.7 | 3 | [分類Labelの伝播](control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation.md) |
+| C5.3.1 | 2 | [共有Serving状態のTenant分離](control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation.md) |
+| C5.3.2 | 3 | [共有計算基盤のTenant分離](control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation.md) |
 
 Validate the catalog and its repository-level invariants with:
 
@@ -31,9 +40,9 @@ python3 controls/scripts/validate_catalog.py
 python3 controls/tests/test_validate_catalog.py
 ```
 
-The current catalog contains metadata for all 11 C5 Requirements and substantive
-documents for C5.2.1, C5.2.2, C5.2.5, and C5.3.1. `verification_level` records AISVS Level
-1, 2, or 3; it is distinct from repository Control maturity. All four substantive
+The current catalog contains metadata and substantive documents for all 11 C5
+Requirements. `verification_level` records AISVS Level 1, 2, or 3; it is distinct
+from repository Control maturity. All 11 substantive
 Controls are `verifiable`, the current target for a mature repository Control. This
 describes the artifacts, not a maintainer's learning progress or proof that a
 product implements them. No Engineering Pattern Mapping is asserted.

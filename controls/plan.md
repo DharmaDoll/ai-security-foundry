@@ -5,6 +5,17 @@
 - Primary backbone: OWASP AISVS
 - AISVS source state reviewed: 2026-09-03
 
+### C5 implementation checkpoint — 2026-09-08
+
+C5全11 RequirementのControlを`verifiable`まで整備した。Phase 1〜3の成果物と
+Exit criteriaを満たし、一覧は[README](README.md)、正規Metadataは[catalog](catalog.yaml)を参照する。
+各Controlは適用境界、脅威、Positive/Negative Verification、Evidence、限界を持つ。
+学習の一巡とは独立したArtifactの完成であり、実製品への適合や全攻撃への完全保証を意味しない。
+
+残る作業は、利用・レビューからの改善と、必要な場合の独立したEngineering Mapping評価である。
+Mapping不在を埋めるためにPatternを生成しない。次Familyの候補はPhase 4のC9/C10/C8だが、
+このC5作業では着手しない。以下のPhase記述は開発順序と判断根拠として保持する。
+
 ## 1. Purpose and boundaries
 
 `controls/` is the requirement-oriented entry point for AI product-security assurance. It answers what security property must be assured, why it matters, how it can be verified, and what evidence would demonstrate effective implementation.

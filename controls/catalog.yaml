@@ -22,12 +22,15 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-01-Identity-Management-Authentication.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.1.2
+      - v1.0-C5.2.1
+      - v1.0-C5.2.6
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.1.2
@@ -43,12 +46,16 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-01-Identity-Management-Authentication.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.1.1
+      - v1.0-C5.2.1
+      - v1.0-C5.2.2
+      - v1.0-C5.2.6
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.2.1
@@ -121,12 +128,15 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.2.2
+      - v1.0-C5.2.4
+      - v1.0-C5.2.7
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.2.4
@@ -142,12 +152,17 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C5.2.2
+      - v1.0-C5.2.3
+      - v1.0-C5.2.7
+      - v1.0-C5.3.1
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.2.5
@@ -222,12 +237,16 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.1.1
+      - v1.0-C5.1.2
+      - v1.0-C5.2.1
+      - v1.0-C5.2.5
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.2.7
@@ -243,12 +262,16 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C5.2.2
+      - v1.0-C5.2.3
+      - v1.0-C5.2.4
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.3.1
@@ -306,10 +329,12 @@ requirements:
     upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md
     research_source:
       url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md
-      last_verified: "2026-09-04"
-    maturity: discovered
-    development_priority: backlog
-    control_ref: null
+      last_verified: "2026-09-08"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation.md
     threat_mappings: []
-    related_requirements: []
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C5.3.1
     mapping_assessment_refs: []
