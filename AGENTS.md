@@ -33,8 +33,19 @@ Treat sources according to their role:
 - OWASP MCP Top 10: MCP-specific risk taxonomy
 - OWASP Agentic Skills Top 10: agent-skill and behavior-layer risk taxonomy
 - OWASP AI Exchange: supplementary security/privacy knowledge and research
+- OWASP Agent Control Standard (ACS): supplementary runtime-control technical specification
+- OWASP Secure Agent Playbook: supplementary security-analysis and verification procedures
 
 Do not treat these sources as interchangeable.
+
+Use supplementary sources—including GenAI LLM Top 10, Agentic Top 10, MCP Top 10,
+Agentic Skills Top 10, ACS, and Secure Agent Playbook—selectively to deepen independently developed
+patterns, not as dependencies, mandatory conformance targets, or completion gates.
+Preserve their distinct roles as risk taxonomies, technical specifications, and
+assessment procedures. Analyze concrete failure paths rather than creating one
+Pattern per listed item.
+Do not automatically install their tools/skills or adopt their defaults and
+mappings. See `engineering/docs/source-policy.md` for the adoption policy.
 
 ## Before making changes
 

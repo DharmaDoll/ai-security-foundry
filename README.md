@@ -68,8 +68,17 @@ External frameworks are inputs, not the repository structure.
 | OWASP MCP Top 10 | MCP-specific risk taxonomy |
 | OWASP Agentic Skills Top 10 | Agent-skill / behavior-layer risk taxonomy |
 | OWASP AI Exchange | Broad supporting security and privacy knowledge |
+| OWASP Agent Control Standard (ACS) | Supplementary runtime-control design reference |
+| OWASP Secure Agent Playbook | Supplementary analysis, review, and verification procedures |
 
 See `sources/registry.yaml` for the version and maturity state currently used by this repository.
+
+GenAI LLM Top 10, Agentic Top 10, MCP Top 10, Agentic Skills Top 10, ACS, and Secure Agent Playbook
+are supplementary knowledge sources, not dependencies or mandatory conformance
+targets. Their distinct source roles remain unchanged. Patterns retain independent
+security reasoning and verification; references do not imply coverage or
+endorsement, and source coverage or mapping success is not a maturity gate. See the
+[engineering source policy](engineering/docs/source-policy.md) for how to use them.
 
 ## Repository structure
 

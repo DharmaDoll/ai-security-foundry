@@ -110,6 +110,13 @@ Domain-specific files may add requirements for areas such as:
 
 ## Detailed guidance
 
+GenAI LLM Top 10, Agentic Top 10, MCP Top 10, Agentic Skills Top 10, ACS, and Secure Agent Playbook
+are supplementary sources for Pattern development. Use risk taxonomies for failure
+and abuse perspectives, ACS for runtime-control design insights, and Playbook for
+analysis, review, and negative-test questions. Preserve independent reasoning;
+none is a dependency, mandatory conformance target, or maturity gate. Do not create
+one Pattern per taxonomy item. Follow `docs/source-policy.md` when using them.
+
 Read the relevant document when the task requires it:
 
 * `docs/security-principles.md`

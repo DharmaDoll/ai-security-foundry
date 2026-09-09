@@ -13,6 +13,44 @@ schema_version: 1
 last_registry_review: "2026-09-01"
 
 sources:
+  owasp-agent-control-standard:
+    name: "OWASP Agent Control Standard (ACS)"
+    role: "reference"
+    canonical_url: "https://github.com/GenAI-Security-Project/agent-control-standard"
+    status: "public-preview"
+    current_version: "main; version.txt reports 0.1.1"
+    last_verified: "2026-09-09"
+    verification_urls:
+      - "https://genai.owasp.org/resource/agent-control-standard-acs/"
+      - "https://github.com/GenAI-Security-Project/agent-control-standard/blob/main/version.txt"
+      - "https://genai-security-project.github.io/agent-control-standard/docs/spec/conformance/"
+    notes: >-
+      Supplementary runtime-control technical specification, not a control backbone
+      or mandatory Pattern dependency/conformance target. OWASP introduction is
+      dated 2026-09-01; this does not establish a stable specification release.
+      README refers to Public Preview while conformance documentation refers to
+      v0.1.0. Resolve document/version differences and pin the relevant revision
+      before substantive use. See engineering/docs/source-policy.md.
+
+  owasp-secure-agent-playbook:
+    name: "OWASP Secure Agent Playbook"
+    role: "reference"
+    canonical_url: "https://github.com/OWASP/secure-agent-playbook"
+    status: "rolling"
+    current_version: "rolling main procedures; release page lists v0.2.7 as latest"
+    last_verified: "2026-09-09"
+    verification_urls:
+      - "https://github.com/OWASP/secure-agent-playbook"
+      - "https://github.com/OWASP/secure-agent-playbook/releases"
+    notes: >-
+      Supplementary analysis, review, and verification procedures, not a normative
+      control standard or mandatory Pattern dependency. Rolling describes the main
+      branch procedures consulted, not an upstream maturity certification; release
+      packages and main may differ. Pin the relevant play revision when used.
+      Independently verify cited standards and mappings. Registration does not
+      authorize installation or execution of skills/plugins and does not establish
+      security, reproducibility, or coverage. See engineering/docs/source-policy.md.
+
   owasp-aisvs:
     name: "OWASP Artificial Intelligence Security Verification Standard (AISVS)"
     role: "control"
