@@ -16,6 +16,19 @@ Exit criteriaを満たし、一覧は[README](README.md)、正規Metadataは[cat
 Mapping不在を埋めるためにPatternを生成しない。次Familyの候補はPhase 4のC9/C10/C8だが、
 このC5作業では着手しない。以下のPhase記述は開発順序と判断根拠として保持する。
 
+### C9 landscape checkpoint — 2026-09-09
+
+Phase 4の次FamilyとしてC9を選び、[全体分析と着手順序](docs/c09-landscape.md)を作成した。
+採用済みv1.0の固定Revisionで要件本文と対応Researchを確認し、最初の代表要件を
+`v1.0-C9.5.1`（Level 2：ツールと引数の細粒度認可）とした。
+全体分析に続き、[C9.5.1のControl](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization.md)を
+解釈・脅威・検証・証拠・限界まで整備し、Catalogに`verifiable`で追加した。
+続いてC9全34件を同じ成熟度まで整備した。要件別の適用境界、脅威、正常・拒否試験、
+証拠期待値、限界を持つ。全件のID・Levelは固定Sourceと照合し、
+一覧は[README](README.md#c9-control-records)、正規Metadataは[Catalog](catalog.yaml)を参照する。
+Phase 4のC9作業は完了。残るのは利用・レビューからの改善と必要時の独立したMapping評価。
+C10/C8にはこの作業で着手しない。学習進捗とEngineering Mappingは変更しない。
+
 ## 1. Purpose and boundaries
 
 `controls/` is the requirement-oriented entry point for AI product-security assurance. It answers what security property must be assured, why it matters, how it can be verified, and what evidence would demonstrate effective implementation.

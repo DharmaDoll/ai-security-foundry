@@ -338,3 +338,822 @@ requirements:
       - v1.0-C5.2.1
       - v1.0-C5.3.1
     mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.1.1
+    requirement_id: C9.1.1
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.1
+      title: Execution Budgets, Loop Control, and Circuit Breakers
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-01-Execution-Budgets.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.1-per-tool-resource-quotas-and-timeouts.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.1.2
+      - v1.0-C9.3.1
+      - v1.0-C9.1.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.1.2
+    requirement_id: C9.1.2
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.1
+      title: Execution Budgets, Loop Control, and Circuit Breakers
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-01-Execution-Budgets.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.2-per-execution-cumulative-budgets.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.1.1
+      - v1.0-C9.1.3
+      - v1.0-C9.2.5
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.1.3
+    requirement_id: C9.1.3
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.1
+      title: Execution Budgets, Loop Control, and Circuit Breakers
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-01-Execution-Budgets.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.3-swarm-wide-agent-halt.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.6.1
+      - v1.0-C9.6.3
+      - v1.0-C9.1.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.1
+    requirement_id: C9.2.1
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.2
+      - v1.0-C9.2.8
+      - v1.0-C9.6.2
+      - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.2
+    requirement_id: C9.2.2
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.2-complete-canonical-approval-display.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.1
+      - v1.0-C9.2.8
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.3
+    requirement_id: C9.2.3
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.3-trusted-action-reversibility-classification.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.4
+      - v1.0-C9.2.10
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.4
+    requirement_id: C9.2.4
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.4-enforce-reversibility-based-action-policy.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.3
+      - v1.0-C9.2.1
+      - v1.0-C9.2.10
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.5
+    requirement_id: C9.2.5
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.1
+      - v1.0-C9.3.7
+      - v1.0-C5.2.5
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.6
+    requirement_id: C9.2.6
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.6-additive-ai-review-before-high-risk-actions.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.7
+      - v1.0-C9.2.1
+      - v1.0-C9.5.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.7
+    requirement_id: C9.2.7
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.6
+      - v1.0-C9.5.3
+      - v1.0-C9.3.6
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.8
+    requirement_id: C9.2.8
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.2
+      - v1.0-C9.2.9
+      - v1.0-C9.6.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.9
+    requirement_id: C9.2.9
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.9-approval-issuing-key-and-credential-isolation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.8
+      - v1.0-C5.2.5
+      - v1.0-C9.5.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.2.10
+    requirement_id: C9.2.10
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.2
+      title: High-Impact Action Approval and Irreversibility Controls
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.10-chain-wide-highest-impact-approval.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.3
+      - v1.0-C9.2.4
+      - v1.0-C9.5.5
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.1
+    requirement_id: C9.3.1
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.1.1
+      - v1.0-C9.3.4
+      - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.2
+    requirement_id: C9.3.2
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.6
+      - v1.0-C9.3.3
+      - v1.0-C9.3.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.3
+    requirement_id: C9.3.3
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.4
+      - v1.0-C9.3.2
+      - v1.0-C9.1.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.4
+    requirement_id: C9.3.4
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.3
+      - v1.0-C9.3.1
+      - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.5
+    requirement_id: C9.3.5
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.6
+      - v1.0-C9.5.1
+      - v1.0-C9.3.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.6
+    requirement_id: C9.3.6
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.2
+      - v1.0-C9.3.5
+      - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.7
+    requirement_id: C9.3.7
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.4
+      - v1.0-C9.2.5
+      - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.3.8
+    requirement_id: C9.3.8
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.3
+      title: Component Isolation and Tool Authorization
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.3.1
+      - v1.0-C9.3.4
+      - v1.0-C9.1.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.4.1
+    requirement_id: C9.4.1
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.4
+      title: Agent and Orchestrator Identity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.4.3
+      - v1.0-C9.5.2
+      - v1.0-C9.4.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.4.2
+    requirement_id: C9.4.2
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.4
+      title: Agent and Orchestrator Identity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.4.1
+      - v1.0-C9.2.8
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.4.3
+    requirement_id: C9.4.3
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.4
+      title: Agent and Orchestrator Identity
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.1.2
+      - v1.0-C5.2.6
+      - v1.0-C9.5.6
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.4.4
+    requirement_id: C9.4.4
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.4
+      title: Agent and Orchestrator Identity
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.4.2
+      - v1.0-C9.2.5
+      - v1.0-C5.3.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.5.1
+    requirement_id: C9.5.1
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.5
+      title: Agent Authorization, Delegation, and Continuous Enforcement
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.2.1
+      - v1.0-C5.2.5
+      - v1.0-C9.5.2
+      - v1.0-C9.5.3
+      - v1.0-C9.5.6
+      - v1.0-C9.2.1
+      - v1.0-C9.1.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.5.2
+    requirement_id: C9.5.2
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.5
+      title: Agent Authorization, Delegation, and Continuous Enforcement
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.1.2
+      - v1.0-C5.2.2
+      - v1.0-C9.5.5
+      - v1.0-C9.5.6
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.5.3
+    requirement_id: C9.5.3
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.5
+      title: Agent Authorization, Delegation, and Continuous Enforcement
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.2.5
+      - v1.0-C9.5.1
+      - v1.0-C9.2.6
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.5.4
+    requirement_id: C9.5.4
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.5
+      title: Agent Authorization, Delegation, and Continuous Enforcement
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.9
+      - v1.0-C9.5.1
+      - v1.0-C5.1.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.5.5
+    requirement_id: C9.5.5
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.5
+      title: Agent Authorization, Delegation, and Continuous Enforcement
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.5.2
+      - v1.0-C9.4.1
+      - v1.0-C9.2.10
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.5.6
+    requirement_id: C9.5.6
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.5
+      title: Agent Authorization, Delegation, and Continuous Enforcement
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.5.1
+      - v1.0-C9.5.2
+      - v1.0-C9.4.3
+      - v1.0-C5.2.6
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.6.1
+    requirement_id: C9.6.1
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.6
+      title: Shutdown and Graceful Degradation
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-06-Shutdown-Graceful-Degradation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.1.3
+      - v1.0-C9.6.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.6.2
+    requirement_id: C9.6.2
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.6
+      title: Shutdown and Graceful Degradation
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-06-Shutdown-Graceful-Degradation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.2.1
+      - v1.0-C9.2.8
+      - v1.0-C9.2.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C9.6.3
+    requirement_id: C9.6.3
+    family:
+      id: C9
+      title: Orchestration & Agentic Security
+    section:
+      id: C9.6
+      title: Shutdown and Graceful Degradation
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-06-Shutdown-Graceful-Degradation.md
+      last_verified: "2026-09-09"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C9.1.3
+      - v1.0-C9.6.1
+      - v1.0-C5.2.5
+    mapping_assessment_refs: []

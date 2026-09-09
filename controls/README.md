@@ -6,7 +6,7 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 
 ## Current artifacts
 
-- [`catalog.yaml`](catalog.yaml): machine-readable C5 inventory with AISVS Verification
+- [`catalog.yaml`](catalog.yaml): machine-readable control inventory with AISVS Verification
   Levels and lifecycle metadata; it is not a copy of the standard.
 - [`schema/control-catalog.schema.json`](schema/control-catalog.schema.json): catalog
   structure and enumerated lifecycle states.
@@ -41,11 +41,58 @@ python3 controls/tests/test_validate_catalog.py
 ```
 
 The current catalog contains metadata and substantive documents for all 11 C5
-Requirements. `verification_level` records AISVS Level 1, 2, or 3; it is distinct
-from repository Control maturity. All 11 substantive
+Requirements and all 34 C9 Requirements (45 Controls). `verification_level` records AISVS Level 1, 2, or 3; it is distinct
+from repository Control maturity. All 45 substantive
 Controls are `verifiable`, the current target for a mature repository Control. This
 describes the artifacts, not a maintainer's learning progress or proof that a
 product implements them. No Engineering Pattern Mapping is asserted.
+
+## C9 Control records
+
+[C9の全体分析と着手順序](docs/c09-landscape.md)に、全6節・34要件の保証範囲、
+C5との違い、Researchからの検討観点を整理した。C9全34件について、
+解釈・適用境界・脅威・Positive/Negative Verification・証拠期待値・限界を備えた
+`verifiable` Controlを整備した。最初の代表要件はC9.5.1。
+これはRepository Artifactの完成であり、製品適合・攻撃への完全保証・学習完了を意味しない。
+
+| Requirement | Level | Control |
+|---|---:|---|
+| C9.1.1 | 1 | [ツール単位の資源上限と実行期限](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.1-per-tool-resource-quotas-and-timeouts.md) |
+| C9.1.2 | 1 | [実行全体の累積予算をRuntimeで強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.2-per-execution-cumulative-budgets.md) |
+| C9.1.3 | 2 | [Agent群全体を停止できるKill-switch](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.3-swarm-wide-agent-halt.md) |
+| C9.2.1 | 1 | [高影響操作を人の承認前に実行させない](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions.md) |
+| C9.2.2 | 2 | [承認画面に実際の操作内容を完全かつ正確に示す](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.2-complete-canonical-approval-display.md) |
+| C9.2.3 | 2 | [高影響操作の可逆性を信頼できる根拠で分類する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.3-trusted-action-reversibility-classification.md) |
+| C9.2.4 | 2 | [可逆性分類を実行制限へ結び付ける](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.4-enforce-reversibility-based-action-policy.md) |
+| C9.2.5 | 2 | [Agentの自己変更能力を強制可能な範囲に限定する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification.md) |
+| C9.2.6 | 2 | [高Risk操作のAI補助レビューを決定論的Gateに追加する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.6-additive-ai-review-before-high-risk-actions.md) |
+| C9.2.7 | 2 | [AI補助レビューの入力・結果・実行経路を操作から守る](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation.md) |
+| C9.2.8 | 3 | [承認を操作・要求者・実行Contextと一回限りの値へ暗号的に結合する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals.md) |
+| C9.2.9 | 3 | [承認を発行する鍵・資格情報をAgentから隔離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.9-approval-issuing-key-and-credential-isolation.md) |
+| C9.2.10 | 3 | [行動連鎖の最大影響を承認Gateへ反映する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.10-chain-wide-highest-impact-approval.md) |
+| C9.3.1 | 1 | [ツール実行を最小権限で隔離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation.md) |
+| C9.3.2 | 1 | [ツール出力をSchemaに照らして検証する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation.md) |
+| C9.3.3 | 2 | [Tool Manifestに権限・資源・出力検証要件を宣言する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements.md) |
+| C9.3.4 | 2 | [Tool Manifestの制約をRuntimeが強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests.md) |
+| C9.3.5 | 2 | [非信頼データ処理をツール呼出し能力から隔離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities.md) |
+| C9.3.6 | 2 | [非信頼ツール出力の処理とAgent操作を構造的に分離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs.md) |
+| C9.3.7 | 2 | [モデルが示した外部資源を承認済み一覧で確認する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources.md) |
+| C9.3.8 | 3 | [Policy違反時にツールを自動的に封じ込める](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation.md) |
+| C9.4.1 | 2 | [各Agent Instanceを固有の暗号的Identityで認証する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity.md) |
+| C9.4.2 | 2 | [Agent操作を実行連鎖へ暗号的に結び付ける](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution.md) |
+| C9.4.3 | 3 | [AgentのIdentity資格情報を定めた周期で更新する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation.md) |
+| C9.4.4 | 3 | [呼出し間に保存するAgent状態の完全性を保護する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state.md) |
+| C9.5.1 | 2 | [Agentのツールと引数に対する細粒度認可](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization.md) |
+| C9.5.2 | 2 | [利用者の委任Contextを各下流呼出しで維持・強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls.md) |
+| C9.5.3 | 2 | [アクセス制御をモデルではなくApplicationで強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions.md) |
+| C9.5.4 | 2 | [Runtimeの秘密・資格情報をモデルから観測できなくする](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context.md) |
+| C9.5.5 | 2 | [Agent間のタスク委任を明示的Policyで制限する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy.md) |
+| C9.5.6 | 3 | [長時間Agentの各特権操作を現在のPolicyで再評価する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action.md) |
+| C9.6.1 | 1 | [推論と出力を手動で停止できるようにする](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs.md) |
+| C9.6.2 | 2 | [承認期限が切れた操作を実行させない](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout.md) |
+| C9.6.3 | 3 | [停止指示をAgentから隔離した別経路で強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation.md) |
+
+今後は利用・レビューからの改善を行う。Engineering Mappingは別の評価として扱う。
 
 ## Learning
 

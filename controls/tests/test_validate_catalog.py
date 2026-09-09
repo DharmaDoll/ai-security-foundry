@@ -53,6 +53,30 @@ class CatalogValidatorTest(unittest.TestCase):
             actual,
         )
 
+    def test_c9_requirement_levels_match_pinned_source(self) -> None:
+        # AISVS v1.0, revision 78775233666a2022dcfb82037e5e029116955c00,
+        # 1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md.
+        expected_by_section = {
+            "C9.1": [1, 1, 2],
+            "C9.2": [1, 2, 2, 2, 2, 2, 2, 3, 3, 3],
+            "C9.3": [1, 1, 2, 2, 2, 2, 2, 3],
+            "C9.4": [2, 2, 3, 3],
+            "C9.5": [2, 2, 2, 2, 2, 3],
+            "C9.6": [1, 2, 3],
+        }
+        expected = {
+            f"{section}.{number}": level
+            for section, levels in expected_by_section.items()
+            for number, level in enumerate(levels, start=1)
+        }
+        catalog = yaml.safe_load(self.catalog_path.read_text(encoding="utf-8"))
+        actual = {
+            requirement["requirement_id"]: requirement["verification_level"]
+            for requirement in catalog["requirements"]
+            if requirement["family"]["id"] == "C9"
+        }
+        self.assertEqual(expected, actual)
+
     def test_rejects_duplicate_versioned_ids(self) -> None:
         errors = self._validate_modified_catalog(
             lambda catalog: catalog["requirements"].append(
