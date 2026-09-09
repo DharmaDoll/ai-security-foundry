@@ -74,6 +74,12 @@ Control solely to mirror a newer AISVS release.
 
 ## Source Accuracy
 
+Every substantive AISVS Control record must include an integer
+`verification_level` matching `catalog.yaml` in its YAML front matter and
+`AISVS Verification Level: N` as the first non-empty line after its title.
+Use `templates/control.md`; validate both representations against the catalog.
+Verification Level is upstream metadata, not Control maturity or product conformance.
+
 Before interpreting or modifying a control:
 
 1. Identify the authoritative upstream source.

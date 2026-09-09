@@ -153,6 +153,66 @@ class CatalogValidatorTest(unittest.TestCase):
             any("verifiable maturity requires control_ref" in error for error in errors)
         )
 
+    def test_rejects_missing_control_verification_level(self) -> None:
+        errors = self._validate_modified_catalog(
+            lambda catalog: None,
+            mutate_control=lambda text: text.replace("verification_level: 2\n", "", 1),
+        )
+        self.assertTrue(any("front matter verification_level" in e for e in errors))
+
+    def test_rejects_control_verification_level_drift(self) -> None:
+        errors = self._validate_modified_catalog(
+            lambda catalog: None,
+            mutate_control=lambda text: text.replace(
+                "verification_level: 2", "verification_level: 3", 1
+            ),
+        )
+        self.assertTrue(any("front matter verification_level" in e for e in errors))
+
+    def test_control_verification_level_requires_integer(self) -> None:
+        for value in ('"2"', "2.0", "true", "null", "0", "4"):
+            with self.subTest(value=value):
+                errors = self._validate_modified_catalog(
+                    lambda catalog: None,
+                    mutate_control=lambda text: text.replace(
+                        "verification_level: 2", f"verification_level: {value}", 1
+                    ),
+                )
+                self.assertTrue(
+                    any("front matter verification_level" in e for e in errors)
+                )
+
+    def test_rejects_missing_visible_verification_level(self) -> None:
+        errors = self._validate_modified_catalog(
+            lambda catalog: None,
+            mutate_control=lambda text: text.replace(
+                "AISVS Verification Level: 2\n", "", 1
+            ),
+        )
+        self.assertTrue(any("immediately after the title" in e for e in errors))
+
+    def test_rejects_visible_verification_level_drift(self) -> None:
+        errors = self._validate_modified_catalog(
+            lambda catalog: None,
+            mutate_control=lambda text: text.replace(
+                "AISVS Verification Level: 2", "AISVS Verification Level: 3", 1
+            ),
+        )
+        self.assertTrue(any("immediately after the title" in e for e in errors))
+
+    def test_rejects_verification_level_only_below_upstream_heading(self) -> None:
+        def move_level(text: str) -> str:
+            return text.replace("AISVS Verification Level: 2\n", "", 1).replace(
+                "## Upstream basis\n",
+                "## Upstream basis\n\nAISVS Verification Level: 2\n",
+                1,
+            )
+
+        errors = self._validate_modified_catalog(
+            lambda catalog: None, mutate_control=move_level
+        )
+        self.assertTrue(any("immediately after the title" in e for e in errors))
+
     def test_rejects_unregistered_threat_source(self) -> None:
         def change_source(catalog: dict[str, Any]) -> None:
             mapping = self._golden_requirement(catalog)["threat_mappings"][0]
@@ -230,7 +290,10 @@ class CatalogValidatorTest(unittest.TestCase):
         )
 
     def _validate_modified_catalog(
-        self, mutate: Callable[[dict[str, Any]], None]
+        self,
+        mutate: Callable[[dict[str, Any]], None],
+        *,
+        mutate_control: Callable[[str], str] | None = None,
     ) -> list[str]:
         catalog = yaml.safe_load(self.catalog_path.read_text(encoding="utf-8"))
         mutate(catalog)
@@ -260,8 +323,14 @@ class CatalogValidatorTest(unittest.TestCase):
                 original_control = REPOSITORY_ROOT / control_ref
                 if original_control.is_file():
                     temporary_control.parent.mkdir(parents=True, exist_ok=True)
+                    text = original_control.read_text(encoding="utf-8")
+                    if (
+                        mutate_control is not None
+                        and requirement["versioned_id"] == "v1.0-C5.2.5"
+                    ):
+                        text = mutate_control(text)
                     temporary_control.write_text(
-                        original_control.read_text(encoding="utf-8"),
+                        text,
                         encoding="utf-8",
                     )
             return self._validator(temporary_catalog, repository_root).validate()

@@ -2,6 +2,7 @@
 title: "<stable repository title>"
 versioned_id: "vX.Y-Cn.n.n"
 requirement_id: "Cn.n.n"
+verification_level: <1|2|3>
 family_id: "Cn"
 source_key: "owasp-aisvs"
 source_version: "X.Y"
@@ -15,6 +16,12 @@ mapping_assessment_refs: []
 ---
 
 # <Stable repository title>
+
+AISVS Verification Level: <1|2|3>
+
+Use the catalog's integer `verification_level` in front matter and the same value
+on the first non-empty line after the title. This is upstream AISVS metadata,
+not repository maturity or a product conformance result.
 
 ## Upstream basis
 

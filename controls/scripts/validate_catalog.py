@@ -433,6 +433,7 @@ class CatalogValidator:
         expected_metadata = {
             "versioned_id": requirement["versioned_id"],
             "requirement_id": requirement["requirement_id"],
+            "verification_level": requirement["verification_level"],
             "family_id": requirement["family"]["id"],
             "source_key": catalog_metadata["source_key"],
             "source_version": catalog_metadata["source_version"],
@@ -447,11 +448,35 @@ class CatalogValidator:
 
         for field, expected in expected_metadata.items():
             actual = front_matter.get(field)
-            if actual != expected:
+            if actual != expected or (
+                field == "verification_level" and type(actual) is not int
+            ):
                 self.errors.append(
                     f"{path}.control_ref front matter {field}: expected "
                     f"{expected!r}, found {actual!r}"
                 )
+
+        body = lines[closing_delimiter + 1 :]
+        title_index = next(
+            (index for index, line in enumerate(body) if line.startswith("# ")),
+            None,
+        )
+        displayed_level = (
+            next(
+                (line.strip() for line in body[title_index + 1 :] if line.strip()),
+                None,
+            )
+            if title_index is not None
+            else None
+        )
+        expected_display = (
+            f"AISVS Verification Level: {requirement['verification_level']}"
+        )
+        if displayed_level != expected_display:
+            self.errors.append(
+                f"{path}.control_ref: expected {expected_display!r} immediately "
+                f"after the title, found {displayed_level!r}"
+            )
 
     def _validate_maturity_gate(
         self, requirement: dict[str, Any], path: str
