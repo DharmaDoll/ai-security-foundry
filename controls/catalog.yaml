@@ -25,7 +25,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.1.2
@@ -49,7 +49,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.1.1
@@ -74,7 +74,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.2
@@ -100,7 +100,7 @@ requirements:
       last_verified: "2026-09-04"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.1
@@ -131,7 +131,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.2
@@ -155,7 +155,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.1
@@ -181,7 +181,7 @@ requirements:
       last_verified: "2026-09-04"
     maturity: verifiable
     development_priority: golden-control
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md
     threat_mappings:
       - source_key: mitre-atlas
         source_version: "2026.08"
@@ -240,7 +240,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.1.1
@@ -265,7 +265,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.1
@@ -290,7 +290,7 @@ requirements:
       last_verified: "2026-09-04"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md
     threat_mappings:
       - source_key: mitre-atlas
         source_version: "2026.08"
@@ -332,7 +332,7 @@ requirements:
       last_verified: "2026-09-08"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation.md
+    control_ref: controls/control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.1
@@ -355,7 +355,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.1-per-tool-resource-quotas-and-timeouts.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.1-per-tool-resource-quotas-and-timeouts/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.1.2
@@ -379,7 +379,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.2-per-execution-cumulative-budgets.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.2-per-execution-cumulative-budgets/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.1.1
@@ -403,7 +403,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.3-swarm-wide-agent-halt.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.3-swarm-wide-agent-halt/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.6.1
@@ -427,7 +427,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.2
@@ -452,7 +452,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.2-complete-canonical-approval-display.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.2-complete-canonical-approval-display/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.1
@@ -475,7 +475,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.3-trusted-action-reversibility-classification.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.3-trusted-action-reversibility-classification/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.4
@@ -498,7 +498,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.4-enforce-reversibility-based-action-policy.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.4-enforce-reversibility-based-action-policy/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.3
@@ -522,7 +522,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.1
@@ -546,7 +546,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.6-additive-ai-review-before-high-risk-actions.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.6-additive-ai-review-before-high-risk-actions/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.7
@@ -570,7 +570,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.6
@@ -594,7 +594,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.2
@@ -618,7 +618,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.9-approval-issuing-key-and-credential-isolation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.9-approval-issuing-key-and-credential-isolation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.8
@@ -642,7 +642,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.10-chain-wide-highest-impact-approval.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.10-chain-wide-highest-impact-approval/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.3
@@ -666,7 +666,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.1.1
@@ -690,7 +690,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.6
@@ -714,7 +714,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.4
@@ -738,7 +738,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.3
@@ -762,7 +762,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.6
@@ -786,7 +786,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.2
@@ -810,7 +810,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.4
@@ -834,7 +834,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.3.1
@@ -858,7 +858,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.4.3
@@ -882,7 +882,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.4.1
@@ -905,7 +905,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.1.2
@@ -929,7 +929,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.4.2
@@ -953,7 +953,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.1
@@ -981,7 +981,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.1.2
@@ -1006,7 +1006,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C5.2.5
@@ -1030,7 +1030,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.9
@@ -1054,7 +1054,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.5.2
@@ -1078,7 +1078,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.5.1
@@ -1103,7 +1103,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.1.3
@@ -1126,7 +1126,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.2.1
@@ -1150,7 +1150,7 @@ requirements:
       last_verified: "2026-09-09"
     maturity: verifiable
     development_priority: next
-    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation.md
+    control_ref: controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation/README.md
     threat_mappings: []
     related_requirements:
       - v1.0-C9.1.3

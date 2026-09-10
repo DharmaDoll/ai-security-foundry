@@ -21,13 +21,21 @@ Mapping不在を埋めるためにPatternを生成しない。次Familyの候補
 Phase 4の次FamilyとしてC9を選び、[全体分析と着手順序](docs/c09-landscape.md)を作成した。
 採用済みv1.0の固定Revisionで要件本文と対応Researchを確認し、最初の代表要件を
 `v1.0-C9.5.1`（Level 2：ツールと引数の細粒度認可）とした。
-全体分析に続き、[C9.5.1のControl](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization.md)を
+全体分析に続き、[C9.5.1のControl](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization/README.md)を
 解釈・脅威・検証・証拠・限界まで整備し、Catalogに`verifiable`で追加した。
 続いてC9全34件を同じ成熟度まで整備した。要件別の適用境界、脅威、正常・拒否試験、
 証拠期待値、限界を持つ。全件のID・Levelは固定Sourceと照合し、
 一覧は[README](README.md#c9-control-records)、正規Metadataは[Catalog](catalog.yaml)を参照する。
 Phase 4のC9作業は完了。残るのは利用・レビューからの改善と必要時の独立したMapping評価。
 C10/C8にはこの作業で着手しない。学習進捗とEngineering Mappingは変更しない。
+
+### C10 landscape checkpoint — 2026-09-10
+
+C9完了後、Phase 4の次FamilyとしてC10を選び、
+[全体分析と着手順序](docs/c10-landscape.md)を作成した。
+採用済み固定Revisionの要件本文と対応Researchから、全4節・23件の保証範囲を整理した。
+最初の代表要件は`v1.0-C10.2.7`（Level 2：受信Tokenの下流APIへの転送禁止）。
+次はこの一件を既存Templateで深める。現時点では個別Control未着手で、Catalogは45件のまま。
 
 ## 1. Purpose and boundaries
 
@@ -128,23 +136,32 @@ controls/
 ```
 
 Phase 2 adds the Golden Control at
-`control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation.md`.
+`control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md`.
 Do not create empty directories or one file per AISVS requirement during incremental
 development.
 
-Use exactly one family-directory level for substantive AISVS Control records:
+Use one family directory and one versioned Requirement directory:
 
 ```text
 control-records/
 └── cNN-family-slug/
-    └── vX.Y-cN.N.N-descriptive-control-name.md
+    └── vX.Y-cN.N.N-descriptive-control-name/
+        ├── README.md
+        └── learning.md  # only when a substantive learning note exists
 ```
 
 The family number makes the primary AISVS backbone directly traceable. The
 descriptive family and Control slugs keep paths understandable, while the versioned
-filename prevents historical Requirement interpretations from being overwritten.
+Requirement directory prevents historical interpretations from being overwritten.
 Do not create section-level directories. Create a family directory only when the
-first substantive Control in that family is added.
+first substantive Control or learning note in that family is added.
+
+`README.md` remains the canonical Control artifact referenced by `control_ref`.
+`learning.md` contains teaching, dialogue, and insights, with reciprocal links when
+both exist. Learning progress remains independent of Control maturity. Shared
+learning policy and Family progress guides remain in `docs/learning/`.
+Learning may precede a Control; a substantive note may create its Requirement
+directory without a placeholder Control or catalog entry.
 
 This storage convention does not make other frameworks normative and does not apply
 to `engineering/`. `catalog.yaml` remains the source of truth for identity,
@@ -202,7 +219,7 @@ This snippet defines a schema proposal; it is not a completed control record.
 | `upstream_revision` | Immutable upstream revision inspected during ingestion |
 | `versioned_id` | Globally unique source/version requirement identifier, such as `v1.0-C5.2.5` |
 | `requirement_id` | Identifier within the source version |
-| `family` / `section` | Upstream grouping metadata; the AISVS family selects the one-level Control-record directory, while sections remain catalog metadata and do not create nested directories |
+| `family` / `section` | Upstream grouping metadata; the family selects the family directory, each versioned Requirement has its own directory, and sections remain metadata without directories |
 | `verification_level` | AISVS level 1, 2, or 3 where applicable |
 | `upstream_status` | `active`, `deprecated`, `superseded`, or `removed`; old rows remain for history |
 | `maturity` | Repository interpretation maturity defined in the next section |

@@ -1,0 +1,560 @@
+---
+title: "AISVS v1.0-C5.2.5 Agent Authorization PDP Isolation Learning Note"
+document_kind: "requirement-learning-note"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+requirement_id: "C5.2.5"
+verification_level: 2
+research_last_researched: "2026-07-14"
+last_updated: "2026-09-06"
+---
+
+# C5.2.5 Agent Authorization PDP Isolation 学習ノート
+
+[Control本文：解釈・検証・証拠・限界](README.md)
+
+
+## この文書について
+
+この文書は、AISVS `v1.0-C5.2.5`のControl成熟過程で行った質疑とScope Calibrationを、
+後から単独で参照できる講義として再構成したものである。
+
+当時は現在の共通学習方式を導入する前だったため、Control本文と対話は存在する一方、
+Requirement単位の学習ノートがなかった。本ノートはその欠落を補う。
+
+これはControl本文、製品の適合判定、またはAISVS原文の代替ではない。次を分離する。
+
+- **Normative:** AISVS v1.0が実際に要求していること。
+- **Research:** AISVS Researchが示すThreat、実装例、Verification上の補足。
+- **Repository interpretation:** 現場のArchitecture Reviewへ適用するための解釈。
+- **Derived insight:** 質疑とControl Reviewから得た、隣接Propertyを含む洞察。
+
+成熟済みControl本文は
+[`v1.0-C5.2.5 Agent Authorization Policy Decision Isolation`](README.md)
+にある。学習ノートの追加によって、そのControl maturityやMapping statusは変更しない。
+
+## 1. Normative Requirement
+
+- Versioned ID: `v1.0-C5.2.5`
+- AISVS Verification Level: `2`
+
+> Verify that the policy decision point for agent authorization is isolated from
+> the agent's execution environment.
+
+意味を崩さない日本語訳:
+
+> Agent AuthorizationのPolicy Decision Pointが、AgentのExecution Environmentから
+> 隔離されていることを検証する。
+
+原文が直接要求するのは、Agent AuthorizationのDecision authorityとAgent Executionの
+Isolationである。特定のProcess、Container、Host、Cloud account、製品を指定していない。
+
+## 2. C5における位置づけ
+
+C5.2.1はAI Resourceへ明示的AllowとDefault Denyを求め、C5.2.2はEnd UserのAuthorityを
+Retrieval Pipelineへ維持する。C5.2.5は、AgentのActionを許可または拒否するAuthorityを、
+そのAgent自身が支配できないことを求める。
+
+```text
+C5.2.1:
+  Resource accessに明示的なPolicyがあるか
+
+C5.2.2:
+  Agent／ServiceがEnd Userより広いDataを取得しないか
+
+C5.2.5:
+  Agentが自分を認可するPDPを支配できないか
+```
+
+このRequirementを一言で表すなら、次である。
+
+> AIに、自分自身の権限管理者をさせない。
+
+より厳密には、AgentはActionをRequestできるが、自分で最終的なAllowを作成、変更、置換
+できてはならない。
+
+## 3. 最初に一つの具体Scenarioを見る
+
+人事Agentが、社員Documentの検索と人事SystemのToolを使用する。
+
+```text
+HR Agent
+  - read_employee_document
+  - update_employee_record
+  - export_hr_report
+```
+
+### Failure-proneな構成
+
+Agent process内にAuthorization libraryがあり、同じFilesystem上のPolicyを読む。
+
+```text
+Agent process
+  +-- LLM／Planner
+  +-- Tool executor
+  +-- authorize(action, resource)
+  +-- policy.yaml       Agent identityで書換可能
+```
+
+Prompt Injection、悪意あるTool output、Dependencyの脆弱性等によりAgent Runtimeが侵害
+されたとする。Attackerは`policy.yaml`またはAuthorization functionを変更し、
+`export_hr_report`をAllowにできる。
+
+```text
+Agent compromise
+  -> 自分を制限するPolicyを変更
+  -> authorize()がAllow
+  -> Human Resources DataをExport
+```
+
+これはC5.2.5の直接的なFailである。ExecutionとDecision authorityが同じEffective control
+boundaryにあるため、Agent compromiseがPDP compromiseになる。
+
+### 推奨される構成
+
+```text
+Separate Policy Administrator
+  -> Policy／PAP
+        |
+        v
+HR Agent -> Decision request -> Independent PDP -> Decision -> PEP -> HR Tool
+    |
+    +-- PDP code、Policy、Identity、Deployment、Routingを支配できない
+```
+
+AgentはDecisionをRequestし、Allow／Denyを受け取ってよい。しかし、AgentのRuntime
+Identityと権限だけでは、PDP、Policy、PDP Identity、Deployment、Recovery、Endpointを
+変更または置換できない。
+
+## 4. 用語
+
+### Agent Execution Environment
+
+LLM call、Planner、Memory、Tool execution、Runtime code等が動くEffective boundary。
+ProcessやContainer名だけでなく、Agentが利用できるIdentity、Filesystem、Socket、Network、
+Secret、Orchestrator API、Deployment権限を含めて考える。
+
+### Policy Decision Point（PDP）
+
+Trusted Identity、Action、Resource、Context、Policy等を評価し、Allow／Denyを決める場所。
+
+### Policy Enforcement Point（PEP）
+
+PDPのDecisionを実際のActionへ強制する場所。PDPがDenyしても、AgentがPEPを迂回してToolへ
+直接AccessできればSystem全体のAuthorizationは破れる。
+
+### Policy Administration Point（PAP）
+
+Authoritative Policyを作成、変更、承認、配布する管理経路。AgentがPAPを操作できれば、
+将来のPDP Decisionを自由に変えられるためIsolationは成立しない。
+
+### Authoritative PDP
+
+Systemが最終的なAuthorization authorityとして受け入れるPDP。Test用やAgent-localの
+参考Decisionではなく、PEPがActionをAllow／Denyするときに信頼するDecision sourceである。
+
+### Effective control boundary
+
+Componentが別Process、Container、Hostに見えるかではなく、Agent compromiseから実際に
+何を支配できるかで定めるBoundary。
+
+例えばPDPが別Containerでも、AgentのService AccountがそのContainerをRedeployできれば、
+Effective boundaryは分かれていない。
+
+### Isolation
+
+C5.2.5におけるIsolationは、特定の物理距離を意味しない。Agent boundaryからPDPのCode、
+Policy、Identity、Routing、Lifecycleを制御できないというSecurity outcomeを意味する。
+
+### Security Property IDとNegative Test ID
+
+Control本文の`SP-3`はSecurity Property 3、`N-4`はNegative Test 4を表すLocal IDである。
+Framework Requirement IDではない。例えばControl本文では、`SP-3`がPDP substitutionを
+防ぐProperty、`N-4`がその置換を試すTestである。
+
+## 5. Threat ModelとTrust Boundary
+
+### Attacker capability
+
+このControlでは、Agent Runtimeが侵害されたと仮定する。原因は問わない。
+
+- Direct／Indirect Prompt Injection。
+- 悪意あるTool、Document、Memory、Inter-agent message。
+- Agent RuntimeまたはDependencyの脆弱性。
+- Agent process内の任意Code実行。
+- Agent workload credentialの取得。
+
+C5.2.5はこれらの侵害を防ぐControlではない。侵害後のBlast radiusを制限する。
+
+### 保護対象
+
+- PDP Codeと実行状態。
+- Authoritative Policy。
+- PDP／PAPのAdministrative identityとCredential。
+- PDP Endpoint identity、Trust anchor、Routing。
+- Deployment、Failover、Rollback、Recovery state。
+- Agent-local fallbackがAuthoritativeになるかどうか。
+
+### 主なTrust Boundary
+
+1. Agent RuntimeとPDP Service。
+2. Agent Workload IdentityとPDP／PAP Administration。
+3. Agentが制御できるRoutingと、PEPが受け入れるPDP Endpoint identity。
+4. Agent Deployment権限とPDP Deployment／Recovery control plane。
+5. AgentとPDPが共有するHost、Cluster、Cloud account、Administrator。
+
+## 6. Security Invariant
+
+まず平易な言葉で表す。
+
+> Agent Runtimeが完全に侵害されても、その権限だけでは、自分を認可するAuthorityを
+> 作り替えられない。
+
+具体的には、Agentが次を行えないことを要求する。
+
+- PDP Code、Policy、Configuration、Trust anchorを変更する。
+- PDPをDeploy、Redeploy、Stop、Rollback、Recoverする。
+- PDPまたはPAP AdministratorをImpersonateする。
+- PDP Endpoint、DNS、Service discovery、Proxy、Certificateを置換する。
+- Agent-controlled componentをAuthoritative PDPとしてPEPへ受け入れさせる。
+- PDP障害時にAgent-local `allow` logicをAuthoritativeにする。
+
+AgentがDecision requestを送り、結果を読むことは通常の利用であり、それだけではIsolation
+Violationではない。
+
+## 7. 何をもって分離と判断するか
+
+### Topology名では判断しない
+
+| Deployment label | C5.2.5の判断 |
+|---|---|
+| In-process library | AgentがProcess memoryを書き換えられるならFail |
+| Sidecar | Separate nameだけでは不十分。共有Volume、Identity、Node権限等を確認する |
+| Separate Container | AgentがContainer runtimeやDeploymentを操作できればFail |
+| Separate Host | Agentが同じAdmin credentialやControl planeを使えればFail |
+| Managed Service | AgentがPolicy／Service administration権限を持てばFail |
+
+> Separate deploymentはIsolationのEvidence候補であり、Isolationそのものではない。
+
+### 権限とLifecycleを見る
+
+Steady-stateでAgentがPDPへWriteできなくても、次の権限があれば支配できる。
+
+- Policy update。
+- Service deployment／rollback。
+- Workload identity issuance。
+- SecretまたはCertificate取得。
+- DNS／Service discovery／Proxy変更。
+- Debug、Maintenance、Emergency interface。
+- Backup restore／Disaster recovery。
+
+現在AgentがそのOperationを使っていなくても、Identityへ権限が付与されていれば、将来の
+Agent機能追加や侵害時に利用され得る。Architecture上のRole separationをPolicyとIAMで
+強制する。
+
+> 役割を分けるとは、Component名を分けることではなく、支配権限を分けることである。
+
+## 8. Scope Calibration
+
+C5.2.5の学習で最も難しかったのは、System上の重大なAuthorization defectと、PDP
+Isolationの直接Failを分けることだった。
+
+| Observation | C5.2.5 | 別途評価するProperty |
+|---|---|---|
+| AgentがPolicyを変更またはPDPをRedeployできる | Fail | AgentがDecision authorityを支配している |
+| AgentとPDPが同じ管理Identityを共有し、そのIdentityでPDPを変更できる | Fail | Nominalな分離しかない |
+| AgentがEndpoint／Trustを変え、偽PDPをAuthoritativeとして受け入れさせる | Fail | PDP substitution |
+| PDP停止時にAgent-local logicが`allow`を返す | Fail | Agent-controlled alternate PDP |
+| PDPがAgentの申告したRole／Tenantを無検証で信頼する | C5.2.5単独ではPassし得る | Trusted authorization contextとPolicy input integrityはFail |
+| Agentが一つのToolをPDPなしで直接呼べる | C5.2.5単独では直ちにFailしない | Complete mediationとTool access controlはFail |
+| Authentic PDPのDecision responseをAgentが改ざんできる | C5.2.5単独では直ちにFailしない | Decision-channel integrityとPEP verificationはFail |
+| AgentがNon-secret PolicyをReadできるが変更できない | Passし得る | Least disclosure上はRead制限が望ましい場合がある |
+| AgentがDecision logを削除できるがPDPを変更できない | C5.2.5単独では直ちにFailしない | Audit／Evidence integrityはFailし、適合判断不能にもなり得る |
+| Separately controlled PEPがPDP障害時にFail openする | PDP自体のIsolationはPassし得る | Fail-safe authorization behaviorはFail |
+
+ここで`Passし得る`はSystemが安全という意味ではない。特定ObservationだけではAgentがPDPを
+支配したと証明されない、というScope上の意味である。
+
+### なぜDirect Tool bypassがC5.2.5の直接Failではないのか
+
+Requirementは、Agent Authorizationに使うPDPがAgent Environmentから隔離されることを
+問う。あるToolがPDPの対象外なら、そのTool pathにはAuthoritative PDP自体が存在しない。
+
+Systemは重大なAuthorization defectを持つが、既存PDPのIsolationが破られたわけではない。
+このGapを無理にC5.2.5へ含めると、Complete mediationとIsolationという異なるPropertyを
+検証できなくなる。
+
+### なぜDecision response改ざんが直接Failではないのか
+
+Authentic PDPは独立して正しいDecisionを返していても、AgentからPEPまでのChannelまたは
+PEP verificationが弱ければDecisionを書き換えられる。これは危険だが、PDPのExecution、
+Policy、Identity自体をAgentが支配したとは限らない。
+
+ただし、Agentが偽PDPをAuthenticとしてPEPへ受け入れさせられるなら、Authoritative PDPを
+置換しているためC5.2.5もFailする。
+
+## 9. Enforcement Point
+
+C5.2.5のIsolationを一つのFilterだけで強制することはできない。複数のControl planeで
+Agentの支配権限を遮断する。
+
+```text
+Runtime IAM
+  + Filesystem／Volume permission
+  + Process／Container／Host isolation
+  + Network identityとmTLS
+  + PDP／PAP Administrative authorization
+  + Deployment／Recovery IAM
+  + Endpoint trust configuration
+  + Fail-closed startup／failure path
+```
+
+PDPを外部Serviceに移すだけでなく、Agent workload identityから次を明示的に拒否する。
+
+- Policy writeとPAP access。
+- PDP Deploy、Update、Rollback、Delete、Stop。
+- PDP Service Account impersonation。
+- Certificate、Trust anchor、DNS、Routeの変更。
+- Shared Volume、Admin Socket、Debug interfaceへのWrite。
+
+PEP側では、受け入れるPDP Identityを検証し、PDP unavailable時にAgent-local Allowへ倒さない。
+
+## 10. VerificationとNegative Test
+
+### Architecture review
+
+1. Agent Authorizationに使うAuthoritative PDPを一つずつ特定する。
+2. Agent compromise boundaryへWorkload identity、Mount、Socket、Network、Secret、Control
+   plane権限を含める。
+3. PDP Code、Policy、Identity、Trust、Routing、Lifecycleを変更できるPrincipalを列挙する。
+4. Normal、Startup、Timeout、Maintenance、Failover、Rollback、Recovery pathを追う。
+5. AgentとPDPが共有するAccount、Host、Cluster、CA、CI/CD、Administratorを明記する。
+
+### Positive verification
+
+- Production-equivalent AgentからDecision requestを送り、特定した独立PDPが応答すること。
+- Separate AdministratorからTest Policyを変更でき、Agent identityでは同じOperationが拒否
+  されること。
+- PDPをRestart、Failover、Rollback、Recoverしても、Identity、Policy、Endpoint、
+  Administrative boundaryがAgent支配へ変わらないこと。
+
+### Negative verification
+
+- Agent identityからPDP Code、Policy、Config、Writable artifactを変更する。
+- PAP、Debug、Maintenance、Emergency、Admin interfaceを呼び出す。
+- PDPまたはAdministrator identityをImpersonateする。
+- Service discovery、DNS、Proxy、Trust anchorを変えて偽PDPへRedirectする。
+- PDPをTimeout／Unavailableにし、Agent-local Allow evaluatorが有効にならないことを確認する。
+- Agentが使えるOS、Container、Orchestrator、IPC、Filesystem権限からPDPを制御する。
+- Agent identityでPDP Image、Policy bundle、Rollback target、Recovery configを置換する。
+
+TestはProductionで破壊的に実施せず、許可されたProduction-equivalent環境とRecovery手順で
+行う。Diagramや`separate-service`というLabelだけをEvidenceにしない。
+
+## 11. Evidence
+
+必要なEvidenceはAgent自身だけに生成・保管させない。Agent compromiseを想定するため、
+Agentが自由に改ざんできる証跡だけではIsolationを証明できない。
+
+- Agent、PDP、PAP、PEP、Deployment／RecoveryのData flowとBoundary。
+- AgentとPDPのRuntime／Administrative privilege inventory。
+- PDP／PolicyのDeployment、Identity、Network、Filesystem configuration。
+- Separate AdministratorによるPolicy change record。
+- Agent boundaryからのNegative test result。
+- PDP nativeまたは独立Control planeのDecision／Administration evidence。
+- Shared dependencyとTrusted assumptionの記録。
+
+Decision logのImmutabilityはC5.2.5の直接Requirementではないが、AgentがLogを削除できると
+検証Evidenceを失い、ReviewerがPassを結論できない場合がある。
+
+> Controlが存在しても、侵害対象だけが証拠を管理していれば、独立性を証明しにくい。
+
+## 12. このRequirementだけでは保証しないこと
+
+C5.2.5にPassしても、次は別途評価する。
+
+- Policyが正しくLeast privilege、Default denyになっていること。
+- Agentが申告するUser、Role、Tenant、ApprovalがTrustedであること。
+- すべてのToolとResource accessがPDP／PEPを通ること。
+- PDP DecisionがPrincipal、Action、Resource、Parameter、Tenant、時点へBindingされること。
+- Decision responseのIntegrityとReplay resistance。
+- PEPがDecisionを正しく強制し、Fail closedすること。
+- Delegation、Credential、Human approvalのIntegrity。
+- Decision logのCompleteness、Immutability、Retention。
+- Agent Runtime、Tool、Sandbox、Model自体が安全であること。
+
+> PDPが独立していることと、Authorization System全体が正しいことは同じではない。
+
+## 13. AISVS Level 2について
+
+AISVSは、C5.2.5をLevel 2とした個別理由をNormative chapterまたはC5.2 Researchで説明して
+いない。次はRepository上の推論である。
+
+Agentを持たないSystemには適用されず、Process分離だけでなくIdentity、Administration、
+Deployment、Routing、Recoveryを含むEffective boundaryを検証する必要がある。Agent
+compromiseを前提としたBlast-radius reductionとDefense in Depthの性質は、AISVSのLevel 2
+一般定義と整合する。
+
+Level 2であることは実装を後回しにする理由ではない。High-impact Tool、Sensitive Data、
+External side effectを持つAgentでは、Decision authority separationを初期Architectureへ
+含める。
+
+## 14. 質疑の再構成
+
+### 問い1: 別Serviceだが同じIdentityでRedeployできる
+
+**Scenario:** PDPはAgentと別Serviceで動く。しかしAgent Service AccountはPDPをRedeployし、
+Policy bundleを変更できる。
+
+**学習者の判断:** Fail。同じ権限でPDPを再配置できるため。
+
+**整理:** 正しい。Network上またはDeployment上の分離より、Effective controlが重要である。
+同じIdentityからPDP Lifecycleを支配できるなら、別Service名でもIsolationは成立しない。
+
+### 問い2: Read-only Agentにも適用されるか
+
+**Scenario:** AgentはHuman Resources Documentを検索するだけで、Recordを更新しない。しかし
+AgentのData access範囲はEnd Userごとに異なる。
+
+**学習者の判断:** 適用される。人事DocumentのAccess Control範囲とAgentの権限が同じとは
+限らず、Confidentialityを保護する必要がある。
+
+**整理:** 正しい。Read-onlyはNon-applicableの理由ではない。Unauthorized Readが重大な
+Security impactを持ち、PDPがAgent accessを認可するならC5.2.5を評価する。
+
+### 問い3: 現在はAdmin APIを使っていない
+
+**Scenario:** Agent IdentityはPDP Admin APIへAccessできるが、現在のAgent workflowでは
+呼び出していない。
+
+**学習者の判断:** 適用される。Roleを分けて設計することが本質であり、現在使わなくても
+将来追加または侵害時に利用される可能性がある。
+
+**整理:** 正しい。Capabilityは通常の利用実績ではなく、侵害時に使用可能なEffective
+permissionで評価する。AgentがAdmin APIを利用できればC5.2.5はFailする。
+
+### 問い4: IsolationだけでAuthorization全体を保証できるか
+
+**学習者の判断:** できない。Requirement文はPDPとAgent Execution Environmentの分離を
+要求しており、分離が本質である。
+
+**整理:** 正しい。Policy correctness、Complete mediation、Request／Decision integrity、
+Logging等は重要だが、C5.2.5単独の保証へ暗黙に含めない。
+
+### 問い5: PDPがAgent-authored Roleを信頼する
+
+**Scenario:** PDPは外部Serviceとして隔離されているが、AgentがRequestへ書いた
+`role=admin`をTrusted attributeとして評価する。
+
+**学習者の判断:** C5.2.5には適合し得るが、検証Logicに不備がある。Agentが作成した情報を
+信頼してはならない。
+
+**整理:** 正しい。AgentはPDPを支配していないためIsolationはPassし得る。一方、Trusted
+Authorization ContextとPolicy input integrityはFailし、Systemは権限昇格に弱い。
+
+### 問い6: 一つのToolがPDPを迂回する
+
+**Scenario:** Authoritative PDP自体はAgentから隔離されているが、一つのToolだけはAgentが
+直接呼び出せる。
+
+**学習者の判断:** Toolが分離されていないためC5.2.5もFailと考えた。
+
+**訂正:** SystemのAuthorizationはFailするが、C5.2.5の直接Failとは限らない。Tool pathに
+PDPを適用していないComplete mediation defectであり、既存PDPをAgentが支配した事実とは
+異なる。両方を別々に報告する。
+
+### 問い7: Authentic PDPのResponseを改ざんする
+
+**Scenario:** External PDPは独立してDenyを返すが、AgentからPEPまでの経路でDecisionを
+Allowへ書き換えられる。
+
+**学習者の判断:** 先のCaseと同様で、改ざんできる箇所がDecision responseへ変わった。
+
+**整理:** SystemはFailする。直接のPropertyはDecision-channel integrityとPEP verificationで
+あり、PDP自体のCode、Policy、Identityを支配していなければC5.2.5単独ではPassし得る。
+偽PDPをAuthenticとして受け入れさせられる場合はPDP substitutionとなりC5.2.5もFailする。
+
+### 問い8: AgentがPolicyをReadできる
+
+**Scenario:** AgentはNon-secret Policyを読めるが、変更、Admin、Substitutionには使えない。
+
+**学習者の判断:** 適合する。Authorization自体には影響しない。ただし可能ならReadさせない。
+
+**整理:** C5.2.5にはPassし得る。Read accessがPolicy evasionやSecurity design disclosureを
+助ける場合はLeast disclosureとして制限するが、ReadだけをIsolation Failへしない。
+
+### 問い9: AgentがDecision logを削除できる
+
+**Scenario:** AgentはPDP、Policy、Decisionに影響できないが、Decision logを削除できる。
+
+**学習者の判断:** C5.2.5には適合する一方、Logにも独立したPolicyが必要であり、削除させる
+べきではない。
+
+**整理:** C5.2.5のIsolation自体はPassし得るが、Audit／Evidence integrityはFailする。
+絶対に誰にも削除させないというより、Retention、Legal hold、Privacy、運用要件に従う
+Authorized deletionと、Agentによる不正なSuppressionを分ける必要がある。
+
+### 問い10: 学習者のPass／Failも間違い得る
+
+**学習者の疑問:** 質問形式のReviewでは、自分の判断も間違っている可能性がある。
+
+**整理:** そのとおりであり、回答を承認Evidenceにしてはならない。対話はScope混同を発見
+して理解を深める方法である。最終的なControl InterpretationはNormative text、Research、
+Primary source、Architecture Evidenceへ戻して検証する。
+
+## 15. このセッションから得られた洞察
+
+1. **AIに自分自身の権限管理者をさせない。** AgentはRequestできるが、Decision authorityを
+   所有してはならない。
+2. **IsolationはTopology名ではなくEffective controlで測る。** Separate process、Sidecar、
+   Managed serviceというLabelだけでは証明にならない。
+3. **Role separationはIdentityとLifecycleに及ぶ。** RuntimeだけでなくPolicy、Deployment、
+   Routing、Recoveryの支配権限を分ける。
+4. **Agent compromiseを前提にNegative testする。** 通常Workflowで使っていないAdmin権限も
+   Attacker capabilityに含める。
+5. **重要なFailureを一つのRequirementへ押し込まない。** Isolation、Complete mediation、
+   Trusted input、Decision integrity、Loggingは相互依存するが別Propertyである。
+6. **C5.2.5へのPassはSystem全体の安全を意味しない。** 独立したPDPが誤った入力で誤った
+   Decisionを返すこともある。
+7. **学習者の判断はEvidenceではない。** 誤答や迷いは、Scope説明を改善するSignalとして
+   永続化する。
+
+## 16. 設計レビュー項目
+
+- AgentがActionをRequestするだけで、Authoritative Decisionを作成できないか。
+- Agent Execution EnvironmentのIdentity、Mount、Socket、Network、Secret、Control planeを
+  含むEffective boundaryを描いたか。
+- PDPはAgent-controlled process memoryの外にあるか。
+- Agent identityがPolicy、PDP Config、PAPを変更できないか。
+- Agent identityがPDPをDeploy、Rollback、Stop、Recoverできないか。
+- AgentがPDP／PAP AdministratorまたはPDP workloadをImpersonateできないか。
+- AgentがDNS、Service discovery、Proxy、Certificate、Trust anchorを変更できないか。
+- PEPが受け入れるPDP Identityを検証するか。
+- PDP failure時にAgent-local Allow logicがAuthoritativeにならないか。
+- Startup、Maintenance、Failover、Rollback、Disaster recoveryも分離を維持するか。
+- Sidecar、Container、Host、Managed serviceというLabelだけでPassにしていないか。
+- Shared Host、Cluster、Cloud account、CA、CI/CD、AdministratorをTrusted assumptionとして
+  明記したか。
+- Agent-authored User、Role、Tenant、ApprovalをTrusted inputとしていないか。
+- すべてのToolとResource pathが適切なPEPを通るかを別Propertyとして確認したか。
+- Decision responseのIntegrity、Binding、Freshness、Replayを別Propertyとして確認したか。
+- AgentがDecision EvidenceをSuppressできず、独立したEvidence sourceがあるか。
+- Test結果をC5.2.5のScopeとSystem全体のRiskに分けて報告したか。
+
+## 17. References
+
+### Normative／Research
+
+- [OWASP AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)
+- [OWASP AISVS v1.0 C5.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md)
+- [OWASP AISVS v1.0 Verification Levels](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x03-Using-AISVS.md)
+
+### Supporting architecture and threat context
+
+- [NIST SP 800-207: Zero Trust Architecture](https://doi.org/10.6028/NIST.SP.800-207)
+- [Open Policy Agent: Policy Decoupling](https://www.openpolicyagent.org/docs/philosophy#policy-decoupling)
+- [MITRE ATLAS `2026.08` source snapshot](https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml)
+
+Supporting sourcesはArchitecture、Policy separation、Threat contextの補足である。
+それらのTechnologyやDeployment例をC5.2.5の唯一のPass条件とはしない。

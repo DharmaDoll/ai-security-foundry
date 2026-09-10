@@ -24,7 +24,7 @@ Classification、Tenant Isolationの設計判断に使える言葉で理解す�
 原則としてC5.1から順に進める。一度に一つのRequirementだけを扱い、対応するResearch
 資料へ必ず一度触れる。すべてのCaseを口頭試問にはせず、講義本文を理解の中心とする。
 
-有益な対話になったRequirementは、このDirectoryへVersioned filenameで永続化する。
+有益な対話になったRequirementは、対応する版付きControl Directoryの`learning.md`へ永続化する。
 永続化後も、学習結果とControl maturityは独立して扱う。
 
 ## C5 Requirement一覧
@@ -60,31 +60,31 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 チェックを付けるだけで管理し、Module、Evidence、Session Log、日付別Statusは
 管理しない。
 
-- [x] [C5.1.1](v1.0-c5.1.1-step-up-authentication.md)
-- [x] [C5.1.2](v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md)
-- [x] [C5.2.1](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md)
-- [x] [C5.2.2](v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md)
-- [x] [C5.2.3](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
-- [x] [C5.2.4](v1.0-c5.2.4-post-inference-authorization-filtering.md)
-- [x] [C5.2.5](v1.0-c5.2.5-agent-authorization-pdp-isolation.md)
-- [x] [C5.2.6](v1.0-c5.2.6-just-in-time-privileged-access.md)
-- [x] [C5.2.7](v1.0-c5.2.7-downstream-classification-label-propagation.md)
-- [x] [C5.3.1](v1.0-c5.3.1-shared-model-serving-tenant-isolation.md)
-- [x] [C5.3.2](v1.0-c5.3.2-shared-compute-tenant-isolation.md)
+- [x] [C5.1.1](../../../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
+- [x] [C5.1.2](../../../control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/learning.md)
+- [x] [C5.2.1](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/learning.md)
+- [x] [C5.2.2](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/learning.md)
+- [x] [C5.2.3](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/learning.md)
+- [x] [C5.2.4](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/learning.md)
+- [x] [C5.2.5](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/learning.md)
+- [x] [C5.2.6](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access/learning.md)
+- [x] [C5.2.7](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/learning.md)
+- [x] [C5.3.1](../../../control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/learning.md)
+- [x] [C5.3.2](../../../control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/learning.md)
 
 ## 永続化した学習ノート
 
-- [C5.1.1 Step-up Authentication：講義、対話、洞察](v1.0-c5.1.1-step-up-authentication.md)
-- [C5.1.2 Agent Token：講義、対話、mTLS／DPoP比較](v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens.md)
-- [C5.2.1 AI Resource Authorization：講義、対話、Complete Mediation](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources.md)
-- [C5.2.2 Retrieval Authorization：講義、対話、委任IdentityとVector検索](v1.0-c5.2.2-end-user-authorization-retrieval-assembly.md)
-- [C5.2.3 Sensitive Data Retrieval：講義、対話、Data ClassificationとTraining Boundary](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage.md)
-- [C5.2.4 Post-inference Filtering：講義、対話、Trusted ProvenanceとAuthorized Response Assembly](v1.0-c5.2.4-post-inference-authorization-filtering.md)
-- [C5.2.5 Agent Authorization PDP Isolation：講義、対話、Effective Control BoundaryとScope Calibration](v1.0-c5.2.5-agent-authorization-pdp-isolation.md)
-- [C5.2.6 Just-in-time Privileged Access：講義、対話、CredentialとPrivilege Lifecycleの分離](v1.0-c5.2.6-just-in-time-privileged-access.md)
-- [C5.2.7 Classification Label Propagation：講義、対話、Derived ArtifactとN/A境界](v1.0-c5.2.7-downstream-classification-label-propagation.md)
-- [C5.3.1 Shared Model Serving：講義、対話、一般LLM Applicationへの適用と責任分界](v1.0-c5.3.1-shared-model-serving-tenant-isolation.md)
-- [C5.3.2 Shared Compute：講義、対話、共有基盤の観測・干渉と保証の裏付け](v1.0-c5.3.2-shared-compute-tenant-isolation.md)
+- [C5.1.1 Step-up Authentication：講義、対話、洞察](../../../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
+- [C5.1.2 Agent Token：講義、対話、mTLS／DPoP比較](../../../control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/learning.md)
+- [C5.2.1 AI Resource Authorization：講義、対話、Complete Mediation](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/learning.md)
+- [C5.2.2 Retrieval Authorization：講義、対話、委任IdentityとVector検索](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/learning.md)
+- [C5.2.3 Sensitive Data Retrieval：講義、対話、Data ClassificationとTraining Boundary](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/learning.md)
+- [C5.2.4 Post-inference Filtering：講義、対話、Trusted ProvenanceとAuthorized Response Assembly](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/learning.md)
+- [C5.2.5 Agent Authorization PDP Isolation：講義、対話、Effective Control BoundaryとScope Calibration](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/learning.md)
+- [C5.2.6 Just-in-time Privileged Access：講義、対話、CredentialとPrivilege Lifecycleの分離](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access/learning.md)
+- [C5.2.7 Classification Label Propagation：講義、対話、Derived ArtifactとN/A境界](../../../control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/learning.md)
+- [C5.3.1 Shared Model Serving：講義、対話、一般LLM Applicationへの適用と責任分界](../../../control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/learning.md)
+- [C5.3.2 Shared Compute：講義、対話、共有基盤の観測・干渉と保証の裏付け](../../../control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/learning.md)
 
 ## Sources
 

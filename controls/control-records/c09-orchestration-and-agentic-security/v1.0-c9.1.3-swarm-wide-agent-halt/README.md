@@ -1,0 +1,153 @@
+---
+title: "Agent群全体を停止できるKill-switch"
+versioned_id: "v1.0-C9.1.3"
+requirement_id: "C9.1.3"
+verification_level: 2
+family_id: "C9"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-01-Execution-Budgets.md"
+last_verified: "2026-09-09"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# Agent群全体を停止できるKill-switch
+
+AISVS Verification Level: 2
+
+初めて読む方へ：[具体例・用語・対話を含む学習ノート](learning.md)。
+
+## Upstream basis
+
+AISVS `v1.0-C9.1.3`を解釈する。要件本文は全ての稼働中Agent Instanceを停止できる群単位のKill-switchが存在することを求める。
+採用済みstable v1.0の固定Revisionで本文と対応Researchの要件別検証・限界を確認した。
+最新の版・製品への追従を意味しない。
+
+Researchは親だけの停止、孤立Worker、Queue、再起動による復活を検証する観点を補足する。
+以下の具体例・Property・検証条件はRepository interpretationである。
+Researchの製品、統計、事件、外部Framework Mappingを未検証のまま転記せず、
+例示された実装方式を一律の適合条件にしない。
+
+## Interpretation
+
+群として実行するAgentの構成員を特定し、一つの停止操作で全稼働Instanceの継続を止める。統括Agentが終了したことだけでは群の停止にならない。
+
+調査の親Agentを止めても、委任先が検索や送信を続ければ群停止は不成立。停止前後の構成員一覧と実行状態を照合し、遅れて届いた仕事でも復活しないことを確認する。
+
+## Security objective
+
+一部のAgentの異常が群全体で拡大し、人が止めたつもりでも実行が残る状態を防ぐ。
+
+## Applicability
+
+複数Instance、子Agent、Replicaを群として稼働させる構成。
+
+### Non-applicability
+
+子Agent・Replicaを生成しない単一Instanceなら群停止は対象外とできる。手動停止そのものはC9.6.1として残る。
+
+## Scope and assumptions
+
+群の識別、構成員の追加、停止完了の定義、停止遅延を定める。下流で既に確定した取引の取消までは要求しない。分断下で停止不能ならその観測を成功扱いしない。
+
+対象構成・採用Policy・許容する動作と評価境界を検証前に固定する。
+不明な構成を安全と仮定せず、未確認範囲をEvidenceの不足として残す。
+
+## Assets, actors, identities, and trust boundaries
+
+資産は群の実行権限・仕事・構成員情報。運用者、統括機構、各Agent、再起動Controllerを区別する。強制点は群の新規受付と構成員それぞれの継続実行。
+
+## Required security properties
+
+Security Invariantは守るべき性質、Enforcement Pointはそれを実際に強制する場所を指す。
+
+| ID | 必要な性質と観測条件 |
+|---|---|
+| SP-1 | 停止対象の全稼働Instanceを列挙・照合できる。 |
+| SP-2 | 停止操作が全構成員に到達し、合意した完了条件で群の実行が止まる。 |
+| SP-3 | Queue、再試行、Controllerが停止対象を自動復活させない。 |
+
+## Scope calibration and adjacent assurance
+
+本要件は停止範囲。停止指示をAgentから隔離する性質はC9.6.3。子のツールJobも継続影響を調べるが、取消不能な外部副作用は残余リスクとして分ける。
+
+## Threat and failure-mode rationale
+
+異常Agentが複製や委任を行い、親の終了や一部Processの停止をすり抜ける。未把握Workerや再起動機構が群を継続させる。
+
+この保証の分析では外部脅威IDを付与する追加価値を確定していない。
+攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
+ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+
+## Verification
+
+### Architecture and configuration review
+
+群ID、動的参加、Worker一覧、Queue、Scheduler、再起動Policy、完了確認を追う。停止中の新規参加を扱う。
+
+### Positive verification
+
+2体以上と子Agentを動かして群停止を起動し、全員の停止を一覧と実測で照合する。範囲外の独立した群への影響も記録する。
+
+### Negative and abuse-case verification
+
+許可された試験環境と模擬Dataを用いる。モデルが協力することに依存せず、
+必要に応じて実行境界へ試験要求を直接与える。
+
+| ID | 条件・操作 | 期待結果・対応Property |
+|---|---|---|
+| N-1 | 親だけ停止する経路を群停止として試す | 子が残るならFailとして検出する。SP-1, SP-2 |
+| N-2 | 停止直前に構成員を追加する | 追加分も対象へ含めるか参加を拒否する。SP-1, SP-3 |
+| N-3 | Queue再送と自動再起動を誘発する | 停止状態が維持される。SP-3 |
+| N-4 | 1 Workerを制御系から分断する | 代替強制や期限付き実行権限等で停止を確かめる。未確認なら停止完了を表示しない。SP-2 |
+
+### Failure conditions
+
+上表の期待結果に反する観測やSPの不成立は、本ControlのFailを裏付ける。
+試験未実施、構成不明、結果を追跡できない場合はPassを裏付ける証拠不足であり、
+実証された回避と区別する。隣接要件の不備だけで本Controlの意味を広げない。
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| 群と構成員の一覧 | 統括基盤 | 動的な全構成員 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 停止前後で漏れを照合できる |
+| 停止・再起動試験 | 検証者・各Worker | 通常・分断・Queue | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 実停止と復活防止を観測できる |
+| 停止完了条件と遅延 | 運用者 | 群全体 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 受付応答と各Instanceの停止時刻を区別する |
+
+成功と失敗の両方について、設定だけでなく実際の結果を採用構成へ対応付ける。
+本Repositoryには期待値のみを置き、本番Evidence、Secret、顧客情報は保存しない。
+特定の監査製品やログ形式は、本Controlが明示する性質を満たすための唯一の方式ではない。
+
+## Related requirements
+
+| Requirement | 関係と境界 |
+|---|---|
+| `v1.0-C9.6.1` | 推論と出力の手動停止 |
+| `v1.0-C9.6.3` | 停止指示経路の隔離 |
+| `v1.0-C9.1.2` | 実行全体の予算 |
+
+## Known limitations and uncertainty
+
+ネットワーク分断時の瞬時停止は一律に保証できない。停止不能なWorkerを隠さず、安全側の権限・通信制限と残る実行を評価する。
+
+`verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態を表す。
+製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
+Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
+
+## References
+
+- [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-01-Execution-Budgets.md)
+- [C9全体分析](../../../docs/c09-landscape.md)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+

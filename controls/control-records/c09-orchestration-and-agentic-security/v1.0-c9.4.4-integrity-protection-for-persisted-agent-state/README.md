@@ -1,0 +1,151 @@
+---
+title: "呼出し間に保存するAgent状態の完全性を保護する"
+versioned_id: "v1.0-C9.4.4"
+requirement_id: "C9.4.4"
+verification_level: 3
+family_id: "C9"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md"
+last_verified: "2026-09-09"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# 呼出し間に保存するAgent状態の完全性を保護する
+
+AISVS Verification Level: 3
+
+## Upstream basis
+
+AISVS `v1.0-C9.4.4`を解釈する。要件本文は呼出し間に永続化されるAgent状態を完全性保護することを求める。
+採用済みstable v1.0の固定Revisionで本文と対応Researchの要件別検証・限界を確認した。
+最新の版・製品への追従を意味しない。
+
+Researchは内容・版・境界の改変やSnapshot差替えの検証を補足する。認証された保存内容でも意味的に安全とは限らないと明記する。
+以下の具体例・Property・検証条件はRepository interpretationである。
+Researchの製品、統計、事件、外部Framework Mappingを未検証のまま転記せず、
+例示された実装方式を一律の適合条件にしない。
+
+## Interpretation
+
+再開時に読む計画・状態が、許可されない変更や別Instanceの状態への差替えを受けたまま利用されないようにする。保存先のWrite制御や信頼境界を跨ぐ完全性検証を組み合わせ、想定攻撃者から守る。
+
+攻撃者が保存した『次は文書を読む』を『次は送信する』へ変更したら、再開前に拒否・隔離する。同じStoreに置いたHashも一緒に書き換えられるなら改変検出にならない。
+
+## Security objective
+
+保存と再開の間に状態が改変され、将来の操作へ影響することを防ぐ。
+
+## Applicability
+
+Checkpoint、計画、Memory、Session状態等を次の呼出しへ保存するAgent。
+
+### Non-applicability
+
+状態を一切持ち越さない範囲は対象外。外部StoreやCacheを使うだけでStatelessとはしない。
+
+## Scope and assumptions
+
+改変可能な主体と保存境界を定義する。原文は一律の暗号方式を指定しない。Store管理者の改変を想定するなら、Store外の鍵・Anchor等で確認する。古い正当Snapshotの復元は許可されたRecoveryと不正Rollbackを区別する。
+
+対象構成・採用Policy・許容する動作と評価境界を検証前に固定する。
+不明な構成を安全と仮定せず、未確認範囲をEvidenceの不足として残す。
+
+## Assets, actors, identities, and trust boundaries
+
+資産は状態とその所有・版対応。Agent、保存Service、鍵・権限管理、復元者を分ける。強制点はWrite認可と再開時の完全性・対応検証。
+
+## Required security properties
+
+Security Invariantは守るべき性質、Enforcement Pointはそれを実際に強制する場所を指す。
+
+| ID | 必要な性質と観測条件 |
+|---|---|
+| SP-1 | 保存状態を不正な変更から保護する。 |
+| SP-2 | 状態の内容と所属Agent・Session等の必要Contextが一致する。 |
+| SP-3 | 検証失敗や不正な旧版復元を正常状態として実行しない。 |
+
+## Scope calibration and adjacent assurance
+
+正規に書いた注入文は完全性が正しくても有害。Memoryの意味・出所・権限は別保証。原文の完全性を『全保存値に必ず署名』へ一律に狭めない。
+
+## Threat and failure-mode rationale
+
+保存先を書ける攻撃者が計画や権限Contextを差し替え、Agentの再開を待って不正操作を誘発する。
+
+この保証の分析では外部脅威IDを付与する追加価値を確定していない。
+攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
+ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+
+## Verification
+
+### Architecture and configuration review
+
+Write権限、保護対象Field、鍵・Anchor、再開前の検証、版と復旧承認の扱いを追う。
+
+### Positive verification
+
+正当に保存した状態から再開でき、許可したRecoveryも検証と版対応を保つことを示す。
+
+### Negative and abuse-case verification
+
+許可された試験環境と模擬Dataを用いる。モデルが協力することに依存せず、
+必要に応じて実行境界へ試験要求を直接与える。
+
+| ID | 条件・操作 | 期待結果・対応Property |
+|---|---|---|
+| N-1 | 内容と保存先のHashを同時変更 | 想定した攻撃者からの改変を検出・阻止。SP-1 |
+| N-2 | 別Session・Tenantの正当状態をコピー | 所属不一致を拒否。SP-2 |
+| N-3 | 古い状態を無承認で復元 | 必要な版・Recovery条件を満たさなければ使用しない。SP-3 |
+| N-4 | 検証情報を欠落・破損 | 通常の再開へ流さない。SP-1, SP-3 |
+
+### Failure conditions
+
+上表の期待結果に反する観測やSPの不成立は、本ControlのFailを裏付ける。
+試験未実施、構成不明、結果を追跡できない場合はPassを裏付ける証拠不足であり、
+実証された回避と区別する。隣接要件の不備だけで本Controlの意味を広げない。
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| 状態保護と攻撃者範囲 | 設計者 | Write・保存・再開 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 誰から何を保護するか明確 |
+| 改変・差替え試験 | 検証者 | 内容・所属・版 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 未許可状態で再開しない |
+| 正常保存・復旧Trace | 状態基盤 | 通常とRecovery | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 有効な状態を追跡 |
+
+成功と失敗の両方について、設定だけでなく実際の結果を採用構成へ対応付ける。
+本Repositoryには期待値のみを置き、本番Evidence、Secret、顧客情報は保存しない。
+特定の監査製品やログ形式は、本Controlが明示する性質を満たすための唯一の方式ではない。
+
+## Related requirements
+
+| Requirement | 関係と境界 |
+|---|---|
+| `v1.0-C9.4.2` | 操作連鎖の暗号的証拠 |
+| `v1.0-C9.2.5` | 自己変更境界 |
+| `v1.0-C5.3.1` | 共有状態のTenant分離 |
+
+## Known limitations and uncertainty
+
+完全性は真実性や安全性と同義でない。正規Writerの侵害や許可された有害な書込は別の検証を要する。
+
+`verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態を表す。
+製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
+Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
+
+## References
+
+- [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md)
+- [C9全体分析](../../../docs/c09-landscape.md)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+

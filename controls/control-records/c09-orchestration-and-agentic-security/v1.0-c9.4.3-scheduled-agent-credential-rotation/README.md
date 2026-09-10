@@ -1,0 +1,151 @@
+---
+title: "AgentのIdentity資格情報を定めた周期で更新する"
+versioned_id: "v1.0-C9.4.3"
+requirement_id: "C9.4.3"
+verification_level: 3
+family_id: "C9"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md"
+last_verified: "2026-09-09"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# AgentのIdentity資格情報を定めた周期で更新する
+
+AISVS Verification Level: 3
+
+## Upstream basis
+
+AISVS `v1.0-C9.4.3`を解釈する。要件本文はAgent Identityの資格情報を定義されたScheduleでRotationすることを求める。
+採用済みstable v1.0の固定Revisionで本文と対応Researchの要件別検証・限界を確認した。
+最新の版・製品への追従を意味しない。
+
+Researchは実際の発行・更新・旧資格情報の受理状態の検証を補足する。緊急失効の推奨は定期Rotationと分ける。
+以下の具体例・Property・検証条件はRepository interpretationである。
+Researchの製品、統計、事件、外部Framework Mappingを未検証のまま転記せず、
+例示された実装方式を一律の適合条件にしない。
+
+## Interpretation
+
+更新予定を書くだけでなく、新しい資格情報へ切り替わり、古い資格情報の利用期間が管理された状態を作る。同じ秘密の有効期限だけを延ばす処理を、秘密の更新と混同しない。
+
+長時間Agentが新しい資格情報へ切り替えた後、旧鍵がいつまでもAPIに通るなら、定めた切替Scheduleを達成した証拠にならない。
+
+## Security objective
+
+古い・露出した資格情報を長期間使い続ける窓を限定する。
+
+## Applicability
+
+Agent Identityを認証する証明書、秘密鍵、Token、API資格情報等のLifecycle。
+
+### Non-applicability
+
+該当資格情報がない範囲は対象外。短命Agentでは終了時破棄と次Instanceでの再発行をScheduleとして評価できるが、長期共通秘密の使い回しを見落とさない。
+
+## Scope and assumptions
+
+資格情報の種類ごとに更新周期、旧新併存期間、更新失敗時の動作を定める。全環境共通の分数を要求しない。信頼Anchorや管理者鍵をAgent資格情報と混同しない。
+
+対象構成・採用Policy・許容する動作と評価境界を検証前に固定する。
+不明な構成を安全と仮定せず、未確認範囲をEvidenceの不足として残す。
+
+## Assets, actors, identities, and trust boundaries
+
+資産はAgent認証能力。発行者、RuntimeのCredential取得、下流のVerifierを分ける。強制点は発行・切替・旧資格情報の終了。
+
+## Required security properties
+
+Security Invariantは守るべき性質、Enforcement Pointはそれを実際に強制する場所を指す。
+
+| ID | 必要な性質と観測条件 |
+|---|---|
+| SP-1 | 対象資格情報と周期・終了条件が明示される。 |
+| SP-2 | Scheduleどおりに新しい資格情報へ切り替わる。 |
+| SP-3 | 併存期間後は旧資格情報を受理せず、障害で無期限延長しない。 |
+
+## Scope calibration and adjacent assurance
+
+短命Token、定期鍵更新、緊急失効、JIT特権は別の性質。定期Rotationだけで侵害直後の停止を保証しない。
+
+## Threat and failure-mode rationale
+
+盗まれた古い資格情報や終了済みAgentの秘密が、更新漏れにより長期間使われる。
+
+この保証の分析では外部脅威IDを付与する追加価値を確定していない。
+攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
+ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+
+## Verification
+
+### Architecture and configuration review
+
+資格情報一覧、発行・更新Job、下流のCache、併存と失効、更新失敗アラートを確認する。
+
+### Positive verification
+
+試験用の短いScheduleで正常切替を実施し、新資格情報の成功と旧資格情報の終了を下流で確認する。
+
+### Negative and abuse-case verification
+
+許可された試験環境と模擬Dataを用いる。モデルが協力することに依存せず、
+必要に応じて実行境界へ試験要求を直接与える。
+
+| ID | 条件・操作 | 期待結果・対応Property |
+|---|---|---|
+| N-1 | 併存期間終了後に旧資格情報を再利用 | 拒否される。SP-3 |
+| N-2 | 更新Serviceを停止 | 定義した失敗処理になり、旧資格情報を無期限に延長しない。SP-2, SP-3 |
+| N-3 | Runtime再起動・Replica追加 | 旧秘密へ巻き戻らない。SP-2 |
+| N-4 | 更新Jobを無効にする | 予定からの逸脱を検出し未達と記録。SP-1, SP-2 |
+
+### Failure conditions
+
+上表の期待結果に反する観測やSPの不成立は、本ControlのFailを裏付ける。
+試験未実施、構成不明、結果を追跡できない場合はPassを裏付ける証拠不足であり、
+実証された回避と区別する。隣接要件の不備だけで本Controlの意味を広げない。
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| 資格情報Schedule | Identity管理者 | 全Agent資格情報 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 周期と旧資格情報終了が明示 |
+| 更新・受理試験 | 発行者・Resource | 新旧資格情報 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 下流で切替が有効 |
+| 障害・再起動結果 | 検証者 | 更新不能・Replica | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 無期限延長を防ぐ |
+
+成功と失敗の両方について、設定だけでなく実際の結果を採用構成へ対応付ける。
+本Repositoryには期待値のみを置き、本番Evidence、Secret、顧客情報は保存しない。
+特定の監査製品やログ形式は、本Controlが明示する性質を満たすための唯一の方式ではない。
+
+## Related requirements
+
+| Requirement | 関係と境界 |
+|---|---|
+| `v1.0-C5.1.2` | 短命・最小ScopeのToken |
+| `v1.0-C5.2.6` | JIT特権 |
+| `v1.0-C9.5.6` | 現在Policyによる再認可 |
+
+## Known limitations and uncertainty
+
+更新前に悪用されるリスクと、侵害者が新資格情報も取得できる状態は残る。Identityの個体一意性は別評価。
+
+`verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態を表す。
+製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
+Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
+
+## References
+
+- [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md)
+- [C9全体分析](../../../docs/c09-landscape.md)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+

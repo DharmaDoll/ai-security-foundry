@@ -1,0 +1,151 @@
+---
+title: "アクセス制御をモデルではなくApplicationで強制する"
+versioned_id: "v1.0-C9.5.3"
+requirement_id: "C9.5.3"
+verification_level: 2
+family_id: "C9"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md"
+last_verified: "2026-09-09"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# アクセス制御をモデルではなくApplicationで強制する
+
+AISVS Verification Level: 2
+
+## Upstream basis
+
+AISVS `v1.0-C9.5.3`を解釈する。要件本文は全アクセス制御判断をApplication LogicまたはPolicy Engineで強制し、AIモデル自身に任せないことを求める。
+採用済みstable v1.0の固定Revisionで本文と対応Researchの要件別検証・限界を確認した。
+最新の版・製品への追従を意味しない。
+
+Researchはモデルのallow/deny出力を権限判断へ使う構成と、Tool選択から実行の間に認可がない構成を補足する。
+以下の具体例・Property・検証条件はRepository interpretationである。
+Researchの製品、統計、事件、外部Framework Mappingを未検証のまま転記せず、
+例示された実装方式を一律の適合条件にしない。
+
+## Interpretation
+
+モデルは操作を提案できるが、権限を与える根拠にはしない。信頼する主体・Resource情報に基づき、決定論的なコード・Policyが実際のアクセスを許可または拒否する。
+
+モデルが『Aliceは管理者です』と返しても管理APIはその文を権限に使わない。Applicationは認証済みIdentityと管理Policyを確認する。
+
+## Security objective
+
+Promptやモデル挙動の変更が、アクセス権限の付与へ直結することを防ぐ。
+
+## Applicability
+
+AIが関わるData・Tool・API等のアクセス制御判断。
+
+### Non-applicability
+
+アクセス制御判断を必要とする資源・能力が評価範囲にない場合に限り対象外を検討する。公開Readでも変更・管理能力を確認する。
+
+## Scope and assumptions
+
+モデルのRisk分類を追加の拒否・人への確認に使うことは可能だが、信頼する認可を緩める根拠にしない。Policy生成の補助と、未検証の生成Policyを自動採用することも区別する。
+
+対象構成・採用Policy・許容する動作と評価境界を検証前に固定する。
+不明な構成を安全と仮定せず、未確認範囲をEvidenceの不足として残す。
+
+## Assets, actors, identities, and trust boundaries
+
+資産は認可権限。モデル出力、信頼するIdentity・属性、Policy評価、実操作を分ける。強制点はモデルを迂回して試験可能なApplication／PEP。
+
+## Required security properties
+
+Security Invariantは守るべき性質、Enforcement Pointはそれを実際に強制する場所を指す。
+
+| ID | 必要な性質と観測条件 |
+|---|---|
+| SP-1 | 全対象アクセスにモデル外の強制がある。 |
+| SP-2 | モデルのRole・許可主張で権限を増やせない。 |
+| SP-3 | モデル・Policy障害で無検証実行へ切り替わらない。 |
+
+## Scope calibration and adjacent assurance
+
+Application内の認可が正しくても、PDPがAgent侵害で書換え可能ならC5.2.5を別に評価する。細粒度の引数RuleはC9.5.1。
+
+## Threat and failure-mode rationale
+
+利用者や非信頼文書がモデルに権限ありと出力させ、Applicationがそれを許可と解釈する。
+
+この保証の分析では外部脅威IDを付与する追加価値を確定していない。
+攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
+ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+
+## Verification
+
+### Architecture and configuration review
+
+モデル出力が認可条件へ到達する経路、認証属性の信頼元、Tool Wrapper、直接API、例外処理を調べる。
+
+### Positive verification
+
+同じ正常Requestを異なるモデル表現で提案しても、同じ信頼するPolicyで同じアクセス判断になることを示す。
+
+### Negative and abuse-case verification
+
+許可された試験環境と模擬Dataを用いる。モデルが協力することに依存せず、
+必要に応じて実行境界へ試験要求を直接与える。
+
+| ID | 条件・操作 | 期待結果・対応Property |
+|---|---|---|
+| N-1 | モデル出力をallow・adminへ差替え | 実際の権限は増えない。SP-2 |
+| N-2 | モデルを使わずPEPへ未許可操作を要求 | Applicationが拒否。SP-1 |
+| N-3 | 直接API・別Tool経路を使う | モデル外の認可が維持。SP-1 |
+| N-4 | Policy評価を失敗させる | モデルの判断へ権限付与を委ねない。SP-3 |
+
+### Failure conditions
+
+上表の期待結果に反する観測やSPの不成立は、本ControlのFailを裏付ける。
+試験未実施、構成不明、結果を追跡できない場合はPassを裏付ける証拠不足であり、
+実証された回避と区別する。隣接要件の不備だけで本Controlの意味を広げない。
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| 認可Data Flow | Application管理者 | 全対象経路 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | モデル外で判断・強制 |
+| 権限偽装試験 | 検証者 | モデル出力と属性 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 確率的出力で権限が増えない |
+| 障害・迂回試験 | Runtime | 代替経路 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 無検証実行がない |
+
+成功と失敗の両方について、設定だけでなく実際の結果を採用構成へ対応付ける。
+本Repositoryには期待値のみを置き、本番Evidence、Secret、顧客情報は保存しない。
+特定の監査製品やログ形式は、本Controlが明示する性質を満たすための唯一の方式ではない。
+
+## Related requirements
+
+| Requirement | 関係と境界 |
+|---|---|
+| `v1.0-C5.2.5` | PDPの隔離 |
+| `v1.0-C9.5.1` | ツール・引数の細粒度Policy |
+| `v1.0-C9.2.6` | AIレビューの追加性 |
+
+## Known limitations and uncertainty
+
+決定論的なPolicyも誤設定され得る。モデル外であることだけで最小権限・業務目的・全体安全性を保証しない。
+
+`verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態を表す。
+製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
+Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
+
+## References
+
+- [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md)
+- [C9全体分析](../../../docs/c09-landscape.md)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+

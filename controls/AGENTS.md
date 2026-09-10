@@ -48,21 +48,30 @@ Do not treat threat taxonomies, risk lists, implementation guidance, and verific
 
 ## Control Record Organization
 
-Organize substantive AISVS Control records by AISVS family using exactly one
-directory level:
+Organize substantive AISVS Control records by AISVS family and versioned Requirement:
 
 ```text
 control-records/
 └── cNN-family-slug/
-    └── vX.Y-cN.N.N-descriptive-control-name.md
+    └── vX.Y-cN.N.N-descriptive-control-name/
+        ├── README.md
+        └── learning.md  # optional; create only after meaningful learning
 ```
 
 Use a zero-padded, lowercase family prefix such as
-`c05-access-control-and-identity/`. Begin the filename with the lowercase,
+`c05-access-control-and-identity/`. Begin the Requirement directory with the lowercase,
 versioned Requirement ID, followed by a stable descriptive slug.
 
+`README.md` is the authoritative Control interpretation, verification, evidence,
+and limitations. `learning.md` holds concrete teaching, dialogue, and insights.
+Keep their purposes and maturity independent. Add reciprocal links when a learning
+note exists; never create an empty note to complete the directory layout.
+Catalog `control_ref` must point to the Control `README.md`, never `learning.md`.
+
 Do not create section-level directories or empty family placeholders. Create a
-family directory only when its first substantive Control is added.
+family or Requirement directory only when its first substantive artifact is added.
+Learning may precede a Control: do not create a placeholder README or catalog entry;
+link to the existing family guide until a substantive Control exists.
 
 The directory layout supports navigation and AISVS traceability; `catalog.yaml`
 remains authoritative for versions, lifecycle, maturity, and
@@ -136,9 +145,9 @@ every AISVS Category or Family.
 - Persist a meaningful session as a standalone lecture plus a faithful
   reconstruction of important questions, uncertainty, corrections, and insights;
   do not preserve raw chat noise merely for completeness.
-- Use one Family directory, a lightweight Family progress guide, and versioned
-  Requirement-note filenames. Do not create empty Family or Requirement
-  placeholders.
+- Keep common policy and lightweight Family progress guides in `docs/learning/`.
+  Store each Requirement note as `learning.md` beside its Control `README.md` in
+  the versioned Requirement directory. Do not create empty placeholders.
 - Never use learning completion to change Control maturity, Mapping status, or a
   product conformance result.
 

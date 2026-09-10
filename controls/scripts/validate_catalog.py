@@ -365,17 +365,17 @@ class CatalogValidator:
             return
 
         expected_directory_prefix = f"c{int(family_match.group(1)):02d}-"
-        if not location.parent.name.startswith(expected_directory_prefix):
+        if not location.parent.parent.name.startswith(expected_directory_prefix):
             self.errors.append(
                 f"{path}.control_ref: family directory must start with "
                 f"{expected_directory_prefix}"
             )
 
-        expected_filename_prefix = f"{requirement['versioned_id'].lower()}-"
-        if not location.name.startswith(expected_filename_prefix):
+        expected_requirement_prefix = f"{requirement['versioned_id'].lower()}-"
+        if not location.parent.name.startswith(expected_requirement_prefix):
             self.errors.append(
-                f"{path}.control_ref: filename must start with "
-                f"{expected_filename_prefix}"
+                f"{path}.control_ref: requirement directory must start with "
+                f"{expected_requirement_prefix}"
             )
 
     def _validate_control_document_metadata(

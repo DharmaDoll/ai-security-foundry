@@ -3,11 +3,13 @@
 from __future__ import annotations
 
 import copy
+import re
 import sys
 import tempfile
 import unittest
 from pathlib import Path
 from typing import Any, Callable
+from urllib.parse import unquote
 
 import yaml
 
@@ -28,6 +30,48 @@ class CatalogValidatorTest(unittest.TestCase):
             [],
             self._validator(self.catalog_path, REPOSITORY_ROOT).validate(),
         )
+
+    def test_control_documents_and_catalog_have_same_inventory(self) -> None:
+        catalog = yaml.safe_load(self.catalog_path.read_text(encoding="utf-8"))
+        expected = {
+            row["control_ref"] for row in catalog["requirements"]
+            if row["control_ref"] is not None
+        }
+        actual = {
+            str(path.relative_to(REPOSITORY_ROOT))
+            for path in (REPOSITORY_ROOT / "controls/control-records").rglob("README.md")
+        }
+        self.assertEqual(expected, actual)
+        self.assertEqual(
+            [], list((REPOSITORY_ROOT / "controls/control-records").glob("*/*.md"))
+        )
+
+    def test_learning_notes_have_reciprocal_control_links_when_control_exists(self) -> None:
+        for note in (REPOSITORY_ROOT / "controls/control-records").glob("*/*/learning.md"):
+            with self.subTest(note=note):
+                control = note.with_name("README.md")
+                if control.exists():
+                    self.assertIn("](README.md)", note.read_text(encoding="utf-8"))
+                    self.assertIn("](learning.md)", control.read_text(encoding="utf-8"))
+        self.assertEqual(
+            [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*.md"))
+        )
+
+    def test_controls_local_markdown_links_resolve(self) -> None:
+        # Check both inline links and reference definitions, including moved notes.
+        pattern = re.compile(r"\]\(([^\s)]+)\)|^\[[^\]\n]+\]:\s*(\S+)", re.M)
+        for document in (REPOSITORY_ROOT / "controls").rglob("*.md"):
+            for match in pattern.finditer(document.read_text(encoding="utf-8")):
+                link = match[1] or match[2]
+                if re.match(r"[a-zA-Z][a-zA-Z0-9+.-]*:", link) or link.startswith("#"):
+                    continue
+                target = unquote(link.split("#", 1)[0])
+                if "<" in target or ">" in target:  # Template placeholders.
+                    continue
+                with self.subTest(document=document, link=link):
+                    resolved = (document.parent / target).resolve()
+                    self.assertTrue(resolved.is_relative_to(REPOSITORY_ROOT))
+                    self.assertTrue(resolved.exists(), f"Dangling local link: {link}")
 
     def test_c5_requirement_levels_match_pinned_source(self) -> None:
         catalog = yaml.safe_load(self.catalog_path.read_text(encoding="utf-8"))
@@ -119,7 +163,7 @@ class CatalogValidatorTest(unittest.TestCase):
             lambda catalog: self._golden_requirement(catalog).update(
                 control_ref=(
                     "controls/control-records/c05-access-control-and-identity/"
-                    "v1.0-c5.2.5-missing.md"
+                    "v1.0-c5.2.5-missing/README.md"
                 )
             )
         )
@@ -130,7 +174,7 @@ class CatalogValidatorTest(unittest.TestCase):
             lambda catalog: self._golden_requirement(catalog).update(
                 control_ref=(
                     "controls/control-records/c06-model-supply-chain/"
-                    "v1.0-c5.2.5-missing.md"
+                    "v1.0-c5.2.5-missing/README.md"
                 )
             )
         )
@@ -138,18 +182,31 @@ class CatalogValidatorTest(unittest.TestCase):
             any("family directory must start with c05-" in error for error in errors)
         )
 
-    def test_rejects_control_filename_with_wrong_requirement_id(self) -> None:
+    def test_rejects_control_directory_with_wrong_requirement_id(self) -> None:
         errors = self._validate_modified_catalog(
             lambda catalog: self._golden_requirement(catalog).update(
                 control_ref=(
                     "controls/control-records/c05-access-control-and-identity/"
-                    "v1.0-c5.2.6-missing.md"
+                    "v1.0-c5.2.6-missing/README.md"
                 )
             )
         )
         self.assertTrue(
-            any("filename must start with v1.0-c5.2.5-" in error for error in errors)
+            any("requirement directory must start with v1.0-c5.2.5-" in error for error in errors)
         )
+
+    def test_rejects_old_flat_layout_and_noncanonical_document(self) -> None:
+        for suffix in (".md", "/learning.md", "/extra/README.md"):
+            with self.subTest(suffix=suffix):
+                errors = self._validate_modified_catalog(
+                    lambda catalog: self._golden_requirement(catalog).update(
+                        control_ref=(
+                            "controls/control-records/c05-access-control-and-identity/"
+                            "v1.0-c5.2.5-agent-authorization-pdp-isolation" + suffix
+                        )
+                    )
+                )
+                self.assertTrue(any("does not match" in e for e in errors))
 
     def test_rejects_dangling_mapping_assessment_reference(self) -> None:
         errors = self._validate_modified_catalog(

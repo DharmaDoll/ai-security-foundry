@@ -1,0 +1,434 @@
+---
+title: "Agent Authorization Policy Decision Isolation"
+versioned_id: "v1.0-C5.2.5"
+requirement_id: "C5.2.5"
+verification_level: 2
+family_id: "C5"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md"
+last_verified: "2026-09-04"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# Agent Authorization Policy Decision Isolation
+
+AISVS Verification Level: 2
+
+初めて読む方へ：[具体例・用語・対話を含む学習ノート](learning.md)。
+
+## Upstream basis
+
+This Control interprets OWASP AISVS `v1.0-C5.2.5`, a Level 2 requirement in
+C5.2, AI Resource Authorization & Classification. The normative chapter and its
+corresponding AISVS Research page were inspected at the immutable revision recorded
+in the front matter. The Research page was marked "Last Researched: 2026-07-14" in
+that snapshot.
+
+The normative requirement asks for isolation of the Policy Decision Point (PDP)
+used for Agent authorization from the Agent execution environment. It does not
+define a required process, container, network, host, or product topology.
+
+The Research material adds useful threat rationale and verification examples. It
+also discusses broader authorization concerns such as complete mediation, trusted
+request context, decision logging, and credential brokering. Those concerns improve
+system assurance, but they do not all become C5.2.5 pass conditions. This record
+separates the normative isolation outcome from adjacent authorization properties so
+that passing or failing another property does not silently change the meaning of
+C5.2.5.
+
+## Interpretation
+
+The authoritative PDP used for Agent authorization must run outside the Agent
+execution environment's effective control.
+
+Assume that the Agent runtime is compromised. Using only the identities,
+credentials, privileges, interfaces, configuration, and network paths available
+from that boundary, the attacker must not be able to:
+
+- modify or replace the PDP or its authoritative Policy;
+- administer, debug, deploy, stop, roll back, or recover the PDP;
+- impersonate the PDP or redirect callers to an Agent-controlled substitute; or
+- make Agent-local authorization logic become the authoritative PDP.
+
+The Agent may request a decision and observe a permit or deny result. That normal
+interaction does not place the PDP inside the Agent's control.
+
+A Policy library loaded into the Agent process does not satisfy this interpretation.
+A separate process, sidecar, container, host, account, or managed service satisfies
+it only when its effective identity, privilege, administration, deployment, and
+lifecycle boundaries resist the declared Agent-compromise scenario. Different
+component names or deployment units are not sufficient by themselves.
+
+This Control evaluates the boundary around the decision authority. It does not, by
+itself, prove that the Policy is correct, that Agent-supplied attributes are
+trustworthy, that every action is mediated by the PDP, that a decision is bound to
+the correct request, or that decision evidence is immutable.
+
+## Security objective
+
+Prevent compromise or manipulation of an Agent runtime from automatically becoming
+control of the authority that decides whether Agent actions are permitted.
+
+In practical terms: the Agent may ask for authority, but it cannot grant that
+authority to itself or change who grants it.
+
+The intended outcome is blast-radius reduction. It is not a claim that PDP isolation
+alone makes the complete authorization system correct.
+
+## Applicability
+
+This Control applies when an autonomous or semi-autonomous Agent uses a PDP to
+authorize operations such as:
+
+- invoking internal or external Tools and APIs;
+- reading protected data or retrieval resources;
+- changing records, configuration, infrastructure, or external state;
+- delegating work to another Agent, service, or Tool; or
+- initiating an operation on behalf of a user or workload identity.
+
+It also applies to read-only operations when authorization protects confidentiality
+or tenant separation. Human approval does not remove applicability when a PDP still
+authorizes the resulting Agent action.
+
+### Non-applicability
+
+The Control may be not applicable when:
+
+- the assessed system has no Agent execution environment; or
+- no Agent output can initiate, parameterize, or otherwise participate in an
+  operation governed by an authorization PDP.
+
+An isolated offline text generator with no protected data, Tool, API, network,
+filesystem, or state-mutation capability is a possible example. Non-applicability
+must follow from an architecture and capability assessment; labels such as
+"read-only," "internal," or "human supervised" are not sufficient by themselves.
+
+## Scope and assumptions
+
+The assessment must identify:
+
+- the exact Agent execution boundary assumed compromised;
+- the exact PDP instance or service being assessed;
+- the authorization uses for which that PDP is authoritative;
+- the effective runtime and administrative identities on both sides;
+- where authoritative Policy is stored and who can change it;
+- who can configure PDP identity, routing, trust, deployment, and lifecycle;
+- failure, failover, rollback, maintenance, and recovery behavior; and
+- shared infrastructure or administrators treated as trusted outside the threat
+  model.
+
+The word "isolated" is not quantitatively defined by AISVS. This record therefore
+uses observable control paths and negative tests rather than assigning a universal
+process, container, host, account, cluster, or hardware boundary. Higher-impact
+systems may require a stronger boundary.
+
+Other authorization properties remain dependencies of a secure system, but are not
+silently imported as C5.2.5 requirements. A reviewer must report those properties
+separately rather than describing a system as secure merely because this one Control
+passes.
+
+## Assets, actors, identities, and trust boundaries
+
+| Element | Relevance to this Control |
+|---|---|
+| Agent runtime | Assumed-compromised requester that must not control the PDP |
+| PDP | Authoritative decision component whose execution and lifecycle are protected |
+| Authoritative Policy and Policy Administration Point (PAP) | Inputs and interfaces that can change future PDP decisions |
+| Agent workload identity | Effective permissions available from the Agent compromise boundary |
+| PDP workload and administrative identities | Identities that distinguish decision service use from its administration |
+| Deployment and recovery control plane | Can replace, reconfigure, stop, roll back, or recover the PDP |
+| PDP endpoint identity and trust configuration | Determines which component callers accept as the authoritative PDP |
+| Policy Enforcement Point (PEP) | Consumer of the decision; its broader correctness is an adjacent assurance concern |
+
+The principal trust boundaries are:
+
+1. Agent runtime to PDP process or service.
+2. Agent workload identity to PDP and Policy administration.
+3. Agent-controlled routing and configuration to the accepted PDP endpoint.
+4. Agent deployment privileges to PDP deployment, lifecycle, and recovery controls.
+5. Shared infrastructure administration across the Agent and PDP boundaries.
+
+A minimal reference relationship is:
+
+```text
+Separate administrative identity ---> Policy / PAP
+                                         |
+                                         v
+Agent runtime ---- decision request ---> PDP ---- decision ----> PEP
+     |                                   ^
+     |                                   |
+     +-- cannot modify, administer, -----+
+         replace, impersonate, or recover
+         the authoritative PDP
+```
+
+## Required security properties
+
+These properties make the repository's interpretation of PDP isolation falsifiable.
+They deliberately exclude adjacent authorization correctness properties.
+
+### SP-1: Independent execution boundary
+
+The Agent's effective runtime identity and privileges cannot modify or replace PDP
+code, executable state, authoritative configuration, Policy, administrative
+credentials, or trust anchors.
+
+Read-only visibility into non-secret Policy or configuration does not by itself fail
+this property. It becomes relevant when the exposed material enables modification,
+impersonation, replacement, or another path to control the PDP.
+
+### SP-2: Separate administration
+
+The Agent identity cannot use PAP, debug, maintenance, impersonation, emergency, or
+administrative interfaces that change how the PDP operates or decides. Policy and
+PDP administration use a separately authenticated path.
+
+### SP-3: Authoritative PDP cannot be substituted
+
+The Agent cannot change endpoint configuration, service discovery, routing, trust
+material, or workload identity so that an Agent-controlled component is accepted as
+the authoritative PDP.
+
+This property establishes the identity of the decision authority. It does not
+require this Control to prove full decision-to-request binding or replay resistance.
+
+### SP-4: No Agent-controlled alternate PDP
+
+Normal, degraded, startup, and error paths do not make embedded or Agent-local logic
+authoritative for an allow decision. If PDP failure activates an Agent-controlled
+`allow` fallback, the Agent execution environment contains an alternate PDP and the
+Control fails.
+
+Fail-open behavior implemented wholly outside the Agent boundary can still be a
+serious authorization defect, but it does not by itself show that the Agent controls
+the PDP.
+
+### SP-5: Deployment and recovery preserve separation
+
+Deployment, failover, rollback, disaster recovery, maintenance, and test modes do
+not give the Agent effective control over PDP code, Policy, identity, endpoint
+selection, or lifecycle.
+
+## Scope calibration and adjacent assurance
+
+The following decisions prevent an insecure system from being mistaken for a
+C5.2.5 failure, or a C5.2.5 pass from being mistaken for complete security.
+
+| Observed condition | C5.2.5 result | Separate assurance impact |
+|---|---|---|
+| Agent identity can modify Policy, redeploy the PDP, or use its administrative interface | Fail | The Agent controls the decision authority |
+| Agent and PDP share a management identity that has those effective permissions | Fail | A nominally separate service is not a separate compromise boundary |
+| Agent can redirect callers to an Agent-controlled PDP substitute | Fail | The Agent can replace the authoritative decision authority |
+| PDP failure activates Agent-local logic that can return `allow` | Fail | The Agent-local fallback is an alternate PDP |
+| A valid permit can be replayed for another principal, action, resource, or tenant | Does not fail this Control by itself | Decision binding, freshness, and PEP verification are defective |
+| The PDP trusts a tenant, role, approval, or entitlement asserted only by the Agent | Does not fail this Control by itself | Trusted authorization context and Policy correctness are defective |
+| An Agent can call one Tool directly without using the PDP | Does not fail this Control by itself | Complete mediation and Tool access control are defective; that Tool is outside any claimed PDP-covered path |
+| Agent can alter a decision after it leaves an authentic PDP | Does not fail this Control by itself | Decision-channel or PEP integrity is defective; if the Agent can substitute the accepted PDP identity, SP-3 fails |
+| Agent can read non-secret Policy but cannot change or use it to control the PDP | Does not fail this Control by itself | Least disclosure may still justify restricting the read path |
+| Agent can delete decision logs but cannot influence the PDP | Does not fail this Control by itself | Audit and evidence integrity are defective and may prevent an assessor from reaching a conclusion |
+
+## Threat and failure-mode rationale
+
+Prompt Injection, malicious Tool output, vulnerable dependencies, or ordinary logic
+errors can give an attacker influence over an Agent runtime. If the PDP shares the
+same effective control boundary, that influence can become permission to change the
+Policy, alter decision logic, replace the decision service, or activate a local
+decision path controlled by the Agent.
+
+The AISVS Research material also recommends complete mediation, independent decision
+logs, trusted identity context, and credential brokering. This Control records those
+as adjacent assurance because their absence can make the system insecure without
+necessarily placing the PDP itself under Agent control.
+
+The following threat links are proposed. ATLAS is a rolling adversary knowledge
+base; these relationships use the pinned `2026.08` snapshot and require reassessment
+when that source state or this Control changes materially.
+
+| Source snapshot | ID | Relationship | Strength | Rationale |
+|---|---|---|---|---|
+| MITRE ATLAS `2026.08` | `AML.T0053` AI Agent Tool Invocation | mitigates | partial | PDP isolation prevents a compromised Agent from rewriting or replacing its decision authority. It does not guarantee that every Tool uses that authority or that Policy is correct. |
+| MITRE ATLAS `2026.08` | `AML.T0051` LLM Prompt Injection | context | context | Prompt Injection is one route to Agent-runtime influence. Isolation limits the resulting control-plane compromise; it does not prevent or detect Prompt Injection. |
+
+Representative in-scope failure modes include:
+
+- Policy evaluation is a library loaded into Agent-controlled process memory.
+- A separate process or sidecar shares a writable volume, service account,
+  administrative socket, process-control privilege, or deployment authority that
+  lets the Agent change the PDP.
+- The Agent identity can update authoritative Policy or invoke a PDP administration
+  interface.
+- Agent-controlled service discovery, routing, trust configuration, or credentials
+  can substitute a different PDP.
+- A PDP outage, startup race, or maintenance mode activates an Agent-local allow
+  evaluator.
+- Agent-accessible deployment or recovery controls can replace the PDP image,
+  Policy, identity, endpoint, or trust anchor.
+
+## Verification
+
+Verification uses a production-equivalent deployment and the Agent's effective
+runtime identity. A diagram, component name, or separate container label is not
+sufficient. Potentially disruptive tests must run in an authorized test environment
+with recovery procedures.
+
+### Architecture and configuration review
+
+1. Identify the authoritative PDP used for the declared Agent-authorization path.
+2. Draw the effective Agent compromise boundary, including workload identity,
+   process and host privileges, mounts, sockets, network paths, secrets, deployment
+   APIs, and configuration sources.
+3. Trace who can modify PDP code, Policy, configuration, identity, trust anchors,
+   routing, deployment, lifecycle, and recovery state.
+4. Confirm that the Agent identity has no effective write, administration,
+   impersonation, deployment, debug, process-control, or secret-read permission that
+   would let it control or replace the PDP.
+5. Examine normal, startup, timeout, unavailable, maintenance, failover, rollback,
+   and recovery modes for an Agent-controlled alternate decision path.
+6. Record shared accounts, hosts, clusters, control planes, and administrators that
+   remain trusted assumptions.
+
+### Positive verification
+
+| Test | Procedure | Expected result |
+|---|---|---|
+| P-1 Independent decision service | Exercise a representative decision request from the production-equivalent Agent runtime | The accepted decision comes from the identified PDP running under the separately controlled boundary |
+| P-2 Separate authorized administration | Change a test Policy or PDP configuration through the approved administrative path | The change is possible through the separate administrator, but the same operation is unavailable to the Agent identity |
+| P-3 Lifecycle continuity | Exercise an approved restart, failover, rollback, or recovery procedure | The recovered PDP retains a non-Agent-controlled identity, Policy, endpoint, and administrative boundary |
+
+These positive tests confirm that the separate boundary is used and maintainable.
+They do not certify that each resulting authorization decision is semantically
+correct.
+
+### Negative and abuse-case verification
+
+| Test | Attempt from the Agent compromise boundary | Expected result |
+|---|---|---|
+| N-1 PDP or Policy modification | Modify PDP code, executable state, Policy, writable configuration, or mounted artifacts | The operation is denied or cannot affect the authoritative PDP |
+| N-2 Administrative access | Invoke PAP, debug, maintenance, emergency, or administrative interfaces | Access is denied and PDP or Policy state does not change |
+| N-3 Identity or privilege takeover | Read administrative credentials, impersonate the PDP or administrator, or use workload-control privileges | The Agent cannot acquire an identity or privilege that controls the PDP |
+| N-4 PDP substitution | Change endpoint configuration, service discovery, routing, DNS, proxy behavior, trust anchors, or accepted workload identity | Callers do not accept an Agent-controlled component as the authoritative PDP |
+| N-5 Agent-local fallback | Cause PDP timeout, connection failure, malformed startup state, or maintenance mode | No Agent-controlled logic becomes authoritative for an allow decision |
+| N-6 Runtime boundary escape | Use Agent-accessible OS, container, orchestrator, IPC, filesystem, or network privileges to change or control the PDP | The declared isolation boundary prevents control within the assessed threat model |
+| N-7 Deployment and recovery takeover | Replace the PDP image, Policy bundle, identity, endpoint, rollback target, or recovery configuration | The Agent identity is denied and the authoritative recovered state remains independently controlled |
+
+### Adjacent checks reported separately
+
+The Research material and secure-system review justify checking the following items,
+but their results must not be reported as C5.2.5 pass or fail unless they expose an
+actual path to control the PDP:
+
+| Check | Report under |
+|---|---|
+| Replay or substitution of a valid decision across principal, action, resource, parameters, tenant, or time | Decision binding, freshness, and PEP verification |
+| Agent-authored identity, role, tenant, approval, or entitlement accepted as authoritative | Trusted authorization context and Policy-input integrity |
+| Direct Tool or resource path that avoids the PEP/PDP | Complete mediation and resource access control |
+| Default permit selected by a separately controlled PEP during PDP failure | Fail-safe authorization behavior |
+| Agent deletion, rewriting, or suppression of decision records | Logging, evidence integrity, and auditability |
+| Read-only access to non-secret Policy or configuration | Least disclosure and guardrail confidentiality |
+| Excessive permissions granted by otherwise independent Policy | Policy correctness, least privilege, and fine-grained authorization |
+
+### Failure conditions
+
+This Control fails within its declared scope when:
+
+- the authoritative PDP executes inside Agent-controlled process memory or another
+  effective Agent control boundary;
+- the Agent can modify or replace PDP code, Policy, configuration, identity,
+  administrative state, or trust anchors;
+- the Agent can administer, impersonate, deploy, stop, roll back, or recover the PDP;
+- the Agent can substitute a component that callers accept as the authoritative PDP;
+- Agent-controlled local logic becomes authoritative for an allow decision; or
+- deployment and recovery paths give the Agent equivalent control even when the
+  steady-state runtime appears separate.
+
+A topology label such as "sidecar," "separate service," or "managed service" is not
+proof of isolation. Missing or Agent-produced evidence does not automatically prove
+that the deployed boundary is absent, but it prevents a verifier from concluding
+that the Control is satisfied.
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| PDP boundary and control-path record | System architect or reviewed architecture source | Agent runtime, authoritative PDP, Policy/PAP, endpoint identity, deployment, and recovery paths | Current deployed design and after material boundary changes | Version controlled; sensitive endpoint and identity details may require restricted storage | Identifies the effective boundary and every path that can modify, replace, administer, or recover the PDP |
+| Runtime identity and privilege inventory | Identity platform, orchestrator, host, or cloud control plane | Agent, PDP, Policy administrator, workload-control, and deployment identities | Captured from the assessed environment; renewed after IAM or deployment changes | Collected independently of the Agent; redact credentials | Demonstrates that Agent privileges cannot control or impersonate the PDP or its administrators |
+| Deployment and isolation configuration | Build/deployment system and runtime control plane | Process, host, namespace, mount, IPC, network, secret, service discovery, and lifecycle boundaries | Corresponds to the tested release and environment | Attributable to a reviewed deployment revision | Effective settings support SP-1 through SP-5; labels alone are insufficient |
+| Policy and PDP administration record | PAP, Policy repository, and deployment pipeline | Policy and PDP change identities, approvals, versioning, and rollback | Current workflow plus a representative recent change | Agent has no effective administration authority; protect sensitive Policy | Only the separately authorized path can change authoritative state |
+| Core isolation test results | Approved test harness and control-plane observers | P-1 through P-3 and applicable N-1 through N-7 | For the assessed release; repeat after material boundary or lifecycle changes | Raw results retained outside Agent write control; sanitize sensitive data | Attempts from the Agent boundary cannot control, replace, impersonate, or become the PDP |
+| Assumption and exception record | Named Control owner and risk authority | Shared infrastructure, trusted administrators, untested paths, and unavailable evidence | Current and reviewed after relevant change or incident | Durable human decision; no production secrets | Each limitation has an owner, rationale, review condition, and stated effect on the isolation claim |
+
+PDP-native decision logs can be valuable corroborating evidence because they show
+that a distinct component participated. Immutability, deletion protection, and full
+decision-to-action correlation remain separate audit properties rather than
+C5.2.5 requirements.
+
+Production evidence, credentials, confidential Policy, customer data, and sensitive
+decision payloads remain outside this public repository. Store only sanitized
+examples and evidence expectations here.
+
+## Related requirements
+
+| Requirement | Relationship and distinction |
+|---|---|
+| `v1.0-C5.2.1` | Establishes access control over AI resources and default deny. It is the more direct home for missing resource enforcement paths. C5.2.5 asks who controls the Agent-authorization PDP. |
+| `v1.0-C9.5.1` | Requires fine-grained runtime Policy over Tool and parameter use. It covers decision scope and Policy semantics rather than PDP isolation. |
+| `v1.0-C9.5.2` | Covers integrity-protected, scope-limited delegation to downstream calls. It is relevant to request and decision binding across hops. |
+| `v1.0-C9.5.3` | Keeps access-control decisions in application logic or a Policy engine rather than the model. It addresses deterministic enforcement; C5.2.5 separately asks whether the PDP is inside the broader Agent control boundary. |
+| `v1.0-C9.5.6` | Requires re-evaluation on privileged actions in long-running sessions. It addresses decision freshness rather than PDP isolation. |
+| `v1.0-C9.6.3` | Requires an isolated out-of-band kill-switch path. It is an analogous control-plane separation requirement for shutdown. |
+| `v1.0-C12.1.2` | Covers sufficient logging of Policy decisions. Log completeness and integrity must not be inferred from PDP isolation. |
+
+Passing this Control must not be presented as satisfying any related requirement in
+full. No Engineering Pattern Mapping has been assessed.
+
+## Known limitations and uncertainty
+
+- PDP isolation does not prove that Policy grants the correct authority or is
+  complete, conflict-free, current, least-privileged, or default-deny.
+- It does not prove complete mediation, PEP correctness, trusted identity or
+  attributes, parameter validation, decision binding, replay resistance, delegation
+  integrity, approval integrity, credential isolation, or Tool sandboxing.
+- It does not require immutable decision logs. Weak logs can prevent effective audit
+  and may leave insufficient evidence to conclude that the boundary operated as
+  designed.
+- Read-only Policy access does not by itself violate PDP isolation, although Policy
+  disclosure may aid evasion or expose sensitive security design.
+- A separate service may still share a cloud account, cluster administrator, host
+  kernel, certificate authority, deployment pipeline, or recovery control plane
+  with the Agent. The threat model must state which shared dependencies remain
+  trusted.
+- A sidecar may reduce accidental coupling without resisting a container escape,
+  node compromise, shared-volume write, workload-identity theft, or orchestrator
+  administration. Deployment topology does not establish an assurance level.
+- An externally controlled PEP can fail open while the PDP remains isolated. That is
+  unsafe authorization behavior, but it must not be misreported as Agent control of
+  the PDP unless the fallback decision is inside the Agent boundary.
+- No ratified Agent-specific PDP-isolation protocol defines a universal boundary or
+  interoperable proof of isolation in the reviewed AISVS Research snapshot.
+- The strongest appropriate boundary depends on the Agent's effective privileges
+  and the impact of the decisions. This Control does not mandate a universal
+  process, host, account, or hardware topology.
+
+## References
+
+- [OWASP AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)
+- [OWASP AISVS C5.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md)
+- [OWASP AISVS v1.0 C9 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [OWASP AISVS v1.0 C12 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)
+- [MITRE ATLAS `2026.08` source snapshot](https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml)
+- [NIST SP 800-207, Zero Trust Architecture](https://doi.org/10.6028/NIST.SP.800-207)
+
+## Changelog
+
+Control maturity describes this artifact and does not represent an individual's
+learning progress or prove that any product implements the Control.
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-03 | Initial verifiable draft | Codex authoring agent | Commit `5921431` |
+| 2026-09-04 | Separated PDP isolation from adjacent authorization, complete-mediation, and audit properties | Maintainer feedback and Codex revision | Commit `f2bb9c2` |

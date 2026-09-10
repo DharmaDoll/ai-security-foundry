@@ -1,0 +1,150 @@
+---
+title: "Agent操作を実行連鎖へ暗号的に結び付ける"
+versioned_id: "v1.0-C9.4.2"
+requirement_id: "C9.4.2"
+verification_level: 2
+family_id: "C9"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md"
+last_verified: "2026-09-09"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# Agent操作を実行連鎖へ暗号的に結び付ける
+
+AISVS Verification Level: 2
+
+## Upstream basis
+
+AISVS `v1.0-C9.4.2`を解釈する。要件本文はAgentが開始した操作を実行連鎖の各Stepへ暗号的に結合し、否認防止を支えることを求める。
+採用済みstable v1.0の固定Revisionで本文と対応Researchの要件別検証・限界を確認した。
+最新の版・製品への追従を意味しない。
+
+ResearchはTrace IDだけでは真正性がないこと、親子記録の結合・改変・連鎖差替えの検証を補足する。
+以下の具体例・Property・検証条件はRepository interpretationである。
+Researchの製品、統計、事件、外部Framework Mappingを未検証のまま転記せず、
+例示された実装方式を一律の適合条件にしない。
+
+## Interpretation
+
+誰のどの操作がどの連鎖に属したかを、記録の書換えで簡単に偽れないようにする。相関IDを付けるだけでなく、操作内容・主体・連鎖上の関係を信頼する暗号的証拠へ結び付ける。
+
+送信操作の記録を別の業務Chainへ付け替えたら検証に失敗する。単にTrace IDを同じ文字列へ変更できるLogでは、この保証を持たない。
+
+## Security objective
+
+操作の改ざん・付け替え・主体の否認によって事故の経路が失われることを抑える。
+
+## Applicability
+
+Agentが操作・委任を開始する実行連鎖。
+
+### Non-applicability
+
+Agentが操作を開始しない範囲は対象外。単一Stepでも当該操作の主体と実行Contextの証拠を検討する。
+
+## Scope and assumptions
+
+否認防止は第三者が主体帰属を検証できる保証として評価する。共有MAC鍵の全保持者が記録を作れる構成は、その限界を示し、独立した否認防止の十分な証拠とは扱わない。特定の署名形式を必須にせず採用時に一次仕様を確認する。
+
+対象構成・採用Policy・許容する動作と評価境界を検証前に固定する。
+不明な構成を安全と仮定せず、未確認範囲をEvidenceの不足として残す。
+
+## Assets, actors, identities, and trust boundaries
+
+資産は操作記録・署名鍵・連鎖対応。Agent、証拠発行者、保存先、独立検証者を分ける。強制点は記録の発行と検証。
+
+## Required security properties
+
+Security Invariantは守るべき性質、Enforcement Pointはそれを実際に強制する場所を指す。
+
+| ID | 必要な性質と観測条件 |
+|---|---|
+| SP-1 | 各操作の内容・主体・連鎖上の位置が暗号的に結び付く。 |
+| SP-2 | 改変・他連鎖への転用・必要Stepの欠落を検証できる。 |
+| SP-3 | 主体帰属を検証できる信頼鍵と発行・保存の責任分界がある。 |
+
+## Scope calibration and adjacent assurance
+
+暗号的証拠は操作の正当性を証明しない。人の承認証票の一回性はC9.2.8。Trace・Logがあるだけでは本要件は満たさない。
+
+## Threat and failure-mode rationale
+
+侵害された仲介者が記録を削除・改変し、別Agentや別Chainの操作へ見せかける。
+
+この保証の分析では外部脅威IDを付与する追加価値を確定していない。
+攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
+ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+
+## Verification
+
+### Architecture and configuration review
+
+記録Schema、連鎖の親子参照、署名対象、信頼鍵、Checkpoint、欠落検出、検証手順を追う。
+
+### Positive verification
+
+複数Stepと委任を含む模擬Chainを独立検証し、操作主体と順序・分岐関係を復元する。
+
+### Negative and abuse-case verification
+
+許可された試験環境と模擬Dataを用いる。モデルが協力することに依存せず、
+必要に応じて実行境界へ試験要求を直接与える。
+
+| ID | 条件・操作 | 期待結果・対応Property |
+|---|---|---|
+| N-1 | 操作内容や主体を書き換える | 検証失敗。SP-1 |
+| N-2 | 有効な記録を別Chainへ移す | 転用を検出。SP-1, SP-2 |
+| N-3 | 中間Stepを削除・差替え | 欠落または関係不整合を検出。SP-2 |
+| N-4 | 共有秘密だけのLogを独立証拠と主張 | 発行主体を区別できない限界を明示。SP-3 |
+
+### Failure conditions
+
+上表の期待結果に反する観測やSPの不成立は、本ControlのFailを裏付ける。
+試験未実施、構成不明、結果を追跡できない場合はPassを裏付ける証拠不足であり、
+実証された回避と区別する。隣接要件の不備だけで本Controlの意味を広げない。
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| 暗号的記録と検証規則 | 証拠基盤管理者 | 主体・操作・連鎖 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 結合対象と鍵の信頼が明確 |
+| 独立検証結果 | 検証者 | 正常・改変Chain | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 復元と改変検出が可能 |
+| 鍵・保存の責任分界 | Security管理者 | 発行・保管・検証 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 誰が証拠を偽造し得るか明示 |
+
+成功と失敗の両方について、設定だけでなく実際の結果を採用構成へ対応付ける。
+本Repositoryには期待値のみを置き、本番Evidence、Secret、顧客情報は保存しない。
+特定の監査製品やログ形式は、本Controlが明示する性質を満たすための唯一の方式ではない。
+
+## Related requirements
+
+| Requirement | 関係と境界 |
+|---|---|
+| `v1.0-C9.4.1` | 個体Identity |
+| `v1.0-C9.2.8` | 承認と操作の暗号的結合 |
+
+## Known limitations and uncertainty
+
+鍵侵害者や正規発行者の虚偽、記録開始前の欠落は別問題。Hashでも低Entropy値や業務関係が漏れる場合があり、保存・公開範囲を制限する。
+
+`verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態を表す。
+製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
+Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
+
+## References
+
+- [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md)
+- [C9全体分析](../../../docs/c09-landscape.md)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+

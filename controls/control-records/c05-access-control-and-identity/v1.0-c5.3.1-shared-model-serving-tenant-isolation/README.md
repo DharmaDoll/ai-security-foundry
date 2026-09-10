@@ -1,0 +1,459 @@
+---
+title: "Shared Model-serving Tenant Isolation"
+versioned_id: "v1.0-C5.3.1"
+requirement_id: "C5.3.1"
+verification_level: 2
+family_id: "C5"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md"
+last_verified: "2026-09-04"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# Shared Model-serving Tenant Isolation
+
+AISVS Verification Level: 2
+
+初めて読む方へ：[具体例・用語・対話を含む学習ノート](learning.md)。
+
+## Upstream basis
+
+This Control interprets OWASP AISVS `v1.0-C5.3.1`, a Level 2 Requirement in
+C5.3, Multi-Tenant Isolation. The normative chapter and corresponding Research
+page were inspected at the immutable revision recorded in the front matter. The
+Research page was marked "Last Researched: 2026-07-13" in that snapshot.
+
+The normative Requirement asks shared model-serving infrastructure to prevent one
+tenant's fine-tuning, inference, or embedding operations from influencing or
+observing another tenant's operations.
+
+The Research page uses concrete serving-stack examples, including inference and
+prefix caches, adapter loading, model and compilation caches, alternate endpoints,
+asynchronous cache tiers, and tenant-supplied artifacts. These examples expose
+places where the isolation boundary can fail. They do not make a particular
+product, cache algorithm, endpoint layout, cryptographic primitive, or version
+floor universally mandatory for this Control.
+
+## Interpretation
+
+All tenant-derived model-serving operations, state, and artifacts must remain bound
+to the trusted tenant context that created or owns them. A tenant must not be able
+to use a serving interface, identifier, cache, adapter, queue, lifecycle action, or
+internal control path to:
+
+- read or infer another tenant's prompts, outputs, embeddings, fine-tuning data,
+  Model variants, or operation metadata;
+- cause its prompts, embeddings, fine-tuning results, adapters, or mutable serving
+  state to affect another tenant's Model behavior or result; or
+- select, replace, delete, restore, or otherwise operate on another tenant's
+  serving state.
+
+The tenant context must originate from a trusted authentication and routing path.
+A tenant identifier supplied only in a prompt, Model-generated argument, object
+name, request body, or other caller-editable field is not a trustworthy isolation
+boundary.
+
+Shared immutable base Model weights do not inherently fail the Control. Sharing is
+acceptable when tenant operations cannot mutate the base or global serving state
+and all tenant-derived mutable state and observable operation data remain isolated.
+Conversely, separate API endpoints, namespaces, processes, containers, or GPUs do
+not prove compliance if a shared cache, adapter registry, artifact store, queue,
+control plane, or fallback path can cross the tenant boundary.
+
+"Observing" includes direct content disclosure and exposed operation metadata that
+reveals protected content, state, or activity. It also includes an
+application-visible cache oracle when one tenant can distinguish another tenant's
+cached input or operation. Microarchitectural and physical-compute side channels
+are assessed under C5.3.2; keeping them separate prevents this Level 2 Control from
+silently acquiring the dedicated-compute expectations of the Level 3 Requirement.
+
+"Influencing" includes cross-tenant mutation, state reuse, routing changes, Model
+or adapter substitution, and one tenant's malformed or adversarial operation
+corrupting another tenant's operation. Ordinary performance variation inside an
+explicitly accepted shared-service budget is not by itself a C5.3.1 failure.
+Cross-tenant compute contention and hardware side channels belong primarily to
+C5.3.2, while quotas and broad service availability require adjacent assurance.
+
+## Security objective
+
+Prevent shared Model-serving optimizations and control surfaces from collapsing
+tenant confidentiality and integrity boundaries.
+
+In practical terms: a tenant may share a service, but its prompts, operations, and
+mutable Model-serving state must behave as though other tenants cannot address,
+reuse, alter, or inspect them.
+
+This Control reduces the blast radius of a malicious tenant, compromised tenant
+credential, or serving-path defect. It does not claim that logical isolation alone
+eliminates hardware side channels or all vulnerabilities in the serving stack.
+
+## Applicability
+
+This Control applies when two or more tenants share any Model-serving component or
+state involved in fine-tuning, inference, or embedding operations. Relevant
+architectures include:
+
+- a hosted inference API serving multiple customers, organizations, or security
+  domains;
+- a shared cluster that loads tenant-specific Model variants or adapters;
+- batch, asynchronous, streaming, or online embedding and inference services;
+- shared inference, prefix, KV, response, Model, adapter, tokenization, compilation,
+  or offload caches;
+- shared queues, schedulers, workers, registries, artifact stores, temporary
+  storage, or internal serving control planes; and
+- an internal platform serving business units or environments whose data and
+  authority must remain separate.
+
+A "tenant" is a security boundary, not necessarily a paying customer. It may be an
+organization, account, workspace, project, environment, regulated workload, or
+other principal group whose serving operations must not be visible to or mutable
+by another group.
+
+### Non-applicability
+
+The Control may be not applicable when:
+
+- the assessed system performs no fine-tuning, inference, or embedding operation;
+  or
+- every Model-serving component, mutable state store, cache, queue, control plane,
+  and operational identity is dedicated to one tenant, with trusted routing that
+  cannot address another tenant's serving environment.
+
+A dedicated frontend or GPU alone is insufficient for non-applicability when a
+Model registry, adapter store, cache, queue, worker pool, internal listener, or
+administrative path remains shared. A deployment that is logically single-tenant
+but shares physical compute with another tenant may make C5.3.1 not applicable
+while C5.3.2 still applies.
+
+## Scope and assumptions
+
+The assessment must identify:
+
+- the tenant security boundaries and the trusted source of tenant identity;
+- the fine-tuning, inference, and embedding operations exposed to each tenant;
+- all externally reachable and internal serving interfaces, including alternate,
+  administrative, debug, development, fallback, and recovery paths;
+- tenant-derived state and artifacts, their identifiers, ownership, storage,
+  lifetime, and reuse behavior;
+- shared caches and offload tiers and every field used to derive their keys;
+- Model, adapter, checkpoint, embedding, compilation, and temporary-file loading
+  and mutation paths;
+- queues, batches, workers, sessions, streams, retries, and result-retrieval paths;
+- which tenant-controlled inputs can reach parsers, deserializers, loaders,
+  plugins, Model extensions, or serving control functions;
+- observability interfaces and tenant-visible errors, metrics, identifiers, and
+  traces; and
+- teardown, eviction, deletion, rollback, restoration, failover, and worker-reuse
+  behavior.
+
+This Control assumes an authoritative tenant identity exists. It can verify how the
+serving system binds and enforces that identity, but it cannot prove that upstream
+tenant membership or identity proofing is correct.
+
+AISVS does not quantitatively define "influencing" or "observing." This record
+therefore distinguishes tenant-derived logical and serving state from lower-level
+shared-compute effects. Reviewers must state the selected tenant boundary, protected
+operation metadata, accepted service-sharing assumptions, and any residual timing
+or availability channels.
+
+## Assets, actors, identities, and trust boundaries
+
+### Assets
+
+- prompts, system context, outputs, token streams, and inference-session state;
+- embedding inputs, vectors, jobs, intermediate state, and results;
+- fine-tuning data, outputs, checkpoints, Model variants, and evaluation artifacts;
+- tenant-specific adapters, routing configuration, Model selection, and serving
+  parameters;
+- inference, prefix, KV, response, tokenization, compilation, Model, and offload
+  caches;
+- job, queue, batch, request, session, stream, and artifact identifiers and
+  metadata; and
+- tenant-scoped logs, metrics, traces, errors, and lifecycle state.
+
+### Actors and identities
+
+- an authenticated tenant user or application;
+- an attacker using its own tenant or a compromised tenant credential;
+- the Model-serving gateway, router, scheduler, workers, and workload identities;
+- fine-tuning, embedding, adapter, cache, and artifact-management services;
+- platform operators and administrative identities; and
+- Model or Agent components whose generated values may select serving operations
+  but are not authoritative tenant identity sources.
+
+### Trust boundaries
+
+1. **Tenant caller to serving edge:** untrusted request content crosses into the
+   platform; trusted tenant context must be established separately.
+2. **Serving edge to routing and scheduling:** tenant context must remain bound to
+   the selected Model, adapter, worker, queue, cache scope, and result path.
+3. **Worker to shared state:** cache, Model, adapter, compilation, temporary, and
+   offload state must not be addressed or mutated across tenants.
+4. **Tenant operation to internal control plane:** tenant authority must not reach
+   global or another tenant's configuration, lifecycle, loading, or debug actions.
+5. **Worker reuse and lifecycle transition:** state from a completed, failed,
+   deleted, evicted, or rolled-back operation must not become visible to a later
+   tenant.
+6. **Observability system to tenant:** errors, metrics, traces, logs, and identifiers
+   exposed to one tenant must not disclose another tenant's operation.
+
+## Required security properties
+
+### SP-1: Trusted tenant binding
+
+Every serving operation and tenant-derived artifact is bound to tenant identity
+established by a trusted authentication and routing path. Caller-controlled content,
+Model output, filenames, object keys, adapter names, or job identifiers cannot
+replace or broaden that identity.
+
+### SP-2: Tenant-scoped serving state
+
+Prompts, outputs, sessions, embeddings, fine-tuning state, adapters, caches, queues,
+temporary artifacts, and offloaded state are partitioned or re-authorized so that
+one tenant cannot read, reuse, enumerate, or restore another tenant's state.
+
+### SP-3: Tenant-scoped mutation and Model behavior
+
+A tenant operation cannot select, update, replace, delete, or corrupt another
+tenant's Model variant, adapter, checkpoint, routing state, or operation. It cannot
+mutate shared base or global serving state unless a distinct trusted administrative
+workflow explicitly authorizes that action outside tenant authority.
+
+### SP-4: No cross-tenant operation observation
+
+Tenant-visible responses, streams, errors, metadata, identifiers, cache behavior,
+logs, metrics, and traces do not disclose another tenant's protected content,
+state, activity, or existence. Where caching creates an application-visible oracle,
+the cache identity and access rules preserve the tenant boundary.
+
+### SP-5: Isolation covers every serving path
+
+Primary, batch, asynchronous, streaming, fallback, retry, internal, operational,
+debug, administrative, and recovery paths preserve the same tenant boundary.
+Unexpected, undocumented, or unauthenticated alternate routes cannot bypass the
+tenant-scoped Enforcement Points.
+
+### SP-6: Isolation survives lifecycle and failure
+
+Worker reuse, cache eviction and offload, failed jobs, retries, rollback, tenant
+deletion, credential rotation, and recovery do not expose or reactivate another
+tenant's stale state. Missing or unverifiable tenant context fails closed instead
+of selecting global or previously used tenant state.
+
+### SP-7: Tenant failures are contained at the serving layer
+
+Malformed, adversarial, or resource-intensive tenant inputs cannot corrupt shared
+serving state or another tenant's operation. Serving-layer failure domains and
+limits prevent one tenant from changing another tenant's result or causing
+security-significant denial outside documented shared-service assumptions.
+
+## Scope calibration and adjacent assurance
+
+| Observed condition | C5.3.1 result | Separate assurance impact |
+|---|---|---|
+| Tenants share immutable base weights, but trusted routing binds all mutable state, caches, adapters, jobs, and outputs to the tenant | Potential pass, subject to complete-path and lifecycle tests | Base-Model integrity and shared-compute isolation still require separate review |
+| A global prefix or KV cache can reuse Tenant A's protected prompt state for Tenant B, or B can detect A's entry through a serving-layer oracle | Fail | Hardware timing channels may additionally require C5.3.2 review |
+| Tenant A can select or replace Tenant B's adapter by changing an adapter name or repository reference | Fail | Artifact provenance and supply-chain controls are also relevant |
+| Dedicated GPUs are used, but workers share a tenant-writable Model or compilation cache | Fail | Dedicated compute does not repair logical serving-state isolation |
+| Logical serving state is correctly isolated, but a residual GPU contention side channel remains | Pass for C5.3.1 only if no serving-layer observation path exists | Evaluate C5.3.2; the overall system may remain unacceptable |
+| A multi-tenant RAG store returns Tenant B's document because end-user retrieval authorization is missing | Not by itself a C5.3.1 failure when Model-serving state remained isolated | Evaluate C5.2.2 and C8 retrieval controls; the system still leaks data |
+| A tenant-visible metrics endpoint exposes another tenant's prompts, request identifiers, or adapter activity | Fail | Logging access control and minimization also require separate review |
+| Tenant A causes ordinary latency variation within an explicit, tested shared-service budget | Not automatically a failure | Review C5.3.2, resource quotas, resilience, and service-level assumptions |
+| Tenant A can crash the shared serving process with a malformed operation, interrupting or corrupting Tenant B's operation | Fail when the effect crosses the declared serving isolation boundary | Vulnerability management and broader availability assurance also apply |
+| Each tenant has a dedicated serving stack and state, but the underlying host or accelerator is shared | C5.3.1 may be not applicable if no logical serving component is shared | C5.3.2 remains applicable to shared compute resources |
+
+## Threat and failure-mode rationale
+
+Shared serving infrastructure creates optimization and management surfaces that
+operate below application-level authorization. A correctly authenticated tenant
+may therefore attack another tenant without requesting that tenant's application
+resource directly.
+
+Representative attacker capabilities and failures include:
+
+- supplying another tenant's identifier, adapter name, Model route, artifact key,
+  or asynchronous job ID;
+- priming or probing a shared prefix, inference, response, or offload cache;
+- causing tenant-controlled fine-tuning, embeddings, adapters, or checkpoints to
+  be loaded into shared or incorrectly scoped state;
+- invoking an alternate or internal listener that does not enforce the tenant
+  context used by the primary API;
+- exploiting worker reuse, stale artifacts, rollback, or deletion gaps to recover
+  prior tenant state;
+- observing cross-tenant activity through errors, metadata, identifiers, metrics,
+  or application-visible timing; and
+- using malformed or resource-intensive operations to corrupt, reset, or deny
+  shared serving state used by other tenants.
+
+The likely impacts are cross-tenant disclosure, Model behavior influenced by
+another tenant's data or adapter, operation corruption, loss of integrity, and
+serving-layer denial of service.
+
+MITRE ATLAS `AML.T0057`, LLM Data Leakage, is a partial mapping because its snapshot
+explicitly includes information from other users as possible leaked data. C5.3.1
+reduces one infrastructure path to that outcome, but `AML.T0057` can also occur
+through training data, connected data sources, Prompt Injection, or other failures
+outside shared Model-serving isolation.
+
+No mapping to `AML.T0024`, Exfiltration via AI Inference API, is asserted in this
+revision. That technique principally describes extracting private training
+information or the Model through inference access. It is useful research context
+but does not precisely identify the cross-tenant serving-state boundary tested by
+C5.3.1.
+
+## Verification
+
+### Architecture and configuration review
+
+1. Draw the full path for fine-tuning, inference, and embedding operations from
+   tenant authentication through routing, scheduling, execution, state storage,
+   result delivery, observability, and teardown.
+2. Inventory every shared serving component, listener, route, identity, cache,
+   queue, worker pool, state store, artifact store, and control plane.
+3. Identify where trusted tenant context is established, how it is propagated, and
+   every Enforcement Point that scopes an operation or artifact.
+4. Trace the ownership, key derivation, read/write permissions, integrity, lifetime,
+   eviction, offload, deletion, and restoration of every tenant-derived state class.
+5. Inspect how Models, adapters, checkpoints, embeddings, plugins, and other
+   tenant-supplied artifacts are admitted, selected, updated, and loaded.
+6. Enumerate primary and alternate inference routes plus administrative, debug,
+   development, internal, fallback, retry, and recovery interfaces.
+7. Review tenant-visible errors, metrics, logs, traces, identifiers, and cache
+   behavior for cross-tenant disclosure.
+8. Record shared-compute and ordinary performance assumptions separately so they
+   are not mistaken for verified logical serving isolation.
+
+The review fails when a shared component, tenant-derived state class, interface, or
+lifecycle path cannot be enumerated well enough to test its tenant boundary.
+
+### Positive verification
+
+Create Tenant A and Tenant B with deliberately distinguishable synthetic prompts,
+embedding inputs, Model variants or adapters, and job identifiers. Exercise each
+supported online, streaming, batch, and asynchronous path concurrently and after
+worker reuse.
+
+Verify that each tenant receives only its own output and metadata, selects only its
+authorized Model-serving state, and cannot observe whether the other tenant's
+protected operation or cache entry exists. Verify that explicitly shared immutable
+base assets can be used by both tenants without allowing either tenant to mutate
+them or the other's derived state.
+
+### Negative and abuse-case verification
+
+| ID | Test | Expected result |
+|---|---|---|
+| N-1 | As Tenant A, put Tenant B's tenant ID in request content, a header, Model-generated argument, artifact path, or object key | Trusted tenant binding remains A; B's state is denied or indistinguishable from a nonexistent object |
+| N-2 | Prime inference, prefix, KV, response, and offload caches with a distinctive Tenant B value, then issue equivalent probes as Tenant A | No B content, state reuse, existence signal, or application-visible cache oracle crosses to A |
+| N-3 | As Tenant A, select, enumerate, replace, delete, or reload Tenant B's adapter, fine-tune, checkpoint, Model route, or embedding artifact | Every operation is denied without changing B's behavior or revealing protected metadata |
+| N-4 | Guess or obtain another tenant's request, stream, batch, queue, job, result, or artifact identifier | The identifier grants no authority; content and protected existence remain unavailable |
+| N-5 | Repeat cross-tenant requests through every fallback, retry, internal, alternate, operational, debug, development, and recovery route | Non-allowlisted routes are unreachable or denied, and allowed routes enforce the same tenant context |
+| N-6 | Reuse a worker after Tenant B's success, failure, cancellation, deletion, cache eviction/offload, credential rotation, and service rollback | Tenant A cannot recover or reactivate B's memory, cache blocks, files, results, or stale state |
+| N-7 | Request tenant-visible errors, metrics, logs, traces, and status endpoints while Tenant B performs distinctive operations | A sees no B content, sensitive identifiers, adapter activity, state, or protected operation existence |
+| N-8 | Submit malformed, oversized, adversarial, or colliding tenant artifacts and operations within a safe test environment | Input is rejected or contained; shared state and Tenant B's operation remain unmodified and available within declared limits |
+| N-9 | Remove, corrupt, expire, or make tenant context unverifiable at different internal hops | The operation fails closed and never falls back to global, default, or previously used tenant state |
+
+Tests must observe intermediate state and control-plane effects in a safe test
+environment where practical. Checking only final natural-language output can miss a
+cross-tenant cache read, Model-state mutation, or operation leak that the Model did
+not repeat in that particular response.
+
+### Failure conditions
+
+The Control fails when any of the following is observed:
+
+- caller- or Model-controlled data can replace trusted tenant context;
+- one tenant can read, enumerate, infer, reuse, restore, or mutate another tenant's
+  operation or tenant-derived serving state;
+- cache, adapter, Model, queue, artifact, result, observability, or lifecycle paths
+  omit the tenant boundary;
+- an alternate, internal, fallback, debug, administrative, or recovery path bypasses
+  the tenant-scoped Enforcement Point;
+- missing or unusable tenant context selects global, default, or stale tenant state;
+- a tenant operation corrupts or changes another tenant's serving result or state;
+  or
+- the assessor cannot inventory the shared serving components and state well
+  enough to verify the isolation claim.
+
+The following do not independently pass this Control:
+
+- separate tenant names, namespaces, API keys, processes, containers, or GPUs
+  without effective cross-tenant negative tests;
+- a prompt instructing the Model not to reveal another tenant's data;
+- per-tenant retrieval filters when shared Model-serving state remains unscoped;
+- encryption at rest without tenant-scoped addressing and authorization;
+- a patched serving-framework version without interface, configuration, and
+  behavior evidence; or
+- dedicated compute when a shared logical cache, Model store, or control plane can
+  still cross tenants.
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| Tenant, component, interface, and data-flow inventory | System owner or architecture process | Every shared fine-tuning, inference, embedding, control, observability, and lifecycle path | Current deployment revision | Version-controlled; sanitize internal identifiers before external use | Identifies tenant identity source, shared components, state classes, Trust Boundaries, and Enforcement Points |
+| Tenant-binding and routing configuration | Identity, gateway, routing, and serving owners | Authentication context, route policy, workload identities, Model/adapter selection, queues, and result delivery | Current Policy and deployment revision | Access-controlled; record immutable configuration or Policy revisions where possible | Tenant context originates from a trusted source and is preserved at every scoped operation |
+| State and artifact isolation evidence | Serving, cache, storage, and artifact owners | Caches and offload tiers, Models, adapters, checkpoints, embeddings, temporary state, queues, and lifecycle actions | Current deployed build and storage layout | Protect tenant-derived content; record ownership, key derivation, ACL, integrity, and retention configuration | Each state class is tenant-partitioned or re-authorized, including reuse, deletion, and restoration paths |
+| Cross-tenant test matrix | Automated security or integration test system | At least two disjoint tenants across every supported serving mode and alternate route | Every material serving, routing, cache, state, or identity change | Reproducible with synthetic data; no production secrets or customer data | N-1 through N-9 or justified equivalents show no cross-tenant observation, reuse, mutation, or unsafe fallback |
+| Serving and Policy decision trace | Trusted gateway, router, scheduler, worker, cache, and control-plane components | Sampled allowed and denied operations at each Enforcement Point | Recent enough to match the assessed deployment | Integrity-protected, access-controlled, and correlated without unnecessary prompt or output content | Correlates tenant, operation, state identifier, route, Model/adapter, Policy/configuration revision, and result |
+| Lifecycle and failure-containment result | Platform owner and automated test system | Worker reuse, failure, cancellation, eviction/offload, deletion, rotation, rollback, and recovery | Current lifecycle implementation and scheduled regression cadence | Timestamped and tied to build and configuration revisions | Stale tenant state is unavailable after transition and malformed operations do not cross the serving boundary |
+
+Evidence must demonstrate isolation behavior, not merely the presence of a tenant
+field or namespace. Real production evidence, prompts, Model artifacts, credentials,
+customer data, and sensitive infrastructure identifiers remain outside this
+repository.
+
+## Related requirements
+
+| Requirement | Relationship and distinction |
+|---|---|
+| `v1.0-C5.2.1` | Requires access controls and default deny for AI Resources generally. C5.3.1 adds a specific cross-tenant property for shared Model-serving operations and state. |
+| `v1.0-C5.2.2` | Requires end-user authorization throughout retrieval and assembly. It can fail even when Model serving is isolated, and Model serving can fail even when retrieval authorization is correct. |
+| `v1.0-C5.2.7` | Preserves classification labels on derived artifacts. Labels may support tenant policy but do not themselves isolate serving state. |
+| `v1.0-C5.3.2` | Addresses influence or observation through shared compute resources and normally requires stronger hardware, confidential-computing, or dedicated-compute evidence. C5.3.1 focuses logical Model-serving infrastructure. |
+
+## Known limitations and uncertainty
+
+- Passing this Control does not prove that tenant identities, memberships, or
+  upstream authorization Policy are correct.
+- Tenant isolation controls can contain known state and routes but cannot prove that
+  the serving implementation has no unknown vulnerability or undocumented state.
+- Application-visible timing and cache behavior can be tested, but complete
+  elimination of timing inference is difficult to prove. Hardware and
+  microarchitectural channels require C5.3.2 assessment.
+- Shared immutable base weights may still contain memorized training data or unsafe
+  behavior unrelated to cross-tenant mutable serving state.
+- This Control does not verify per-user authorization inside one tenant, RAG
+  retrieval authorization, Model and dependency provenance, classification-label
+  correctness, or complete observability assurance.
+- Availability boundaries depend on documented capacity, quotas, scheduling, and
+  failure-domain assumptions. C5.3.1 does not require zero performance interaction
+  on a shared service.
+- Product-specific cache, adapter, endpoint, and artifact-loading behavior changes
+  rapidly. Verification must use the deployed build and current primary product
+  documentation rather than treating examples in AISVS Research as permanent
+  configuration rules.
+- Negative tests demonstrate known paths and declared state classes; they cannot
+  compensate for an incomplete interface or state inventory.
+
+No Engineering Pattern Mapping has been assessed. Future Patterns may address
+tenant-bound caches, adapters, serving control planes, or lifecycle isolation
+independently; none should be presumed to satisfy the complete Control without an
+explicit Mapping assessment.
+
+## References
+
+- [OWASP AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)
+- [OWASP AISVS v1.0 C5.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md)
+- [MITRE ATLAS 2026.08 snapshot: AML.T0057 LLM Data Leakage](https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-04 | Initial verifiable Control | OWASP AISVS v1.0 normative and Research sources; repository interpretation | Current change set |

@@ -213,23 +213,36 @@ RequirementへC5.1.1固有のSectionを機械的に複製しない。
 
 ## Storage and naming
 
-学習文書はAISVS Familyごとに一つのDirectoryへ配置する。
+個別の学習ノートは、対応するControlと同じ版付きRequirement Directoryへ配置する。
+内容は統合せず、Control本文と学習の役割を分ける。
 
 ```text
-controls/docs/learning/
-├── README.md
-└── cNN-family-slug/
+controls/
+├── control-records/
+│   └── cNN-family-slug/
+│       └── vX.Y-cN.N.N-descriptive-control-name/
+│           ├── README.md
+│           └── learning.md
+└── docs/learning/
     ├── README.md
-    └── vX.Y-cN.N.N-descriptive-topic.md
+    └── cNN-family-slug/
+        └── README.md
 ```
 
 - `controls/docs/learning/README.md`: 全Category共通の学習・永続化方針。
 - Family `README.md`: Requirement一覧、現在位置、軽量なChecklist、Family固有Source。
-- Requirement note: 一つの有益な学習セッションを再利用可能な講義として保存する。
+- Control `README.md`: 解釈・適用範囲・検証・証拠・限界の正本。Catalogはここを参照する。
+- `learning.md`: 一つの有益な学習セッションを再利用可能な講義として保存する。
+  Control本文とは相互リンクし、内容や成熟度を一体化しない。
 
 Section単位のDirectoryや空のFamily placeholderを作らない。最初の学習Artifactができた
-ときだけFamily Directoryを作る。Requirement IDとSource VersionをFilenameへ含め、
+ときだけ必要なDirectoryを作る。Requirement IDとSource VersionをDirectory名へ含め、
 将来のVersionで過去の学習結果を上書きしない。
+
+学習ノートがないControlに空の`learning.md`を作らない。学習がControl整備に先行する場合も、
+空のControl本文やCatalog行は作らず、実在する学習ガイドへリンクする。両方が存在するように
+なった時点で相互リンクを追加する。Control評価では本文と上流資料、学習ではノートと対象要件・
+Researchを読み、学習からControlへの反映は独立した解釈・検証の変更として判断する。
 
 ## Lightweight progress
 
@@ -267,9 +280,14 @@ Session Log、Evidence、Reviewer identity、理解度Score、日付ごとのSta
 - Control maturity、Mapping status、製品適合を変更していない。
 - Production Evidence、Secret、個人情報を含まない。
 
+## Family learning guides
+
+- [C5：Access Control and Identity](c05-access-control-and-identity/README.md)
+- [C9：Orchestration and Agentic Security](c09-orchestration-and-agentic-security/README.md)
+
 ## Reference learning note
 
-- [C5.1.1 Step-up Authentication：講義、対話、洞察](c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication.md)
+- [C5.1.1 Step-up Authentication：講義、対話、洞察](../../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
 
 このノートは共通方式の最初のReferenceである。内容を全Requirementへコピーするのでは
 なく、Source separation、Security視座、対話の保存、Scope Calibrationの深さを参考に

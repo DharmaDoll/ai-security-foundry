@@ -1,0 +1,151 @@
+---
+title: "モデルが示した外部資源を承認済み一覧で確認する"
+versioned_id: "v1.0-C9.3.7"
+requirement_id: "C9.3.7"
+verification_level: 2
+family_id: "C9"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+upstream_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md"
+research_url: "https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md"
+last_verified: "2026-09-09"
+maturity: "verifiable"
+mapping_assessment_refs: []
+---
+
+# モデルが示した外部資源を承認済み一覧で確認する
+
+AISVS Verification Level: 2
+
+## Upstream basis
+
+AISVS `v1.0-C9.3.7`を解釈する。要件本文はモデル出力に名前が現れた外部資源を、インストール・呼出し前に承認済みAllow-listまたはRegistryで検証することを求める。
+採用済みstable v1.0の固定Revisionで本文と対応Researchの要件別検証・限界を確認した。
+最新の版・製品への追従を意味しない。
+
+Researchは架空Package名、類似名、MCP登録、コマンド引数を介した別Resource起動を補足する。
+以下の具体例・Property・検証条件はRepository interpretationである。
+Researchの製品、統計、事件、外部Framework Mappingを未検証のまま転記せず、
+例示された実装方式を一律の適合条件にしない。
+
+## Interpretation
+
+モデルが勧めた名前やURLをそのままコード取得・実行の根拠にしない。実際に利用する資源の識別を解決し、その資源が承認範囲にあることを実行前に確認する。
+
+Package管理Toolを許可していても、モデル指定の未承認Packageを導入できれば不成立。公的Registryに存在することと、このSystemで承認済みであることも区別する。
+
+## Security objective
+
+幻覚や攻撃者が与えた外部資源名から、不正なコード・Serviceを実行する経路を防ぐ。
+
+## Applicability
+
+モデルが指定したPackage、Image、Plugin、MCP Server、URL等を導入・呼出すAgent。
+
+### Non-applicability
+
+モデル由来の資源名を取得・実行へ使う能力がない範囲は対象外。人に候補を表示するだけの範囲と自動導入を区別する。
+
+## Scope and assumptions
+
+承認単位を名前空間・提供者・版・Digest・Endpoint等から適切に選ぶ。全てを一律必須にはしないが、同名別資源を区別できる粒度が必要。
+
+対象構成・採用Policy・許容する動作と評価境界を検証前に固定する。
+不明な構成を安全と仮定せず、未確認範囲をEvidenceの不足として残す。
+
+## Assets, actors, identities, and trust boundaries
+
+資産は実行環境と導入物。モデルの候補、信頼する承認Registry、名前解決・取得先、実行を分ける。強制点は取得・起動の前。
+
+## Required security properties
+
+Security Invariantは守るべき性質、Enforcement Pointはそれを実際に強制する場所を指す。
+
+| ID | 必要な性質と観測条件 |
+|---|---|
+| SP-1 | 信頼する承認先と資源識別の規則がある。 |
+| SP-2 | 実際に利用する資源を導入・呼出し前に照合する。 |
+| SP-3 | 別名・Redirect・引数で未承認資源へ切り替えられない。 |
+
+## Scope calibration and adjacent assurance
+
+承認済み資源が無害とは限らず、Supply-chain完全性は別。Hashを固定しない方式でも承認の意味が明確なら評価可能だが、変化する内容のリスクは残す。
+
+## Threat and failure-mode rationale
+
+攻撃者がモデルの架空候補と同名Packageを登録し、または許可されたRunnerの引数で別コードを起動する。
+
+この保証の分析では外部脅威IDを付与する追加価値を確定していない。
+攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
+ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+
+## Verification
+
+### Architecture and configuration review
+
+候補生成から解決・取得・実行までを追い、Registry管理、Cache、Redirect、Runner内の追加資源を調べる。
+
+### Positive verification
+
+承認済みの模擬資源だけを導入し、照合した識別子と実際の利用先を比較する。
+
+### Negative and abuse-case verification
+
+許可された試験環境と模擬Dataを用いる。モデルが協力することに依存せず、
+必要に応じて実行境界へ試験要求を直接与える。
+
+| ID | 条件・操作 | 期待結果・対応Property |
+|---|---|---|
+| N-1 | 未承認・類似名・別Namespaceを指定 | 実行前に拒否。SP-1, SP-2 |
+| N-2 | 承認URLから未承認先へRedirect | 実使用先の照合を回避しない。SP-3 |
+| N-3 | 許可Runnerの引数で別資源を起動 | Runner名だけの許可で通さない。SP-3 |
+| N-4 | Registry取得不能・応答改変 | 有効な承認根拠なしで導入しない。SP-1, SP-2 |
+
+### Failure conditions
+
+上表の期待結果に反する観測やSPの不成立は、本ControlのFailを裏付ける。
+試験未実施、構成不明、結果を追跡できない場合はPassを裏付ける証拠不足であり、
+実証された回避と区別する。隣接要件の不備だけで本Controlの意味を広げない。
+
+## Evidence expectations
+
+| Evidence class | Producer | Scope | Freshness | Integrity and sensitivity | Acceptance criteria |
+|---|---|---|---|---|---|
+| 承認Registryと管理権限 | 採用管理者 | 資源種別と識別粒度 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 承認の意味が明確 |
+| 解決・取得・実行Trace | Runtime | 候補から実体 | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 承認資源との一致 |
+| 資源差替え試験 | 検証者 | 別名・Redirect・Runner | 対象機構・Policy変更後、定期回帰時 | 評価Revision・時刻・試験IDを保持。アクセス制限し模擬Dataを使う | 未承認資源を起動不可 |
+
+成功と失敗の両方について、設定だけでなく実際の結果を採用構成へ対応付ける。
+本Repositoryには期待値のみを置き、本番Evidence、Secret、顧客情報は保存しない。
+特定の監査製品やログ形式は、本Controlが明示する性質を満たすための唯一の方式ではない。
+
+## Related requirements
+
+| Requirement | 関係と境界 |
+|---|---|
+| `v1.0-C9.3.4` | 登録・実行制約 |
+| `v1.0-C9.2.5` | 自己変更による資源追加 |
+| `v1.0-C9.5.1` | 起動Tool・引数の認可 |
+
+## Known limitations and uncertainty
+
+Registryの侵害、承認後の内容変更、依存先の問題は残る。人気やDownload数は承認・安全性の証明ではない。
+
+`verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態を表す。
+製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
+Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
+
+## References
+
+- [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
+- [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-03-Tool-and-Plugin-Isolation.md)
+- [C9全体分析](../../../docs/c09-landscape.md)
+
+## Changelog
+
+| Date | Change | Source or maintainer | Evidence |
+|---|---|---|---|
+| 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+
