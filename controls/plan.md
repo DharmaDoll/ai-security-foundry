@@ -145,6 +145,7 @@ Use one family directory and one versioned Requirement directory:
 ```text
 control-records/
 └── cNN-family-slug/
+    ├── README.md  # family assurance overview and navigation
     └── vX.Y-cN.N.N-descriptive-control-name/
         ├── README.md
         └── learning.md  # only when a substantive learning note exists
@@ -156,7 +157,11 @@ Requirement directory prevents historical interpretations from being overwritten
 Do not create section-level directories. Create a family directory only when the
 first substantive Control or learning note in that family is added.
 
-`README.md` remains the canonical Control artifact referenced by `control_ref`.
+The family `README.md` gives GitHub users a default-rendered overview from Category
+to Section to Requirement. It links concise assurance questions and prohibited
+failure states to the individual Controls; it is not a conformance checklist.
+
+The Requirement-level `README.md` remains the canonical Control artifact referenced by `control_ref`.
 `learning.md` contains teaching, dialogue, and insights, with reciprocal links when
 both exist. Learning progress remains independent of Control maturity. Shared
 learning policy and Family progress guides remain in `docs/learning/`.

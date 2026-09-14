@@ -55,6 +55,13 @@ engineering patterns, risks, and adversary techniques. A mapping is derived only
 after its endpoints are understood. It does not define the meaning or maturity of
 either endpoint.
 
+### Cross-cutting insights
+
+[`docs/insights/`](docs/insights/README.md) preserves reusable mental models and
+security reasoning that span Controls, Engineering Patterns, threat modeling,
+reviews, and education. Insights are original synthesis rather than normative
+requirements or implementation guidance.
+
 ## Framework roles
 
 External frameworks are inputs, not the repository structure.
@@ -118,7 +125,9 @@ endorsement, and source coverage or mapping success is not a maturity gate. See 
 │   └── framework-update-review.md
 ├── docs/
 │   ├── repository-design.md
-│   └── maintenance.md
+│   ├── maintenance.md
+│   └── insights/
+│       └── README.md
 └── .github/
     └── pull_request_template.md
 ```

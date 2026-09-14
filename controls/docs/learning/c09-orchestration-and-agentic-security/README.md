@@ -4,13 +4,14 @@ C9ではAgentが許可された、意図された、制限された行動を実�
 [共通学習方針](../README.md)に従い、原則として章の順番に、一度に一要件ずつ進める。
 全体の保証範囲・ID・Levelは[章の分析](../../c09-landscape.md)と
 [Control一覧](../../../README.md#c9-control-records)を参照する。
-[C9学習マップ](map.md)では、Category・Section・Requirementを「問うこと」と
+[C9 Family overview](../../../control-records/c09-orchestration-and-agentic-security/README.md)では、
+Category・Section・Requirementを「問うこと」と
 「できてはいけないこと」で俯瞰できる。
 
 ## 現在位置
 
-C9.1の全3要件、C9.2の全10要件、C9.3.1〜C9.3.3の講義・対話を一巡して保存した。
-現在学習中の要件はない。次はC9.3.4（Manifest宣言のRuntime強制）。
+C9.1の全3要件、C9.2の全10要件、C9.3.1〜C9.3.5の講義・対話を一巡して保存した。
+現在学習中の要件はない。次はC9.3.6（非信頼Tool出力とAgent操作の分離）。
 学習進捗はControl成熟度・製品適合とは独立している。
 
 ## 一巡のチェックリスト
@@ -31,8 +32,8 @@ C9.1の全3要件、C9.2の全10要件、C9.3.1〜C9.3.3の講義・対話を一
 - [x] [C9.3.1：Tool実行の最小権限・隔離](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation/learning.md)
 - [x] [C9.3.2：Tool出力のSchema検証](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation/learning.md)
 - [x] [C9.3.3：Tool ManifestへのSecurity要件の宣言](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements/learning.md)
-- [ ] C9.3.4
-- [ ] C9.3.5
+- [x] [C9.3.4：Manifest宣言のRuntime強制](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/learning.md)
+- [x] [C9.3.5：非信頼Data処理とTool能力の隔離](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/learning.md)
 - [ ] C9.3.6
 - [ ] C9.3.7
 - [ ] C9.3.8

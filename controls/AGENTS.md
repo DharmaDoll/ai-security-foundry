@@ -53,6 +53,7 @@ Organize substantive AISVS Control records by AISVS family and versioned Require
 ```text
 control-records/
 └── cNN-family-slug/
+    ├── README.md  # family overview; create with substantive family content
     └── vX.Y-cN.N.N-descriptive-control-name/
         ├── README.md
         └── learning.md  # optional; create only after meaningful learning
@@ -62,11 +63,23 @@ Use a zero-padded, lowercase family prefix such as
 `c05-access-control-and-identity/`. Begin the Requirement directory with the lowercase,
 versioned Requirement ID, followed by a stable descriptive slug.
 
-`README.md` is the authoritative Control interpretation, verification, evidence,
-and limitations. `learning.md` holds concrete teaching, dialogue, and insights.
+Each Requirement-level `README.md` is the authoritative Control interpretation,
+verification, evidence, and limitations. `learning.md` holds concrete teaching,
+dialogue, and insights.
 Keep their purposes and maturity independent. Add reciprocal links when a learning
 note exists; never create an empty note to complete the directory layout.
 Catalog `control_ref` must point to the Control `README.md`, never `learning.md`.
+
+The family-level `README.md` is the GitHub-friendly navigation entry point. It
+summarizes the Category, Sections, and Requirements as concise assurance questions
+and prohibited failure states, then links to the individual Control records. It is
+not a substitute for the upstream standard, an individual Control, or a product
+conformance checklist. Keep learning progress in `docs/learning/`, not in the
+family overview.
+
+Use this location for every future Family map. Do not create
+`docs/learning/<family>/map.md`; create or update
+`control-records/<family>/README.md` instead.
 
 Do not create section-level directories or empty family placeholders. Create a
 family or Requirement directory only when its first substantive artifact is added.

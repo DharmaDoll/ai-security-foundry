@@ -220,20 +220,20 @@ RequirementへC5.1.1固有のSectionを機械的に複製しない。
 controls/
 ├── control-records/
 │   └── cNN-family-slug/
+│       ├── README.md
 │       └── vX.Y-cN.N.N-descriptive-control-name/
 │           ├── README.md
 │           └── learning.md
 └── docs/learning/
     ├── README.md
     └── cNN-family-slug/
-        ├── README.md
-        └── map.md
+        └── README.md
 ```
 
 - `controls/docs/learning/README.md`: 全Category共通の学習・永続化方針。
-- Family `README.md`: Requirement一覧、現在位置、軽量なChecklist、Family固有Source。
-- Family `map.md`: Category、Section、Requirementを「問うこと」と「できてはいけないこと」で
-  辿る学習用の俯瞰図。
+- `docs/learning/`のFamily `README.md`: Requirement一覧、現在位置、軽量なChecklist、Family固有Source。
+- `control-records/`のFamily `README.md`: Category、Section、Requirementを「問うこと」と
+  「できてはいけないこと」で辿り、個別Controlへ案内する俯瞰図。
 - Control `README.md`: 解釈・適用範囲・検証・証拠・限界の正本。Catalogはここを参照する。
 - `learning.md`: 一つの有益な学習セッションを再利用可能な講義として保存する。
   Control本文とは相互リンクし、内容や成熟度を一体化しない。
@@ -247,9 +247,10 @@ Section単位のDirectoryや空のFamily placeholderを作らない。最初の�
 なった時点で相互リンクを追加する。Control評価では本文と上流資料、学習ではノートと対象要件・
 Researchを読み、学習からControlへの反映は独立した解釈・検証の変更として判断する。
 
-### Family learning map
+### Family Control overview
 
-Familyの学習を開始したら、個別ノートと別に`map.md`を作り、次の三段階を一つの文書で示す。
+FamilyのControlが実体を持ったら、`control-records/<family>/README.md`に次の三段階を
+一つの文書で示す。
 
 1. `C`：Category全体として何を保証したいか。
 2. `C.x`：Sectionがどの保証軸を担当するか。
@@ -258,11 +259,13 @@ Familyの学習を開始したら、個別ノートと別に`map.md`を作り、
 各段階に「問うこと」と「できてはいけないこと」を置く。「できてはいけないこと」は、
 そのRequirementを直接Failさせる代表的な失敗を短く示す。隣接RequirementのFailure、
 推奨実装、特定製品を混ぜない。完全な解釈・適用境界・検証はControl本文、具体的な講義と
-対話は`learning.md`へリンクし、`map.md`だけで適合判定しない。
+対話は`learning.md`へリンクし、Family READMEだけで適合判定しない。
 
 この俯瞰図はAISVS原文の再掲ではなく、固定したSourceに対するRepositoryの学習用解釈である。
 Source Versionを明示し、Requirementの追加・変更時には意味の差分を確認して更新する。
-未整備Categoryへ空の`map.md`を先行作成しない。
+未整備Categoryへ空のFamily READMEを先行作成しない。
+今後も俯瞰図は`control-records/<family>/README.md`へ配置し、
+`docs/learning/<family>/map.md`は作成しない。
 
 ## Lightweight progress
 

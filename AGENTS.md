@@ -47,6 +47,28 @@ Pattern per listed item.
 Do not automatically install their tools/skills or adopt their defaults and
 mappings. See `engineering/docs/source-policy.md` for the adoption policy.
 
+## Cross-cutting insights
+
+Store durable mental models and reusable security reasoning that apply across
+Controls, Engineering Patterns, threat modeling, reviews, and education under
+`docs/insights/`.
+
+An Insight is not a Control, Pattern, Mapping, or conformance claim. Use it to
+preserve original synthesis that would be lost if it remained only inside a
+Requirement-specific learning note or conversation.
+
+- Create one file per coherent insight; do not use the directory as a session log.
+- State the central thesis, practical model, examples, review implications,
+  limitations, and related repository artifacts.
+- Distinguish upstream facts from repository interpretation and discussion-derived
+  conclusions.
+- Link to the Controls, learning notes, Patterns, incidents, or sources that
+  prompted the insight without making them subordinate to it.
+- Prefer concise, quotable formulations and diagrams that can be reused in design
+  reviews, training material, and slides.
+- Do not treat an Insight as normative evidence or as a replacement for detailed
+  Control verification or Engineering guidance.
+
 ## Before making changes
 
 1. Read `README.md`.

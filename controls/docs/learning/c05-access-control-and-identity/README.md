@@ -19,7 +19,8 @@ Classification、Tenant Isolationの設計判断に使える言葉で理解す�
 [`../README.md`](../README.md)に従う。この文書ではC5固有のRequirement一覧、学習順、
 進捗、Sourceだけを管理する。
 
-[C5学習マップ](map.md)では、Category・Section・Requirementを「問うこと」と
+[C5 Family overview](../../../control-records/c05-access-control-and-identity/README.md)では、
+Category・Section・Requirementを「問うこと」と
 「できてはいけないこと」で俯瞰できる。
 
 ## 進め方

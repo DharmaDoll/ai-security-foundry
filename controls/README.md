@@ -9,6 +9,8 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 個別資料は`control-records/<family>/<versioned-requirement>/`にまとめる。
 `README.md`はControlの解釈・検証・証拠・限界の正本、任意の`learning.md`は具体例・用語・
 対話・洞察を含む学習ノートである。両者を相互リンクし、CatalogはControl本文を参照する。
+[Family README](control-records/c05-access-control-and-identity/README.md)は、Category、Section、
+Requirementを俯瞰して個別Controlへ辿るための入口である。
 [学習方針・進捗一覧](docs/learning/README.md)は従来どおり独立して管理する。
 
 - [`catalog.yaml`](catalog.yaml): machine-readable control inventory with AISVS Verification
@@ -22,6 +24,8 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 
 C5の全11件について、解釈・適用範囲・脅威・検証・証拠期待値・限界を備えた
 `verifiable` Controlを整備した。初期Golden ControlはC5.2.5である。
+[C5 Family overview](control-records/c05-access-control-and-identity/README.md)では、
+Categoryから各Requirementまでの保証範囲を短い問いで俯瞰できる。
 
 | Requirement | Level | Control |
 |---|---:|---|
@@ -65,6 +69,8 @@ C5との違い、Researchからの検討観点を整理した。C9全34件につ
 解釈・適用境界・脅威・Positive/Negative Verification・証拠期待値・限界を備えた
 `verifiable` Controlを整備した。最初の代表要件はC9.5.1。
 これはRepository Artifactの完成であり、製品適合・攻撃への完全保証・学習完了を意味しない。
+[C9 Family overview](control-records/c09-orchestration-and-agentic-security/README.md)では、
+Categoryから各Requirementまでの保証範囲を短い問いで俯瞰できる。
 
 | Requirement | Level | Control |
 |---|---:|---|
@@ -105,16 +111,16 @@ C5との違い、Researchからの検討観点を整理した。C9全34件につ
 
 今後は利用・レビューからの改善を行う。Engineering Mappingは別の評価として扱う。
 
-## Learning
+## Navigation and learning
 
 - [Common Controls learning method](docs/learning/README.md): shared teaching,
   dialogue-reconstruction, insight, storage, and quality rules for every AISVS
   Category.
 - [AISVS C5 Access Control and Identity learning guide](docs/learning/c05-access-control-and-identity/README.md):
   C5 Requirement sequence, lightweight progress, and persistent learning notes.
-- [AISVS C5 learning map](docs/learning/c05-access-control-and-identity/map.md):
+- [AISVS C5 family overview](control-records/c05-access-control-and-identity/README.md):
   Category, Section, and Requirement-level questions and prohibited failure states.
-- [AISVS C9 learning map](docs/learning/c09-orchestration-and-agentic-security/map.md):
+- [AISVS C9 family overview](control-records/c09-orchestration-and-agentic-security/README.md):
   a compact overview of what each C9 assurance layer asks and must prevent.
 
 ## Control record layout
@@ -124,13 +130,20 @@ Store substantive AISVS Control records under one AISVS-family directory:
 ```text
 control-records/
 └── cNN-family-slug/
-    └── vX.Y-cN.N.N-descriptive-control-name.md
+    ├── README.md
+    └── vX.Y-cN.N.N-descriptive-control-name/
+        ├── README.md
+        └── learning.md  # optional
 ```
 
 For example, the Golden Control is stored under
 `c05-access-control-and-identity/`. The family number and versioned Requirement ID
 provide direct upstream traceability; the descriptive suffix keeps the security
 subject understandable without looking up the identifier.
+
+The family `README.md` is the navigation and assurance overview rendered by
+default in GitHub. Individual Requirement `README.md` files remain the canonical
+Control interpretations, and `catalog.yaml` points only to those individual files.
 
 Use only the family level as a directory boundary. Do not create section-level
 directories such as `c05.2/`, and do not create empty family directories. Create a

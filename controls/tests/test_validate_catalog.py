@@ -39,12 +39,35 @@ class CatalogValidatorTest(unittest.TestCase):
         }
         actual = {
             str(path.relative_to(REPOSITORY_ROOT))
-            for path in (REPOSITORY_ROOT / "controls/control-records").rglob("README.md")
+            for path in (REPOSITORY_ROOT / "controls/control-records").glob(
+                "*/*/README.md"
+            )
         }
         self.assertEqual(expected, actual)
         self.assertEqual(
-            [], list((REPOSITORY_ROOT / "controls/control-records").glob("*/*.md"))
+            [],
+            [
+                path
+                for path in (
+                    REPOSITORY_ROOT / "controls/control-records"
+                ).glob("*/*.md")
+                if path.name != "README.md"
+            ],
         )
+
+        control_families = {
+            path.parents[1]
+            for path in (REPOSITORY_ROOT / "controls/control-records").glob(
+                "*/*/README.md"
+            )
+        }
+        overview_families = {
+            path.parent
+            for path in (REPOSITORY_ROOT / "controls/control-records").glob(
+                "*/README.md"
+            )
+        }
+        self.assertEqual(control_families, overview_families)
 
     def test_learning_notes_have_reciprocal_control_links_when_control_exists(self) -> None:
         for note in (REPOSITORY_ROOT / "controls/control-records").glob("*/*/learning.md"):
@@ -55,6 +78,9 @@ class CatalogValidatorTest(unittest.TestCase):
                     self.assertIn("](learning.md)", control.read_text(encoding="utf-8"))
         self.assertEqual(
             [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*.md"))
+        )
+        self.assertEqual(
+            [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/map.md"))
         )
 
     def test_controls_local_markdown_links_resolve(self) -> None:
