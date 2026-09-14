@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
+[学習ノート：具体例・対話・洞察](learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C9.2.3`を解釈する。要件本文は高影響操作ごとに信頼できる可逆性分類を持つことを求める。読取専用、可逆、外部依存の可逆、不可逆は例示である。
@@ -147,4 +149,3 @@ Engineering PatternとMappingは独立して評価し、その存在を本Contro
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
-

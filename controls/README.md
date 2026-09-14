@@ -112,6 +112,10 @@ C5との違い、Researchからの検討観点を整理した。C9全34件につ
   Category.
 - [AISVS C5 Access Control and Identity learning guide](docs/learning/c05-access-control-and-identity/README.md):
   C5 Requirement sequence, lightweight progress, and persistent learning notes.
+- [AISVS C5 learning map](docs/learning/c05-access-control-and-identity/map.md):
+  Category, Section, and Requirement-level questions and prohibited failure states.
+- [AISVS C9 learning map](docs/learning/c09-orchestration-and-agentic-security/map.md):
+  a compact overview of what each C9 assurance layer asks and must prevent.
 
 ## Control record layout
 
