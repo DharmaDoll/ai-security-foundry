@@ -10,8 +10,8 @@ Category・Section・Requirementを「問うこと」と
 
 ## 現在位置
 
-C9.1の全3要件、C9.2の全10要件、C9.3.1〜C9.3.5の講義・対話を一巡して保存した。
-現在学習中の要件はない。次はC9.3.6（非信頼Tool出力とAgent操作の分離）。
+C9.1の全3要件、C9.2の全10要件、C9.3の全8要件、C9.4.1の講義・対話を一巡して保存した。
+現在学習中の要件はない。次はC9.4.2（実行Chain各Stepへの暗号的Binding）。
 学習進捗はControl成熟度・製品適合とは独立している。
 
 ## 一巡のチェックリスト
@@ -34,10 +34,10 @@ C9.1の全3要件、C9.2の全10要件、C9.3.1〜C9.3.5の講義・対話を一
 - [x] [C9.3.3：Tool ManifestへのSecurity要件の宣言](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements/learning.md)
 - [x] [C9.3.4：Manifest宣言のRuntime強制](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/learning.md)
 - [x] [C9.3.5：非信頼Data処理とTool能力の隔離](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/learning.md)
-- [ ] C9.3.6
-- [ ] C9.3.7
-- [ ] C9.3.8
-- [ ] C9.4.1
+- [x] [C9.3.6：非信頼Tool出力とAgent操作の構造的分離](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs/learning.md)
+- [x] [C9.3.7：Modelが示した外部Resourceの利用前確認](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources/learning.md)
+- [x] [C9.3.8：Policy違反時のTool自動封じ込め](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation/learning.md)
+- [x] [C9.4.1：Agent Instanceの一意な暗号的Identity](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity/learning.md)
 - [ ] C9.4.2
 - [ ] C9.4.3
 - [ ] C9.4.4
