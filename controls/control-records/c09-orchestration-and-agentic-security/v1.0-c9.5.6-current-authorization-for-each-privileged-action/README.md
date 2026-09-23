@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 3
 
+[学習ノート：講義・対話・洞察](learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C9.5.6`を解釈する。要件本文は長時間Agent Sessionが各特権操作で現在のBackend認可Policyを再評価することを求める。
@@ -149,4 +151,3 @@ Engineering PatternとMappingは独立して評価し、その存在を本Contro
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
-

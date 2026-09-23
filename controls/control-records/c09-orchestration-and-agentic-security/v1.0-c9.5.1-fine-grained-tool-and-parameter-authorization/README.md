@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
+[学習ノート：講義・対話・洞察](learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C9.5.1`を解釈する。原文は、Runtimeが強制する細粒度のPolicyにより、

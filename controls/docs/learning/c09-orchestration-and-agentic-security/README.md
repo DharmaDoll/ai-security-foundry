@@ -10,8 +10,8 @@ Category・Section・Requirementを「問うこと」と
 
 ## 現在位置
 
-C9.1の全3要件、C9.2の全10要件、C9.3の全8要件、C9.4.1の講義・対話を一巡して保存した。
-現在学習中の要件はない。次はC9.4.2（実行Chain各Stepへの暗号的Binding）。
+C9の全34要件について、講義・対話とRequirement別の学習ノートを一巡して保存した。
+現在学習中の要件はない。学習結果の横断的な洞察への整理は、Control成熟度とは別の作業として扱う。
 学習進捗はControl成熟度・製品適合とは独立している。
 
 ## 一巡のチェックリスト
@@ -38,18 +38,18 @@ C9.1の全3要件、C9.2の全10要件、C9.3の全8要件、C9.4.1の講義・�
 - [x] [C9.3.7：Modelが示した外部Resourceの利用前確認](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources/learning.md)
 - [x] [C9.3.8：Policy違反時のTool自動封じ込め](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation/learning.md)
 - [x] [C9.4.1：Agent Instanceの一意な暗号的Identity](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity/learning.md)
-- [ ] C9.4.2
-- [ ] C9.4.3
-- [ ] C9.4.4
-- [ ] C9.5.1
-- [ ] C9.5.2
-- [ ] C9.5.3
-- [ ] C9.5.4
-- [ ] C9.5.5
-- [ ] C9.5.6
-- [ ] C9.6.1
-- [ ] C9.6.2
-- [ ] C9.6.3
+- [x] [C9.4.2：操作内容と実行Chainの暗号的結合](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution/learning.md)
+- [x] [C9.4.3：AgentのIdentity資格情報の定期更新](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation/learning.md)
+- [x] [C9.4.4：保存したAgent状態の完全性保護](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state/learning.md)
+- [x] [C9.5.1：Toolと引数の細粒度認可](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization/learning.md)
+- [x] [C9.5.2：利用者の委任範囲を下流まで維持](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls/learning.md)
+- [x] [C9.5.3：アクセス制御をモデル外で強制](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions/learning.md)
+- [x] [C9.5.4：Runtimeの秘密をモデルへ露出させない](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context/learning.md)
+- [x] [C9.5.5：Agent間の明示的な委任Policy](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy/learning.md)
+- [x] [C9.5.6：現在のPolicyで各特権操作を再評価](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action/learning.md)
+- [x] [C9.6.1：推論と出力の手動停止](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs/learning.md)
+- [x] [C9.6.2：承認期限切れの操作をブロック](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout/learning.md)
+- [x] [C9.6.3：Agentから隔離した停止経路](../../../control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation/learning.md)
 
 ## Sources
 
