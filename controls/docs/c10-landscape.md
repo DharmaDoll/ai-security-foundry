@@ -3,7 +3,7 @@
 - 調査日：2026-09-10
 - 対象：採用済みOWASP AISVS v1.0、C10 Model Context Protocol (MCP) Security
 - 固定Revision：`78775233666a2022dcfb82037e5e029116955c00`（C5/C9と同じ）
-- 状態：章の分析と代表要件の選定。個別Controlは未着手。
+- 状態：C10全4節・23要件を`verifiable`まで整備し、章の初期成熟化を完了。
 
 本資料は採用済みSnapshotを分析する。AISVSやMCPの最新版への追従を宣言するものではない。
 要件本文を正本とし、Researchの章概要と全4節の要件別Verification・Gapsを参照した。
@@ -95,7 +95,7 @@ Token passthroughは、この受信Tokenの透過的な転送を指す。[要件
 C9.5.2の委任Context伝播と比較でき、MCP固有の要求範囲も明確になる。
 初期Golden ControlであるC5.2.5は維持する。
 
-| 検討項目 | 次の個別Controlで深める内容 |
+| 検討項目 | 個別Controlで深めた内容 |
 |---|---|
 | 保証特性 | 受信したClient Tokenが下流APIへの資格情報として転送されない。 |
 | 具体例 | 文書APIには別途取得した対象API用の資格情報を使う。その取得方式を一方式に固定しない。 |
@@ -112,16 +112,22 @@ C9.5.2の委任Context伝播と比較でき、MCP固有の要求範囲も明確�
 ## 5. 段階的な進め方
 
 1. **今回：全体像と初手の確定。** 本資料に4節の境界と解釈上の注意を残す。
-2. **次：C10.2.7。** 正確な本文と対応Researchを再確認し、既存Templateで解釈・適用範囲・
-   脅威・正常/拒否試験・証拠期待値・限界を整備してCatalogへ追加する。
-3. **各境界の代表：C10.1.2 → C10.3.3 → C10.4.8。** Serverの許可、HTTP境界、定義変更を
-   一件ずつ整備する。各件で独立したVerificationとEvidenceを具体化する。
-4. **残る要件。** C10.2の認証・認可・Session、C10.1の出所・隔離、C10.3のTransport、
-   C10.4の形式・内容・再送・同意を順に深める。近接要件を一つへ吸収しない。
-5. **章の整合確認。** 本文/Research/Repository解釈、ID・Level、重複と非保証範囲、
-   Catalog・リンクを確認する。全件の成熟化を完了した時点で結果を報告する。
+2. **完了：C10.2.7。** 正確な本文と対応Researchを再確認し、既存Templateで解釈・適用範囲・
+   脅威・正常/拒否試験・証拠期待値・限界を整備してCatalogへ追加した。
+3. **完了：C10.1。** Source・暗号検証、Server Allowlist、Local Sandboxの3要件を、
+   Requirement単位のControlとして独立したVerificationとEvidenceまで整備した。
+4. **完了：C10.2。** Sectionを作業単位として、毎要求のToken検証、Claim検証、
+   Token非永続化、Tool一覧、Tool・引数認可、Session終了を深めた。近接要件を一つへ吸収せず、
+   C10.2.7を含む全7件をRequirement単位のControlとして整備した。
+5. **完了：C10.3。** Remoteの認証・暗号化済みStreamable HTTP、Local stdio境界、Origin／Host、
+   最低Protocol Version、Sender-constrained Tokenの5件を独立したControlとして整備した。
+6. **完了：C10.4。** Schema、内容検査、Parameter、Payload、署名／Replay、導入同意、
+   Definition変更の8件をRequirement単位のControlとして整備した。
+7. **完了：章の整合確認。** 本文／Research／Repository解釈、ID・Level、重複と非保証範囲、
+   Catalog・Family READMEを確認し、全23件を`verifiable`とした。
 
-今回の分析ではCatalogの成熟度を進めない。学習は希望時に別の流れで行う。
+C10の全Requirementは個別Controlの検証可能性を満たした。今後の改善は利用・人のReview・Source更新に基づいて行う。
+学習は希望時に別の流れで行う。
 Engineeringは独立に発見・開発し、両側が理解可能になってからMappingを評価する。
 
 ## 参照

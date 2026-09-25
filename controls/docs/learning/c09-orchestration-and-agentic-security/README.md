@@ -1,7 +1,12 @@
 # AISVS C9 学習ガイド
 
+> **Legacy learning layout:** C9は旧方針のRequirement単位で学習を完了している。
+> 既存ノートは対話と洞察を保持するため移動しない。将来再編する場合は、Source versionと
+> Linkを保った明示的MigrationとしてC9.1〜C9.6のSection単位へ統合する。
+
 C9ではAgentが許可された、意図された、制限された行動を実行するための保証を学ぶ。
-[共通学習方針](../README.md)に従い、原則として章の順番に、一度に一要件ずつ進める。
+この文書は旧Requirement単位で完了した学習履歴を案内する。今後の新規学習には
+[共通学習方針](../README.md)のSection単位方式を使う。
 全体の保証範囲・ID・Levelは[章の分析](../../c09-landscape.md)と
 [Control一覧](../../../README.md#c9-control-records)を参照する。
 [C9 Family overview](../../../control-records/c09-orchestration-and-agentic-security/README.md)では、

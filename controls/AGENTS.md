@@ -55,8 +55,7 @@ control-records/
 └── cNN-family-slug/
     ├── README.md  # family overview; create with substantive family content
     └── vX.Y-cN.N.N-descriptive-control-name/
-        ├── README.md
-        └── learning.md  # optional; create only after meaningful learning
+        └── README.md
 ```
 
 Use a zero-padded, lowercase family prefix such as
@@ -64,11 +63,29 @@ Use a zero-padded, lowercase family prefix such as
 versioned Requirement ID, followed by a stable descriptive slug.
 
 Each Requirement-level `README.md` is the authoritative Control interpretation,
-verification, evidence, and limitations. `learning.md` holds concrete teaching,
-dialogue, and insights.
-Keep their purposes and maturity independent. Add reciprocal links when a learning
-note exists; never create an empty note to complete the directory layout.
-Catalog `control_ref` must point to the Control `README.md`, never `learning.md`.
+verification, evidence, and limitations. Catalog `control_ref` must point to that
+Control `README.md`.
+
+New learning content is organized separately by AISVS Section, not by Requirement:
+
+```text
+docs/learning/
+└── cNN-family-slug/
+    ├── README.md
+    └── vX.Y-cN.N-section-slug/
+        └── learning.md
+```
+
+One Section note teaches every Requirement in that Section as a coherent unit.
+Include the Source version in the directory name so a future upstream revision does
+not silently overwrite historical learning. Link each relevant Control to the
+Section note once it exists, and link the Section note back to the individual
+Controls. Keep learning progress and Control maturity independent.
+
+Requirement-level learning notes created before this convention are retained as
+historical learning artifacts. Do not move or combine them as an incidental part
+of another task; consolidate them only in an explicit migration that preserves
+links and substantive dialogue-derived insights.
 
 The family-level `README.md` is the GitHub-friendly navigation entry point. It
 summarizes the Category, Sections, and Requirements as concise assurance questions
@@ -81,10 +98,11 @@ Use this location for every future Family map. Do not create
 `docs/learning/<family>/map.md`; create or update
 `control-records/<family>/README.md` instead.
 
-Do not create section-level directories or empty family placeholders. Create a
-family or Requirement directory only when its first substantive artifact is added.
-Learning may precede a Control: do not create a placeholder README or catalog entry;
-link to the existing family guide until a substantive Control exists.
+Do not create Section directories under `control-records/` or empty family
+placeholders. Create a Control family or Requirement directory only when its first
+substantive Control artifact is added. Under `docs/learning/`, create a versioned
+Section directory only when its substantive `learning.md` is written. Learning may
+precede a Control: do not create a placeholder Control README or catalog entry.
 
 The directory layout supports navigation and AISVS traceability; `catalog.yaml`
 remains authoritative for versions, lifecycle, maturity, and
@@ -147,8 +165,11 @@ insights into the appropriate Control, template, AGENTS.md, or durable guidance.
 Use `docs/learning/README.md` as the common learning and persistence method for
 every AISVS Category or Family.
 
-- Begin every Requirement lesson with the versioned ID, AISVS Verification Level,
-  exact English Requirement, and a faithful Japanese translation.
+- Teach one AISVS Section per learning content. Cover every Requirement in the
+  Section; do not reduce the scope merely to reduce the number of files.
+- Begin the Section lecture with its ID and title, followed by every included
+  Requirement's versioned ID, AISVS Verification Level, exact English text, and a
+  faithful Japanese translation.
 - Teach from a senior product-security perspective: identify attacker capability,
   assets, Trust Boundaries, Security Invariants, deterministic Enforcement Points,
   observable Pass/Fail conditions, and the assurance boundary.
@@ -158,15 +179,15 @@ every AISVS Category or Family.
 - Persist a meaningful session as a standalone lecture plus a faithful
   reconstruction of important questions, uncertainty, corrections, and insights;
   do not preserve raw chat noise merely for completeness.
-- Keep common policy and lightweight Family progress guides in `docs/learning/`.
-  Store each Requirement note as `learning.md` beside its Control `README.md` in
-  the versioned Requirement directory. Do not create empty placeholders.
+- Keep common policy, lightweight Family progress guides, and versioned Section
+  notes in `docs/learning/`. Store each new `learning.md` under a versioned Section
+  directory. Do not create empty placeholders.
 - Never use learning completion to change Control maturity, Mapping status, or a
   product conformance result.
 
-The C5.1.1 learning note linked from `docs/learning/README.md` is the initial
-reference for depth and structure, not a template whose topic-specific sections
-must be copied mechanically.
+The legacy C5.1.1 Requirement note linked from `docs/learning/README.md` remains a
+reference for depth and teaching stance. It is not the current storage granularity
+or a template whose topic-specific sections must be copied mechanically.
 
 ---
 
@@ -256,6 +277,14 @@ Do not confuse the existence of a configuration or document with evidence that t
 ## Incremental Development
 
 Do not generate placeholder content for every framework requirement.
+
+Use an AISVS Section (`C.x`) as the default planning and delivery batch when
+expanding a Family. Within that batch, keep one canonical Control record, Catalog
+entry, maturity value, scope, and verification boundary per Requirement (`C.x.y`).
+Do not replace several Requirements with one Section-level Control. A Section is
+complete only when every Requirement in its agreed scope has independently reached
+the target maturity and the distinctions between adjacent Requirements have been
+reviewed.
 
 Work incrementally:
 

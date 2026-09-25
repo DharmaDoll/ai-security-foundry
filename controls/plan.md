@@ -35,7 +35,28 @@ C9完了後、Phase 4の次FamilyとしてC10を選び、
 [全体分析と着手順序](docs/c10-landscape.md)を作成した。
 採用済み固定Revisionの要件本文と対応Researchから、全4節・23件の保証範囲を整理した。
 最初の代表要件は`v1.0-C10.2.7`（Level 2：受信Tokenの下流APIへの転送禁止）。
-次はこの一件を既存Templateで深める。現時点では個別Control未着手で、Catalogは45件のまま。
+2026-09-23にこの一件を既存Templateで`verifiable`まで整備し、Catalogへ追加した。
+Client Tokenの非転送と委任Contextの維持を分け、Credential取得失敗時のFallback、
+Proxy・Retry・任意送信先を含むEgress試験と証拠期待値を定義した。この時点のCatalogは46件。
+2026-09-24にControl成熟化の作業単位をSectionへ変更し、C10.1の3要件をすべて
+`verifiable`まで整備した。Control ArtifactとCatalog行はRequirement単位を維持する。
+続いてC10.2の残る6要件も成熟させ、同Sectionの全7要件を`verifiable`とした。
+さらにC10.3 Secure Transportの全5要件を成熟させ、Remote／Local Transport、Origin／Host、
+Version Downgrade、Sender-constrained Tokenの保証境界を分離した。続いてC10.4の全8要件を成熟させ、
+Schema／Content、Parameter／Payload、署名／Replay、Consent／Definition再承認を分離した。
+C10全23要件が`verifiable`となり、Catalogは68件。C10の章整合確認をもって同Familyの初期成熟化を完了した。
+
+### C8 landscape checkpoint — 2026-09-24
+
+Phase 4の残るFamilyとしてC8を選び、[全体分析と着手順序](docs/c08-landscape.md)を作成した。
+採用済み固定Revisionの要件本文と3つのSection Researchから、全3節・11件の保証範囲を整理した。
+最初のSectionはC8.1 Access Controls on Memory & RAG Indicesである。Vector ID／NamespaceのTenant一意性、
+Security／Provenance Metadata Tagの不変性、全Retrieval PathでのScope強制という3要件を`verifiable`まで整備した。
+続いてC8.2 Embedding Sanitization & Validationの5要件を`verifiable`まで整備した。Sensitive Field、Vector異常、
+Trusted MemoryへのSource検証、Retrieval操作Content、Memory間の矛盾を、それぞれ独立して検証可能な保証へ翻訳した。
+C8.3 Memory Expiry & Revocationの3要件も`verifiable`まで整備した。Logical ExclusionとPhysical Deletionを分け、
+Resetは宣言したMemory Scopeの再利用停止、QuarantineはForensic保持とProduction Retrieval除外の両立として定義した。
+C8全3 Section・11要件の初期成熟化を完了し、Catalogは79件となった。次はC8章内の整合確認と、未着手Familyの優先順位見直しを行う。
 
 ## 1. Purpose and boundaries
 
@@ -147,26 +168,35 @@ control-records/
 └── cNN-family-slug/
     ├── README.md  # family assurance overview and navigation
     └── vX.Y-cN.N.N-descriptive-control-name/
-        ├── README.md
-        └── learning.md  # only when a substantive learning note exists
+        └── README.md
+
+docs/learning/
+└── cNN-family-slug/
+    ├── README.md  # lightweight family learning navigation
+    └── vX.Y-cN.N-section-slug/
+        └── learning.md  # only when a substantive Section lecture exists
 ```
 
 The family number makes the primary AISVS backbone directly traceable. The
 descriptive family and Control slugs keep paths understandable, while the versioned
 Requirement directory prevents historical interpretations from being overwritten.
-Do not create section-level directories. Create a family directory only when the
-first substantive Control or learning note in that family is added.
+Do not create Section directories under `control-records/`. Under `docs/learning/`,
+create a versioned Section directory only with a substantive lecture. Create a
+family directory only when the first substantive Control or learning artifact in
+that family is added.
 
 The family `README.md` gives GitHub users a default-rendered overview from Category
 to Section to Requirement. It links concise assurance questions and prohibited
 failure states to the individual Controls; it is not a conformance checklist.
 
 The Requirement-level `README.md` remains the canonical Control artifact referenced by `control_ref`.
-`learning.md` contains teaching, dialogue, and insights, with reciprocal links when
-both exist. Learning progress remains independent of Control maturity. Shared
+New `learning.md` files contain Section-level teaching, dialogue, and insights for
+all Requirements in that Section, with reciprocal links when the relevant Controls
+also exist. Learning progress remains independent of Control maturity. Shared
 learning policy and Family progress guides remain in `docs/learning/`.
-Learning may precede a Control; a substantive note may create its Requirement
-directory without a placeholder Control or catalog entry.
+Learning may precede a Control; a substantive Section note does not create a
+placeholder Control or catalog entry. Requirement-level C5/C9 notes created under
+the earlier convention remain historical artifacts until an explicit migration.
 
 This storage convention does not make other frameworks normative and does not apply
 to `engineering/`. `catalog.yaml` remains the source of truth for identity,

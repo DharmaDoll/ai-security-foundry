@@ -33,10 +33,10 @@
 
 ## Required sources
 
-各Requirementの講義を作る前に、少なくとも次を読む。
+各Sectionの講義を作る前に、少なくとも次を読む。
 
 1. `sources/registry.yaml`に登録されたSourceのVersionとStatus。
-2. 固定RevisionのAISVS Normative Requirement。
+2. 固定Revisionにある対象Sectionの全AISVS Normative Requirement。
 3. 同じRevisionに対応するAISVS Research page。
 4. Security-significantな解釈に必要なPrimary specificationまたは公式Guidance。
 
@@ -78,16 +78,18 @@ EngineerがArchitecture Reviewを行う視座で構成する。
 
 ## Learning workflow
 
-Category／Familyごとに全Requirementへ一度触れる。一度に扱うのは一つのRequirement
-だけとする。
+Category／Familyごとに全Requirementへ一度触れるが、講義・保存・復習の単位は
+RequirementではなくSection（`C.x`）とする。一度に扱うのは一つのSectionだけとし、
+その中の全Requirementを共通Scenarioと保証軸の中で比較する。
 
-1. Category全体の目的とRequirement一覧を確認する。
-2. Normative Requirement、Research、必要なPrimary sourceを読む。
-3. 下記の共通構造で講義する。
-4. 原則2〜3問の短い対話で、本質または分かりにくい境界だけを確認する。
-5. 有益な対話になった場合、Requirement単位の学習ノートへ永続化する。
-6. Family guideのChecklistと次のRequirementだけを更新する。
-7. Familyを一巡した後、再利用可能な洞察をControl、Template、AGENTS.md、または別の
+1. Category全体の目的、Section一覧、各SectionのRequirement一覧を確認する。
+2. 対象Sectionの全Normative Requirement、Research、必要なPrimary sourceを読む。
+3. 下記の共通構造で、Section全体を一つの講義として扱う。
+4. 各Requirementの直接の保証と相互の境界を説明する。数が多くても読み飛ばさない。
+5. Section全体に対して原則2〜3問の短い対話を行い、本質または分かりにくい境界だけを確認する。
+6. 有益な対話になった場合、Section単位の学習ノートへ永続化する。
+7. Family guideのChecklistと次のSectionだけを更新する。
+8. Familyを一巡した後、再利用可能な洞察をControl、Template、AGENTS.md、または別の
    Guidanceへ反映すべきかを検討する。
 
 すべてのSecurity PropertyやCaseを質問形式でなぞらない。理解の中心は講義本文に置く。
@@ -95,22 +97,23 @@ Category／Familyごとに全Requirementへ一度触れる。一度に扱うの�
 
 ## Required lecture structure
 
-各講義は必ず次の順で始める。
+各Section講義は必ず次の順で始める。
 
-### 1. Normative Requirement
+### 1. Normative Requirements
 
-- Versioned Requirement ID。
-- AISVS Verification Level。
-- AISVSの英語原文。
-- 意味を崩さない日本語訳。
+- Section ID、Section title、対象Source version。
+- Section内の全Versioned Requirement ID。
+- 各RequirementのAISVS Verification Level。
+- 各RequirementのAISVS英語原文。
+- 各Requirementの意味を崩さない日本語訳。
 
 短いRequirement単位の引用としてSourceと固定Revisionを示す。Research pageやChapterを
 大量にコピーしない。
 
-### 2. Categoryにおける位置づけ
+### 2. CategoryにおけるSectionの位置づけ
 
-Category全体の中で何を扱うRequirementか、隣接するAuthentication、Authorization、
-Isolation、Integrity、Detection等とどう異なるかを説明する。
+Category全体の中でSectionが何を扱い、Section内の各Requirementが保証をどう分担するか、
+隣接するAuthentication、Authorization、Isolation、Integrity、Detection等とどう異なるかを説明する。
 
 ### 3. Security ObjectiveとScenario
 
@@ -145,9 +148,10 @@ Enforcement Pointが決定論的に守るかを説明する。
 Requirementが保証しない事項を明示する。Security best practiceとして推奨する内容を
 NormativeなPass条件へ暗黙に追加しない。
 
-### 9. 本質と短い対話
+### 9. Sectionの本質と短い対話
 
-Security責任者として持ち帰る設計原則をまとめ、その後に原則2〜3問だけ行う。
+Security責任者としてSection全体から持ち帰る設計原則をまとめ、その後に原則2〜3問だけ行う。
+各Requirementを一問ずつ試験する方式には戻さない。
 
 ## Persistent learning note
 
@@ -176,25 +180,25 @@ Security責任者として持ち帰る設計原則をまとめ、その後に原
 
 ### Minimum persistent structure
 
-Requirementごとの永続ノートには、少なくとも次を含める。
+Sectionごとの永続ノートには、少なくとも次を含める。
 
 1. 文書の役割とSource separation。
-2. Normative Requirementと日本語訳。
-3. Categoryにおける位置づけ。
+2. Section内の全Normative Requirement、Level、日本語訳。
+3. CategoryにおけるSectionの位置づけと、Requirement間の分担。
 4. Security Objectiveと具体Scenario。
 5. 用語。
 6. Threat ModelとAbuse Path。
 7. Security InvariantとEnforcement Point。
 8. Pass／FailとScope Calibration。
-9. 保証しない範囲と隣接Property。
+9. 各Requirementが保証しない範囲と隣接Property。
 10. 対話の再構成。
 11. このセッションから得られた洞察。
 12. 後から使える設計レビュー項目。
 13. Primary references。
 
 Human／Agent比較、CSRF等の一般Securityとの比較、Verification Levelの理由、特定Protocol
-の詳細などは、Requirementの理解に必要な場合だけ独立Sectionとして加える。すべての
-RequirementへC5.1.1固有のSectionを機械的に複製しない。
+の詳細などは、Sectionの理解に必要な場合だけ独立項目として加える。すべてのSectionへ
+C5.1.1固有の構成を機械的に複製しない。
 
 ## Derived insight rules
 
@@ -213,8 +217,8 @@ RequirementへC5.1.1固有のSectionを機械的に複製しない。
 
 ## Storage and naming
 
-個別の学習ノートは、対応するControlと同じ版付きRequirement Directoryへ配置する。
-内容は統合せず、Control本文と学習の役割を分ける。
+新しい学習ノートは、`docs/learning/`配下の版付きSection Directoryへ配置する。
+複数Requirementの講義を一つに統合するが、Control本文と学習の役割は分ける。
 
 ```text
 controls/
@@ -222,30 +226,34 @@ controls/
 │   └── cNN-family-slug/
 │       ├── README.md
 │       └── vX.Y-cN.N.N-descriptive-control-name/
-│           ├── README.md
-│           └── learning.md
+│           └── README.md
 └── docs/learning/
     ├── README.md
     └── cNN-family-slug/
-        └── README.md
+        ├── README.md
+        └── vX.Y-cN.N-section-slug/
+            └── learning.md
 ```
 
 - `controls/docs/learning/README.md`: 全Category共通の学習・永続化方針。
-- `docs/learning/`のFamily `README.md`: Requirement一覧、現在位置、軽量なChecklist、Family固有Source。
+- `docs/learning/`のFamily `README.md`: Section一覧、現在位置、軽量なChecklist、Family固有Source。
 - `control-records/`のFamily `README.md`: Category、Section、Requirementを「問うこと」と
   「できてはいけないこと」で辿り、個別Controlへ案内する俯瞰図。
 - Control `README.md`: 解釈・適用範囲・検証・証拠・限界の正本。Catalogはここを参照する。
-- `learning.md`: 一つの有益な学習セッションを再利用可能な講義として保存する。
-  Control本文とは相互リンクし、内容や成熟度を一体化しない。
+- Section `learning.md`: 一つのSectionと全Requirementを、有益な学習セッションから
+  再利用可能な講義として保存する。関連Controlとは相互リンクし、内容や成熟度を一体化しない。
 
-Section単位のDirectoryや空のFamily placeholderを作らない。最初の学習Artifactができた
-ときだけ必要なDirectoryを作る。Requirement IDとSource VersionをDirectory名へ含め、
+空のSection DirectoryやFamily placeholderを作らない。最初の実質的な学習Artifactが
+できたときだけ必要なDirectoryを作る。Section IDとSource VersionをDirectory名へ含め、
 将来のVersionで過去の学習結果を上書きしない。
 
-学習ノートがないControlに空の`learning.md`を作らない。学習がControl整備に先行する場合も、
-空のControl本文やCatalog行は作らず、実在する学習ガイドへリンクする。両方が存在するように
-なった時点で相互リンクを追加する。Control評価では本文と上流資料、学習ではノートと対象要件・
-Researchを読み、学習からControlへの反映は独立した解釈・検証の変更として判断する。
+学習ノートのために空のControl本文やCatalog行を作らない。ControlとSection noteの両方が
+存在する時点で相互リンクを追加する。Control評価では本文と上流資料、学習ではSection noteと
+対象要件・Researchを読み、学習からControlへの反映は独立した解釈・検証の変更として判断する。
+
+旧方針で作成したC5/C9のRequirement単位`learning.md`は、対話と洞察を含む歴史的Artifactとして
+そのまま維持する。通常作業のついでに移動・結合しない。Section単位へ統合する場合は、参照Link、
+対話由来の洞察、Source versionを失わない明示的なMigrationとして行う。
 
 ### Family Control overview
 
@@ -271,22 +279,22 @@ Source Versionを明示し、Requirementの追加・変更時には意味の差�
 
 Family guideで管理する進捗は次だけとする。
 
-- 現在学習中のRequirement。
-- 各Requirementを一巡したかのChecklist。
-- 永続化したRequirement noteへのLink。
+- 現在学習中のSection。
+- 各Sectionを一巡したかのChecklist。
+- 永続化したSection noteへのLink。
 
 Session Log、Evidence、Reviewer identity、理解度Score、日付ごとのStatusは管理しない。
-学習完了は、学習者が次を自分の言葉で短く説明できた時点とする。
+Section学習の完了は、学習者が次を自分の言葉で短く説明できた時点とする。
 
-- Requirementの本質。
-- 具体的なPass／Failと理由。
-- Requirementだけでは保証しない範囲。
+- Section全体の本質とRequirement間の違い。
+- 代表的なPass／Failと理由。
+- 各Requirementだけでは保証しない範囲。
 
 ## Quality check
 
 永続ノートを完了する前に確認する。
 
-- 冒頭にRequirement ID、Level、英語原文、日本語訳がある。
+- 冒頭にSection IDと、全RequirementのID、Level、英語原文、日本語訳がある。
 - Normative、Research、Interpretation、Derived insightを混同していない。
 - Attacker Capability、Trust Boundary、Security Invariant、Enforcement Pointが具体的である。
 - Pass／FailをComponentの有無ではなくOutcomeで説明している。
@@ -306,12 +314,14 @@ Session Log、Evidence、Reviewer identity、理解度Score、日付ごとのSta
 ## Family learning guides
 
 - [C5：Access Control and Identity](c05-access-control-and-identity/README.md)
+- [C8：Memory, Embeddings & Vector Database Security](c08-memory-embeddings-and-vector-database-security/README.md)
 - [C9：Orchestration and Agentic Security](c09-orchestration-and-agentic-security/README.md)
+- [C10：Model Context Protocol (MCP) Security](c10-model-context-protocol-security/README.md)
 
 ## Reference learning note
 
+- [C8.1 Access Controls on Memory & RAG Indices：現行Section単位方式](c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices/learning.md)
 - [C5.1.1 Step-up Authentication：講義、対話、洞察](../../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
 
-このノートは共通方式の最初のReferenceである。内容を全Requirementへコピーするのでは
-なく、Source separation、Security視座、対話の保存、Scope Calibrationの深さを参考に
-する。
+C8.1は現行のSection単位方式のReferenceである。C5.1.1は旧Requirement単位方式だが、
+Source separation、Security視座、対話の保存、Scope Calibrationの深さを引き続き参考にする。

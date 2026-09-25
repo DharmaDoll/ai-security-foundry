@@ -6,9 +6,10 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 
 ## Current artifacts
 
-個別資料は`control-records/<family>/<versioned-requirement>/`にまとめる。
-`README.md`はControlの解釈・検証・証拠・限界の正本、任意の`learning.md`は具体例・用語・
-対話・洞察を含む学習ノートである。両者を相互リンクし、CatalogはControl本文を参照する。
+個別Controlは`control-records/<family>/<versioned-requirement>/README.md`に置き、
+解釈・検証・証拠・限界の正本とする。新しい学習コンテンツは
+`docs/learning/<family>/<versioned-section>/learning.md`にSection単位で置き、各Sectionの
+全Requirementを一つの講義として扱う。両者は必要時に相互リンクし、CatalogはControl本文だけを参照する。
 [Family README](control-records/c05-access-control-and-identity/README.md)は、Category、Section、
 Requirementを俯瞰して個別Controlへ辿るための入口である。
 [学習方針・進捗一覧](docs/learning/README.md)は従来どおり独立して管理する。
@@ -50,17 +51,77 @@ python3 controls/tests/test_validate_catalog.py
 ```
 
 The current catalog contains metadata and substantive documents for all 11 C5
-Requirements and all 34 C9 Requirements (45 Controls). `verification_level` records AISVS Level 1, 2, or 3; it is distinct
-from repository Control maturity. All 45 substantive
+Requirements, all 11 C8 Requirements, all 34 C9 Requirements, and all 23 C10 Requirements (79 Controls).
+`verification_level` records AISVS Level 1, 2, or 3; it is distinct from repository
+Control maturity. All 79 substantive
 Controls are `verifiable`, the current target for a mature repository Control. This
 describes the artifacts, not a maintainer's learning progress or proof that a
 product implements them. No Engineering Pattern Mapping is asserted.
+
+## C8 development plan
+
+[C8の全体分析と着手順序](docs/c08-landscape.md)に、全3節・11要件の保証範囲と
+Researchからの注意点を整理した。C8.1 Access Controls on Memory & RAG Indicesの3要件に加え、
+C8.2 Embedding Sanitization & Validationの5要件を`verifiable`まで整備した。C8.2では、Sensitive Fieldの
+Pre-embedding処理、Vector異常のProduction投入前検疫、Source検証を伴うTrusted Memory昇格、
+Retrieval操作ContentのVectorization前検査、既存Memoryとの矛盾Alertを別々の保証として扱う。
+C8.3 Memory Expiry & Revocationの3要件も`verifiable`まで整備し、期限切れのLogical Exclusion、
+宣言したScopeのMemory Reset、Forensic保持を伴うQuarantineを分離した。これによりC8全11要件の初期成熟化を完了した。
+
+[C8 Family overview](control-records/c08-memory-embeddings-and-vector-database-security/README.md)は、
+CategoryとSectionの保証境界、および整備済みRequirementへの入口を示す。
+
+| Requirement | Level | Control |
+|---|---:|---|
+| C8.1.1 | 1 | [Vector IDとNamespaceをTenantごとに一意・衝突不能にする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.1-tenant-unique-vector-identifiers-and-namespaces/README.md) |
+| C8.1.2 | 2 | [Document Metadata Tagを初回Write後に不変にする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.2-immutable-document-metadata-tags/README.md) |
+| C8.1.3 | 2 | [すべてのRetrieval OperationでScopeを強制する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.3-retrieval-scope-enforcement/README.md) |
+| C8.2.1 | 1 | [Sensitive FieldをEmbedding前に検出・変換・除外する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.1-sensitive-field-handling-before-embedding/README.md) |
+| C8.2.2 | 2 | [異常なVectorをProduction Index投入前に検疫する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.2-vector-anomaly-quarantine-before-production/README.md) |
+| C8.2.3 | 2 | [Agent／Tool OutputをSource検証なしにTrusted Memoryへ書かない](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.3-source-validated-trusted-memory-writes/README.md) |
+| C8.2.4 | 3 | [Retrieval操作用ContentをVectorization前に検出・拒否・検疫する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.4-retrieval-manipulation-screening-before-vectorization/README.md) |
+| C8.2.5 | 3 | [新規Memoryと既存Memoryの矛盾を検出しAlertする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.5-memory-contradiction-detection-and-alerting/README.md) |
+| C8.3.1 | 2 | [期限切れVectorをRetrieval結果から除外する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.1-expired-vector-retrieval-exclusion/README.md) |
+| C8.3.2 | 2 | [定義したMemory範囲を完全にResetできるようにする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.2-complete-memory-reset/README.md) |
+| C8.3.3 | 3 | [Quarantine Contentを保持しつつ全Retrieval結果から除外する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.3-quarantine-retention-and-retrieval-exclusion/README.md) |
 
 ## C10 development plan
 
 [C10の全体分析と着手順序](docs/c10-landscape.md)に、全4節・23要件の保証範囲と
 Researchからの注意点を整理した。最初の代表要件はC10.2.7（Level 2：受信Tokenの
-下流APIへの転送禁止）。個別Controlは未着手であり、Catalogの成熟度・件数には含めない。
+下流APIへの転送禁止）。この代表Controlを解釈・適用境界・脅威・正常/拒否試験・
+証拠期待値・限界まで整備し、Catalogへ`verifiable`で追加した。
+C10全4 Section・23要件を同じ成熟度まで整備した。C10.4ではSchemaと内容検査、ParameterとPayload、
+Response署名、Local導入同意、Tool定義変更を別々のPass／Failとして扱う。学習進捗および製品適合とは独立する。
+
+[C10 Family overview](control-records/c10-model-context-protocol-security/README.md)は、
+CategoryとSectionの保証境界、および整備済みRequirementへの入口を示す。
+
+| Requirement | Level | Control |
+|---|---:|---|
+| C10.1.1 | 1 | [MCP Componentを信頼済みSourceから取得し暗号的に検証する](control-records/c10-model-context-protocol-security/v1.0-c10.1.1-trusted-source-and-cryptographic-component-verification/README.md) |
+| C10.1.2 | 2 | [Allowlistで許可したMCP Serverだけを接続・実行する](control-records/c10-model-context-protocol-security/v1.0-c10.1.2-allowlisted-mcp-server-admission/README.md) |
+| C10.1.3 | 2 | [Local MCP Serverを最小権限Sandboxで実行する](control-records/c10-model-context-protocol-security/v1.0-c10.1.3-least-privilege-local-server-sandbox/README.md) |
+| C10.2.1 | 1 | [各RequestでAccess Tokenを検証する](control-records/c10-model-context-protocol-security/v1.0-c10.2.1-per-request-access-token-validation/README.md) |
+| C10.2.2 | 1 | [Issuer・Audience・Expiration・Scopeを検証する](control-records/c10-model-context-protocol-security/v1.0-c10.2.2-issuer-audience-expiration-and-scope-validation/README.md) |
+| C10.2.3 | 1 | [Access TokenとUser Credentialを永続化しない](control-records/c10-model-context-protocol-security/v1.0-c10.2.3-no-access-token-or-user-credential-persistence/README.md) |
+| C10.2.4 | 2 | [許可Scopeに応じてTool Discoveryを制限する](control-records/c10-model-context-protocol-security/v1.0-c10.2.4-scope-filtered-tool-discovery/README.md) |
+| C10.2.5 | 2 | [各InvocationでToolとArgumentを認可する](control-records/c10-model-context-protocol-security/v1.0-c10.2.5-per-invocation-tool-and-argument-authorization/README.md) |
+| C10.2.6 | 2 | [Session終了時にArtifactを除去する](control-records/c10-model-context-protocol-security/v1.0-c10.2.6-session-artifact-removal/README.md) |
+| C10.2.7 | 2 | [受信したClient Access Tokenを下流APIへ転送しない](control-records/c10-model-context-protocol-security/v1.0-c10.2.7-no-client-token-passthrough-to-downstream-apis/README.md) |
+| C10.3.1 | 1 | [Remote MCPに認証・暗号化済みStreamable HTTPを使う](control-records/c10-model-context-protocol-security/v1.0-c10.3.1-authenticated-encrypted-streamable-http/README.md) |
+| C10.3.2 | 1 | [stdioを管理されたLocal環境だけに限定する](control-records/c10-model-context-protocol-security/v1.0-c10.3.2-stdio-only-in-controlled-local-environments/README.md) |
+| C10.3.3 | 2 | [OriginとHostを独立に検証する](control-records/c10-model-context-protocol-security/v1.0-c10.3.3-independent-origin-and-host-validation/README.md) |
+| C10.3.4 | 2 | [最低MCP Protocol Versionを強制する](control-records/c10-model-context-protocol-security/v1.0-c10.3.4-minimum-mcp-protocol-version-enforcement/README.md) |
+| C10.3.5 | 3 | [Access Tokenを送信Clientへ拘束する](control-records/c10-model-context-protocol-security/v1.0-c10.3.5-sender-constrained-access-tokens/README.md) |
+| C10.4.1 | 1 | [Tool Responseを宣言Schemaで検証する](control-records/c10-model-context-protocol-security/v1.0-c10.4.1-validate-tool-responses-against-schemas/README.md) |
+| C10.4.2 | 1 | [Tool ResponseをIndirect Prompt Injection観点で検査する](control-records/c10-model-context-protocol-security/v1.0-c10.4.2-screen-tool-responses-for-indirect-prompt-injection/README.md) |
+| C10.4.3 | 1 | [未知・過大なFunction Parameterを拒否する](control-records/c10-model-context-protocol-security/v1.0-c10.4.3-reject-unrecognized-or-oversized-function-parameters/README.md) |
+| C10.4.4 | 2 | [Strict Server-side Schema Validationを強制する](control-records/c10-model-context-protocol-security/v1.0-c10.4.4-strict-server-side-schema-validation/README.md) |
+| C10.4.5 | 2 | [Transport Payload Sizeを制限する](control-records/c10-model-context-protocol-security/v1.0-c10.4.5-transport-payload-size-limits/README.md) |
+| C10.4.6 | 2 | [Tool Response署名でReplayを検出する](control-records/c10-model-context-protocol-security/v1.0-c10.4.6-signed-tool-responses-with-replay-protection/README.md) |
+| C10.4.7 | 2 | [Local Server導入前に明示同意を求める](control-records/c10-model-context-protocol-security/v1.0-c10.4.7-explicit-local-server-installation-consent/README.md) |
+| C10.4.8 | 3 | [Tool Definition変更後は再承認まで実行を止める](control-records/c10-model-context-protocol-security/v1.0-c10.4.8-tool-definition-change-reapproval/README.md) |
 
 ## C9 Control records
 
@@ -117,7 +178,9 @@ Categoryから各Requirementまでの保証範囲を短い問いで俯瞰でき�
   dialogue-reconstruction, insight, storage, and quality rules for every AISVS
   Category.
 - [AISVS C5 Access Control and Identity learning guide](docs/learning/c05-access-control-and-identity/README.md):
-  C5 Requirement sequence, lightweight progress, and persistent learning notes.
+  legacy Requirement sequence, progress, and persistent learning notes.
+- [AISVS C10 Model Context Protocol Security learning guide](docs/learning/c10-model-context-protocol-security/README.md):
+  current Section-based sequence for the four C10 lectures.
 - [AISVS C5 family overview](control-records/c05-access-control-and-identity/README.md):
   Category, Section, and Requirement-level questions and prohibited failure states.
 - [AISVS C9 family overview](control-records/c09-orchestration-and-agentic-security/README.md):
@@ -132,8 +195,13 @@ control-records/
 └── cNN-family-slug/
     ├── README.md
     └── vX.Y-cN.N.N-descriptive-control-name/
-        ├── README.md
-        └── learning.md  # optional
+        └── README.md
+
+docs/learning/
+└── cNN-family-slug/
+    ├── README.md
+    └── vX.Y-cN.N-section-slug/
+        └── learning.md
 ```
 
 For example, the Golden Control is stored under
@@ -141,13 +209,19 @@ For example, the Golden Control is stored under
 provide direct upstream traceability; the descriptive suffix keeps the security
 subject understandable without looking up the identifier.
 
-The family `README.md` is the navigation and assurance overview rendered by
+The Control family `README.md` is the navigation and assurance overview rendered by
 default in GitHub. Individual Requirement `README.md` files remain the canonical
 Control interpretations, and `catalog.yaml` points only to those individual files.
 
-Use only the family level as a directory boundary. Do not create section-level
-directories such as `c05.2/`, and do not create empty family directories. Create a
-family directory only with its first substantive Control.
+Section learning notes are revision-aware teaching artifacts. They cover all
+Requirements in one Section but do not replace the individual Controls. Existing
+C5/C9 Requirement-level notes are retained as legacy learning history and are not
+automatically moved or merged.
+
+Within `control-records/`, use only the family and versioned Requirement levels;
+do not create Section directories such as `c05.2/`. Versioned Section directories
+are used only under `docs/learning/` and only when a substantive lecture exists.
+Do not create empty family directories.
 
 The filesystem layout is a navigation aid. `catalog.yaml` remains authoritative for
 source version, lifecycle state, Verification Level, maturity, related Requirements, and

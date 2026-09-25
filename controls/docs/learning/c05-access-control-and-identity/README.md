@@ -10,14 +10,17 @@ last_updated: "2026-09-08"
 
 # AISVS C5 Access Control and Identity 学習ガイド
 
+> **Legacy learning layout:** C5は旧方針のRequirement単位で学習を完了している。
+> 既存ノートは対話と洞察を保持するため移動しない。将来再編する場合は、Source versionと
+> Linkを保った明示的MigrationとしてC5.1、C5.2、C5.3のSection単位へ統合する。
+
 ## 目的
 
 AISVS C5の各Requirementを、現場のIdentity、Authentication、Authorization、
 Classification、Tenant Isolationの設計判断に使える言葉で理解する。
 
-全Category共通の講義形式、Source separation、対話の永続化、Naming、Quality checkは
-[`../README.md`](../README.md)に従う。この文書ではC5固有のRequirement一覧、学習順、
-進捗、Sourceだけを管理する。
+全Category共通の現行方針は[`../README.md`](../README.md)に従う。この文書はC5で実施した
+旧Requirement単位の学習順、進捗、SourceへのNavigationを維持する。
 
 [C5 Family overview](../../../control-records/c05-access-control-and-identity/README.md)では、
 Category・Section・Requirementを「問うこと」と
