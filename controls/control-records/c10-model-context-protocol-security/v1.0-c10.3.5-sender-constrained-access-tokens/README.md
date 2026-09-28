@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 3
 
+学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.3.5`は、MCP ClientとServer間のAccess TokenをmTLSまたはDPoPでSender-constrainedに

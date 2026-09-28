@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
+学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.3.4`は、MCP Clientが許容可能な最低Protocol Versionを強制し、そのVersionを下回る

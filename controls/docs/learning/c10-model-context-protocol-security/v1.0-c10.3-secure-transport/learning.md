@@ -1,0 +1,165 @@
+---
+title: "AISVS C10.3 Secure Transport 学習ノート"
+document_kind: "section-learning-note"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+section_id: "C10.3"
+requirements:
+  - "v1.0-C10.3.1"
+  - "v1.0-C10.3.2"
+  - "v1.0-C10.3.3"
+  - "v1.0-C10.3.4"
+  - "v1.0-C10.3.5"
+last_updated: "2026-09-26"
+---
+
+# C10.3 Secure Transport
+
+## 1. 文書の役割とSource separation
+
+本書はAISVS v1.0 C10.3の全5 Requirementを、一つのMCP構成に沿って学ぶ講義と対話の再構成である。Control本文や製品適合評価の代替ではない。
+
+- **Normative:** 下表の要件原文とVerification Level。
+- **AISVS Research:** Remote／Local Transport、DNS Rebinding、Version Downgrade、盗難TokenのReplayについての脅威・検証例。Researchの製品や事例をそのまま適合条件にはしない。
+- **Repository interpretation:** 接続経路、HTTPの要求元と要求先、Version交渉、Tokenの提示者を、それぞれ検証可能な境界として扱う。
+- **Derived insight:** 補完策によるリスク低減とRequirementのPass／Failを分ける。互換性のための自動Downgradeは、設定したVersion下限を無効にする。
+
+## 2. Normative Requirements
+
+| ID | Level | AISVS English | 日本語訳 |
+|---|---:|---|---|
+| `v1.0-C10.3.1` | 1 | Verify that authenticated, encrypted streamable HTTP is used for MCP transport for remote services. | Remote MCP Serviceには、認証され暗号化されたStreamable HTTPを使うことを確認する。 |
+| `v1.0-C10.3.2` | 1 | Verify that stdio transport is permitted only in controlled local environments. | stdio Transportを許すのは、管理されたLocal環境だけであることを確認する。 |
+| `v1.0-C10.3.3` | 2 | Verify that MCP servers validate both the Origin header and the Host header independently on all HTTP-based transports to prevent DNS rebinding attacks. | すべてのHTTPベースのMCP Transportで、DNS Rebinding防止のためOriginとHostをそれぞれ独立に検証することを確認する。 |
+| `v1.0-C10.3.4` | 2 | Verify that MCP clients enforce a minimum acceptable protocol version and reject initialize responses that propose a version below that minimum. | Clientが許容する最低Protocol Versionを強制し、それ未満を提案する初期化応答を拒否することを確認する。 |
+| `v1.0-C10.3.5` | 3 | Verify that access tokens between the MCP client and server are sender-constrained using mTLS or DPoP. | ClientとServer間のAccess Tokenを、mTLSまたはDPoPで送信者へ暗号的に結び付けることを確認する。 |
+
+正本は[固定RevisionのC10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)である。LevelはAISVS Verification Levelであり、学習難度やControl maturityではない。
+
+## 3. C10における位置づけ
+
+C10.1は導入するComponentの信頼と実行権限、C10.2はCallerとToolの認証・認可、C10.3は通信経路・接続先・Protocol Version・Token提示者を扱う。C10.4はMessageやContentの検証を扱う。
+
+C10.3の五つの問いは、順に「Remote通信は保護されるか」「stdioを使う場所は管理できるか」「HTTPは想定した要求元・要求先か」「Clientは許可したVersionを維持するか」「盗まれたTokenだけで別の送信者が利用できるか」である。
+
+## 4. Concrete Scenario
+
+社内AgentはCloud上のRemote MCP Serverと、開発者PCで起動するLocal Filesystem MCP Serverを使う。Remote Serverには社内Dataの参照Tool、Local ServerにはWorkspaceのFile Toolがある。さらにLocal Serverは任意でLoopback HTTP Endpointも提供する。
+
+攻撃者はNetwork経路、悪意あるWebサイト、古いServer、流出したAccess Token、変更可能なLocal起動設定のいずれかを利用する。Remoteで平文通信があれば内容を盗聴・改ざんできる。Local stdio起動設定を遠隔から変更できれば、そのPC上で別Commandを実行できる。BrowserからLoopback HTTPへ届く場合、HostまたはOriginの検証漏れがDNS Rebindingの入口になる。
+
+## 5. 用語
+
+- **Streamable HTTP:** MCPのHTTP Transport。POST／GETを使い、必要に応じてServer-Sent Eventsで応答を流す。Remote利用時は暗号化と認証を組み合わせる。
+- **stdio:** ClientがServerを子Processとして起動し、標準入力・標準出力でMCP Messageを交換するTransport。起動Command自体が実行権限を持つ。
+- **Origin:** 主にBrowserでRequestを開始したWebサイトを表すHTTP Header。
+- **Host:** Requestの宛先を表すHTTP Header。HTTP/2等では相当するAuthorityも考慮する。
+- **DNS Rebinding:** 攻撃者のHost名の解決先をLocal／Private Addressへ変え、被害者Browserを通じて内部Serverへ届かせる攻撃。
+- **Version Floor:** Clientが許可する最低Protocol Version。Clientが旧Versionを実装していても、その環境で利用を許すとは限らない。
+- **Bearer Token:** 文字列の所持だけで利用できるAccess Token。TLSが通信路を保護しても、別経路で盗まれれば再利用され得る。
+- **Sender-constrained Token:** TokenをClientの証明書または鍵へ結び付け、提示時にその鍵の所持も確認する方式。
+
+## 6. Threat ModelとAbuse Path
+
+```text
+Remoteで平文・無認証のMCP接続 → Tool引数／応答／Credentialの露出・改ざん
+管理外からstdioのcommand／argsを登録 → Client Hostの権限で任意Processを起動
+攻撃者サイトのDNSがLoopbackを指す → Host／Originの検証漏れ → Local Toolへ到達
+Serverが旧Versionを返す → Clientが自動Fallback → 設定したSecurity Baselineを迂回
+MCP向けTokenを窃取 → 別Clientが自分のmTLS証明書で接続 → Token BindingがなければReplay
+```
+
+LocalhostへのBind、TLS、Caller認証、Version対応、Client証明書はそれぞれ有益だが、検証している性質が異なる。
+
+## 7. Security InvariantとEnforcement Point
+
+| 要件 | 守る性質 | 決定論的な強制地点 |
+|---|---|---|
+| C10.3.1 | RemoteのすべてのMCP通信Hopが適切に暗号化・認証され、想定したTransportを使う。 | ClientのTransport Policy、TLS検証、Gateway／ServerのRequest認証。 |
+| C10.3.2 | stdio起動設定を管理外の主体が指定・変更し、任意Commandを実行できない。 | MCP HostのLocal Launcher、起動設定のAdmission、OS実行権限。 |
+| C10.3.3 | HTTP Endpointが、OriginとHostを独立に許可した場合だけRequestを処理する。 | 信頼できるHTTP EdgeとServerのRequest Gate。 |
+| C10.3.4 | Server応答がVersion Floor未満なら、ClientはOperational Stateへ進まない。 | ClientのInitialize State MachineとFallback経路。 |
+| C10.3.5 | Token単体を盗んだ別送信者はMCP Resourceを利用できない。 | 発行時のKey／Certificate Bindingと、Resource Serverの提示時検証。 |
+
+## 8. Pass／Failと保証範囲
+
+| 観測 | 判定 | 理由 |
+|---|---|---|
+| Remote ServerへStreamable HTTPを使い、全HopでTLSとCaller認証を強制する | C10.3.1 Pass候補 | 平文・無認証の経路を残さない。 |
+| Remote通信でTLS終端後のBackend Hopを平文・無認証で通す | C10.3.1 Fail候補 | 実際の通信経路全体を評価する必要がある。 |
+| stdio設定を管理されたLocal Launcherだけが変更・起動できる | C10.3.2 Pass候補 | 管理外の主体にLocal Processを起動させない。 |
+| Network公開の設定APIが任意のstdio `command`を受け付ける | C10.3.2 Fail | Local実行権限を遠隔から操作できる。 |
+| Loopback HTTPでTokenとOriginは検証するがHostを検証しない | C10.3.3 Fail | 補完策は有益でも、独立したHost検証が欠ける。 |
+| ClientがVersion Floor未満の初期化応答で接続を中止する | C10.3.4 Pass候補 | 許可しないVersionへ進まない。 |
+| ClientがRead-onlyを理由にVersion Floor未満へ自動Fallbackする | C10.3.4 Fail | 権限を絞ってもVersion下限の強制にはならない。 |
+| mTLSを使うが、Tokenは証明書に結び付かず別の証明書で再利用できる | C10.3.5 Fail | 接続の認証とTokenのSender Constraintは別。 |
+| TokenをCertificate／Keyへ結び付け、別Key・Proof欠落・Replayを拒否する | C10.3.5 Pass候補 | Token文字列だけでは利用できない。 |
+
+C10.3.3のPass／Failと、補完策を考慮した製品リスクの受容は別の記録である。Originがない非Browser Requestの扱い、ProxyによるHost書換え、直接Backend接続は設計と試験で明確にする。
+
+C10.3.4は特定のVersion値をRepository全体へ一律に指定しない。以下の`2025-06-18`は学習用の例であり、旧Versionが常に危険だという主張ではない。Floorの選定・変更は互換性とSecurity要件に基づくOwner判断とする。
+
+C10.3.5のmTLSではClient証明書を要求するだけでなく、その証明書とTokenのBindingを一致させる。DPoPではTokenと鍵のBindingに加え、Request固有Proofの署名、Method、URI、鮮度、Replayを検証する。二方式の同時導入は要件ではない。通常のBearer Tokenを使う接続でのTLS、短い期限、狭いScopeはリスクを下げるが、Token単体の窃取後Replayを防ぐ保証にはならない。[RFC 8705](https://www.rfc-editor.org/rfc/rfc8705.html)、[RFC 9449](https://www.rfc-editor.org/rfc/rfc9449.html)
+
+## 9. 対話の再構成
+
+### 問い1：Localhost、Token、OriginはあるがHostがない
+
+**Scenario:** Local MCP Serverは`127.0.0.1`でHTTPを待ち受け、各RequestのTokenとOriginを検証するがHostは検証しない。
+
+**学習者の判断:** C10.3.3はFail。ただし、ほかの条件でリスクは下がるので「条件付きPass」と考えた。
+
+**整理:** リスク低減という判断は妥当。ただしC10.3.3はOriginとHostの独立検証を明示しているため、Requirement判定はFail。製品として補完策による残余リスクを受容するかは、別の意思決定として記録する。Negative Testでは有効Tokenで「許可Origin・未許可Host」を送り、Host Gateそのものが拒否するか確かめる。
+
+### 問い2：mTLS接続だがTokenはCertificate-boundではない
+
+**Scenario:** GatewayはClient証明書を要求する。しかしAccess Tokenは通常のBearer Tokenであり、別の有効なClient証明書からも再利用できる。
+
+**学習者の判断:** C10.3.5はFail。Bearer Tokenをやめた方がよいのでは、と疑問を示した。
+
+**整理:** 正しい。mTLS Client認証とmTLS Certificate-bound Tokenは異なる。高い保証が必要ならmTLSによるToken BindingかDPoPを選び、別KeyでのReplayを拒否する。Bearer方式を使う場合もTLS、短い期限、狭いScope等でリスクを下げられるが、Token単体のReplayリスクは残る。必要なAssurance Levelと運用能力に応じて選ぶ。
+
+### 問い3：ServerがVersion Floor未満を返す
+
+**Scenario:** Clientの最低Versionは例として`2025-06-18`。Serverは`2025-03-26`を返す。Clientは旧Versionにも対応しており、Read-only Toolに限って自動的に続行する。
+
+**学習者の疑問:** 判断が難しい。Serverに合わせるしかないのではないか。
+
+**整理:** C10.3.4ではFail。Clientは、実装上対応していても設定したFloor未満を拒否する。接続が必要ならServerを更新するか、Ownerが互換性とSecurity影響を評価してFloorを明示的に変更する。Read-onlyへの制限はリスクを減らし得るが、Version下限を守ったことにはならない。
+
+## 10. このSectionから得る設計判断
+
+> 通信を守るには、暗号化、相手・Callerの認証、接続先Header、Version交渉、Token提示者を、それぞれの強制地点で評価する。
+
+> 補完策で残余リスクを受容できても、欠けたRequirementをPassへ読み替えない。
+
+> Clientが旧Versionを実装できることと、現在のDeploymentで利用を許可することは別である。
+
+これらはRepository interpretationと今回の対話に基づく洞察であり、AISVSの追加要件ではない。
+
+## 11. 設計レビューの問い
+
+- Remoteの全MCP経路はStreamable HTTPを使い、TLSとRequest認証を維持するか。
+- stdioのExecutable、Arguments、Environment、Working Directoryを誰が変更・起動できるか。
+- HTTP EndpointはOriginとHostを独立に評価し、片方が不許可なら処理前に拒否するか。
+- ClientはVersion Floor未満の初期化応答と自動Fallbackを拒否するか。
+- mTLSまたはDPoPを使う場合、Token発行時のBindingと提示時のKey所持確認がつながるか。
+- Proxy、Retry、Reconnect、Certificate Rotation、Browser以外のClientでも同じ境界を守るか。
+
+## 12. ControlへのLink
+
+- [C10.3.1 Remote Streamable HTTP](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.3.1-authenticated-encrypted-streamable-http/README.md)
+- [C10.3.2 Controlled Local stdio](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.3.2-stdio-only-in-controlled-local-environments/README.md)
+- [C10.3.3 Origin・Host検証](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.3.3-independent-origin-and-host-validation/README.md)
+- [C10.3.4 Minimum Protocol Version](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.3.4-minimum-mcp-protocol-version-enforcement/README.md)
+- [C10.3.5 Sender-constrained Token](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.3.5-sender-constrained-access-tokens/README.md)
+
+## 13. References
+
+- [AISVS v1.0 C10 Normative Requirements](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)
+- [AISVS v1.0 C10.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C10-MCP-Security/C10-03-Secure-Transport.md)
+- [MCP Transport仕様（2025-06-18）](https://modelcontextprotocol.io/specification/2025-06-18/basic/transports)
+- [RFC 8705: mTLS Certificate-bound Access Tokens](https://www.rfc-editor.org/rfc/rfc8705.html)
+- [RFC 9449: DPoP](https://www.rfc-editor.org/rfc/rfc9449.html)

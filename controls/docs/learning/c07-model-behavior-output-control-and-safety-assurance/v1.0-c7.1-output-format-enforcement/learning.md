@@ -1,0 +1,96 @@
+---
+title: "C7.1 Output Format Enforcement：Model出力を完成済みデータと決め付けない"
+document_kind: "section-learning-note"
+source_version: "1.0"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+last_updated: "2026-09-27"
+---
+
+# C7.1 Output Format Enforcement
+
+## Normative Requirements
+
+[AISVS v1.0固定版の英語原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md)を正本とする。以下は日本語要約であり、原文の大量転載は避ける。
+
+| ID | Level | 要約 |
+|---|---:|---|
+| v1.0-C7.1.1 | 1 | アプリが全Model出力を定義済みSchemaで検証し、不一致を拒否する。 |
+| v1.0-C7.1.2 | 1 | Model出力に長さ制限と終了制御を設ける。 |
+
+## 文書の役割と保証の分担
+
+Normativeは上記原文。Researchは切断、形式制約、検証例等の補足。以下の実装手順とScenarioはRepository interpretation、対話から得た原則はDerived insightとして扱う。
+
+C7.1は出力の形式・長さ・終了、C7.2は信頼性、C7.3は安全性、C7.4は出典を扱う。学習完了でControl本文・Catalog・Mapping・製品適合を変更しない。[Family guide](../README.md)へ戻る。
+
+## Scenario・Threat Model
+
+サポートAgentがUserの問い合わせから、titleとpriorityを含むチケット作成用JSONを生成する。攻撃者は問い合わせ文を選べ、Modelに余分な項目・不正な値・過大な出力を生成させようとする。Modelも悪意なしに形式を誤り得る。
+
+保護対象は後続APIの処理、チケットDataの完全性、処理資源。Trust BoundaryはModelからアプリ、アプリからAPI、アプリからUser表示。正常なJSONも信頼できる命令とは限らない。
+
+## 用語・実装イメージ
+
+- JSON：データを表現する形式。解析できることは受け入れ条件を満たすことと別。
+- Schema：必須項目、型、許可値、長さ、追加項目の扱い等を定める規則。
+- Streaming：応答を完成前から少しずつ受信・配信する方式。内部受信とUser公開を区別する。
+- 終了状態：正常完了、上限による打ち切り、切断等の違い。
+
+例：titleは必須文字列・最大200文字、priorityはlow/normal/high、追加項目は禁止とする。
+
+```text
+Model応答
+  → 終了状態の確認
+  → JSON解析
+  → Schema検証
+  → 業務ルール・認可
+  → チケット作成API
+```
+
+アプリの受入れ判定が決定論的なEnforcement Point。Schema検証はライブラリを利用できる。生成時の形式制約も補助になるが、業務上の意味や認可を保証しない。
+
+Security Invariantは「Schema不一致を後続処理へ渡さない」「不完全な操作内容を推測で補って実行しない」。後者の具体的な扱いはResearchとRepository解釈による補足で、C7.1.2の原文へ勝手に条件を追加しない。
+
+## Pass／Fail・Negative tests
+
+- Fail（7.1.1）：JSON解析だけでpriority=urgentや余分なexecute_command項目を通す。
+- Passの例（7.1.1）：定義したSchema不一致をアプリが拒否する。正しい形式でも認可は別途必要。
+- Fail（7.1.2）：出力が無制限で終了制御がない。
+- 別の処理上の問題：上限で生成は停止しても、途中JSONを推測で補い実行する。
+- テスト：欠損・型違い・追加項目・長すぎる値を拒否する。上限到達・切断・Streamingキャンセル時に未完成のTool要求を実行しない。正常な完成出力は受け付ける。
+- 正常系：文章中の許可文字、許可値、境界長の入力が不必要に拒否されない。
+
+## Streamingの評価
+
+| 構成 | 観点 |
+|---|---|
+| 内部で受信し、完成・検証後に公開 | Streaming受信と検証を両立できる。 |
+| 部分検査後に表示 | 全文検証とは別。各検査が何を保証するか確認する。 |
+| 表示後に全文検査 | 既に開示した内容を取り消せない。 |
+| 未完成Tool引数からAPI実行 | 検証前に副作用が発生する。 |
+
+全文Schema適合等は断片だけで完了できない。表示前の有害性・機密性検査の不足は、7.1だけでなく7.3やC5の関連保証を別々に評価する。Streamingという方式だけで不適合と断定しない。
+
+## 対話の再構成
+
+1. 問い：JSONとして解析できれば、そのままAPIへ渡せるか。学習者：「Fail」。整理：解析とSchema適合は別。
+2. 問い：上限で切れたJSONを推測補完して実行してよいか。学習者：「No」。整理：処理全体の安全性を否定した回答。長さ・終了制御自体が成立している可能性とは区別する。
+3. 質問：「アプリのロジックで検証するのが基本か」。整理：受入れはアプリで強制。ライブラリとModel側の形式制約を併用できる。型・業務条件・認可は別々に確認。
+4. 質問：「Streamingアプリは出力検証していないと判断してよいか」。訂正：Streamingの有無だけでは判断できない。何を、いつ、どの境界の前に検証するかを見る。
+
+## Derived insights・レビュー項目
+
+> Modelには正しい形で作らせる。アプリは受け入れてよいか確認する。
+
+> 検証前の出力が、取り消せない境界を越えているかを見る。
+
+- Modelへの指示だけを形式保証と扱っていないか。
+- 検証失敗後の補完や再生成が未検証実行を生まないか。
+- 再生成の回数・資源を制限し、新しい出力を検証しているか。
+- 正常終了と打ち切りを識別できるか。
+- Streamingで公開・実行する時点と、検証完了時点を説明できるか。
+- Schema適合を回答の正確性・認可と混同していないか。
+
+## References
+
+- [C7.1 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-01-Output-Format-Enforcement.md)

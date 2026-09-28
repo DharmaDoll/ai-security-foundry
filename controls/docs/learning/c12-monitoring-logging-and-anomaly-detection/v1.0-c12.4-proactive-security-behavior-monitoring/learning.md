@@ -1,0 +1,108 @@
+---
+title: "AISVS C12.4 Proactive Security Behavior Monitoring 学習ノート"
+document_kind: "section-learning-note"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+section_id: "C12.4"
+requirements:
+  - "v1.0-C12.4.1"
+  - "v1.0-C12.4.2"
+  - "v1.0-C12.4.3"
+last_updated: "2026-09-26"
+---
+
+# C12.4 Proactive Security Behavior Monitoring
+
+## 1. 文書の役割とSource separation
+
+本書はC12.4の全3 Requirementを、自律的な送金提案と緊急停止のScenarioで学ぶ講義・対話の再構成である。Control本文や製品適合の証拠の代替ではない。
+
+- **Normative:** 固定Revisionの下表のRequirementとVerification Level。
+- **AISVS Research:** 自発的な行動の評価、承認と操作の相関、停止・上書きの監査を補足する。製品や統計値、Gateway方式を必須条件にしない。
+- **Repository interpretation:** 行動の起動・Policy判断・承認・実行結果を結合し、停止指示と実際の停止を別Eventとして追う。
+- **Derived insight:** 学習者は振る舞いの理由・根拠の不足を指摘し、記録要件と停止制御が別評価であることを確認した。
+
+## 2. Normative Requirements
+
+| ID | Level | AISVS English | 日本語訳 |
+|---|---:|---|---|
+| `v1.0-C12.4.1` | 2 | Verify that autonomous action triggers include proactive behavior-pattern analysis, security evaluation, and threat-landscape assessment. | 自律的な行動の起動に、自発的な行動Patternの分析、Security評価、脅威状況の評価が含まれることを確認する。 |
+| `v1.0-C12.4.2` | 2 | Verify that audit logs capture security-critical proactive actions, including approver identity, timestamp, action parameters, and decision outcomes. | Security上重要な自発的操作を、承認者Identity、時刻、操作Parameter、判断結果とともに監査Logへ記録することを確認する。 |
+| `v1.0-C12.4.3` | 2 | Verify that kill-switch activations and override commands are logged. | 緊急停止の発動と、制御を上書きする指示を記録することを確認する。 |
+
+正本は[固定版のC12要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)である。
+
+## 3. Sectionの位置づけと用語
+
+**Proactive**は、その場のUser指示への応答だけでなく、ScheduleやEventを契機にAgentが自ら行動を始めること。**Trigger**はその起動契機、**Override**は停止・制限等を例外的に上書きする指示である。
+
+C12.4.1は行動起動時の分析・評価、C12.4.2は重要操作と承認判断の監査、C12.4.3は停止・上書き指示の記録を分担する。現在の脅威状況の評価に、毎回の外部Threat Feed検索や特定製品を必須と解釈しない。
+
+承認なしの実行を阻止する保証は主にC9.2、実際に停止を強制する保証はC9.6で扱う。C12.4の記録が存在しても、それらの実行制御が有効とは限らない。
+
+## 4. Concrete ScenarioとThreat Model
+
+夜間Scheduleで取引Dataを調べるAgentが、取引先への送金を提案した。承認Gateは担当者の拒否を受け、送金を実行しなかった。しかしLogには「送金なし」しか残らない。
+
+攻撃者が取引DataやTool Responseを操作できれば、正規のScheduleを使って危険な提案を誘発できる。侵害Agentの自己申告だけを記録すると、提案した送金先・金額や起動根拠を隠すこともできる。重要なTrust Boundaryは、入力Data→Agentの提案、提案→Policy／承認Service、承認→実行Tool、各Component→独立したAudit Storeである。
+
+守る対象は資金、承認者の説明責任、操作と判断の結合、Incident調査の証拠である。Agentの自由形式の思考過程を丸ごと保存することと、信頼できる起動・Policy・承認Evidenceを残すことは同じではない。
+
+## 5. Security InvariantとEnforcement Point
+
+| 保証 | 地点と検証 |
+|---|---|
+| 起動時に行動Pattern、安全性、脅威Contextを評価する | Orchestrator／Policy層でTrigger、操作、評価結果を結び付ける。分析手法が完全な攻撃判定器とは主張しない。 |
+| 重要操作と承認判断を辿れる | 承認ServiceがTrusted Identity、時刻、Action ID、対象Parameter、判断結果を生成し、Toolの操作記録と相関させる。 |
+| 停止発動と上書き指示が失われない | Control Planeが指示Eventを記録する。停止受付・停止完了は別Eventで確認する。 |
+
+Parameterの機密性に応じてRedactionや権限制限された保管先を使う。誰が何を承認したかを照合できる情報まで消さない。
+
+## 6. Pass／FailとScope Calibration
+
+| 観測 | 判定 |
+|---|---|
+| Scheduleだけで起動し、行動Pattern・Security・脅威Contextの評価を一切行わない | C12.4.1 Fail候補。 |
+| 送金を拒否したが、「送金なし」のLogしかない | C12.4.2 Fail。承認者、時刻、送金先・金額、判断結果を再構成できない。 |
+| 拒否判断と対象ParameterをTrusted Identity・時刻とともに記録する | C12.4.2 Pass候補。承認Gateの強制とは別に評価する。 |
+| 緊急停止の発動を記録したが、待機中の仕事が続く | C12.4.3の記録はPass候補でも、停止制御に不備がある。 |
+| 緊急停止は実動するが、発動や再開Overrideの記録がない | 停止できてもC12.4.3はFail。 |
+
+Recordは操作の安全性を証明しない。操作Parameterが承認後に変わらない保証、停止の伝播、Audit Logの改ざん耐性も重要だが、それぞれの保証を記録の存在と混同しない。
+
+## 7. 対話の再構成
+
+### 問い1：拒否できたが「送金なし」しか残らない
+
+**学習者の判断:** 振る舞いの理由・根拠が分からない。
+
+**整理:** 起動契機、参照情報、Policyを辿れないことは実効性の問題である。さらにC12.4.2が明示する承認者、時刻、Parameter、判断結果がない。「送金なし」では承認による拒否、実行失敗、未実行を区別できない。自由形式の内部推論の保存を必須条件へ置き換えない。
+
+### 問い2：停止発動を記録したが待機中の処理は続く
+
+**学習者の確認:** 記録と実際の停止は別要件か。
+
+**整理:** 別に評価する。C12.4.3は発動・Overrideの記録、C9.6は停止制御を扱う。「指示を出した」「受け付けた」「実行が止まった」を分けると調査に役立つ。学習者が最初からPassと断定したやり取りではなく、Scopeを確認した対話として残す。
+
+## 8. このSectionの本質
+
+> 実行を止める保証と、その判断を後から説明できる保証は別である。
+
+> 「送金なし」や「停止ボタンを押した」だけでは、誰が何を判断し、何が実際に起きたかは分からない。
+
+これらはSourceの直接引用ではなく、対話を通じたRepositoryの解釈である。
+
+## 9. 設計レビューとNegative Test
+
+- Schedule、外部Event、Peer Agentなど対象Triggerごとに、行動Pattern・Security・脅威Contextを評価するか。
+- 拒否、承認、Timeout、取消し、Tool失敗で、承認者・時刻・Parameter・判断結果と操作Eventを結合できるか。
+- Agentが生成した承認者名を、Trusted Approval ServiceのIdentityの代わりに採用していないか。
+- 承認されたParameterと実行Parameterが異なる場合を、独立したEventの比較で発見できるか。
+- 停止と再開Overrideを試し、指示発行・受付・実際の状態を区別できるか。待機中処理や子Agentの停止はC9.6として別に検証するか。
+
+## 10. References
+
+- [AISVS v1.0 C12 Requirements](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)
+- [AISVS v1.0 C12.4 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-04-Proactive-Security-Behavior-Monitoring.md)

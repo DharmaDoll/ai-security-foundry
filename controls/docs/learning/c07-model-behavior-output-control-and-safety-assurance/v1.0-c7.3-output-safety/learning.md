@@ -1,0 +1,101 @@
+---
+title: "C7.3 Output Safety：公開・通信・実行の前に出力を扱う"
+document_kind: "section-learning-note"
+source_version: "1.0"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+last_updated: "2026-09-28"
+---
+
+# C7.3 Output Safety
+
+## Normative Requirements
+
+[AISVS v1.0固定版の英語原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md)を正本とする。ここでは大量転載せず、日本語要約を示す。LevelはAISVS Verification Levelであり、学習やControlの成熟度ではない。
+
+| ID | Level | 日本語要約 |
+|---|---:|---|
+| v1.0-C7.3.1 | 1 | 全回答を自動分類器で検査し、定義した有害内容に該当する回答を遮断する。 |
+| v1.0-C7.3.2 | 2 | System PromptやBackend Dataを漏らす回答を出力フィルタで検知・遮断する。 |
+| v1.0-C7.3.3 | 2 | Model出力を契機とする外向き要求を防ぐ。 |
+| v1.0-C7.3.4 | 3 | 似た文字、書式、Metadata、構造化項目等に隠れた・誤認を誘う内容を検査する。 |
+
+## Source separation・位置づけ
+
+Normativeは上記原文。Researchは攻撃経路・対策例・残余リスクの補足。以下の具体Scenario・技術案はRepository interpretation。対話から得た原則はDerived insightとして分ける。[Family guide](../README.md)へ戻る。学習の保存でControl本文、Catalog、Mapping、製品適合は変更しない。
+
+C7.1は形式と終了、C7.2は信頼性、C7.3は有害性・情報漏えい・自動通信・隠蔽、C7.4は出典と引用の整合性を扱う。C2入力検査やC5認可と置き換えない。
+
+## 具体Scenario・用語・Threat Model
+
+社内文書を要約するAgentがWeb UIへMarkdown回答を返す。攻撃者は取得文書へ指示を書き込み、Agentに機密情報をURLのQueryへ埋めたMarkdown画像を出力させる。Userには画像が表示されるだけでも、Browserが外部URLを自動取得する可能性がある。
+
+- Markdown：文章と画像・リンク等を記述する軽量な形式。表示時にはURLの取得などが起こり得る。
+- 出力分類器：回答が有害内容等へ該当するか推定する仕組み。検知精度は完全ではない。
+- CSP：Browserが読めるResource等を制限するHTTP Policy。表示設計を代替しない。
+- Sink：Model出力の行き先。画面、Tool引数、Log、Memory等では必要な制御が違う。
+- 不可視文字・類似文字：見た目と内部表現の違いを作る文字。正常な言語・絵文字にも必要なものがある。
+
+Trust BoundaryはModel出力からBrowser描画、Browserから外部サイト、Model出力からTool/API、社内Backend DataからUser。保護対象は機密情報、User、Tool権限、実行端末。Userに見えている本文だけでなく、URL・Metadata・構造化項目を確認する。
+
+## Security Invariant・Enforcement
+
+1. 検査前の危険な出力が公開・自動取得・実行を通じて取り消せない境界を越えない。
+2. Model出力だけを根拠に外向き通信や特権Tool操作を開始しない。
+3. 有害判定後の遮断をアプリで強制し、分類器の判定と公開処理を接続する。
+
+決定論的なEnforcement Pointは表示Rendererの許可機能、Browser／ServerのEgress制限、Tool実行認可、アプリの公開判定に分散する。Classifier/APIは意味上の危険を推定する補助で、完全な安全証明ではない。
+
+## 具体的な対策・検証例
+
+| 要件 | 対策例 | Negative test |
+|---|---|---|
+| 7.3.1 | 全公開経路を分類器経由にし、閾値超過を公開前に遮断。 | 危険と判定してもStreaming断片が先に表示されないか。 |
+| 7.3.2 | 不要なSecretをModelへ渡さず、出力中の内部情報を検査。 | 画面本文以外のURL・Streaming・Log等へ機密情報が漏れないか。元Data認可は別途検証。 |
+| 7.3.3 | 外部画像等の自動取得を無効化し、CSP・Egress制限を追加防御にする。 | 機密情報を含む画像URLでBrowser・Server・Toolの外向き通信が起こらないか。 |
+| 7.3.4 | 出力先ごとにUnicode、Markdown URL、未知JSON項目、Metadataを検査。 | 表示上無害な文面でも、Raw Dataや別Sinkで別の意味を持たないか。 |
+
+HTMLを使うなら適切なSanitizerが役立つが、Sanitize後に別の変換を加えると保証が崩れ得る。Sanitizerだけで画像の自動取得、意味分類、認可まで解決しない。Unicodeも一律削除ではなく、用途・言語・Sinkに応じて扱う。
+
+実装の小さな出発点は、自由なHTMLを避ける、Markdownで許す機能を絞る、自動的な外部Resource取得を止める、意味分類だけをAPIへ渡す、の組み合わせ。実装の正本はEngineering Pattern側で開発し、ここでは理解のための例として扱う。
+
+## Streamingと性能の保証境界
+
+内部でStreaming受信し、全文検査後に公開する方式は保証を説明しやすいが表示開始が遅れる。Chunk検査や非同期の事後検査は体感速度を改善し得るが、全文が必要な判定や既公開情報の回収を保証しない。外部Providerの機能・Version・対象経路も確認する。
+
+検査をすべて直列に積むことが要件ではない。決定論的な表示・通信制限と意味分類を役割分担させる。性能を測るなら同じWorkloadで初回表示、全体時間、P50/P95/P99、分類器の時間とCost、誤検知・見逃し、Timeout時の可用性を観測する。安全なFallbackとUXのトレードオフは用途ごとに決める。
+
+## Pass／Fail・Scope calibration
+
+- Fail（7.3.3）：フィルタが危険URLを検知する前に、画面描画が画像を取得している。
+- Fail（7.3.1）：危険判定をLogするだけで、同じ回答を公開する。
+- 7.3.2・7.3.3が重なる例：URLのQueryに機密情報があり、画面では見えないがBrowserが外部へ送る。表示本文の非表示は安全性を意味しない。
+- 別保証：検索・Toolの認可が不十分なら、出力フィルタだけでBackend Dataの漏えいを防げない。
+- Passの例：想定した表示・通信・実行経路で、危険判定後の遮断と自動外向き通信の抑止を実測する。他の未知攻撃の不存在までは主張しない。
+
+## 対話の再構成
+
+1. 問い：Markdownの画像URLが検査より先に取得される。学習者：「Fail」。整理：検出後に通信は取り消せない。
+2. 質問：「全回答を分類するにはどうするか」。整理：内部受信と公開を分離し、危険判定をアプリの遮断へ接続する。Streamingを無検査と同一視しない。
+3. 問い：本文に機密情報が見えなければ安全か。学習者：「言えない。外部URLに送信され得る」。整理：Model出力→Browser→外部サイトの境界で漏れる。URL中の機密情報と自動通信は別々に評価できる。
+4. 質問：「どう検査するか。ライブラリやAPIはあるか」。整理：Unicode、JSON、Markdown、意味分類を出力先別に扱う。製品選定だけで保証を主張しない。
+5. 所感：「性能が気になる。みんな本当に実装しているか。Engineeringで必ず扱いたい」。整理：普及率は断定しない。同期検査は遅延、非同期検査は公開前保証を弱め得る。実測対象として[Issue #5](https://github.com/DharmaDoll/ai-security-foundry/issues/5)へ登録。
+
+## Derived insights・レビュー項目
+
+> Modelの出力は読むための文章であると同時に、表示機能や後続処理を動かし得る入力でもある。
+
+> 見えていない情報でも、出力に埋め込まれ、別の仕組みが送信すれば漏えいする。
+
+- 公開前に必要な判定がすべて完了しているか。
+- Rendererによる画像・Link Preview・Font等の自動取得を把握したか。
+- URLの本文以外、構造化項目、Metadata、Streaming断片を検査したか。
+- 分類器障害時の公開Policyを明示したか。
+- Performanceと誤判定を同じWorkloadで測定したか。
+
+## References
+
+- [C7.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-03-Output-Safety-Privacy-Explainability.md)
+- [AWS Streaming Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-streaming.html)
+- [Microsoft Streaming Content Filtering](https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/content-streaming)
+- [Unicode UTS #39](https://unicode.org/reports/tr39/)
+- [DOMPurify](https://github.com/cure53/DOMPurify)

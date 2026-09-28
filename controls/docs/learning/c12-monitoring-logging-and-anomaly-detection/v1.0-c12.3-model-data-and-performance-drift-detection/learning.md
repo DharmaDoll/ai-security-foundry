@@ -1,0 +1,156 @@
+---
+title: "AISVS C12.3 Model, Data, and Performance Drift Detection 学習ノート"
+document_kind: "section-learning-note"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+section_id: "C12.3"
+requirements:
+  - "v1.0-C12.3.1"
+  - "v1.0-C12.3.2"
+  - "v1.0-C12.3.3"
+  - "v1.0-C12.3.4"
+last_updated: "2026-09-26"
+---
+
+# C12.3 Model, Data, and Performance Drift Detection
+
+## 1. 文書の役割とSource separation
+
+本書はAISVS v1.0 C12.3の全4 Requirementを、社内RAGの回答品質が変化したScenarioから学ぶ講義・対話の再構成である。製品適合の証拠やControl本文の代替ではない。
+
+- **Normative:** 固定Revisionの下表のRequirement原文とVerification Level。
+- **AISVS Research:** 入力分布の変化、Hallucination検知と時系列評価、想定内と説明不能な変化の区別を補足する。記載された製品、閾値、研究結果を適合条件にはしない。
+- **Repository interpretation:** 「モデルの異常」をモデルの重みだけで説明せず、Prompt、RAG、Memory、Cache、Provider Routing、検査器、Traffic構成の変化へ分解して調査する。
+- **Derived insight:** 学習者はMemory・Cache・RAG Dataの品質と、採用シーズンのような業務上のContextを原因候補として挙げた。変更履歴は原因の候補であって、想定内と判定する証拠そのものではないことを対話で整理した。
+
+## 2. Normative Requirements
+
+| ID | Level | AISVS English | 日本語訳 |
+|---|---:|---|---|
+| `v1.0-C12.3.1` | 1 | Verify that data drift detection monitors input distribution changes that may impact model performance, using statistically validated methods matched to the input data type (e.g., KS test or PSI for tabular numeric features, embedding-distance metrics for text or image). | Modelの性能に影響し得る入力分布の変化を、データ型に合う統計的に妥当性を確認した方法で監視することを確認する。例として、表形式の数値にはKS検定やPSI、Textや画像にはEmbedding距離のMetricが挙げられる。 |
+| `v1.0-C12.3.2` | 2 | Verify that hallucination detection monitors identify and flag model outputs that contain factually incorrect, inconsistent, or fabricated information. | 事実と異なる、矛盾する、または捏造された情報を含むModel出力をHallucination検知の仕組みが識別し、Flagを付けることを確認する。 |
+| `v1.0-C12.3.3` | 2 | Verify that hallucination rates are tracked as continuous time-series metrics to enable trend analysis and detection of sustained model degradation. | Hallucinationの割合を継続した時系列Metricとして追跡し、傾向分析と持続的なModel品質低下の検知を可能にすることを確認する。 |
+| `v1.0-C12.3.4` | 3 | Verify that unexplained behavioral shifts are distinguished from gradual, expected operational drift. | 説明できない振る舞いの変化を、緩やかで想定内の運用上の変化と区別することを確認する。 |
+
+正本は[固定RevisionのC12要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)である。
+
+## 3. C12における位置づけと要件の分担
+
+C12.1は何が起きたかを辿る記録、C12.2は攻撃や不審な行動の検知、C12.3は入力と出力の振る舞いの変化を継続的に観測する。変化は攻撃、障害、正規の季節性、製品改善のどれでも起こり得る。
+
+```text
+入力の分布が変わったか                         C12.3.1
+個々の出力で事実誤認・矛盾・捏造をFlagできるか   C12.3.2
+そのFlagの割合が継続して悪化していないか         C12.3.3
+変化の理由と想定範囲を説明できるか               C12.3.4
+```
+
+C12.3.2の検知結果は真実そのものではない。C12.3.3の時系列は、その検知器と対象母集団の定義が変われば比較しにくくなる。C12.3.4では、変更記録との時間的な一致だけで「想定内」と判断しない。
+
+## 4. Security ObjectiveとConcrete Scenario
+
+社内RAG Assistantで「根拠のない回答」とFlagされた割合が、先週の5%から今週15%へ上がった。表示されるModel名は同じである。前後の期間に、文書Indexの更新、Cacheの入替え、Memoryの蓄積、Prompt修正、採用シーズンの質問増加があり得る。Flagを付ける検査器自体も変更されたかもしれない。
+
+保護対象は、回答を信頼して判断するUser、根拠として提示する社内文書、意思決定の正確性、調査可能性である。誤った回答が後のAgent行動や別のMemoryへ取り込まれれば、影響は一回の回答に留まらない。
+
+最初の問いは「Modelが劣化したか」ではなく、**何が、どの質問群で、いつから変わったか**である。同じ質問集合を両期間で評価できるなら、Traffic構成の変化とSystem側の変化を分ける手掛かりになる。
+
+## 5. 初見の用語
+
+- **Drift:** 入力や出力の分布・振る舞いが時間とともに変わること。攻撃や品質低下を直接意味しない。
+- **Input Distribution:** どの種類・言語・長さ・Topicの質問が、どの割合で入ってくるか等の分布。
+- **KS検定／PSI:** 数値Dataの分布差を見る方法の例。異なるData型へ無批判に流用しない。
+- **Embedding Distance:** Text等を数値Vectorとして表した結果の距離。Encoderや前処理を変えると距離の意味も変わり得る。
+- **Hallucination:** 事実誤認、矛盾、根拠のない捏造を含むModel出力を指す。RAGのSourceに忠実かと、世界の事実として正しいかは別の問いである。
+- **Flagged Rate:** 検査器に問題ありと判定された割合。真の誤回答率そのものとは限らない。
+- **Slice:** Tenant、Language、機能、質問Topic等で分けた部分集合。全体平均が安定しても、重要な一部だけ悪化することがある。
+- **Expected Drift:** 事前または事後の証拠で、範囲と原因を説明できる運用上の変化。変更記録が存在するだけでは足りない。
+
+## 6. Threat ModelとAbuse Path
+
+攻撃者はRAGへ入る文書、質問Traffic、Memoryへ書かれるContent、あるいは一部の設定を操作できる可能性がある。攻撃者がいなくても、正規の文書更新やProvider側の変更で同じ観測値が動く。
+
+```text
+悪性文書がIndexへ混入 → 特定Topicの回答だけが変化 → 全体平均では見えない
+古いCache／汚染Memoryを参照 → Model名は同じでも回答が不正確になる
+検査器のVersion変更 → Flag率が上昇 → 真の誤回答率の上昇と誤解する
+季節性のある質問増加 → Input分布が変化 → 攻撃や品質低下と即断する
+```
+
+主なTrust Boundaryは、外部またはUser提供Data→Index／Memory、Index／Cache→Model Context、Model出力→検査器、検査器のMetric→運用判断である。検査器の判断を、Model出力の正しさや認可の証明に昇格させない。
+
+## 7. Security InvariantとEnforcement Point
+
+| 対象 | 守る性質 | 設計・検証地点 |
+|---|---|---|
+| C12.3.1 | 重要な入力の傾向変化を、Data型に合う方法と固定したReference Windowで観測する。 | Ingress Telemetry、Data型ごとのDrift Job、BaselineとEncoder／前処理のVersion管理。統計的検知は完全ではない。 |
+| C12.3.2 | 事実誤認・矛盾・捏造の代表例を検知・Flagし、元Responseへ辿れる。 | Output EvaluatorとTraceの相関。検査器の判定を無条件の真実と扱わない。 |
+| C12.3.3 | 分子・分母・Sampling・検査器Versionが分かる時系列としてFlag率を追う。 | Metrics Pipeline、Version別集計、Dashboard／Alert。 |
+| C12.3.4 | 想定内との分類には、変化の範囲・時期・原因を裏付ける証拠を要する。 | Change／Deployment記録との相関、対象Sliceの再評価、人によるTriageとDisposition。 |
+
+Event生成、Version付け、集計、比較条件は決定論的に設計できる。一方、統計的な差とHallucination判定そのものは不確実であり、Security上の最終判断には検証が必要である。
+
+## 8. Pass／FailとScope Calibration
+
+| 観測 | 判定 | 理由 |
+|---|---|---|
+| 表形式の数値Inputだけを監視し、主要なText質問の変化を見ない | C12.3.1 Fail候補 | 対象InputのData型に合う監視が欠ける。 |
+| 数値には検証済みの分布検定、TextにはVersion固定のEmbedding距離を使い、既知Shiftを検知する | C12.3.1 Pass候補 | 方法とData型、Baseline、検知結果が結び付く。 |
+| 明らかに存在しない文書を引用した回答も、矛盾した回答もFlagされない | C12.3.2 Fail候補 | 指定された不正確な出力を検知できない。 |
+| 検知Eventはあるが、週ごとのFlag数だけを示し評価対象数が分からない | C12.3.3 Fail候補 | 割合を比較できない。 |
+| 5%から15%になったが、検査器Versionと質問の構成も変わった | Model劣化は未確定 | C12.3.3のMetricは分母・Sampling・検査器の変更を揃えて再評価する。 |
+| 急増した週に文書更新があるという理由だけで「想定内」とCloseする | C12.3.4 Fail候補 | 時間的な一致は原因や想定範囲の証拠ではない。 |
+| 採用シーズンの質問増をSliceで特定し、同種質問の品質が維持されたことを確認する | C12.3.4の説明候補 | Input Driftはあるが、攻撃やModel劣化はそれだけでは確定しない。 |
+
+C12.3は特定の製品、万能なHallucination検知器、共通の数値閾値を要求しない。また、変化を検知したことだけでRAG文書の完全性、Memoryの安全性、回答の正確性が保証されるわけではない。
+
+## 9. 対話の再構成
+
+### 問い1：Flag率が5%から15%へ上がった
+
+**Scenario:** 社内RAGの「根拠のない回答」Flag率が上昇したが、表示上のModel名は同じ。
+
+**学習者の判断:** MemoryやCache、RAG Dataの品質を調べる。
+
+**整理:** 適切な切り分けである。Modelの重みだけでなく、何を取得・再利用してModelへ渡したかが回答を変える。加えてInput Traffic、Prompt、実際にServingされたModel／Provider、検査器Version、Samplingを調べる。5%と15%はまず**検知された割合**であり、真の誤回答率が3倍という証明ではない。
+
+### 問い2：RAG文書更新が同じ週にあった
+
+**学習者の初期判断:** 更新があったので、想定内の変化といえる。
+
+**訂正と整理:** 更新履歴は原因の候補であって免罪符ではない。悪化した質問群、取得文書のID・Version、更新内容を比較し、その変化の方向・範囲・大きさが更新で説明できるか確かめる。誤った文書や悪性Contentが取り込まれた可能性もある。急な上昇を、緩やかな想定内Driftと自動的に同一視しない。
+
+### 問い3：採用シーズンの質問が増えた
+
+**Scenario:** 入力の傾向は変化したが、同じ種類の質問で比較すると回答品質は維持されている。
+
+**学習者の判断:** 攻撃またはModel劣化が確定とは言えない。シーズン的要素は最初に考慮するContextである。
+
+**整理:** その通り。季節性は有力な説明仮説であり、同種質問の比較とTraffic Mixの記録で裏付ける。季節性があるからすべて安全、とも結論しない。特定の重要なSliceで品質や安全性が悪化していないかを別に確認する。
+
+## 10. このSectionから得られた洞察
+
+> Driftは異常の判決ではなく、調査を始めるSignalである。
+
+> 「変更があった」は原因の候補であり、「想定内だった」の証拠ではない。
+
+> Flag率は検査器と母集団を含めて初めて意味を持つ。分子だけ、またはModel名だけでは原因を語れない。
+
+これらはSourceの直接引用ではなく、講義と対話から得たRepositoryの解釈である。
+
+## 11. 設計レビューとNegative Test
+
+- 数値、Text、画像等、対象InputのData型ごとに適切なDrift MethodとBaselineを選び、既知のShiftを検知できるか。
+- 季節性のある正常なTrafficを投入し、Input Drift AlertがそのままSecurity Incidentへ昇格されないか。
+- 少数の高ImpactなTenant／Topicだけに起きるShiftを全体平均が隠していないか。
+- 捏造されたCitation、取得文書との矛盾、既知の正答例を含むFixtureで、Hallucination Flagの見逃しと誤検知を測れるか。
+- 時系列の各点に、Flag数、評価数、Sampling、検査器Version、Model／Prompt／Index Versionを対応させられるか。
+- 文書更新、Cache入替え、Memory変更、Prompt修正、Provider Routing変更の前後で、同じ質問群を可能な範囲で比較できるか。
+- 説明不能な急変を、近くに変更記録があるという理由だけでCloseしないか。説明できた変化の根拠も保存するか。
+
+## 12. References
+
+- [AISVS v1.0 C12 Normative Requirements](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)
+- [AISVS v1.0 C12.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-03-Model-Drift-Detection.md)

@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 1
 
+学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.3.1`は、Remote ServiceのMCP Transportに認証済み・暗号化済みの

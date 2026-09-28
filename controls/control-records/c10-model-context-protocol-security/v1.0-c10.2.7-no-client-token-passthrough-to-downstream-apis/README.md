@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
+学習資料：[C10.2 Authentication & Authorization](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.2-authentication-and-authorization/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.2.7`は、MCP ServerがClientから受信したAccess Tokenを

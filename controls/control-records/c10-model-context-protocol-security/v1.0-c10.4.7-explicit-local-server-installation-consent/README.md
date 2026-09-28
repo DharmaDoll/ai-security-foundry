@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
+学習資料：[C10.4 Schema, Message, and Input Validation](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.4.7`は、Local MCP ServerのInstallation時に、MCP ClientがUserへ明示的なConsent Dialogueと

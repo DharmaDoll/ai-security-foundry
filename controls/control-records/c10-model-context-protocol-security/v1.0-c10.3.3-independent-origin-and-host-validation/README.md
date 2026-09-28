@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
+学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.3.3`は、DNS Rebinding攻撃を防ぐため、すべてのHTTP-based MCP Transportで

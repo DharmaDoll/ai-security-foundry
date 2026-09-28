@@ -4,8 +4,8 @@ document_kind: "family-learning-guide"
 source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
-current_section: "C10.2"
-last_updated: "2026-09-25"
+current_section: "complete"
+last_updated: "2026-09-26"
 ---
 
 # AISVS C10 Model Context Protocol (MCP) Security 学習ガイド
@@ -60,15 +60,14 @@ LevelはAISVS Verification Levelであり、学習難易度やControl maturity�
 
 ## 軽量な進捗記録
 
-現在学習中：`C10.2 Authentication & Authorization`。
+現在学習中のSection：なし。C10全4 Sectionの講義と対話を一巡済み。
 
 - [x] [C10.1 Component Integrity](v1.0-c10.1-component-integrity/learning.md)
-- [ ] C10.2 Authentication & Authorization
-- [ ] C10.3 Secure Transport
-- [ ] C10.4 Schema, Message, and Input Validation
+- [x] [C10.2 Authentication & Authorization](v1.0-c10.2-authentication-and-authorization/learning.md)
+- [x] [C10.3 Secure Transport](v1.0-c10.3-secure-transport/learning.md)
+- [x] [C10.4 Schema, Message, and Input Validation](v1.0-c10.4-schema-message-and-input-validation/learning.md)
 
-C10.2.7について開始した説明は、独立したRequirement noteには保存しない。C10.2の講義時に、
-Token Pass-throughと委任Contextの違いをSection全体の認証・認可Contextへ統合する。
+C10.2.7のToken Pass-throughと委任Contextの違いは、C10.2のSection学習ノートへ統合した。
 
 ## Sources
 

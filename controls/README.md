@@ -174,13 +174,19 @@ Categoryから各Requirementまでの保証範囲を短い問いで俯瞰でき�
 
 ## Navigation and learning
 
+- [AISVS C7 Model Behavior learning guide](docs/learning/c07-model-behavior-output-control-and-safety-assurance/README.md):
+  output validation lectures, beginning with C7.1 and streaming trust boundaries.
+- [AISVS C2 Input Validation learning guide](docs/learning/c02-input-validation/README.md):
+  Section-based lectures, dialogue, concrete mitigation examples, and negative tests.
 - [Common Controls learning method](docs/learning/README.md): shared teaching,
   dialogue-reconstruction, insight, storage, and quality rules for every AISVS
   Category.
 - [AISVS C5 Access Control and Identity learning guide](docs/learning/c05-access-control-and-identity/README.md):
   legacy Requirement sequence, progress, and persistent learning notes.
 - [AISVS C10 Model Context Protocol Security learning guide](docs/learning/c10-model-context-protocol-security/README.md):
-  current Section-based sequence for the four C10 lectures.
+  completed Section-based learning notes for all four C10 Sections.
+- [AISVS C12 Monitoring, Logging & Anomaly Detection learning guide](docs/learning/c12-monitoring-logging-and-anomaly-detection/README.md):
+  completed learning notes for all five Sections, including privacy and operating-cost trade-offs.
 - [AISVS C5 family overview](control-records/c05-access-control-and-identity/README.md):
   Category, Section, and Requirement-level questions and prohibited failure states.
 - [AISVS C9 family overview](control-records/c09-orchestration-and-agentic-security/README.md):

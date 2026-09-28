@@ -1,0 +1,182 @@
+---
+title: "AISVS C10.2 Authentication & Authorization 学習ノート"
+document_kind: "section-learning-note"
+source_key: "owasp-aisvs"
+source_version: "1.0"
+source_status: "stable"
+upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
+section_id: "C10.2"
+requirements:
+  - "v1.0-C10.2.1"
+  - "v1.0-C10.2.2"
+  - "v1.0-C10.2.3"
+  - "v1.0-C10.2.4"
+  - "v1.0-C10.2.5"
+  - "v1.0-C10.2.6"
+  - "v1.0-C10.2.7"
+last_updated: "2026-09-25"
+---
+
+# C10.2 Authentication & Authorization
+
+## 1. 文書の役割とSource separation
+
+本書は、AISVS v1.0 C10.2の全7 Requirementを、MCPのRequestから下流APIまでの認証・認可の流れとして学ぶ講義と、対話の再構成である。製品適合の証拠やControl本文の代替ではない。
+
+- **Normative:** 固定RevisionのRequirement原文とVerification Level。
+- **AISVS Research:** Token、Tool、引数、Session、下流APIの失敗経路と検証例を補足する。Research内の事件・数値・製品は独立に確認せず、適合判定の根拠に採用しない。
+- **Repository interpretation:** 信頼する主体、対象、操作、時点、Credentialの用途を、実際の実行境界で結び付ける。
+- **Derived insight:** Access TokenとSession IDの役割、およびToolのScope確認と対象Objectの認可の違いは、今回の対話から明確になった。
+
+## 2. Normative Requirements
+
+| ID | Level | AISVS English | 日本語訳 |
+|---|---:|---|---|
+| `v1.0-C10.2.1` | 1 | Verify that MCP servers validate access tokens for each request and do not rely on transport security alone. | MCP Serverが各RequestでAccess Tokenを検証し、通信路の安全性だけに依存しないことを確認する。 |
+| `v1.0-C10.2.2` | 1 | Verify that MCP servers validate the presented access token's issuer, audience, expiration, and scope claims in accordance with OAuth 2.1. | 提示されたAccess Tokenの発行者、利用先、有効期限、ScopeをOAuth 2.1に従って検証することを確認する。 |
+| `v1.0-C10.2.3` | 1 | Verify that MCP servers acting as OAuth 2.1 resource servers do not store or persist access tokens or user credentials. | OAuth 2.1 Resource Serverとして動くMCP ServerがAccess TokenやUser Credentialを保存・永続化しないことを確認する。 |
+| `v1.0-C10.2.4` | 2 | Verify that MCP tools/list returns only tools permitted by resource owners' authorized scopes. | `tools/list`が、Resource Ownerの認可済みScopeで許可されたToolだけを返すことを確認する。 |
+| `v1.0-C10.2.5` | 2 | Verify that MCP servers enforce access control on every tool invocation, validating that the user's access token authorizes both the requested tool and the specific argument values supplied. | MCP ServerがTool呼出しごとに、要求Toolと具体的な引数値の両方をUserの権限で認可することを確認する。 |
+| `v1.0-C10.2.6` | 2 | Verify that MCP servers ensure all session artifacts are removed when a session terminates. | Session終了時にすべてのSession Artifactが除去されることを確認する。 |
+| `v1.0-C10.2.7` | 2 | Verify that MCP servers do not pass through access tokens received from clients to downstream APIs. | Clientから受け取ったAccess Tokenを下流APIへそのまま転送しないことを確認する。 |
+
+正本は[固定RevisionのC10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)である。
+
+## 3. C10における位置づけ
+
+C10.1は利用するComponentの信頼と封じ込め、C10.2は利用者とTool操作の認証・認可、C10.3はTransport、C10.4はMessageやContentの検証を扱う。C10.2の内部では、次の順に保証を分担する。
+
+```text
+RequestごとのToken検証 C10.2.1
+  → Tokenのissuer／audience／expiration／scopeの検証 C10.2.2
+  → 受信Credentialを蓄積しない C10.2.3
+  → 許可Toolだけを列挙する C10.2.4
+  → Toolと具体的な対象・引数を実行ごとに認可する C10.2.5
+  → 終了Sessionの状態を除去する C10.2.6
+  → 受信Tokenを別Resourceへ転用しない C10.2.7
+```
+
+## 4. Concrete Scenario
+
+AliceはTenant AのDocumentを読む権限だけを持つ。AI AgentがMCP Serverの`read_document(document_id)`を呼び、そのServerが社内Document APIへ問い合わせる。AliceのTokenには`documents:read`があり、利用先はMCP Serverである。Document XはTenant A、Document YはTenant Bに属する。
+
+正しい構成では、MCP Serverは各RequestでTokenを検証し、`tools/list`に許可Toolだけを返す。`read_document("Y")`ではScopeが十分でも、Document YへのAliceの権限がないため、Tool実行前または最終Resourceで拒否する。下流Document APIへは、そのAPI向けに発行・選択されたCredentialを使用する。Session終了後は旧Session ID、Cache、Queued Work等を再利用できない。
+
+## 5. 用語
+
+- **Access Token:** 特定のResource Server向けに発行されたAccess Credential。署名が正しいだけでは、その利用先や操作範囲まで正しいとは限らない。
+- **Issuer (`iss`):** Tokenの発行者。信頼するAuthorization Serverと一致するか確認する。
+- **Audience (`aud`):** Tokenの想定利用先。Document API向けTokenをMCP Serverで受理しないための境界。
+- **Expiration (`exp`):** Tokenの有効期限。ただし、期限内であっても権限が取り消されていないことを自動的には証明しない。
+- **Scope:** 委任された操作範囲。`documents:read`は文書を読む種類の操作を示すが、すべての文書への権限を意味しない。
+- **Resource Owner:** Resourceへの権限を持ち、Clientにアクセスを許可する主体。このScenarioではAlice。
+- **Session ID:** 会話、接続、Subscription等の状態を関連付ける識別子。盗まれればBearer Credentialとして悪用され得るため、OwnerとのBindingや終了処理が必要。
+- **Session Artifact:** Session ID、Resume Token、認可Context、Cache、Temp File、Handle、Subscription、Queued Work等、Sessionの継続・再開・権限・Dataに影響する状態。
+- **Downstream API:** MCP Serverが業務処理のために呼ぶ別のResource Server。ここではDocument API。
+
+## 6. Threat ModelとAbuse Path
+
+攻撃者は、盗んだSession ID、別Audience向けの有効なToken、低権限Userの正規Token、改変可能なTool引数、あるいは侵害されたAgent出力を持つとする。
+
+```text
+接続時だけTokenを検証 → 後続RequestをSession IDだけで許可 → 終了・失効した権限でTool実行
+別Audienceの署名済みTokenを提示 → aud未検証 → 別Resourceの権限をMCPで流用
+read Scopeを持つAlice → document_idをTenant Bへ変更 → Object認可なしで他Tenantの文書取得
+MCP向けTokenをDocument APIへ転送 → Audience境界を越えたCredential再利用・漏えい
+Session終了 → Cache／Queue／Subscriptionが残る → 旧権限で取得・副作用が継続
+```
+
+## 7. Security InvariantとEnforcement Point
+
+| 要件 | 守る性質 | 決定論的な強制地点 |
+|---|---|---|
+| C10.2.1–2 | 各RequestのTokenが、信頼する発行者から対象MCP Server向けに発行され、有効で必要Scopeを持つ。 | MCP Server／Gatewayの全HTTP Request入口。 |
+| C10.2.3 | 受信TokenやUser Credentialを、後から取り出せる状態でMCP Serverへ蓄積しない。 | Credential Handling、Cache、Log、Trace、Queueの保存境界。 |
+| C10.2.4 | 各主体が見るTool一覧には、その主体の許可Toolだけを含める。 | 認証済みContextで`tools/list`を作るFilter。 |
+| C10.2.5 | 実行するTool、対象Object、引数値が、同一の検証済み主体の現在の許可範囲内にある。 | `tools/call` Dispatcherと、必要に応じてDocument APIのObject認可。 |
+| C10.2.6 | Session終了後に旧Sessionの識別子・状態・作業を利用できない。 | Session Registry、Cache、Queue、Worker、Cleanup。 |
+| C10.2.7 | MCP Server向けTokenを下流APIのAccess Credentialとして渡さない。 | 下流Requestを組み立てるEgress／Credential Broker。 |
+
+Modelが生成した`tenant_id`、`owner`、`document_id`は認可判断の入力にはなり得るが、信頼するIdentityや許可の証明にはならない。実対象を解決してから、信頼するPolicy／ACLと照合する。
+
+## 8. Pass／Failと隣接する保証
+
+| 観測 | 判定 | 理由 |
+|---|---|---|
+| 毎Requestで有効なAccess Tokenを要求し、Session IDだけのRequestを拒否する | C10.2.1 Pass候補 | 接続時の一度きりの検証に依存しない。 |
+| 接続時だけTokenを確認し、後続はSession IDだけで24時間Toolを実行する | C10.2.1 Fail | Access Tokenを各Requestで検証していない。TLSとSession期限は代替にならない。 |
+| Token署名・期限・Scopeは確認するが、`aud`を確認しない | C10.2.2 Fail | 別Resource向けTokenを受理する。 |
+| Access TokenをTraceや永続Session Storeへ記録する | C10.2.3 Fail | Credentialを保存してしまう。 |
+| `tools/list`に`read_document`だけを返し、許可Scopeに基づいて他Toolを隠す | C10.2.4 Pass候補 | 一覧の許可範囲を守る。ただし直接呼出しの認可は別。 |
+| `read_document("Y")`でread Scopeだけを確認し、Tenant BのDocument Yを返す | C10.2.5 Fail | Toolの操作種類は許可されても、具体的引数値・対象を認可していない。 |
+| Session終了後も旧Resume TokenやQueueからData・副作用へ到達できる | C10.2.6 Fail | Session Artifactが残り、旧権限を使える。 |
+| MCP向け受信TokenをDocument APIの`Authorization`へ転送する | C10.2.7 Fail | 下流へTokenをPass-throughしている。 |
+
+Tokenの有効期限を各Requestで確認しても、期限内の即時失効や権限変更はそれだけでは反映されない。必要な鮮度に応じて短い期限、Introspection、失効情報、Policy再評価等を設計する。これらの一方式をAISVSの文面から一律に必須とはしない。
+
+C10.2.4のTool一覧制御とC10.2.5の直接呼出し認可はそれぞれ独立に評価する。Tool名を隠しても推測して呼び出せる。C10.2.5のArgument認可と、C10.4の型・Schema検証も別の保証である。Session終了時にAudit Evidenceを消す要求ではないが、AuditにCredentialや再開可能Stateを残してはいけない。
+
+下流向けの委任Contextを保つことと、同じ受信Tokenをそのまま転送することは異なる。正規のAuthorization ServerでToken Exchange等を行い、Document API向けの別Credentialを得る構成はC10.2.7のPass-throughとは区別する。
+
+## 9. 対話の再構成
+
+### 問い1：Session IDだけで後続Requestを処理できるか
+
+**Scenario:** 初回だけAccess Tokenを検証し、以後は24時間有効なSession IDとTLSで`tools/list`、`tools/call`を受け付ける。
+
+**学習者の判断:** Session IDを適切に管理し、有効期限もあればPassと考えた。
+
+**整理:** AISVS C10.2.1の文面ではFail。各RequestのAccess Token検証が欠ける。一般的なWeb ApplicationでSession Cookieを認証Credentialにする方式そのものを否定する判定ではない。このMCP構成では、Session IDが実質的に24時間使えるBearer Credentialとなる。
+
+**追加の問い:** 「今回のScenarioではSession IDだけでは認証を通さない、という認識でよいか」。**整理:** よい。TokenでRequestの権限を評価し、Session IDは会話・状態を関連付ける。両者の主体をBindingし、AliceのTokenとBobのSession IDの組合せを拒否する。Tokenが有効でも即時失効は別途設計する。
+
+### 問い2：別Audienceの署名済みToken
+
+**Scenario:** 署名・期限・Issuer・Scopeは正しいが、社内検索API向けTokenの`aud`を検証せず、MCP Serverが受け入れる。
+
+**学習者の判断:** Fail。Audienceも検証すべき。
+
+**整理:** 正しい。組織内のTokenというだけで別Resourceへ転用してはならない。C10.2.2はTokenの真正性と、このMCP Serverで使える意味の両方を確認する。
+
+### 問い3：Tool Scopeはあるが別TenantのDocumentを取得
+
+**Scenario:** `tools/list`には許可された`read_document`だけを表示する。実行時は`documents:read` Scopeを確認するが、`document_id`のOwner／Tenantを確認しない。AliceはTenant BのDocumentを取得できる。
+
+**学習者の判断:** Scopeを実行時に確認する部分はPass。DocumentごとのTenantを確認しない部分はFail。
+
+**整理:** 正しい切り分け。認可Scopeに基づくTool一覧はC10.2.4のPass候補で、実行時のScope確認はC10.2.5に必要な一段階。ただし具体的な引数値と対象Documentの認可を欠くため、**C10.2.5全体はFail**。`documents:read`は「文書を読む操作」を許す範囲であり、「すべての文書を読む権限」ではない。
+
+## 10. このSectionの本質
+
+> Access TokenはRequestの権限判断に使い、Session IDは状態を関連付ける。何を提示すれば最終的に操作できるのかで、実効的なCredentialの寿命を評価する。
+
+> Toolを使える権限と、そのToolで指定した対象を操作できる権限は、同じ判定の別条件である。
+
+> 一段階の検証にPassしても、後続の境界を越えてよい証明にはならない。
+
+この整理はAISVS文面の引用ではなく、対話とControl解釈から得たRepositoryの学習上の洞察である。
+
+## 11. 設計レビューの問い
+
+- 各Request入口、再接続、Session Resume、Tool直通経路でTokenを検証するか。
+- Issuer、Audience、期限、Scopeを、このMCP ServerのPolicyと照合するか。
+- Access TokenやUser CredentialをLog、Trace、Cache、Queue、Temp Fileへ残さないか。
+- `tools/list`がPrincipalごとにFilterされ、共有Cacheから他Principalの一覧を返さないか。
+- `tools/call`でToolだけでなく、正規化後の引数・対象Object・Tenantを認可するか。
+- Session終了時に全Replica、Cache、Queue、Subscription、Workerで旧状態を無効化するか。
+- 下流APIにそのAPI向けCredentialを提示し、受信したMCP向けTokenを転送しないか。
+
+## 12. ControlへのLink
+
+- [C10.2.1 RequestごとのToken検証](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.1-per-request-access-token-validation/README.md)
+- [C10.2.2 Token Claim検証](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.2-issuer-audience-expiration-and-scope-validation/README.md)
+- [C10.2.3 Credential非保存](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.3-no-access-token-or-user-credential-persistence/README.md)
+- [C10.2.4 許可Toolの列挙](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.4-scope-filtered-tool-discovery/README.md)
+- [C10.2.5 ToolとArgumentの認可](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.5-per-invocation-tool-and-argument-authorization/README.md)
+- [C10.2.6 Session Artifact除去](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.6-session-artifact-removal/README.md)
+- [C10.2.7 下流Token Pass-through禁止](../../../../control-records/c10-model-context-protocol-security/v1.0-c10.2.7-no-client-token-passthrough-to-downstream-apis/README.md)
+
+## 13. References
+
+- [AISVS v1.0 C10 Normative Requirements](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)
+- [AISVS v1.0 C10.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C10-MCP-Security/C10-02-Authentication-Authorization.md)

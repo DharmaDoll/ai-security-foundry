@@ -19,6 +19,8 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 1
 
+学習資料：[C10.4 Schema, Message, and Input Validation](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation/learning.md)
+
 ## Upstream basis
 
 AISVS `v1.0-C10.4.2`は、MCP `tools/list`と`tools/call`のResponseをModel Contextへ注入する前に、
