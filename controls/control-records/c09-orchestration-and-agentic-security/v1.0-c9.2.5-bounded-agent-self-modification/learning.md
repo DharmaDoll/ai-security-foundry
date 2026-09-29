@@ -133,7 +133,7 @@ RBACは役割に応じてAPIの操作権限を制限する仕組み。Agentに�
 - [OPA Policy Language](https://www.openpolicyagent.org/docs/policy-language)
 - [Kubernetes RBAC Good Practices](https://kubernetes.io/docs/concepts/security/rbac-good-practices/)
 - [Kubernetes Validating Admission Policy](https://kubernetes.io/docs/reference/access-authn-authz/validating-admission-policy/)
-- [C9学習ガイド](../../../docs/learning/c09-orchestration-and-agentic-security/README.md)
+- [C9学習ガイド](../../../learning/c09-orchestration-and-agentic-security/README.md)
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
 [research]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md

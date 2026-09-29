@@ -25,7 +25,7 @@ not repository maturity or a product conformance result.
 
 Save as `controls/control-records/cNN-family-slug/vX.Y-cN.N.N-descriptive-control-name/README.md`.
 When a substantive Section learning note exists under
-`controls/docs/learning/cNN-family-slug/vX.Y-cN.N-section-slug.md`, add an
+`controls/learning/cNN-family-slug/vX.Y-cN.N-section-slug.md`, add an
 introductory link after the visible Level line and a backlink from the note. Do not
 create placeholder learning notes or make learning completion a Control maturity gate.
 

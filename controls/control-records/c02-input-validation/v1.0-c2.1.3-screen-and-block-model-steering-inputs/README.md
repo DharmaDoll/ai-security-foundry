@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 1
 
-学習資料：[C2.1 Prompt Injection Defenses](../../../docs/learning/c02-input-validation/v1.0-c2.1-prompt-injection-defenses.md)
+学習資料：[C2.1 Prompt Injection Defenses](../../../learning/c02-input-validation/v1.0-c2.1-prompt-injection-defenses.md)
 
 ## Upstream basis
 

@@ -2,7 +2,7 @@
 
 対象はAISVS v1.0の固定Revision `78775233666a2022dcfb82037e5e029116955c00`。
 以下は[正規要件][normative]の代替ではなく、C2の保証範囲を辿るためのRepository interpretation。
-[Section単位の学習資料](../../docs/learning/c02-input-validation/README.md)は講義と対話を扱う。
+[Section単位の学習資料](../../learning/c02-input-validation/README.md)は講義と対話を扱う。
 Controlの成熟度は学習進捗とは独立して[Catalog](../../catalog.yaml)で管理する。
 
 ## この章で保証したいこと

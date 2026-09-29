@@ -77,13 +77,13 @@ class CatalogValidatorTest(unittest.TestCase):
                     self.assertIn("](README.md)", note.read_text(encoding="utf-8"))
                     self.assertIn("](learning.md)", control.read_text(encoding="utf-8"))
         self.assertEqual(
-            [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*/learning.md"))
+            [], list((REPOSITORY_ROOT / "controls/learning").glob("*/v*/learning.md"))
         )
         self.assertTrue(
-            list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*.md"))
+            list((REPOSITORY_ROOT / "controls/learning").glob("*/v*.md"))
         )
         self.assertEqual(
-            [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/map.md"))
+            [], list((REPOSITORY_ROOT / "controls/learning").glob("*/map.md"))
         )
 
     def test_controls_local_markdown_links_resolve(self) -> None:

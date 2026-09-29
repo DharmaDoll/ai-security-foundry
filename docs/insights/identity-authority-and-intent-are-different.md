@@ -2,7 +2,7 @@
 title: "Identity、Authority、Intent、Transaction Integrityを分ける"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-14"
+last_updated: "2026-09-29"
 ---
 
 # Identity、Authority、Intent、Transaction Integrityを分ける
@@ -41,6 +41,23 @@ Policyが正しい、内容が安全、人が承認した、現在も有効、�
 
 同様に、信頼できるIssuerのTokenであることと、そのAudience、Tenant、Resource、Actionで使用できることは別である。
 
+## Session、Tool、Objectを一つの権限とみなさない
+
+MCP等では、Access TokenがRequestの主体・Scopeを示し、Session IDが会話や処理状態を関連付ける場合がある。
+Session IDを持つことだけで毎回の認証・認可を済ませたとは言えない。さらに、Toolを呼べるScopeがあっても、
+引数で指定するDocumentやTenantを操作できるとは限らない。
+
+```text
+Requestの主体とTokenの用途
+  -> SessionとのBinding
+  -> Toolと引数の許可
+  -> 対象Objectの現在の認可
+  -> 実行
+```
+
+各段階のPassを次の段階の許可へ自動昇格させない。ただし一般的なWeb Session方式を一律に否定する話ではなく、
+何を提示すれば実際に操作できるかという、そのSystemの実効的なCredentialを評価する。
+
 ## 一つのUXで複数Propertyを満たす場合
 
 重要操作の画面で、Security Keyによる再認証と操作承認を同時に行う設計は可能である。ただし内部では、
@@ -62,6 +79,7 @@ Policyが正しい、内容が安全、人が承認した、現在も有効、�
 - Freshnessは新しいToken発行時刻ではなく、実Authentication eventから判断するか。
 - Signature、Authentication、Authorization、Approvalを相互の代替にしていないか。
 - 実行時の対象・値が、認可・承認された内容と同一か。
+- Session ID、Tool Scope、対象Objectの権限を別々に検証できるか。
 
 ## 誤用と限界
 
@@ -83,5 +101,6 @@ Policyが正しい、内容が安全、人が承認した、現在も有効、�
 - [C5.1.2：Agent Token](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/learning.md)
 - [C9.2.1：Human Approval](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions/learning.md)
 - [C9.2.8：Approval Binding](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals/learning.md)
+- [C10.2：MCP Authentication & Authorization](../../controls/learning/c10-model-context-protocol-security/v1.0-c10.2-authentication-and-authorization.md)
 
 本書は個別Requirementを統合した新しいControlではなく、複数の保証を混同しないためのRepository interpretationである。

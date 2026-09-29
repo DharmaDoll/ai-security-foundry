@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
-学習資料：[C8.3 Memory Expiry & Revocation](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3-memory-expiry-revocation.md)
+学習資料：[C8.3 Memory Expiry & Revocation](../../../learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3-memory-expiry-revocation.md)
 
 ## Upstream basis
 

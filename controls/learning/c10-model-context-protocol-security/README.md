@@ -23,9 +23,9 @@ C10を、MCPの個別機能の暗記ではなく、次の四つのTrust Boundary
 [`../README.md`](../README.md)に従う。C10では23 Requirementを個別ファイルへ分けず、
 C10.1〜C10.4の四つの講義として扱う。
 
-[C10 Family overview](../../../control-records/c10-model-context-protocol-security/README.md)は
+[C10 Family overview](../../control-records/c10-model-context-protocol-security/README.md)は
 CategoryとSectionの保証境界、整備済みControlへの入口を示す。全Requirementの保証範囲と
-Controlの着手順序は[Controls計画](../../../plan.md)を参照する。
+Controlの着手順序は[Controls計画](../../plan.md)を参照する。
 
 ## 進め方
 
@@ -37,7 +37,7 @@ Threat Model、Security Invariant、Enforcement PointはSection全体で統合�
 有益な対話は、次の版付きSectionファイルとして保存する。
 
 ```text
-controls/docs/learning/c10-model-context-protocol-security/
+controls/learning/c10-model-context-protocol-security/
 ├── README.md
 ├── v1.0-c10.1-component-integrity.md
 ├── v1.0-c10.2-authentication-and-authorization.md
@@ -68,6 +68,15 @@ LevelはAISVS Verification Levelであり、学習難易度やControl maturity�
 - [x] [C10.4 Schema, Message, and Input Validation](v1.0-c10.4-schema-message-and-input-validation.md)
 
 C10.2.7のToken Pass-throughと委任Contextの違いは、C10.2のSection学習ノートへ統合した。
+
+## このFamilyの学習から生まれた横断的Insight
+
+- [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md)：C10.2のSession、Tool、Objectへの権限を一つとみなさない。
+- [利用停止・消去・再出現防止](../../../docs/insights/retirement-is-more-than-deletion.md)：C10.2のSession終了後に残るArtifactとWorkを確認する。
+- [信頼は利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：C10.1・C10.4の認証済みComponentとTool Contentを区別する。
+- [検査するのは実際に利用されるPayload](../../../docs/insights/validation-must-cover-effective-payload.md)：C10.4のSchema検査とModelによるContent利用を区別する。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
 
 ## Sources
 

@@ -107,7 +107,7 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.6.2](v1.0-c9.6.2-deny-actions-after-approval-timeout/README.md) | 2 | 承認期限内に成立しない操作を阻止するか。 | 期限切れ・未回答・承認基盤障害を暗黙の許可として実行する。 |
 | [C9.6.3](v1.0-c9.6.3-out-of-band-shutdown-control-isolation/README.md) | 3 | 停止指示をAgent Runtimeから隔離した別経路で強制するか。 | Agent侵害・停止拒否・同一障害によりKill-switchまで操作不能になる。 |
 
-個別の具体例・対話・洞察は[C9学習ガイド](../../docs/learning/c09-orchestration-and-agentic-security/README.md)から各`learning.md`を参照する。
+個別の具体例・対話・洞察は[C9学習ガイド](../../learning/c09-orchestration-and-agentic-security/README.md)から各`learning.md`を参照する。
 
 ## Source
 

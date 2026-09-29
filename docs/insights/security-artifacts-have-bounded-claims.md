@@ -2,7 +2,7 @@
 title: "Security Artifactは証明できる範囲を越えて信頼しない"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-14"
+last_updated: "2026-09-29"
 ---
 
 # Security Artifactは証明できる範囲を越えて信頼しない
@@ -24,6 +24,7 @@ Signature、Schema、Manifest、Policy、Log、Classification Label等はSecurit
 | Tool Manifest | 必要能力と制約の宣言 | 宣言の最小性、真実性、Runtimeでの強制 |
 | Authorization Policy | 定義された条件でのDecision | 全Access PathがDecisionを通ること |
 | Log／Alert | Eventの観測と記録 | 違反や副作用を阻止したこと |
+| Confidence／Drift Score | 定義した方法と母集団に対する評価Signal | 回答の真実性、侵害の確定、追加検証の不要性 |
 | DLP Detection | 定義Patternとの一致 | Requester固有の受領権限、言い換えた情報の安全性 |
 | Classification Label | Protection stateや取扱条件 | PolicyがLabelを実際に強制すること |
 | Deployment名・製品機能 | 意図したArchitectureの手掛かり | 実構成と攻撃時の実効的なIsolation |
@@ -79,6 +80,7 @@ ManifestにNetwork禁止と書いた
 - Versionと実行物、PolicyとPEP、ManifestとRuntimeが対応しているか。
 - 検出、判断、阻止を別々に観測できるか。
 - 一つの成功Evidenceで隣接PropertyをPassにしていないか。
+- 高いConfidenceで高影響回答の追加検証を省略、またはDrift Signalを侵害の判決にしていないか。
 - 正しい形式の悪意ある値、正規署名された危険な内容をNegative Testへ含めるか。
 
 ## 誤用と限界
@@ -103,5 +105,7 @@ ManifestにNetwork禁止と書いた
 - [C9.3.2：Tool Output Schema](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation/learning.md)
 - [C9.3.3：Tool Manifest](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements/learning.md)
 - [C9.3.4：Runtime Enforcement](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/learning.md)
+- [C7.2：Hallucination Detection & Mitigation](../../controls/learning/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2-hallucination-detection-and-mitigation.md)
+- [C12.3：Drift Detection](../../controls/learning/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3-model-data-and-performance-drift-detection.md)
 
 本書は各Artifactを弱いと評価するのではなく、保証Claimを正しい境界へ保つためのRepository interpretationである。

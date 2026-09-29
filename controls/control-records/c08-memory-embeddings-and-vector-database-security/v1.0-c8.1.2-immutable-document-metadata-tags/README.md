@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
-学習資料：[C8.1 Access Controls on Memory & RAG Indices](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices.md)
+学習資料：[C8.1 Access Controls on Memory & RAG Indices](../../../learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices.md)
 
 ## Upstream basis
 

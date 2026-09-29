@@ -44,6 +44,13 @@ C12を製品別のLog設定集ではなく、AI Systemの処理を再構成し�
 
 実質的な講義と対話を保存するときだけ、版付きSectionファイルを追加する。空のSectionファイルやRequirement別のPlaceholderは作らない。
 
+## このFamilyの学習から生まれた横断的Insight
+
+- [再構成でき、保護されたSecurity Evidence](../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：C12.1・C12.2・C12.5のEvent、Alert、変更履歴を調査可能かつ最小限に扱う。
+- [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C12.3のDrift Signalを侵害の確証や認可Decisionと混同しない。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
+
 ## Sources
 
 - [AISVS v1.0 C12 Normative Requirements](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)

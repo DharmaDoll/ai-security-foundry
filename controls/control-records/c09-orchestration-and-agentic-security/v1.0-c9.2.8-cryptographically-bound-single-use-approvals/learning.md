@@ -117,7 +117,7 @@ nonceの消費と外部APIの返金は、常に一つの不可分な処理にで
 
 - [AISVS v1.0 C9.2.8][normative]
 - [対応Research][research]
-- [C9学習ガイド](../../../docs/learning/c09-orchestration-and-agentic-security/README.md)
+- [C9学習ガイド](../../../learning/c09-orchestration-and-agentic-security/README.md)
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
 [research]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md

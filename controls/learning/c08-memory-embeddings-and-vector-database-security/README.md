@@ -22,7 +22,7 @@ C8をVector Database製品の設定集ではなく、将来のModel判断へ再�
 [`../README.md`](../README.md)に従う。C8では11 Requirementを個別学習ファイルへ分けず、
 C8.1〜C8.3の三つの講義として扱う。
 
-[C8 Family overview](../../../control-records/c08-memory-embeddings-and-vector-database-security/README.md)は
+[C8 Family overview](../../control-records/c08-memory-embeddings-and-vector-database-security/README.md)は
 CategoryとSectionの保証境界、整備済みControlへの入口を示す。
 
 ## Section一覧
@@ -40,6 +40,13 @@ CategoryとSectionの保証境界、整備済みControlへの入口を示す。
 - [x] [C8.1 Access Controls on Memory & RAG Indices](v1.0-c8.1-access-controls-memory-rag-indices.md)
 - [x] [C8.2 Embedding Sanitization & Validation](v1.0-c8.2-embedding-sanitization-validation.md)
 - [x] [C8.3 Memory Expiry & Revocation](v1.0-c8.3-memory-expiry-revocation.md)
+
+## このFamilyの学習から生まれた横断的Insight
+
+- [信頼は利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：C8.2のCandidateとTrusted Memoryを分ける。
+- [利用停止・消去・再出現防止](../../../docs/insights/retirement-is-more-than-deletion.md)：C8.3のExpiry、Reset、Quarantineを別の保証として捉える。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
 
 ## Sources
 

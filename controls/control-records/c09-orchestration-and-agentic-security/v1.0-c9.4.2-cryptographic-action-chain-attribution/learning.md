@@ -143,7 +143,7 @@ Hashも低Entropy値の推測や業務関係の漏えいを防ぐ保証にはな
 - [SPIFFE Concepts][spiffe]（補足資料、2026-09-16参照。latestの仕様は今後変わり得る）
 - [SPIRE Concepts][spire]（同上）
 - [C9 Family overview](../README.md)
-- [C9学習ガイド](../../../docs/learning/c09-orchestration-and-agentic-security/README.md)
+- [C9学習ガイド](../../../learning/c09-orchestration-and-agentic-security/README.md)
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
 [research]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md

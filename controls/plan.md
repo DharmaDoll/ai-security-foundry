@@ -192,7 +192,7 @@ control-records/
     └── vX.Y-cN.N.N-descriptive-control-name/
         └── README.md
 
-docs/learning/
+learning/
 └── cNN-family-slug/
     ├── README.md  # lightweight family learning navigation
     └── vX.Y-cN.N-section-slug.md  # only when a substantive Section lecture exists
@@ -201,7 +201,7 @@ docs/learning/
 The family number makes the primary AISVS backbone directly traceable. The
 descriptive family and Control slugs keep paths understandable, while the versioned
 Requirement directory prevents historical interpretations from being overwritten.
-Do not create Section directories under `control-records/`. Under `docs/learning/`,
+Do not create Section directories under `control-records/`. Under `learning/`,
 create a versioned Section file only with a substantive lecture. Create a
 family directory only when the first substantive Control or learning artifact in
 that family is added.
@@ -214,7 +214,7 @@ The Requirement-level `README.md` remains the canonical Control artifact referen
 New `learning.md` files contain Section-level teaching, dialogue, and insights for
 all Requirements in that Section, with reciprocal links when the relevant Controls
 also exist. Learning progress remains independent of Control maturity. Shared
-learning policy and Family progress guides remain in `docs/learning/`.
+learning policy and Family progress guides remain in `learning/`.
 Learning may precede a Control; a substantive Section note does not create a
 placeholder Control or catalog entry. Requirement-level C5/C9 notes created under
 the earlier convention remain historical artifacts until an explicit migration.

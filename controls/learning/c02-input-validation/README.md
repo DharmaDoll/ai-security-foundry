@@ -22,6 +22,12 @@ last_updated: "2026-09-27"
 
 実装計画は[Issue #4](https://github.com/DharmaDoll/ai-security-foundry/issues/4)。一要件一Patternではなく、実システムの設計問題から独立して開発する。
 
+## このFamilyの学習から生まれた横断的Insight
+
+- [検査するのは実際に利用されるPayload](../../../docs/insights/validation-must-cover-effective-payload.md)：C2.1の検査対象と最終利用のずれを、出力・Tool応答にも持ち運ぶ考え方。
+
+これは学習の起点を示すLinkであり、ControlやPatternとの正式なMappingではない。
+
 ## Sources
 
 - [Normative C2](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md)

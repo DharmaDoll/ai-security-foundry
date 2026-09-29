@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 3
 
-学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport.md)
+学習資料：[C10.3 Secure Transport](../../../learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport.md)
 
 ## Upstream basis
 

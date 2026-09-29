@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 1
 
-学習資料：[C10.1 Component Integrity](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.1-component-integrity.md)
+学習資料：[C10.1 Component Integrity](../../../learning/c10-model-context-protocol-security/v1.0-c10.1-component-integrity.md)
 
 ## Upstream basis
 

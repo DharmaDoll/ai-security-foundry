@@ -207,7 +207,7 @@ Positive testとして、分離を保ったまま両者の正規処理が動く�
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md): RequirementとLevelの根拠。
 - [AISVS C5.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md): 共有基盤の脅威と分離手段の限界を扱う補足資料。Normativeではない。
 - [Source registry](../../../../sources/registry.yaml): Repositoryが記録したVersion・Status。記録時点の状態であり、最新性の証明ではない。
-- [共通の学習・永続化方針](../../../docs/learning/README.md)
+- [共通の学習・永続化方針](../../../learning/README.md)
 
 このノートでC5全11 Requirementの学習が一巡した。Family全体の洞察の統合やControlへの
 反映は別の作業として判断し、学習完了によって自動的に実施しない。

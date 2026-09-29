@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
-学習資料：[C8.2 Embedding Sanitization & Validation](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2-embedding-sanitization-validation.md)
+学習資料：[C8.2 Embedding Sanitization & Validation](../../../learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2-embedding-sanitization-validation.md)
 
 ## Upstream basis
 

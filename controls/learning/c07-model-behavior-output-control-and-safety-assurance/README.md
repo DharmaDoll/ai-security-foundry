@@ -23,6 +23,14 @@ Modelの出力を、形式・信頼性・有害性・出典の異なる軸で評
 - [x] [C7.3 講義・対話](v1.0-c7.3-output-safety.md)
 - [x] [C7.4 講義・対話](v1.0-c7.4-source-attribution-and-citation-integrity.md)
 
+## このFamilyの学習から生まれた横断的Insight
+
+- [検査するのは実際に利用されるPayload](../../../docs/insights/validation-must-cover-effective-payload.md)：C7.1・C7.3の検査後の公開・Renderingを考える。
+- [再構成でき、保護されたSecurity Evidence](../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：C7.4の出典から、主張と根拠の連鎖を辿る。
+- [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C7.2のConfidenceやC7.4のCitationを過大評価しない。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
+
 ## Sources
 
 - [AISVS v1.0 C7 Normative](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md)

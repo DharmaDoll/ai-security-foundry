@@ -127,7 +127,7 @@ Enforcement Point（強制する場所）は、各Agentの実行基盤と仕事�
 - [AISVS v1.0 C9要件本文][normative]
 - [同一RevisionのC9.1 Research][research]
 - [既存Control](README.md)
-- [C9学習ガイド](../../../docs/learning/c09-orchestration-and-agentic-security/README.md)
+- [C9学習ガイド](../../../learning/c09-orchestration-and-agentic-security/README.md)
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
 [research]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-01-Execution-Budgets.md

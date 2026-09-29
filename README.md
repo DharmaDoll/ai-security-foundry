@@ -97,7 +97,9 @@ endorsement, and source coverage or mapping success is not a maturity gate. See 
 ├── SECURITY.md
 ├── plan.md
 ├── controls/
-│   └── README.md
+│   ├── README.md
+│   ├── control-records/
+│   └── learning/
 ├── engineering/
 │   ├── AGENTS.md
 │   ├── README.md

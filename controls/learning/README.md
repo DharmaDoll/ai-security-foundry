@@ -1,5 +1,8 @@
 # Controls Learning Documentation
 
+横断的な学習上の洞察は[Insights一覧](../../docs/insights/README.md)に置く。
+Familyごとの学習ガイドから、そのFamilyを起点に生まれたInsightへ辿れる。
+
 この文書は、AISVSのすべてのCategory／Familyで共通して使用する学習方法と、学習結果を
 永続ドキュメントへ変換する方法を定める。
 
@@ -217,7 +220,7 @@ C5.1.1固有の構成を機械的に複製しない。
 
 ## Storage and naming
 
-新しい学習ノートは、`docs/learning/<family>/`配下の版付きSectionファイルとして配置する。
+新しい学習ノートは、`learning/<family>/`配下の版付きSectionファイルとして配置する。
 複数Requirementの講義を一つに統合するが、Control本文と学習の役割は分ける。
 
 ```text
@@ -227,15 +230,15 @@ controls/
 │       ├── README.md
 │       └── vX.Y-cN.N.N-descriptive-control-name/
 │           └── README.md
-└── docs/learning/
+└── learning/
     ├── README.md
     └── cNN-family-slug/
         ├── README.md
         └── vX.Y-cN.N-section-slug.md
 ```
 
-- `controls/docs/learning/README.md`: 全Category共通の学習・永続化方針。
-- `docs/learning/`のFamily `README.md`: Section一覧、現在位置、軽量なChecklist、Family固有Source。
+- `controls/learning/README.md`: 全Category共通の学習・永続化方針。
+- `learning/`のFamily `README.md`: Section一覧、現在位置、軽量なChecklist、Family固有Source。
 - `control-records/`のFamily `README.md`: Category、Section、Requirementを「問うこと」と
   「できてはいけないこと」で辿り、個別Controlへ案内する俯瞰図。
 - Control `README.md`: 解釈・適用範囲・検証・証拠・限界の正本。Catalogはここを参照する。
@@ -272,7 +275,7 @@ FamilyのControlが実体を持ったら、`control-records/<family>/README.md`�
 Source Versionを明示し、Requirementの追加・変更時には意味の差分を確認して更新する。
 未整備Categoryへ空のFamily READMEを先行作成しない。
 今後も俯瞰図は`control-records/<family>/README.md`へ配置し、
-`docs/learning/<family>/map.md`は作成しない。
+`learning/<family>/map.md`は作成しない。
 
 ## Lightweight progress
 
@@ -323,7 +326,7 @@ Section学習の完了は、学習者が次を自分の言葉で短く説明で�
 ## Reference learning note
 
 - [C8.1 Access Controls on Memory & RAG Indices：現行Section単位方式](c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices.md)
-- [C5.1.1 Step-up Authentication：講義、対話、洞察](../../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
+- [C5.1.1 Step-up Authentication：講義、対話、洞察](../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
 
 C8.1は現行のSection単位方式のReferenceである。C5.1.1は旧Requirement単位方式だが、
 Source separation、Security視座、対話の保存、Scope Calibrationの深さを引き続き参考にする。

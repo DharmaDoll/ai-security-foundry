@@ -69,7 +69,7 @@ Control `README.md`.
 New learning content is organized separately by AISVS Section, not by Requirement:
 
 ```text
-docs/learning/
+learning/
 └── cNN-family-slug/
     ├── README.md
     └── vX.Y-cN.N-section-slug.md
@@ -81,6 +81,11 @@ not silently overwrite historical learning. Link each relevant Control to the
 Section note once it exists, and link the Section note back to the individual
 Controls. Keep learning progress and Control maturity independent.
 
+Cross-cutting Insights remain under the repository-level `docs/insights/`.
+When a Family's learning produces a reusable Insight, link its canonical file
+from that Family's learning `README.md` and identify the originating Requirement
+IDs. Those links are navigation and provenance, not Control or Pattern mappings.
+
 Requirement-level learning notes created before this convention are retained as
 historical learning artifacts. Do not move or combine them as an incidental part
 of another task; consolidate them only in an explicit migration that preserves
@@ -91,7 +96,7 @@ summarizes the Category's assurance purpose, Section boundaries, and Requirement
 as concise assurance questions and prohibited failure states, then links to the
 individual Control records. It is not a substitute for the upstream standard,
 an individual Control, or a product
-conformance checklist. Keep learning progress in `docs/learning/`, not in the
+conformance checklist. Keep learning progress in `learning/`, not in the
 family overview.
 
 Keep durable chapter-level assurance boundaries and Research-derived cautions in
@@ -99,12 +104,12 @@ the family `README.md`; keep development order and checkpoints in `plan.md`.
 Do not create a parallel `docs/cNN-landscape.md` for the same family overview.
 
 Use this location for every future Family map. Do not create
-`docs/learning/<family>/map.md`; create or update
+`learning/<family>/map.md`; create or update
 `control-records/<family>/README.md` instead.
 
 Do not create Section directories under `control-records/` or empty family
 placeholders. Create a Control family or Requirement directory only when its first
-substantive Control artifact is added. Under `docs/learning/`, create a versioned
+substantive Control artifact is added. Under `learning/`, create a versioned
 Section file only when its substantive lecture is written. Learning may
 precede a Control: do not create a placeholder Control README or catalog entry.
 
@@ -166,7 +171,7 @@ insights into the appropriate Control, template, AGENTS.md, or durable guidance.
 
 ## Learning Documentation
 
-Use `docs/learning/README.md` as the common learning and persistence method for
+Use `learning/README.md` as the common learning and persistence method for
 every AISVS Category or Family.
 
 - Teach one AISVS Section per learning content. Cover every Requirement in the
@@ -184,12 +189,12 @@ every AISVS Category or Family.
   reconstruction of important questions, uncertainty, corrections, and insights;
   do not preserve raw chat noise merely for completeness.
 - Keep common policy, lightweight Family progress guides, and versioned Section
-  notes in `docs/learning/`. Store each new Section lecture as a versioned Markdown
+  notes in `learning/`. Store each new Section lecture as a versioned Markdown
   file directly under its Family learning directory. Do not create empty placeholders.
 - Never use learning completion to change Control maturity, Mapping status, or a
   product conformance result.
 
-The legacy C5.1.1 Requirement note linked from `docs/learning/README.md` remains a
+The legacy C5.1.1 Requirement note linked from `learning/README.md` remains a
 reference for depth and teaching stance. It is not the current storage granularity
 or a template whose topic-specific sections must be copied mechanically.
 

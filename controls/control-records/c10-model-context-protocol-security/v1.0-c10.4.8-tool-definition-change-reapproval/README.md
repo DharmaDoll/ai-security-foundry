@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 3
 
-学習資料：[C10.4 Schema, Message, and Input Validation](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation.md)
+学習資料：[C10.4 Schema, Message, and Input Validation](../../../learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation.md)
 
 ## Upstream basis
 

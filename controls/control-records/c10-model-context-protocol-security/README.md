@@ -62,7 +62,7 @@ AISVS要件、MCP仕様の規範、Researchの提案を混同しない。
 未整備Requirementの行やPlaceholderは作らない。要件本文、Research、Repository解釈を確認して
 個別Controlが`verifiable`になった時点で、この一覧へ追加する。
 
-講義と対話は[C10学習ガイド](../../docs/learning/c10-model-context-protocol-security/README.md)から、
+講義と対話は[C10学習ガイド](../../learning/c10-model-context-protocol-security/README.md)から、
 C10.1〜C10.4のSection単位で辿る。学習完了とControl maturityは独立している。
 
 ## Source

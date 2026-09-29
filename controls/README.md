@@ -12,11 +12,11 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 
 個別Controlは`control-records/<family>/<versioned-requirement>/README.md`に置き、
 解釈・検証・証拠・限界の正本とする。新しい学習コンテンツは
-`docs/learning/<family>/<versioned-section>.md`にSection単位で置き、各Sectionの
+`learning/<family>/<versioned-section>.md`にSection単位で置き、各Sectionの
 全Requirementを一つの講義として扱う。両者は必要時に相互リンクし、CatalogはControl本文だけを参照する。
 [Family README](control-records/c05-access-control-and-identity/README.md)は、Category、Section、
 Requirementを俯瞰して個別Controlへ辿るための入口である。
-[学習方針・進捗一覧](docs/learning/README.md)は従来どおり独立して管理する。
+[学習方針・進捗一覧](learning/README.md)は従来どおり独立して管理する。
 
 - [`catalog.yaml`](catalog.yaml): machine-readable control inventory with AISVS Verification
   Levels and lifecycle metadata; it is not a copy of the standard.
@@ -178,18 +178,18 @@ Categoryから各Requirementまでの保証範囲を短い問いで俯瞰でき�
 
 ## Navigation and learning
 
-- [AISVS C7 Model Behavior learning guide](docs/learning/c07-model-behavior-output-control-and-safety-assurance/README.md):
+- [AISVS C7 Model Behavior learning guide](learning/c07-model-behavior-output-control-and-safety-assurance/README.md):
   output validation lectures, beginning with C7.1 and streaming trust boundaries.
-- [AISVS C2 Input Validation learning guide](docs/learning/c02-input-validation/README.md):
+- [AISVS C2 Input Validation learning guide](learning/c02-input-validation/README.md):
   Section-based lectures, dialogue, concrete mitigation examples, and negative tests.
-- [Common Controls learning method](docs/learning/README.md): shared teaching,
+- [Common Controls learning method](learning/README.md): shared teaching,
   dialogue-reconstruction, insight, storage, and quality rules for every AISVS
   Category.
-- [AISVS C5 Access Control and Identity learning guide](docs/learning/c05-access-control-and-identity/README.md):
+- [AISVS C5 Access Control and Identity learning guide](learning/c05-access-control-and-identity/README.md):
   legacy Requirement sequence, progress, and persistent learning notes.
-- [AISVS C10 Model Context Protocol Security learning guide](docs/learning/c10-model-context-protocol-security/README.md):
+- [AISVS C10 Model Context Protocol Security learning guide](learning/c10-model-context-protocol-security/README.md):
   completed Section-based learning notes for all four C10 Sections.
-- [AISVS C12 Monitoring, Logging & Anomaly Detection learning guide](docs/learning/c12-monitoring-logging-and-anomaly-detection/README.md):
+- [AISVS C12 Monitoring, Logging & Anomaly Detection learning guide](learning/c12-monitoring-logging-and-anomaly-detection/README.md):
   completed learning notes for all five Sections, including privacy and operating-cost trade-offs.
 - [AISVS C5 family overview](control-records/c05-access-control-and-identity/README.md):
   Category, Section, and Requirement-level questions and prohibited failure states.
@@ -207,7 +207,7 @@ control-records/
     └── vX.Y-cN.N.N-descriptive-control-name/
         └── README.md
 
-docs/learning/
+learning/
 └── cNN-family-slug/
     ├── README.md
     └── vX.Y-cN.N-section-slug.md
@@ -229,7 +229,7 @@ automatically moved or merged.
 
 Within `control-records/`, use only the family and versioned Requirement levels;
 do not create Section directories such as `c05.2/`. Versioned Section directories
-are used only under `docs/learning/` and only when a substantive lecture exists.
+are used only under `learning/` and only when a substantive lecture exists.
 Do not create empty family directories.
 
 The filesystem layout is a navigation aid. `catalog.yaml` remains authoritative for

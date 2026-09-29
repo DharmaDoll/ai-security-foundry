@@ -104,7 +104,7 @@ Agent用IdentityにはKMSの署名権限を与えず、承認Service用Identity�
 - [対応Research][research]
 - [AWS KMS Sign API][kms-sign]
 - [AWS KMS key policies][kms-policy]
-- [C9学習ガイド](../../../docs/learning/c09-orchestration-and-agentic-security/README.md)
+- [C9学習ガイド](../../../learning/c09-orchestration-and-agentic-security/README.md)
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md
 [research]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-02-High-Impact-Action-Approval.md

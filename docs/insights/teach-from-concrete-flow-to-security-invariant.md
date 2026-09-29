@@ -91,6 +91,6 @@ last_updated: "2026-09-14"
 - [C5.1.1：Step-up Authentication](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
 - [C5.2.2：Retrieval Authorization](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/learning.md)
 - [C5.2.5：PDP Isolation](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/learning.md)
-- [Common Controls learning method](../../controls/docs/learning/README.md)
+- [Common Controls learning method](../../controls/learning/README.md)
 
 本書はSecurity要件ではなく、Requirementから実務的な理解を引き出すためのRepository共通の教育方法である。

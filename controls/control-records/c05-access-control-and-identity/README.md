@@ -34,7 +34,7 @@
 | [C5.3.1](v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md) | 2 | 共有Model Servingの状態をTenantごとに分離するか。 | Cache、Batch、Context等を介して別Tenantの情報が混ざる。 |
 | [C5.3.2](v1.0-c5.3.2-shared-compute-tenant-isolation/README.md) | 3 | 共有計算基盤でTenant間の観測と干渉を防ぐか。 | 他TenantのMemory・Storage・資源利用を観測または変更できる。 |
 
-個別の具体例・対話・洞察は[C5学習ガイド](../../docs/learning/c05-access-control-and-identity/README.md)から各`learning.md`を参照する。
+個別の具体例・対話・洞察は[C5学習ガイド](../../learning/c05-access-control-and-identity/README.md)から各`learning.md`を参照する。
 
 ## Source
 
