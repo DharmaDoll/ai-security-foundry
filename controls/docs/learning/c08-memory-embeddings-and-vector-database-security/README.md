@@ -23,8 +23,7 @@ C8をVector Database製品の設定集ではなく、将来のModel判断へ再�
 C8.1〜C8.3の三つの講義として扱う。
 
 [C8 Family overview](../../../control-records/c08-memory-embeddings-and-vector-database-security/README.md)は
-CategoryとSectionの保証境界、整備済みControlへの入口を示す。全Requirementの保証範囲は
-[C8全体分析](../../c08-landscape.md)を参照する。
+CategoryとSectionの保証境界、整備済みControlへの入口を示す。
 
 ## Section一覧
 
@@ -38,9 +37,9 @@ CategoryとSectionの保証境界、整備済みControlへの入口を示す。�
 
 現在学習中のSection：なし。C8全3 Sectionを一巡済み。次の講義はC10.1。
 
-- [x] [C8.1 Access Controls on Memory & RAG Indices](v1.0-c8.1-access-controls-memory-rag-indices/learning.md)
-- [x] [C8.2 Embedding Sanitization & Validation](v1.0-c8.2-embedding-sanitization-validation/learning.md)
-- [x] [C8.3 Memory Expiry & Revocation](v1.0-c8.3-memory-expiry-revocation/learning.md)
+- [x] [C8.1 Access Controls on Memory & RAG Indices](v1.0-c8.1-access-controls-memory-rag-indices.md)
+- [x] [C8.2 Embedding Sanitization & Validation](v1.0-c8.2-embedding-sanitization-validation.md)
+- [x] [C8.3 Memory Expiry & Revocation](v1.0-c8.3-memory-expiry-revocation.md)
 
 ## Sources
 

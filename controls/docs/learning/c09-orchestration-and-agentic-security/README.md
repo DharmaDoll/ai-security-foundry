@@ -7,7 +7,7 @@
 C9ではAgentが許可された、意図された、制限された行動を実行するための保証を学ぶ。
 この文書は旧Requirement単位で完了した学習履歴を案内する。今後の新規学習には
 [共通学習方針](../README.md)のSection単位方式を使う。
-全体の保証範囲・ID・Levelは[章の分析](../../c09-landscape.md)と
+全体の保証範囲・ID・Levelは[章の分析](../../../control-records/c09-orchestration-and-agentic-security/README.md)と
 [Control一覧](../../../README.md#c9-control-records)を参照する。
 [C9 Family overview](../../../control-records/c09-orchestration-and-agentic-security/README.md)では、
 Category・Section・Requirementを「問うこと」と

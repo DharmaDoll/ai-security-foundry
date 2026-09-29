@@ -36,13 +36,13 @@ C12を製品別のLog設定集ではなく、AI Systemの処理を再構成し�
 
 全5 Section・21 Requirementの講義と対話を保存済み。Control成熟・製品適合の完了を意味しない。
 
-- [x] [C12.1 Request & Response Logging](v1.0-c12.1-request-response-logging/learning.md)
-- [x] [C12.2 Detection and Alerting](v1.0-c12.2-detection-and-alerting/learning.md)
-- [x] [C12.3 Model, Data, and Performance Drift Detection](v1.0-c12.3-model-data-and-performance-drift-detection/learning.md)
-- [x] [C12.4 Proactive Security Behavior Monitoring](v1.0-c12.4-proactive-security-behavior-monitoring/learning.md)
-- [x] [C12.5 Training Data & Model Lifecycle Audit](v1.0-c12.5-training-data-and-model-lifecycle-audit/learning.md)
+- [x] [C12.1 Request & Response Logging](v1.0-c12.1-request-response-logging.md)
+- [x] [C12.2 Detection and Alerting](v1.0-c12.2-detection-and-alerting.md)
+- [x] [C12.3 Model, Data, and Performance Drift Detection](v1.0-c12.3-model-data-and-performance-drift-detection.md)
+- [x] [C12.4 Proactive Security Behavior Monitoring](v1.0-c12.4-proactive-security-behavior-monitoring.md)
+- [x] [C12.5 Training Data & Model Lifecycle Audit](v1.0-c12.5-training-data-and-model-lifecycle-audit.md)
 
-実質的な講義と対話を保存するときだけ、版付きSection Directoryを追加する。空のSectionファイルやRequirement別のPlaceholderは作らない。
+実質的な講義と対話を保存するときだけ、版付きSectionファイルを追加する。空のSectionファイルやRequirement別のPlaceholderは作らない。
 
 ## Sources
 

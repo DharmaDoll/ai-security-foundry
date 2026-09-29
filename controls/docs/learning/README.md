@@ -217,7 +217,7 @@ C5.1.1固有の構成を機械的に複製しない。
 
 ## Storage and naming
 
-新しい学習ノートは、`docs/learning/`配下の版付きSection Directoryへ配置する。
+新しい学習ノートは、`docs/learning/<family>/`配下の版付きSectionファイルとして配置する。
 複数Requirementの講義を一つに統合するが、Control本文と学習の役割は分ける。
 
 ```text
@@ -231,8 +231,7 @@ controls/
     ├── README.md
     └── cNN-family-slug/
         ├── README.md
-        └── vX.Y-cN.N-section-slug/
-            └── learning.md
+        └── vX.Y-cN.N-section-slug.md
 ```
 
 - `controls/docs/learning/README.md`: 全Category共通の学習・永続化方針。
@@ -240,11 +239,11 @@ controls/
 - `control-records/`のFamily `README.md`: Category、Section、Requirementを「問うこと」と
   「できてはいけないこと」で辿り、個別Controlへ案内する俯瞰図。
 - Control `README.md`: 解釈・適用範囲・検証・証拠・限界の正本。Catalogはここを参照する。
-- Section `learning.md`: 一つのSectionと全Requirementを、有益な学習セッションから
+- Sectionファイル: 一つのSectionと全Requirementを、有益な学習セッションから
   再利用可能な講義として保存する。関連Controlとは相互リンクし、内容や成熟度を一体化しない。
 
-空のSection DirectoryやFamily placeholderを作らない。最初の実質的な学習Artifactが
-できたときだけ必要なDirectoryを作る。Section IDとSource VersionをDirectory名へ含め、
+空のSectionファイルやFamily placeholderを作らない。最初の実質的な学習Artifactが
+できたときだけ必要なファイルを作る。Section IDとSource Versionをファイル名へ含め、
 将来のVersionで過去の学習結果を上書きしない。
 
 学習ノートのために空のControl本文やCatalog行を作らない。ControlとSection noteの両方が
@@ -323,7 +322,7 @@ Section学習の完了は、学習者が次を自分の言葉で短く説明で�
 
 ## Reference learning note
 
-- [C8.1 Access Controls on Memory & RAG Indices：現行Section単位方式](c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices/learning.md)
+- [C8.1 Access Controls on Memory & RAG Indices：現行Section単位方式](c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices.md)
 - [C5.1.1 Step-up Authentication：講義、対話、洞察](../../control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/learning.md)
 
 C8.1は現行のSection単位方式のReferenceである。C5.1.1は旧Requirement単位方式だが、

@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 1
 
-学習資料：[C10.1 Component Integrity](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.1-component-integrity/learning.md)
+学習資料：[C10.1 Component Integrity](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.1-component-integrity.md)
 
 ## Upstream basis
 
@@ -171,7 +171,7 @@ Build・Packaging境界に依存するため、評価Scopeを明示する。
 
 - [AISVS v1.0 C10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)
 - [AISVS v1.0 C10.1 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C10-MCP-Security/C10-01-Component-Integrity.md)
-- [C10全体分析](../../../docs/c10-landscape.md)
+- [C10 Family概要](../README.md)
 
 ## Changelog
 

@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 3
 
-学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport/learning.md)
+学習資料：[C10.3 Secure Transport](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.3-secure-transport.md)
 
 ## Upstream basis
 
@@ -161,7 +161,7 @@ Trade-offを理由に検証をFail-openにしてはならないが、適切な�
 - [AISVS v1.0 C10.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C10-MCP-Security/C10-03-Secure-Transport.md)
 - [RFC 8705: OAuth 2.0 Mutual-TLS Client Authentication and Certificate-Bound Access Tokens](https://www.rfc-editor.org/rfc/rfc8705)
 - [RFC 9449: OAuth 2.0 Demonstrating Proof of Possession](https://www.rfc-editor.org/rfc/rfc9449)
-- [C10全体分析](../../../docs/c10-landscape.md)
+- [C10 Family概要](../README.md)
 
 ## Changelog
 

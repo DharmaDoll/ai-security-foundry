@@ -25,7 +25,7 @@ C10.1〜C10.4の四つの講義として扱う。
 
 [C10 Family overview](../../../control-records/c10-model-context-protocol-security/README.md)は
 CategoryとSectionの保証境界、整備済みControlへの入口を示す。全Requirementの保証範囲と
-着手順序は[C10全体分析](../../c10-landscape.md)を参照する。
+Controlの着手順序は[Controls計画](../../../plan.md)を参照する。
 
 ## 進め方
 
@@ -34,18 +34,18 @@ C10.1から章順に進める。各講義では、そのSectionの全Requirement
 Threat Model、Security Invariant、Enforcement PointはSection全体で統合する。
 
 質疑応答はSection全体に対して原則2〜3問とし、全Requirementを一問ずつ口頭試問しない。
-有益な対話は、次の版付きSection Directoryに一つの`learning.md`として保存する。
+有益な対話は、次の版付きSectionファイルとして保存する。
 
 ```text
 controls/docs/learning/c10-model-context-protocol-security/
 ├── README.md
-├── v1.0-c10.1-component-integrity/learning.md
-├── v1.0-c10.2-authentication-and-authorization/learning.md
-├── v1.0-c10.3-secure-transport/learning.md
-└── v1.0-c10.4-schema-message-and-input-validation/learning.md
+├── v1.0-c10.1-component-integrity.md
+├── v1.0-c10.2-authentication-and-authorization.md
+├── v1.0-c10.3-secure-transport.md
+└── v1.0-c10.4-schema-message-and-input-validation.md
 ```
 
-実質的な講義と対話を保存するときにだけSection Directoryを作る。空ファイルは作らない。
+実質的な講義と対話を保存するときにだけSectionファイルを作る。空ファイルは作らない。
 
 ## Section一覧
 
@@ -62,10 +62,10 @@ LevelはAISVS Verification Levelであり、学習難易度やControl maturity�
 
 現在学習中のSection：なし。C10全4 Sectionの講義と対話を一巡済み。
 
-- [x] [C10.1 Component Integrity](v1.0-c10.1-component-integrity/learning.md)
-- [x] [C10.2 Authentication & Authorization](v1.0-c10.2-authentication-and-authorization/learning.md)
-- [x] [C10.3 Secure Transport](v1.0-c10.3-secure-transport/learning.md)
-- [x] [C10.4 Schema, Message, and Input Validation](v1.0-c10.4-schema-message-and-input-validation/learning.md)
+- [x] [C10.1 Component Integrity](v1.0-c10.1-component-integrity.md)
+- [x] [C10.2 Authentication & Authorization](v1.0-c10.2-authentication-and-authorization.md)
+- [x] [C10.3 Secure Transport](v1.0-c10.3-secure-transport.md)
+- [x] [C10.4 Schema, Message, and Input Validation](v1.0-c10.4-schema-message-and-input-validation.md)
 
 C10.2.7のToken Pass-throughと委任Contextの違いは、C10.2のSection学習ノートへ統合した。
 

@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
-学習資料：[C8.3 Memory Expiry & Revocation](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3-memory-expiry-revocation/learning.md)
+学習資料：[C8.3 Memory Expiry & Revocation](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3-memory-expiry-revocation.md)
 
 ## Upstream basis
 
@@ -144,7 +144,7 @@ Logical ResetはPhysical Erasure、Backup破棄、外部Provider Copyの削除�
 
 - [AISVS v1.0 C8要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C08-Memory-Embeddings-and-Vector-Database.md)
 - [AISVS v1.0 C8.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C08-Memory-and-Embeddings/C08-03-Memory-Expiry-Revocation-Leakage-Prevention.md)
-- [C8全体分析](../../../docs/c08-landscape.md)
+- [C8 Family概要](../README.md)
 
 ## Changelog
 

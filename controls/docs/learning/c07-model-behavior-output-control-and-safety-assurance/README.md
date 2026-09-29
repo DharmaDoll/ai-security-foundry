@@ -18,10 +18,10 @@ Modelの出力を、形式・信頼性・有害性・出典の異なる軸で評
 | C7.3 Output Safety | 4 | L1: 1、L2: 2、L3: 1 | 有害性・内部情報・外向き要求・隠蔽 |
 | C7.4 Source Attribution & Citation Integrity | 4 | L1: 2、L2: 1、L3: 1 | 出典と主張の追跡、生成Media |
 
-- [x] [C7.1 講義・対話](v1.0-c7.1-output-format-enforcement/learning.md)
-- [x] [C7.2 講義・対話](v1.0-c7.2-hallucination-detection-and-mitigation/learning.md)
-- [x] [C7.3 講義・対話](v1.0-c7.3-output-safety/learning.md)
-- [x] [C7.4 講義・対話](v1.0-c7.4-source-attribution-and-citation-integrity/learning.md)
+- [x] [C7.1 講義・対話](v1.0-c7.1-output-format-enforcement.md)
+- [x] [C7.2 講義・対話](v1.0-c7.2-hallucination-detection-and-mitigation.md)
+- [x] [C7.3 講義・対話](v1.0-c7.3-output-safety.md)
+- [x] [C7.4 講義・対話](v1.0-c7.4-source-attribution-and-citation-integrity.md)
 
 ## Sources
 

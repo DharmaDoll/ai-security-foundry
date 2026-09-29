@@ -2,7 +2,15 @@
 
 対象はAISVS v1.0、固定Revision `78775233666a2022dcfb82037e5e029116955c00`。
 以下は原文の代替や製品適合チェックリストではなく、C8の保証境界と整備済みControlへの入口である。
-全11要件の分析と段階的な着手順序は[C8全体分析](../../docs/c08-landscape.md)を参照する。
+開発順序と進捗は[Controls計画](../../plan.md)を参照する。
+
+## この章で保証したいこと
+
+Memoryは会話履歴だけでなく、RAG Index、Vector Store、Semantic Cache、Chunk Metadataなど、
+将来のModel判断に再利用される状態を含む。C8は「読むときのScope強制」（C8.1）、
+「書くときの出所・内容の検証」（C8.2）、「期限・信頼を失った後の全Read Pathからの除外」（C8.3）を扱う。
+EmbeddingやMemoryへの書込みは将来の判断に影響するTrust Boundaryである。
+Similarityは関連度であり、認可、真正性、安全性、新しさの証明ではない。
 
 ## Category：C8 Memory, Embeddings & Vector Database Security
 
@@ -19,6 +27,16 @@
 | C8.3 Memory Expiry & Revocation | Expiry、Reset、Quarantineを全Index／Cache／Replicaへ強制し、状態を検証できるか。 | TombstoneやFlagを付けただけで、別検索経路・Backup Restore・Background Writerから再出現させる。 |
 
 ## 整備済みRequirement
+
+### Researchを踏まえた横断的な確認点
+
+- Ingestion時にSource Object ID、ACL、分類、所有者、失効状態をChunkと結び付ける。Namespaceだけでは認可は完結しない。
+- 検索ではUnauthorized Candidateを後から捨てるだけでなく、取得・Expansion・Cacheの各境界でScopeを強制する。
+- Sensitive DataやPoisonのEmbedding後はReplica・Cache・Backupへ派生する。元文書の削除だけでは影響消失を証明できない。
+- 異常VectorはOutlierとは限らない。Agent／Tool Outputを生成主体の判断だけでTrusted Memoryへ昇格しない。
+- Expiry／Quarantineによる検索除外と物理消去を分ける。ResetにはSummary、Cache、Background Writerも含め、Quarantineは調査用保持と通常検索からの隔離を両立させる。
+
+これらは対応Researchに基づく検討観点であり、一律に個別要件の必須条件へ追加しない。
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|

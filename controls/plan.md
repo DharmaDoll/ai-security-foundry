@@ -5,6 +5,28 @@
 - Primary backbone: OWASP AISVS
 - AISVS source state reviewed: 2026-09-03
 
+### C2 checkpoint — 2026-09-28
+
+C2の[保証範囲](control-records/c02-input-validation/README.md)とSection単位の開発順序を整理した。
+学習資料とは独立に、C2.1の最初の[C2.1.1 Control](control-records/c02-input-validation/v1.0-c2.1.1-normalize-input-before-tokenization-or-embedding/README.md)を
+正規要件と対応Researchから`verifiable`まで整備した。C2.1は残り7要件、C2.2は4要件が未整備。
+次はC2.1.2から、各要件の独立した保証境界とNegative Testを確認して進める。
+学習済みのC7・C12もControlとしては未着手であり、C2のSection横断確認後に優先順位を判断する。
+
+2026-09-29：続く[C2.1.2 Control](control-records/c02-input-validation/v1.0-c2.1.2-detect-and-mitigate-encoded-input-smuggling/README.md)も
+`verifiable`まで整備した。C2.1の残りは6要件。次はC2.1.3で「入力経路の検査」と
+「検知時の遮断」を分けて確認する。C2.1全体は未完了であり、
+Catalog・Control本文・Family案内の整合を確認しながら進める。
+
+同日：続けて[C2.1.3 Control](control-records/c02-input-validation/v1.0-c2.1.3-screen-and-block-model-steering-inputs/README.md)を
+`verifiable`まで整備した。全入力経路の検査とFlag時の遮断を独立に試験する。
+C2.1の残りは5要件。次はC2.1.4でContext上限と黙った切詰めの境界を扱う。
+
+同日：[C2.1.4 Control](control-records/c02-input-validation/v1.0-c2.1.4-reject-over-limit-input-without-truncation/README.md)を
+`verifiable`まで整備した。上限超過の拒否を最終Payload・Model切替・SDKの
+切詰め挙動まで追い、事前の資料選択と区別した。C2.1の残りは4要件。
+次はC2.1.5の文字集合Allowlistを、対応言語を不当に壊さない保証と併せて扱う。
+
 ### C5 implementation checkpoint — 2026-09-08
 
 C5全11 RequirementのControlを`verifiable`まで整備した。Phase 1〜3の成果物と
@@ -18,7 +40,7 @@ Mapping不在を埋めるためにPatternを生成しない。次Familyの候補
 
 ### C9 landscape checkpoint — 2026-09-09
 
-Phase 4の次FamilyとしてC9を選び、[全体分析と着手順序](docs/c09-landscape.md)を作成した。
+Phase 4の次FamilyとしてC9を選び、[Family概要](control-records/c09-orchestration-and-agentic-security/README.md)へ保証範囲を集約した。
 採用済みv1.0の固定Revisionで要件本文と対応Researchを確認し、最初の代表要件を
 `v1.0-C9.5.1`（Level 2：ツールと引数の細粒度認可）とした。
 全体分析に続き、[C9.5.1のControl](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization/README.md)を
@@ -32,7 +54,7 @@ C10/C8にはこの作業で着手しない。学習進捗とEngineering Mapping�
 ### C10 landscape checkpoint — 2026-09-10
 
 C9完了後、Phase 4の次FamilyとしてC10を選び、
-[全体分析と着手順序](docs/c10-landscape.md)を作成した。
+[Family概要](control-records/c10-model-context-protocol-security/README.md)へ保証範囲を集約した。
 採用済み固定Revisionの要件本文と対応Researchから、全4節・23件の保証範囲を整理した。
 最初の代表要件は`v1.0-C10.2.7`（Level 2：受信Tokenの下流APIへの転送禁止）。
 2026-09-23にこの一件を既存Templateで`verifiable`まで整備し、Catalogへ追加した。
@@ -48,7 +70,7 @@ C10全23要件が`verifiable`となり、Catalogは68件。C10の章整合確認
 
 ### C8 landscape checkpoint — 2026-09-24
 
-Phase 4の残るFamilyとしてC8を選び、[全体分析と着手順序](docs/c08-landscape.md)を作成した。
+Phase 4の残るFamilyとしてC8を選び、[Family概要](control-records/c08-memory-embeddings-and-vector-database-security/README.md)へ保証範囲を集約した。
 採用済み固定Revisionの要件本文と3つのSection Researchから、全3節・11件の保証範囲を整理した。
 最初のSectionはC8.1 Access Controls on Memory & RAG Indicesである。Vector ID／NamespaceのTenant一意性、
 Security／Provenance Metadata Tagの不変性、全Retrieval PathでのScope強制という3要件を`verifiable`まで整備した。
@@ -173,15 +195,14 @@ control-records/
 docs/learning/
 └── cNN-family-slug/
     ├── README.md  # lightweight family learning navigation
-    └── vX.Y-cN.N-section-slug/
-        └── learning.md  # only when a substantive Section lecture exists
+    └── vX.Y-cN.N-section-slug.md  # only when a substantive Section lecture exists
 ```
 
 The family number makes the primary AISVS backbone directly traceable. The
 descriptive family and Control slugs keep paths understandable, while the versioned
 Requirement directory prevents historical interpretations from being overwritten.
 Do not create Section directories under `control-records/`. Under `docs/learning/`,
-create a versioned Section directory only with a substantive lecture. Create a
+create a versioned Section file only with a substantive lecture. Create a
 family directory only when the first substantive Control or learning artifact in
 that family is added.
 

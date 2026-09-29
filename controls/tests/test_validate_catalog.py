@@ -77,7 +77,10 @@ class CatalogValidatorTest(unittest.TestCase):
                     self.assertIn("](README.md)", note.read_text(encoding="utf-8"))
                     self.assertIn("](learning.md)", control.read_text(encoding="utf-8"))
         self.assertEqual(
-            [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*.md"))
+            [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*/learning.md"))
+        )
+        self.assertTrue(
+            list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/v*.md"))
         )
         self.assertEqual(
             [], list((REPOSITORY_ROOT / "controls/docs/learning").glob("*/map.md"))

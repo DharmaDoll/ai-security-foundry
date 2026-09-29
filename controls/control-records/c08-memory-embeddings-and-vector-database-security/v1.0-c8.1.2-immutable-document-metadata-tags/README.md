@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
-学習資料：[C8.1 Access Controls on Memory & RAG Indices](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices/learning.md)
+学習資料：[C8.1 Access Controls on Memory & RAG Indices](../../../docs/learning/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1-access-controls-memory-rag-indices.md)
 
 ## Upstream basis
 
@@ -139,7 +139,7 @@ Failを裏付ける。Immutable対象TagのContractがなければPassの証拠�
 
 - [AISVS v1.0 C8要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C08-Memory-Embeddings-and-Vector-Database.md)
 - [AISVS v1.0 C8.1 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C08-Memory-and-Embeddings/C08-01-Access-Controls-Memory-RAG.md)
-- [C8全体分析](../../../docs/c08-landscape.md)
+- [C8 Family概要](../README.md)
 
 ## Changelog
 

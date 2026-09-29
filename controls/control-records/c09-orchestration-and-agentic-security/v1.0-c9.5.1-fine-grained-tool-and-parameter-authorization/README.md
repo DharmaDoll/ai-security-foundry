@@ -227,7 +227,7 @@ Engineering Mappingは未評価。独立したPatternの存在やMapping成功�
 
 - [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
 - [AISVS v1.0 C9.5 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-05-Agent-Authorization-Delegation.md)
-- [C9全体分析と選定理由](../../../docs/c09-landscape.md)
+- [C9 Family概要](../README.md)
 - [C5.2.1：明示的AllowとDefault Deny](../../c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/README.md)
 - [C5.2.5：PDPの隔離](../../c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md)
 

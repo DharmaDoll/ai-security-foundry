@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 3
 
-学習資料：[C10.4 Schema, Message, and Input Validation](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation/learning.md)
+学習資料：[C10.4 Schema, Message, and Input Validation](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation.md)
 
 ## Upstream basis
 
@@ -138,7 +138,7 @@ Definitionが同じでもBackend Behavior、Data Source、Dependencyは変化し
 
 - [AISVS v1.0 C10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)
 - [AISVS v1.0 C10.4 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C10-MCP-Security/C10-04-Schema-Message-Validation.md)
-- [C10全体分析](../../../docs/c10-landscape.md)
+- [C10 Family概要](../README.md)
 
 ## Changelog
 

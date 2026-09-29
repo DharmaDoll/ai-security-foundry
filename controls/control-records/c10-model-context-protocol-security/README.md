@@ -2,8 +2,19 @@
 
 対象はAISVS v1.0、固定Revision `78775233666a2022dcfb82037e5e029116955c00`。
 以下は原文の代替や適合チェックリストではなく、C10の保証境界と、整備済みControlへの
-入口を示すRepository interpretationである。全23要件の分析と段階的な着手順序は
-[C10全体分析](../../docs/c10-landscape.md)を参照する。
+入口を示すRepository interpretationである。開発順序と進捗は[Controls計画](../../plan.md)を参照する。
+
+## この章で保証したいこと
+
+MCPでは「配布元・設定 → Hostでの導入と起動」「Client → Serverの各要求」
+「Server → 下流API」「Tool定義・応答 → Model Contextと次の行動」が別々の信頼境界となる。
+接続成功、Session、Token、署名の一つだけで境界全体を信頼しない。
+
+Research上の注意：出所の暗号的検証は部品の無害性を証明しない。Session確立は毎要求の認可を
+代替せず、切断はSession状態の削除と同義ではない。HTTPS、Origin、Hostは異なる確認であり、
+stdio自体には隔離機能がない。Schemaや署名が正しくても内容は危険になり得る。
+Tool定義変更の通知と再承認前の実行停止も別の保証である。これらは検討観点であり、
+AISVS要件、MCP仕様の規範、Researchの提案を混同しない。
 
 ## Category：C10 Model Context Protocol (MCP) Security
 

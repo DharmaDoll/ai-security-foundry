@@ -17,8 +17,8 @@ last_updated: "2026-09-27"
 | C2.1 Prompt Injection Defenses | 8 | L1: 5、L2: 2、L3: 1 | 検査対象と利用内容の整合性、指示階層、入力の隠蔽 |
 | C2.2 Content & Policy Screening | 4 | L1: 2、L2: 1、L3: 1 | 禁止内容、多言語、非テキスト、組み合わせ攻撃 |
 
-- [x] [C2.1 講義・対話](v1.0-c2.1-prompt-injection-defenses/learning.md)
-- [x] [C2.2 講義・対話](v1.0-c2.2-content-policy-screening/learning.md)
+- [x] [C2.1 講義・対話](v1.0-c2.1-prompt-injection-defenses.md)
+- [x] [C2.2 講義・対話](v1.0-c2.2-content-policy-screening.md)
 
 実装計画は[Issue #4](https://github.com/DharmaDoll/ai-security-foundry/issues/4)。一要件一Patternではなく、実システムの設計問題から独立して開発する。
 

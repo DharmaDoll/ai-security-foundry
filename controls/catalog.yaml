@@ -9,6 +9,108 @@ catalog:
   upstream_revision: 78775233666a2022dcfb82037e5e029116955c00
 
 requirements:
+  - versioned_id: v1.0-C2.1.1
+    requirement_id: C2.1.1
+    family:
+      id: C2
+      title: Input Validation
+    section:
+      id: C2.1
+      title: Prompt Injection Defenses
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C02-User-Input-Validation/C02-01-Prompt-Injection-Defense.md
+      last_verified: "2026-09-28"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c02-input-validation/v1.0-c2.1.1-normalize-input-before-tokenization-or-embedding/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C2.1.2
+      - v1.0-C2.1.3
+      - v1.0-C2.1.5
+      - v1.0-C8.2.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C2.1.2
+    requirement_id: C2.1.2
+    family:
+      id: C2
+      title: Input Validation
+    section:
+      id: C2.1
+      title: Prompt Injection Defenses
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C02-User-Input-Validation/C02-01-Prompt-Injection-Defense.md
+      last_verified: "2026-09-29"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c02-input-validation/v1.0-c2.1.2-detect-and-mitigate-encoded-input-smuggling/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C2.1.1
+      - v1.0-C2.1.3
+      - v1.0-C2.1.5
+      - v1.0-C2.1.7
+      - v1.0-C8.2.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C2.1.3
+    requirement_id: C2.1.3
+    family:
+      id: C2
+      title: Input Validation
+    section:
+      id: C2.1
+      title: Prompt Injection Defenses
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C02-User-Input-Validation/C02-01-Prompt-Injection-Defense.md
+      last_verified: "2026-09-29"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c02-input-validation/v1.0-c2.1.3-screen-and-block-model-steering-inputs/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C2.1.1
+      - v1.0-C2.1.2
+      - v1.0-C2.1.6
+      - v1.0-C2.2.3
+      - v1.0-C9.3.6
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C2.1.4
+    requirement_id: C2.1.4
+    family:
+      id: C2
+      title: Input Validation
+    section:
+      id: C2.1
+      title: Prompt Injection Defenses
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C02-User-Input-Validation/C02-01-Prompt-Injection-Defense.md
+      last_verified: "2026-09-29"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c02-input-validation/v1.0-c2.1.4-reject-over-limit-input-without-truncation/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C2.1.3
+      - v1.0-C2.1.6
+      - v1.0-C2.1.8
+      - v1.0-C9.1.2
+    mapping_assessment_refs: []
+
   - versioned_id: v1.0-C5.1.1
     requirement_id: C5.1.1
     family:

@@ -6,9 +6,13 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 
 ## Current artifacts
 
+[C2 Family overview](control-records/c02-input-validation/README.md)からC2の保証範囲と各Controlへ辿れる。
+[開発計画](plan.md)に沿ってC2.1から着手し、C2.1.1〜C2.1.4の4件を
+`verifiable`として整備した。C2.1の残る4要件とC2.2の4要件は未整備であり、学習完了とは区別する。
+
 個別Controlは`control-records/<family>/<versioned-requirement>/README.md`に置き、
 解釈・検証・証拠・限界の正本とする。新しい学習コンテンツは
-`docs/learning/<family>/<versioned-section>/learning.md`にSection単位で置き、各Sectionの
+`docs/learning/<family>/<versioned-section>.md`にSection単位で置き、各Sectionの
 全Requirementを一つの講義として扱う。両者は必要時に相互リンクし、CatalogはControl本文だけを参照する。
 [Family README](control-records/c05-access-control-and-identity/README.md)は、Category、Section、
 Requirementを俯瞰して個別Controlへ辿るための入口である。
@@ -50,17 +54,17 @@ python3 controls/scripts/validate_catalog.py
 python3 controls/tests/test_validate_catalog.py
 ```
 
-The current catalog contains metadata and substantive documents for all 11 C5
-Requirements, all 11 C8 Requirements, all 34 C9 Requirements, and all 23 C10 Requirements (79 Controls).
+The current catalog contains metadata and substantive documents for four C2 Requirements,
+all 11 C5 Requirements, all 11 C8 Requirements, all 34 C9 Requirements, and all 23 C10 Requirements (83 Controls).
 `verification_level` records AISVS Level 1, 2, or 3; it is distinct from repository
-Control maturity. All 79 substantive
+Control maturity. All 83 substantive
 Controls are `verifiable`, the current target for a mature repository Control. This
 describes the artifacts, not a maintainer's learning progress or proof that a
 product implements them. No Engineering Pattern Mapping is asserted.
 
 ## C8 development plan
 
-[C8の全体分析と着手順序](docs/c08-landscape.md)に、全3節・11要件の保証範囲と
+[C8 Family概要](control-records/c08-memory-embeddings-and-vector-database-security/README.md)に、全3節・11要件の保証範囲と
 Researchからの注意点を整理した。C8.1 Access Controls on Memory & RAG Indicesの3要件に加え、
 C8.2 Embedding Sanitization & Validationの5要件を`verifiable`まで整備した。C8.2では、Sensitive Fieldの
 Pre-embedding処理、Vector異常のProduction投入前検疫、Source検証を伴うTrusted Memory昇格、
@@ -87,7 +91,7 @@ CategoryとSectionの保証境界、および整備済みRequirementへの入口
 
 ## C10 development plan
 
-[C10の全体分析と着手順序](docs/c10-landscape.md)に、全4節・23要件の保証範囲と
+[C10 Family概要](control-records/c10-model-context-protocol-security/README.md)に、全4節・23要件の保証範囲と
 Researchからの注意点を整理した。最初の代表要件はC10.2.7（Level 2：受信Tokenの
 下流APIへの転送禁止）。この代表Controlを解釈・適用境界・脅威・正常/拒否試験・
 証拠期待値・限界まで整備し、Catalogへ`verifiable`で追加した。
@@ -125,7 +129,7 @@ CategoryとSectionの保証境界、および整備済みRequirementへの入口
 
 ## C9 Control records
 
-[C9の全体分析と着手順序](docs/c09-landscape.md)に、全6節・34要件の保証範囲、
+[C9 Family概要](control-records/c09-orchestration-and-agentic-security/README.md)に、全6節・34要件の保証範囲、
 C5との違い、Researchからの検討観点を整理した。C9全34件について、
 解釈・適用境界・脅威・Positive/Negative Verification・証拠期待値・限界を備えた
 `verifiable` Controlを整備した。最初の代表要件はC9.5.1。
@@ -206,8 +210,7 @@ control-records/
 docs/learning/
 └── cNN-family-slug/
     ├── README.md
-    └── vX.Y-cN.N-section-slug/
-        └── learning.md
+    └── vX.Y-cN.N-section-slug.md
 ```
 
 For example, the Golden Control is stored under

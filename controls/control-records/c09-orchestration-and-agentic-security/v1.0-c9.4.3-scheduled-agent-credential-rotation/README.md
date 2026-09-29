@@ -143,7 +143,7 @@ Engineering PatternとMappingは独立して評価し、その存在を本Contro
 
 - [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
 - [AISVS v1.0 対応Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C09-Orchestration-and-Agents/C09-04-Agent-Identity-and-Audit.md)
-- [C9全体分析](../../../docs/c09-landscape.md)
+- [C9 Family概要](../README.md)
 
 ## Changelog
 

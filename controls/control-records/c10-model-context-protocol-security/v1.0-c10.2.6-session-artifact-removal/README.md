@@ -19,7 +19,7 @@ mapping_assessment_refs: []
 
 AISVS Verification Level: 2
 
-学習資料：[C10.2 Authentication & Authorization](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.2-authentication-and-authorization/learning.md)
+学習資料：[C10.2 Authentication & Authorization](../../../docs/learning/c10-model-context-protocol-security/v1.0-c10.2-authentication-and-authorization.md)
 
 ## Upstream basis
 
@@ -154,7 +154,7 @@ AISVS本文は「Session終了」とArtifact範囲を定義しないため、Sys
 
 - [AISVS v1.0 C10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)
 - [AISVS v1.0 C10.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C10-MCP-Security/C10-02-Authentication-Authorization.md)
-- [C10全体分析](../../../docs/c10-landscape.md)
+- [C10 Family概要](../README.md)
 
 ## Changelog
 
