@@ -178,6 +178,9 @@ Categoryから各Requirementまでの保証範囲を短い問いで俯瞰でき�
 
 ## Navigation and learning
 
+- [AISVS Family assurance map](family-assurance-map.md):
+  three representative system views showing where the 12 families ask assurance questions;
+  not a conformance or Engineering Pattern mapping.
 - [AISVS C7 Model Behavior learning guide](learning/c07-model-behavior-output-control-and-safety-assurance/README.md):
   output validation lectures, beginning with C7.1 and streaming trust boundaries.
 - [AISVS C2 Input Validation learning guide](learning/c02-input-validation/README.md):
@@ -191,8 +194,12 @@ Categoryから各Requirementまでの保証範囲を短い問いで俯瞰でき�
   completed Section-based learning notes for all four C10 Sections.
 - [AISVS C12 Monitoring, Logging & Anomaly Detection learning guide](learning/c12-monitoring-logging-and-anomaly-detection/README.md):
   completed learning notes for all five Sections, including privacy and operating-cost trade-offs.
+- [AISVS C2 family overview](control-records/c02-input-validation/README.md):
+  input-validation assurance boundaries and Requirement navigation.
 - [AISVS C5 family overview](control-records/c05-access-control-and-identity/README.md):
   Category, Section, and Requirement-level questions and prohibited failure states.
+- [AISVS C7 family overview](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md):
+  output-format, reliability, safety, and attribution assurance boundaries.
 - [AISVS C9 family overview](control-records/c09-orchestration-and-agentic-security/README.md):
   a compact overview of what each C9 assurance layer asks and must prevent.
 

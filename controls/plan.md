@@ -27,6 +27,104 @@ C2.1の残りは5要件。次はC2.1.4でContext上限と黙った切詰めの�
 切詰め挙動まで追い、事前の資料選択と区別した。C2.1の残りは4要件。
 次はC2.1.5の文字集合Allowlistを、対応言語を不当に壊さない保証と併せて扱う。
 
+同日：[C2.1.5 Control](control-records/c02-input-validation/v1.0-c2.1.5-allowlist-required-input-characters/README.md)を
+`verifiable`まで整備した。Field・用途・対応言語別のAllowlistと、許可外文字の拒否／必要文字の受入れを
+対にして検証可能にした。C2.1の残りは3要件。次はC2.1.6の指示階層を、Model内の優先順位と
+Application側の決定論的な権限境界を混同せずに扱う。
+
+同日：[C2.1.6 Control](control-records/c02-input-validation/v1.0-c2.1.6-preserve-instruction-hierarchy-across-steps/README.md)を
+`verifiable`まで整備した。上位Roleを保つ構造と、User・Tool・RAG・Memoryを経た後続Stepでの
+実効的な指示優先を分けて検証する。認可Decisionは別保証とした。C2.1の残りは2要件。
+次はC2.1.7の予約特殊TokenがLiteralとして扱われる境界を確認する。
+
+同日：[C2.1.7 Control](control-records/c02-input-validation/v1.0-c2.1.7-render-reserved-tokens-as-literal-content/README.md)を
+`verifiable`まで整備した。非信頼Text中の予約表現が実際のRole／Turn境界に変わらないことを
+Model・Tokenizer・Template・入力経路ごとに確認する。C2.1の残りはC2.1.8の1要件。
+次はMany-shot検出をContext上限や単なる連続投稿制限と区別して扱う。
+
+同日：[C2.1.8 Control](control-records/c02-input-validation/v1.0-c2.1.8-detect-many-shot-jailbreak-patterns/README.md)を
+`verifiable`まで整備した。Many-shot検知をContext上限、投稿回数、Modelの拒否応答と区別し、
+正常なFew-shotとの誤判定も試験対象にした。C2.1全8要件の初期成熟化が揃った。
+次はSection横断で保証境界とCatalogの整合を確認し、その後C2.2の着手を判断する。
+
+同日：C2.1全8件を横断確認し、Catalog・Level・Linkの整合を確認した。
+C2.1.7では事前拒否をLiteral EncodingのPass証拠としないよう検証条件を修正した。
+C2.1の初期Sectionレビューを終え、次はC2.2の保証範囲を確認する。
+
+同日：C2.2の最初の[C2.2.1 Control](control-records/c02-input-validation/v1.0-c2.2.1-screen-prompts-before-model-context/README.md)を
+`verifiable`まで整備した。四つの内容区分と設定可能な閾値による分類に加え、
+閾値超過時のModel投入前拒否／無害化を独立して検証する。C2.2の残り3要件は未整備。
+次はC2.2.2で非対応言語における分類の評価を扱う。
+
+2026-09-30：[C2.2.2 Control](control-records/c02-input-validation/v1.0-c2.2.2-evaluate-content-classification-for-unsupported-languages/README.md)を
+`verifiable`まで整備した。非対応・不明・混在言語での分類評価を、全言語対応や
+一律拒否の義務と混同しない。C2.2の残りはC2.2.3・C2.2.4の2要件。
+次は非テキスト入力の検査境界を扱う。
+
+同日：[C2.2.3 Control](control-records/c02-input-validation/v1.0-c2.2.3-check-non-text-inputs-for-hidden-attacks/README.md)を
+`verifiable`まで整備した。画像・動画・音声の隠蔽／攪乱を、元Fileだけでなく
+Modelが消費する変換後表現との関係で検証する。OCRや文字起こしを全成分の
+安全性証明としない。C2.2の残りはC2.2.4の1要件。次は複数形式の連携攻撃を扱う。
+
+同日：[C2.2.4 Control](control-records/c02-input-validation/v1.0-c2.2.4-detect-and-block-cross-modal-attacks/README.md)を
+`verifiable`まで整備した。個別形式では無害でも、合成後に攻撃となるCaseを検出し、
+Logのみではなく下流への伝播を遮断することを試験する。これでC2.2の4要件が揃った。
+次はSection横断で隣接要件の保証境界、Catalog・Level・Linkを確認する。
+
+同日：C2.2の4件を横断確認し、内容分類、非対応言語での評価、非テキストの検査、
+複合形式攻撃の検出・遮断という保証境界を[Family概要](control-records/c02-input-validation/README.md)に整理した。
+固定版のLevel、Catalog、Control参照を照合した。C2全2 Section・12要件の初期成熟化が揃った。
+これはControl Artifactの到達点であり、実製品の適合やすべての入力攻撃の防止を意味しない。
+次はC7・C12等の未整備Familyを、保証上の必要性と学習資料の蓄積に照らして選ぶ。
+
+### C7 checkpoint — 2026-09-30
+
+C2入力境界の初期成熟化に続き、Model出力を受け入れる境界を先に扱うためC7を選んだ。
+[Family概要](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md)で
+全4 Section・13要件の保証上の問いを整理した。これは未作成ControlのPlaceholderではない。
+最初の[C7.1.1 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.1.1-validate-and-reject-model-outputs-by-schema/README.md)を
+正規要件と対応Researchから`verifiable`まで整備した。全Model出力のSchema適合と
+不一致拒否を、内容安全性・事実性・認可・長さ／終了制御から分けて確認する。
+残る12要件は未整備。次は同SectionのC7.1.2で長さと終了状態の保証を扱う。
+
+同日：[C7.1.2 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.1.2-bound-model-output-length-and-termination/README.md)を
+`verifiable`まで整備した。出力上限が実際に働くことと、正常完了・上限到達・中断を
+区別して未完了出力を安全に扱うことを分けて検証する。C7.1の2要件が揃ったため、
+次はSection横断でSchema検証との境界とCatalog・Level・Linkを確認する。
+
+同日：C7.1の2件を横断確認し、Schemaによる受け入れ判定と出力Bound・終了判定の
+違いを[Family概要](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md)に明記した。
+固定版のLevel、Catalog、Control参照を照合し、C7.1の初期Sectionレビューを終えた。
+次はC7.2の保証範囲を確認し、信頼性評価と低Confidence時の処理を分けて着手する。
+
+同日：[C7.2.1 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2.1-estimate-generated-answer-reliability/README.md)を
+`verifiable`まで整備した。Confidenceの有無ではなく、回答の信頼性という対象、
+代表的な正誤との関係、誤った高Confidenceの限界を評価する。
+低Confidence時の自動遮断・FallbackはC7.2.2、高Impact回答の追加検証はC7.2.3として分けた。
+次はC7.2.2でScoreを実際の公開判定へ結び付ける。
+
+2026-10-01：[C7.2.2 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2.2-block-or-fallback-below-confidence-threshold/README.md)を
+`verifiable`まで整備した。定義済み閾値未満の回答が、Warningのみで公開・利用されず、
+自動で遮断または元回答を含まないFallbackへ切り替わることを試験する。
+Scoreの校正はC7.2.1、高Impact回答の追加検証はC7.2.3に分ける。
+次はC7.2.3でConfidenceと誤答時のImpactを別軸として扱う。
+
+同日：[C7.2.3 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2.3-additional-verification-for-high-risk-responses/README.md)を
+`verifiable`まで整備した。Policy上のHigh-risk回答はConfidenceにかかわらず、
+具体的な主張・操作内容を対象にした追加検証を通す。検証方式を一律に固定せず、
+人間の承認や別Modelの同意だけで適合としない。C7.2の3要件が揃ったため、
+次はSection横断で保証境界とCatalog・Level・Linkを確認する。
+
+同日：C7.2の3件を横断確認し、Confidence推定、閾値未満の自動Gate、
+高Impact回答の追加検証を[Family概要](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md)で分離した。
+固定版のLevel、Catalog、Control参照を照合し、C7.2の初期Sectionレビューを終えた。
+次はC7.3の出力安全性を、内容分類・内部情報・外向きRequest・隠蔽の別保証として扱う。
+
+同日：[C7.3.1 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.1-classify-and-block-harmful-responses/README.md)を
+`verifiable`まで整備した。全Responseの有害内容分類と、該当時の公開・利用遮断を
+接続して検証する。入力分類のC2.2.1、内部情報漏えいのC7.3.2、外向きRequestの
+C7.3.3とは保証を分ける。次はC7.3.2の出力側の内部情報漏えい防止を扱う。
+
 ### C5 implementation checkpoint — 2026-09-08
 
 C5全11 RequirementのControlを`verifiable`まで整備した。Phase 1〜3の成果物と

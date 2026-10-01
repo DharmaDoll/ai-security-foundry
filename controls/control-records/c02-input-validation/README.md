@@ -50,21 +50,29 @@ ResearchはUnicode隠蔽、変換順序、検出器回避、長文・多ター�
 | [C2.1.2](v1.0-c2.1.2-detect-and-mitigate-encoded-input-smuggling/README.md) | 1 | Encoding・表現の隠蔽を検出し、許可された方法で緩和するか。 | 隠した指示を復号して未検査のまま利用する。 |
 | [C2.1.3](v1.0-c2.1.3-screen-and-block-model-steering-inputs/README.md) | 1 | Modelを誘導し得る全入力を検査し、検知時に遮断するか。 | 一部経路を素通しにする、または検知だけで継続する。 |
 | [C2.1.4](v1.0-c2.1.4-reject-over-limit-input-without-truncation/README.md) | 1 | Context上限超過入力を切り詰めず拒否するか。 | 超過後に黙って末尾を捨て、意味や指示を変える。 |
-| C2.1.5 | 1 | 用途に必要な文字だけを許可するか。 | 不要な不可視・制御文字を無条件で受け取る。 |
-| C2.1.6 | 2 | 信頼できる指示が後続の非信頼入力に上書きされないか。 | Userや文書が自称したRoleを上位指示として採用する。 |
-| C2.1.7 | 2 | 予約特殊Tokenの文字列表現をLiteralとして扱うか。 | 入力文字列が実際のMessage境界になる。 |
-| C2.1.8 | 3 | Many-shot Jailbreakの構造を検出できるか。 | 大量の例示による誘導を未評価で通す。 |
+| [C2.1.5](v1.0-c2.1.5-allowlist-required-input-characters/README.md) | 1 | 用途に必要な文字だけを許可するか。 | 不要な不可視・制御文字を無条件で受け取る、または必要な多言語文字を壊す。 |
+| [C2.1.6](v1.0-c2.1.6-preserve-instruction-hierarchy-across-steps/README.md) | 2 | 信頼できる指示が後続の非信頼入力に上書きされないか。 | Userや文書が自称したRoleを上位指示として採用する。 |
+| [C2.1.7](v1.0-c2.1.7-render-reserved-tokens-as-literal-content/README.md) | 2 | 予約特殊Tokenの文字列表現をLiteralとして扱うか。 | 入力文字列が実際のMessage境界になる。 |
+| [C2.1.8](v1.0-c2.1.8-detect-many-shot-jailbreak-patterns/README.md) | 3 | Many-shot Jailbreakの構造を検出できるか。 | 大量の例示による誘導を未評価で通す。 |
 
 ## C2.2 Requirement
 
-C2.2は学習済みだがControlは未整備。対応Researchを確認してから個別に成熟させる。
+C2.2は学習済み。対応Researchを確認し、RequirementごとにControlを成熟させる。
+最初のC2.2.1は、内容分類だけでなく閾値超過時のModel投入前制御までを扱う。
+
+| ID | 固有の確認点 | これだけでは保証しないこと |
+|---|---|---|
+| C2.2.1 | 四区分の内容分類と閾値超過時の投入前制御 | 非対応言語での分類精度 |
+| C2.2.2 | 非対応・不明言語での分類評価 | 全言語対応や評価後の一律拒否 |
+| C2.2.3 | 非テキスト入力の隠蔽・攪乱・既知攻撃の検査 | 複数形式の関係性から成立する攻撃の遮断 |
+| C2.2.4 | 複数形式にまたがる攻撃の検出と遮断 | 下流Actionの決定論的認可 |
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
-| C2.2.1 | 1 | 定めた内容区分とThresholdで各Promptを評価するか。 | 禁止内容を評価せずModelへ渡す。 |
-| C2.2.2 | 1 | 非対応言語で分類が適用できるか確認するか。 | 非対応言語を対応済みと誤認する。 |
-| C2.2.3 | 2 | 非テキスト入力の隠蔽・攪乱を確認するか。 | 画像・音声等を検査対象外の抜け道にする。 |
-| C2.2.4 | 3 | 複数形式をまたぐ連携攻撃を検出・遮断するか。 | 各形式だけ個別に安全と判定し、組合せで攻撃を成立させる。 |
+| [C2.2.1](v1.0-c2.2.1-screen-prompts-before-model-context/README.md) | 1 | 四つの内容区分で各PromptをScore化し、閾値超過を投入前に拒否・無害化するか。 | 閾値超過をLogだけに残して未処理のままModelへ渡す。 |
+| [C2.2.2](v1.0-c2.2.2-evaluate-content-classification-for-unsupported-languages/README.md) | 1 | 非対応・不明言語での分類性能を実際のPrompt経路で評価するか。 | 英語での成功やProviderの対応表だけで多言語の有効性を主張する。 |
+| [C2.2.3](v1.0-c2.2.3-check-non-text-inputs-for-hidden-attacks/README.md) | 2 | 非テキスト入力の隠蔽・攪乱と、変換後にModelが見る内容を検査するか。 | 元Fileや抽出Textだけを見て、未検査のMedia成分を検査済みと扱う。 |
+| [C2.2.4](v1.0-c2.2.4-detect-and-block-cross-modal-attacks/README.md) | 3 | 異なる入力形式の組合せで成立する攻撃を検出・遮断するか。 | 各形式だけを個別に安全と判定し、合成後の攻撃をLogのみで通す。 |
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md
 
