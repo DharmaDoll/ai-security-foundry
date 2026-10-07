@@ -40,6 +40,16 @@ C7.2では、信頼性を推定する（C7.2.1）、低Confidenceを自動で遮
 （C7.2.2）、誤答時のImpactが高い回答を追加検証する（C7.2.3）を分ける。
 高ConfidenceはHigh-riskの追加検証を省略する理由にならない。
 
+C7.3では、有害Categoryの分類・遮断（C7.3.1）、内部情報の開示検出・遮断
+（C7.3.2）、出力起点の外向き通信防止（C7.3.3）、隠れた・誤認を誘う表現の
+検査（C7.3.4）を分ける。C7.3.4の「検査」は一律削除を意味せず、
+見た目だけを根拠に他の3件をPassとしない。
+
+C7.4のRAGでは、出典が回答に示されるか（C7.4.1）、その出典を誰が
+どこから構成したか（C7.4.2）、個々の主張をChunkへ辿れるか（C7.4.3）を
+分ける。生成MediaのWatermark（C7.4.4）は別の枝であり、AI生成を示す
+標識を発行者認証・非改変・事実性と同一視しない。
+
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
 | [C7.1.1](v1.0-c7.1.1-validate-and-reject-model-outputs-by-schema/README.md) | 1 | 全Model出力を定義済みSchemaで検証し、不一致を拒否するか。 | JSONとして読めたことや生成時の形式指定だけで下流へ渡す。 |
@@ -48,13 +58,13 @@ C7.2では、信頼性を推定する（C7.2.1）、低Confidenceを自動で遮
 | [C7.2.2](v1.0-c7.2.2-block-or-fallback-below-confidence-threshold/README.md) | 2 | 閾値未満の低Confidence回答を自動で遮断・Fallbackへ移すか。 | 低信頼と判定してもWarningだけで元回答を返す。 |
 | [C7.2.3](v1.0-c7.2.3-additional-verification-for-high-risk-responses/README.md) | 3 | Policy上High-riskの回答へ追加検証を行うか。 | 高Confidenceを理由に高Impact回答の追加確認を省く。 |
 | [C7.3.1](v1.0-c7.3.1-classify-and-block-harmful-responses/README.md) | 1 | 全Responseを有害内容Classifierで検査し、該当内容を遮断するか。 | 検知しても公開・送信を続ける。 |
-| C7.3.2 | 2 | System PromptやBackend Dataの漏えいを検出・遮断するか。 | 内部情報をUser向け出力へ混入させる。 |
-| C7.3.3 | 2 | Model生成出力が外向きRequestを起動しないか。 | 未信頼出力から外部通信が自動的に発生する。 |
-| C7.3.4 | 3 | 文字・形式・Metadata等で隠れた／誤認を誘う内容を検査するか。 | 見た目だけで安全と判定する。 |
-| C7.4.1 | 1 | RAG利用回答に元文書へのAttributionがあるか。 | 根拠を辿れない回答を出典付きと表示する。 |
-| C7.4.2 | 1 | AttributionをModel生成TextではなくRetrieval Metadataから得るか。 | Modelが架空の出典を作れる。 |
-| C7.4.3 | 2 | RAG回答の主張を取得Chunkへ辿れるか。 | 文書名だけで個々の主張の裏付けが不明になる。 |
-| C7.4.4 | 3 | 生成MediaへAI生成を証明するWatermarkを付けるか。 | 生成物の由来を確認できない。 |
+| [C7.3.2](v1.0-c7.3.2-block-system-prompt-and-backend-data-disclosure/README.md) | 2 | System Promptや許されないBackend Dataの出力開示を検出・遮断するか。 | 検知した内部情報をそのまま配送する。 |
+| [C7.3.3](v1.0-c7.3.3-prevent-output-triggered-outbound-requests/README.md) | 2 | Model生成出力だけで外向きRequestが起動しないか。 | 未信頼出力の描画・Preview・転送だけで通信が始まる。 |
+| [C7.3.4](v1.0-c7.3.4-check-hidden-encoded-and-misleading-outputs/README.md) | 3 | 文字・形式・Metadata等で隠れた／誤認を誘う内容を検査するか。 | 表示本文だけを見てRawや下流の別解釈を見落とす。 |
+| [C7.4.1](v1.0-c7.4.1-attribute-rag-responses-to-source-documents/README.md) | 1 | RAG利用回答に識別可能な元文書へのAttributionがあるか。 | 出典がない、または元文書を特定できない回答を出典付きと扱う。 |
+| [C7.4.2](v1.0-c7.4.2-derive-rag-attributions-from-retrieval-metadata/README.md) | 1 | AttributionをModel生成TextではなくRetrieval Metadataから得るか。 | Modelが未取得の出典を作成・上書きできる。 |
+| [C7.4.3](v1.0-c7.4.3-trace-rag-claims-to-retrieved-chunks/README.md) | 2 | RAG回答の主張を取得Chunkへ辿り、該当箇所が支えるか確認できるか。 | 文書名だけで個々の主張の裏付けが不明になる。 |
+| [C7.4.4](v1.0-c7.4.4-watermark-ai-generated-media/README.md) | 3 | 生成Mediaの最終配布物でAI生成Watermarkを検証できるか。 | 生成時の付与だけを見て、配布物では標識を確認できない。 |
 
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
 

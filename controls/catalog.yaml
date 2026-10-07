@@ -798,6 +798,184 @@ requirements:
       - v1.0-C7.3.4
     mapping_assessment_refs: []
 
+  - versioned_id: v1.0-C7.3.2
+    requirement_id: C7.3.2
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.3
+      title: Output Safety
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-03-Output-Safety-Privacy-Explainability.md
+      last_verified: "2026-10-02"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.2-block-system-prompt-and-backend-data-disclosure/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.2.2
+      - v1.0-C5.2.4
+      - v1.0-C7.3.1
+      - v1.0-C7.3.3
+      - v1.0-C7.3.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C7.3.3
+    requirement_id: C7.3.3
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.3
+      title: Output Safety
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-03-Output-Safety-Privacy-Explainability.md
+      last_verified: "2026-10-02"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.3-prevent-output-triggered-outbound-requests/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C7.3.2
+      - v1.0-C7.3.4
+      - v1.0-C9.3.1
+      - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C7.3.4
+    requirement_id: C7.3.4
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.3
+      title: Output Safety
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-03-Output-Safety-Privacy-Explainability.md
+      last_verified: "2026-10-02"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.4-check-hidden-encoded-and-misleading-outputs/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C2.1.2
+      - v1.0-C2.1.7
+      - v1.0-C7.1.1
+      - v1.0-C7.3.1
+      - v1.0-C7.3.2
+      - v1.0-C7.3.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C7.4.1
+    requirement_id: C7.4.1
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.4
+      title: Source Attribution & Citation Integrity
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-04-Source-Attribution-Citation-Integrity.md
+      last_verified: "2026-10-03"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.1-attribute-rag-responses-to-source-documents/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.2.2
+      - v1.0-C7.2.1
+      - v1.0-C7.4.2
+      - v1.0-C7.4.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C7.4.2
+    requirement_id: C7.4.2
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.4
+      title: Source Attribution & Citation Integrity
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-04-Source-Attribution-Citation-Integrity.md
+      last_verified: "2026-10-03"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.2-derive-rag-attributions-from-retrieval-metadata/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.2.2
+      - v1.0-C7.4.1
+      - v1.0-C7.4.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C7.4.3
+    requirement_id: C7.4.3
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.4
+      title: Source Attribution & Citation Integrity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-04-Source-Attribution-Citation-Integrity.md
+      last_verified: "2026-10-03"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.3-trace-rag-claims-to-retrieved-chunks/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C5.2.2
+      - v1.0-C7.2.1
+      - v1.0-C7.2.3
+      - v1.0-C7.4.1
+      - v1.0-C7.4.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C7.4.4
+    requirement_id: C7.4.4
+    family:
+      id: C7
+      title: Model Behavior, Output Control & Safety Assurance
+    section:
+      id: C7.4
+      title: Source Attribution & Citation Integrity
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C07-Model-Behavior/C07-04-Source-Attribution-Citation-Integrity.md
+      last_verified: "2026-10-03"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.4-watermark-ai-generated-media/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C7.3.4
+      - v1.0-C7.4.1
+      - v1.0-C7.4.2
+      - v1.0-C7.4.3
+    mapping_assessment_refs: []
+
   - versioned_id: v1.0-C9.1.1
     requirement_id: C9.1.1
     family:
