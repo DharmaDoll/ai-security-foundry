@@ -321,6 +321,7 @@ Section学習の完了は、学習者が次を自分の言葉で短く説明で�
 - [C8：Memory, Embeddings & Vector Database Security](c08-memory-embeddings-and-vector-database-security/README.md)
 - [C9：Orchestration and Agentic Security](c09-orchestration-and-agentic-security/README.md)
 - [C10：Model Context Protocol (MCP) Security](c10-model-context-protocol-security/README.md)
+- [C11：Adversarial Robustness](c11-adversarial-robustness/README.md)
 - [C12：Monitoring, Logging & Anomaly Detection](c12-monitoring-logging-and-anomaly-detection/README.md)
 
 ## Reference learning note
