@@ -125,6 +125,274 @@ Scoreの校正はC7.2.1、高Impact回答の追加検証はC7.2.3に分ける。
 接続して検証する。入力分類のC2.2.1、内部情報漏えいのC7.3.2、外向きRequestの
 C7.3.3とは保証を分ける。次はC7.3.2の出力側の内部情報漏えい防止を扱う。
 
+2026-10-02：[C7.3.2 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.2-block-system-prompt-and-backend-data-disclosure/README.md)を
+`verifiable`まで整備した。System PromptとBackend Dataの意図しない出力開示を
+検知・遮断する一方、正当に許可されたBackend Dataの利用は一律に拒否しない。
+受取権限の決定・取得認可はC5側の独立した保証とし、Filterだけで代替しない。
+次はC7.3.3のModel出力を契機とする外向きRequestを扱う。
+
+同日：[C7.3.3 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.3-prevent-output-triggered-outbound-requests/README.md)を
+`verifiable`まで整備した。URL文字列の表示と、出力だけを契機とする通信を分け、
+Browser・Server・Toolでの外向きRequestを観測して検証する。明示操作や
+独立したPolicy判断に基づく正当な通信は一律禁止としない。
+次はC7.3.4の隠れた・符号化された・誤認を誘う内容の検査を扱う。
+
+同日：[C7.3.4 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.4-check-hidden-encoded-and-misleading-outputs/README.md)を
+`verifiable`まで整備した。Raw・表示・下流解釈の差をSink別に検査し、
+正当な多言語表現の一律削除を要件化しない。C7.3.1〜C7.3.4を横断確認し、
+分類／開示／通信／隠蔽の四つを別保証として[Family概要](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md)に整理した。
+これでC7.3の初期Sectionレビューを終えた。次はC7.4の出典・引用の保証へ進む。
+
+2026-10-03：[C7.4.1 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.1-attribute-rag-responses-to-source-documents/README.md)を
+`verifiable`まで整備した。RAG回答に識別可能な参照元文書を示すことと、
+出典の生成主体（C7.4.2）、主張とChunkの支持関係（C7.4.3）を分ける。
+次はC7.4.2でRetrieval Metadataからの出典構成を扱う。
+
+同日：[C7.4.2 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.2-derive-rag-attributions-from-retrieval-metadata/README.md)を
+`verifiable`まで整備した。Citationの正本を今回のRetrieval Metadataへ結び付け、
+Model生成Textによる出典の追加・上書きを許さない。Metadata自体の汚染、
+出典の表示、主張の支持は別の保証として残す。次はC7.4.3のClaimと
+取得Chunkの対応を扱う。
+
+同日：[C7.4.3 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.3-trace-rag-claims-to-retrieved-chunks/README.md)を
+`verifiable`まで整備した。主張から今回取得したChunkの版・該当箇所へ辿れる
+ことと、その箇所が主体・数値・条件を支えるかの評価を分ける。NLI等の特定方式は
+必須化せず、明白な矛盾・誤主体・旧版の引用をNegative Testへ落とした。
+次はC7.4.4の生成MediaのWatermarkを扱う。
+
+同日：[C7.4.4 Control](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.4-watermark-ai-generated-media/README.md)を
+`verifiable`まで整備した。生成時の付与と最終配布物での検出を分け、
+通常の変換で失われる経路を試験する。Watermarkは特定の発行者、非改変、
+事実性を一律に証明しない。ResearchのC2PA併用例や法令解説を規範条件へ
+昇格させず、Textを含むMediaの範囲は用途ごとの判断として残した。
+C7.4の4要件が揃ったので、次はSectionとFamily全体の境界・Level・Linkを
+横断確認する。
+
+同日：C7.4の4件を横断確認した。C7.4.1〜C7.4.3はRAG回答の出典表示・
+出典の生成主体・主張と取得Chunkの対応という別保証であり、C7.4.4は生成Mediaの
+AI生成標識という独立した枝である。[Family概要](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md)、
+Catalog、ControlのLevel・参照先を照合し、C7の全13 Requirementの初期整備を
+`verifiable`で完了した。これはRepository Artifactの成熟度であって、実製品の
+適合や全ての誤出力の検出を保証しない。次の優先Familyは別途計画から選ぶ。
+
+### C12 checkpoint — 2026-10-03
+
+C2・C7の入力／出力境界に続き、その処理を運用中に観測・調査できるかを扱う
+C12を選んだ。全5 Section・21 Requirementの学習資料は既にあるが、Controlの
+成熟とは独立する。[Family概要](control-records/c12-monitoring-logging-and-anomaly-detection/README.md)へ
+各SectionとRequirementの保証上の問いを整理した。初回はC12.1の
+[C12.1.1 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.1-log-ai-interactions-with-session-context/README.md)を
+正規要件と対応Researchから`verifiable`まで整備した。Session／実行Contextと
+AI固有Telemetryの結合を直接の保証とし、Policy判断の詳細（C12.1.2）、
+推論Schema（C12.1.3）、RAG検索の記録（C12.1.4）を混ぜない。
+次はC12.1.2のSafety／Policy判断の監査可能な記録を扱う。
+
+同日：[C12.1.2 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.2-log-safety-filter-and-policy-decisions/README.md)を
+`verifiable`まで整備した。Safety／ModerationのAllow・Block・Redact・Error等を
+対象処理、Policy、Stage、判断と実際の扱いへ結び付ける。記録の存在を
+遮断の有効性と混同せず、Researchの特定SchemaやScoreを一律必須としない。
+次はC12.1.3の推論Event Schemaと最低Fieldを扱う。
+
+同日：[C12.1.3 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.3-structured-interoperable-inference-event-logs/README.md)を
+`verifiable`まで整備した。Model ID、入出力別Token数、Provider、Operationを
+構造化・比較可能なFieldとして記録し、ダミー値やProvider間の意味のずれを
+Negative Testで検出する。OTel固有属性、実Serving Modelの二重Field、
+Content既定除外はResearchの補足であり一律のNormative条件にしない。
+次はC12.1.4のRAG Retrieval Eventを扱う。
+
+2026-10-04：[C12.1.4 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.4-log-rag-retrieval-queries-documents-and-sources/README.md)を
+`verifiable`まで整備した。実際にRetrieverへ渡したQuery、取得文書、
+Knowledge Sourceを同じEventで辿れるようにする。Queryの復元不能なHashだけ、
+件数だけのLog、複数Sourceや旧版文書の取り違えをNegative Testへ落とした。
+全文の運用Log複製は必須化せず、保護された別Storeへ置く場合は参照整合性を
+試験する。C12.1の4要件が揃ったので、次はSection横断で境界・Level・Linkを
+確認する。
+
+同日：C12.1の4件を横断確認した。Session相関（C12.1.1）、Safety／Policy
+判断の詳細（C12.1.2）、推論Eventの共通Field（C12.1.3）、Retrievalの
+Query・文書・Source（C12.1.4）は、同じ処理を観測する別の保証である。
+[Family概要](control-records/c12-monitoring-logging-and-anomaly-detection/README.md)、
+Catalog、ControlのLevel・参照先を照合し、C12.1の初期Sectionレビューを
+終えた。Logの存在は遮断・認可・検知の有効性を示さず、Contentの過剰収集も
+正当化しない。次はC12.2の検知・Alertを、記録から独立した保証として扱う。
+
+同日：[C12.2.1 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.1-detect-and-alert-on-known-adversarial-inputs/README.md)を
+`verifiable`まで整備した。既知の攻撃的な入力を見つけ、調査につながる通知を
+出せるかを試す。入力の記録だけ、遮断だけでは合格としない。利用者の質問に
+加え、AIが読む外部文書やToolの返答も、実際にある経路について確認する。
+未知の攻撃を必ず見つけるとは主張しない。次はC12.2.2で、会話の流れや
+繰り返しから異常を見つける保証を扱う。
+
+同日：[C12.2.2 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.2-detect-unusual-conversation-and-probing-behavior/README.md)を
+`verifiable`まで整備した。一件ごとの危険な文面ではなく、会話の変化、拒否後の
+再試行、少しずつ条件を変える探り行動を見つけられるかを試す。回数が多い
+だけの正規利用を攻撃と決め付けず、誤判定も確認する。通知を要件本文の
+必須条件へ付け加えず、C12.2.1の通知と区別する。次はC12.2.3で、協調した
+攻撃などに合わせた個別の検知ルールを扱う。
+
+同日：[C12.2.3 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.3-detect-ai-specific-attacks-with-custom-rules/README.md)を
+`verifiable`まで整備した。協調した脱獄、不正な指示の混入、内部指示の引き出しを
+対象システム向けのルールで見つけられるか、合成した試行で確かめる。
+単発の既知文面の検知（C12.2.1）や一人の行動異常（C12.2.2）だけでは
+置き換えない。次はC12.2.4で、抽出に関する通知から問題の質問を調べられるかを扱う。
+
+同日：[C12.2.4 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.4-include-offending-query-metadata-in-extraction-alerts/README.md)を
+`verifiable`まで整備した。抽出の疑いを知らせる通知から問題の質問へ辿れるかを
+合成データで試す。通知名と総利用量だけでは足りない。質問本文の通知への
+直接添付や特定の項目名は必須にせず、別の保管先を使うなら参照が解決できる
+ことを確認する。次はC12.2.5で、AIの利用量を利用者・会話・機能・組織に
+正しく帰属させられるかを扱う。
+
+同日：[C12.2.5 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.5-attribute-token-usage-by-user-session-feature-and-team/README.md)を
+`verifiable`まで整備した。AIのトークン使用量が利用者・会話・機能・チーム
+または作業領域へ正しく結び付くかを、二つの組織にまたがる合成試験で確かめる。
+費用の急増を知らせる通知や予算上限は有用だが、この要件の必須条件には
+しない。次はC12.2.6で、AI APIを隠れた通信路として悪用する兆候の監視を扱う。
+
+同日：[C12.2.6 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.6-monitor-llm-api-traffic-for-covert-c2-activity/README.md)を
+`verifiable`まで整備した。管理対象からLLM APIへの経路を確認し、正規の
+AI利用に紛れた指令・情報の受け渡しを疑う信号が実際に評価されるかを、
+無害な模擬通信で試す。暗号化通信の全文取得や自動遮断は必須としない。
+C12.2の6要件が揃ったので、次はSection全体の保証境界、Level、Catalog、
+Linkを横断確認する。
+
+同日：C12.2の6件を横断確認した。既知の攻撃的な入力と通知（C12.2.1）、
+会話を通した不自然な行動（C12.2.2）、AI特有の攻撃を狙う個別ルール
+（C12.2.3）、抽出通知から質問への追跡（C12.2.4）、使用量の四つの
+帰属先（C12.2.5）、AI APIを使う隠れた通信の兆候（C12.2.6）は別の
+保証である。Levelは順に1・2・2・2・2・3で、Catalogと本文が一致し、
+Family一覧とSection学習資料から各Controlへ辿れる。これでC12.2の
+初期Sectionレビューを終えた。次はC12.3.1の入力データの変化の監視へ進む。
+
+同日：[C12.3.1 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.1-monitor-input-distribution-drift-by-data-type/README.md)を
+`verifiable`まで整備した。入力件数が同じでも内容の構成が変わる試験を使い、
+データの種類に合う方法で変化を見つけられるか確認する。分布の変化を
+攻撃や回答品質低下の証拠とは決め付けない。次はC12.3.2で、個々の
+出力の事実誤認・矛盾・捏造を識別できるかを扱う。
+
+同日：[C12.3.2 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.2-identify-and-flag-factually-wrong-contradictory-or-fabricated-outputs/README.md)を
+`verifiable`まで整備した。既知の誤答・矛盾・架空の情報に印を付けられるか、
+正答を一律に疑わないかを合成データで確かめる。検知器の判定は真実の証明
+ではなく、回答の自動遮断や印の割合の時系列監視とも分ける。次は
+C12.3.3で、印が付いた割合を継続して追えるかを扱う。
+
+同日：[C12.3.3 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.3-track-hallucination-rate-over-time/README.md)を
+`verifiable`まで整備した。印が付いた件数を検査済み回答数で割り、
+同じ条件で複数期間を比べられるかを試す。検知器や抽出対象が変わっただけの
+見かけの上昇と、実際の継続的な変化を混同しない。次はC12.3.4で、
+説明できない変化と想定内の運用変化を分ける。
+
+同日：[C12.3.4 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.4-distinguish-unexplained-behavior-from-expected-drift/README.md)を
+`verifiable`まで整備した。変更の時期が一致するだけでは想定内とせず、
+変化の範囲・方向・大きさまで説明できるかを合成例で確かめる。根拠が
+足りなければ未解決として残す。C12.3の4要件が揃ったので、Section全体の
+保証境界、Level、Catalog、Linkを横断確認する。
+
+同日：C12.3の4件を横断確認した。入力分布の変化（C12.3.1）、個々の
+誤情報を含む回答のFlag（C12.3.2）、その割合の時系列（C12.3.3）、
+想定内と説明不能な変化の区別（C12.3.4）は別の保証である。Levelは順に
+1・2・2・3で、Catalogと本文が一致し、Family一覧とSection学習資料から
+各Controlへ辿れる。これでC12.3の初期Sectionレビューを終えた。次は
+C12.4.1で、自律的な行動を始める際のSecurity評価を扱う。
+
+同日：[C12.4.1 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.4.1-evaluate-autonomous-action-triggers/README.md)を
+`verifiable`まで整備した。正規のScheduleやEventでも起動前に、行動の
+流れ、安全性、関係する脅威状況の三観点が評価されるかを、模擬した
+起動経路で確かめる。ResearchにあるGateway方式や外部Threat Feedを
+一律の必須条件にはせず、実行時の承認Gateとも分けた。次はC12.4.2で、
+重要な自律操作と承認判断の監査記録を扱う。
+
+同日：[C12.4.2 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.4.2-audit-security-critical-proactive-actions/README.md)を
+`verifiable`まで整備した。模擬送金の承認・拒否・Timeout・実行失敗を使い、
+承認者、時刻、対象引数、判断結果と実行結果を同じ操作へ辿れるか確かめる。
+「送金なし」だけでは拒否・未提案・失敗を区別できない。記録の保証と
+実行時の承認Gateは別に評価する。次はC12.4.3で、緊急停止とOverride
+指示の記録を扱う。
+
+同日：[C12.4.3 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.4.3-log-kill-switch-activations-and-override-commands/README.md)を
+`verifiable`まで整備した。模擬Agentの手動停止、自動停止、再開Overrideで、
+発動と指示を管理画面の操作や実際の停止完了から区別して記録できるかを
+確かめる。C12.4の3要件が揃ったので、Section全体の保証境界、Level、
+Catalog、Linkを横断確認する。
+
+同日：C12.4の3件を横断確認した。自律的な行動の起動時に三つの観点を
+評価する（C12.4.1）、重要操作と承認判断を監査する（C12.4.2）、
+停止発動とOverride指示を記録する（C12.4.3）は別の保証である。
+Levelはいずれも2で、Catalogと本文が一致し、Family一覧とSection学習資料
+から各Controlへ辿れる。記録があっても実行時の承認Gateや実停止を
+保証しない。これでC12.4の初期Sectionレビューを終えた。次はC12.5.1で、
+Datasetと構成要素の来歴を扱う。
+
+同日：[C12.5.1 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.1-record-complete-dataset-lineage/README.md)を
+`verifiable`まで整備した。二つの元Datasetを変換・増強・結合した合成例で、
+構成要素と中間成果物の各版を辿り、Notebookによる未記録の加工も見つける。
+来歴を内容の安全性やModel変更監査と混同しない。次はC12.5.2で、
+Label付け活動の記録を扱う。
+
+同日：[C12.5.2 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.2-log-all-labeling-activities/README.md)を
+`verifiable`まで整備した。ラベルの最終値だけでなく、初回付与・付け直し・
+削除や、自動処理・まとめて取り込む経路の活動を合成Dataで辿る。
+ラベルの正しさやModel変更記録の変更不能性とは分けて評価する。
+次はC12.5.3で、Model変更の監査記録を扱う。
+
+同日：[C12.5.3 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.3-immutable-audit-records-for-model-changes/README.md)を
+`verifiable`まで整備した。Model Artifactや配備先・Alias・管理対象の設定を
+変える経路を洗い出し、変更前後の実体と監査記録を結び付ける。記録の欠落と、
+変更者が過去の記録を消せる状態を別々に試す。次はC12.5.4で、取込文書の
+書込み時Tagを扱う。
+
+同日：[C12.5.4 Control](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.4-tag-ingested-documents-at-write-time/README.md)を
+`verifiable`まで整備した。文書を書き込む時にSource・Writer Identity・
+Timestampを付けることを、Uploadと同期Connectorの合成例で確かめる。
+利用者の自己申告と信頼できる書込みContextを分け、Tagの存在だけで
+本文の安全性や検索認可まで保証しない。
+
+同日：C12.5の4件を横断確認した。Datasetと加工の来歴（C12.5.1）、
+ラベル付け活動の記録（C12.5.2）、変更不能なModel変更監査（C12.5.3）、
+取込文書への書込み時Tag（C12.5.4）は、同じ来歴の話でも対象と保証が異なる。
+Levelは順に1・1・2・2で、Catalogと本文が一致し、Family一覧とSection
+学習資料から各Controlへ辿れる。来歴だけで内容の安全性、変更の承認、
+検索認可は保証しない。C12全21件の初期Control整備を終えた。
+
+### C11 checkpoint — 2026-10-04
+
+C2・C7・C12の初期整備後、入力や出力の境界だけでは説明しきれない
+Modelの安全性訓練、敵対的な操作への耐性、Privacy推測、Model抽出への
+保証を扱うためC11を選んだ。[C11 Family概要](control-records/c11-adversarial-robustness/README.md)に
+4 Section・17 Requirementの問いと失敗状態を整理した。これは全要件の
+Control本文や学習資料を一括作成したことを意味しない。
+
+最初の[C11.1.1 Control](control-records/c11-adversarial-robustness/v1.0-c11.1.1-model-alignment-and-safety-training/README.md)を
+`verifiable`まで整備した。利用するModel Versionが禁止出力カテゴリを
+対象とする訓練・調整を受けた根拠と、代表的な合成質問での振る舞いを
+分けて確かめる。Promptや出力FilterだけをModel訓練の証拠にはしない。
+
+### C11 checkpoint — 2026-10-05
+
+[C11.1.2 Control](control-records/c11-adversarial-robustness/v1.0-c11.1.2-run-versioned-alignment-suite-on-model-updates/README.md)を
+`verifiable`まで整備した。試験Suiteの版管理と、Model更新・Releaseの
+たびの実行記録を独立に確かめる。実行した事実、試験結果の良否、Release
+判断を混同しない。
+
+[C11.1.3 Control](control-records/c11-adversarial-robustness/v1.0-c11.1.3-evaluate-modality-relevant-adversarial-attacks/README.md)を
+`verifiable`まで整備した。製品で有効な形式・変換経路と既知の攻撃手法を
+対応させ、前処理での拒否とModelの応答を区別して評価する。結果が悪くても
+評価を行った事実と、耐性の不足・修正判断は混同しない。
+
+[C11.1.4 Control](control-records/c11-adversarial-robustness/v1.0-c11.1.4-harden-model-against-adversarial-inputs/README.md)を
+`verifiable`まで整備した。対策の存在、実際の推論経路への適用、敵対的な
+試験での効果を分けて確かめる。Model自身の強化と外付けの安全層も混同しない。
+続いて[C11.1.5 Control](control-records/c11-adversarial-robustness/v1.0-c11.1.5-measure-harmful-content-rate-and-flag-regressions/README.md)を
+`verifiable`まで整備した。自動評価器による割合の測定、比較条件、定義した
+しきい値を超える悪化の印を別々に確認する。印が付くことと、Release停止や
+弱点の修正も混同しない。これでC11.1の5要件の初期Control本文が揃った。
+
+C11.1を横断確認した。訓練の根拠（C11.1.1）、更新ごとの試験実行
+（C11.1.2）、形式に合った攻撃評価（C11.1.3）、強化策の効果
+（C11.1.4）、有害出力率の悪化検知（C11.1.5）は別の保証である。
+Levelは順に1・1・1・2・3で、Catalogと本文が一致し、Family一覧から
+各Controlへ辿れる。Controlの初期整備は学習完了を意味しない。
+
 ### C5 implementation checkpoint — 2026-09-08
 
 C5全11 RequirementのControlを`verifiable`まで整備した。Phase 1〜3の成果物と

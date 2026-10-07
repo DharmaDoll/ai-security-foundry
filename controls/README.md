@@ -7,8 +7,9 @@ See [`plan.md`](plan.md) for the incremental plan for developing the controls kn
 ## Current artifacts
 
 [C2 Family overview](control-records/c02-input-validation/README.md)からC2の保証範囲と各Controlへ辿れる。
-[開発計画](plan.md)に沿ってC2.1から着手し、C2.1.1〜C2.1.4の4件を
-`verifiable`として整備した。C2.1の残る4要件とC2.2の4要件は未整備であり、学習完了とは区別する。
+[開発計画](plan.md)に沿いC2・C7・C12の初期整備を終え、現在は
+[C11](control-records/c11-adversarial-robustness/README.md)のControlを
+一件ずつ成熟させている。学習完了とControl maturityは区別する。
 
 個別Controlは`control-records/<family>/<versioned-requirement>/README.md`に置き、
 解釈・検証・証拠・限界の正本とする。新しい学習コンテンツは
@@ -54,13 +55,13 @@ python3 controls/scripts/validate_catalog.py
 python3 controls/tests/test_validate_catalog.py
 ```
 
-The current catalog contains metadata and substantive documents for four C2 Requirements,
-all 11 C5 Requirements, all 11 C8 Requirements, all 34 C9 Requirements, and all 23 C10 Requirements (83 Controls).
-`verification_level` records AISVS Level 1, 2, or 3; it is distinct from repository
-Control maturity. All 83 substantive
-Controls are `verifiable`, the current target for a mature repository Control. This
-describes the artifacts, not a maintainer's learning progress or proof that a
-product implements them. No Engineering Pattern Mapping is asserted.
+現在のCatalogには130件のControl本文がある。内訳はC2の12件、C5の11件、
+C7の13件、C8の11件、C9の34件、C10の23件、C11.1の5件、C12.1の4件、C12.2の6件、
+C12.3の4件、C12.4の3件、C12.5の4件。
+`verification_level`はAISVSが付けたLevel 1〜3の値であり、このRepositoryでの
+Controlの成熟度とは別である。130件の本文はすべて`verifiable`、つまり検証方法を
+説明できる段階にある。これは執筆物の状態であり、実際の製品が要件を満たすことや、
+学習が終わったことを示さない。Engineering Patternとの対応付けも主張していない。
 
 ## C8 development plan
 
@@ -200,6 +201,10 @@ Categoryから各Requirementまでの保証範囲を短い問いで俯瞰でき�
   Category, Section, and Requirement-level questions and prohibited failure states.
 - [AISVS C7 family overview](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md):
   output-format, reliability, safety, and attribution assurance boundaries.
+- [AISVS C11 family overview](control-records/c11-adversarial-robustness/README.md):
+  alignment, privacy inference, model extraction, and runtime anomaly boundaries.
+- [AISVS C12 family overview](control-records/c12-monitoring-logging-and-anomaly-detection/README.md):
+  interaction logging, detection, drift, autonomous behavior, and lifecycle audit boundaries.
 - [AISVS C9 family overview](control-records/c09-orchestration-and-agentic-security/README.md):
   a compact overview of what each C9 assurance layer asks and must prevent.
 
