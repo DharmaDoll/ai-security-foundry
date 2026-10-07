@@ -3069,6 +3069,106 @@ requirements:
       - v1.0-C9.6.3
     mapping_assessment_refs: []
 
+  - versioned_id: v1.0-C12.5.1
+    requirement_id: C12.5.1
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.5
+      title: Training Data & Model Lifecycle Audit
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-05-Training-Data-Model-Lifecycle-Audit.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.1-record-complete-dataset-lineage/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C12.5.2
+      - v1.0-C12.5.3
+      - v1.0-C12.5.4
+      - v1.0-C12.1.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C12.5.2
+    requirement_id: C12.5.2
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.5
+      title: Training Data & Model Lifecycle Audit
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-05-Training-Data-Model-Lifecycle-Audit.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.2-log-all-labeling-activities/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C12.5.1
+      - v1.0-C12.5.3
+      - v1.0-C12.5.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C12.5.3
+    requirement_id: C12.5.3
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.5
+      title: Training Data & Model Lifecycle Audit
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-05-Training-Data-Model-Lifecycle-Audit.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.3-immutable-audit-records-for-model-changes/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C12.5.1
+      - v1.0-C12.5.2
+      - v1.0-C12.5.4
+      - v1.0-C12.1.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C12.5.4
+    requirement_id: C12.5.4
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.5
+      title: Training Data & Model Lifecycle Audit
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-05-Training-Data-Model-Lifecycle-Audit.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.4-tag-ingested-documents-at-write-time/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C12.5.1
+      - v1.0-C12.5.2
+      - v1.0-C12.5.3
+      - v1.0-C8.1.2
+      - v1.0-C8.1.3
+    mapping_assessment_refs: []
+
   - versioned_id: v1.0-C11.1.1
     requirement_id: C11.1.1
     family:
