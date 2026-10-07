@@ -2892,6 +2892,107 @@ requirements:
       - v1.0-C12.2.5
     mapping_assessment_refs: []
 
+  - versioned_id: v1.0-C12.3.1
+    requirement_id: C12.3.1
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.3
+      title: Model, Data, and Performance Drift Detection
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-03-Model-Drift-Detection.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.1-monitor-input-distribution-drift-by-data-type/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C12.1.4
+      - v1.0-C12.3.2
+      - v1.0-C12.3.3
+      - v1.0-C12.3.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C12.3.2
+    requirement_id: C12.3.2
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.3
+      title: Model, Data, and Performance Drift Detection
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-03-Model-Drift-Detection.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.2-identify-and-flag-factually-wrong-contradictory-or-fabricated-outputs/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C7.2.1
+      - v1.0-C7.2.2
+      - v1.0-C7.4.3
+      - v1.0-C12.3.1
+      - v1.0-C12.3.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C12.3.3
+    requirement_id: C12.3.3
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.3
+      title: Model, Data, and Performance Drift Detection
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-03-Model-Drift-Detection.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.3-track-hallucination-rate-over-time/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C7.2.1
+      - v1.0-C12.3.1
+      - v1.0-C12.3.2
+      - v1.0-C12.3.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C12.3.4
+    requirement_id: C12.3.4
+    family:
+      id: C12
+      title: Monitoring, Logging & Anomaly Detection
+    section:
+      id: C12.3
+      title: Model, Data, and Performance Drift Detection
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C12-Monitoring-and-Logging/C12-03-Model-Drift-Detection.md
+      last_verified: "2026-10-04"
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.4-distinguish-unexplained-behavior-from-expected-drift/README.md
+    threat_mappings: []
+    related_requirements:
+      - v1.0-C12.3.1
+      - v1.0-C12.3.2
+      - v1.0-C12.3.3
+      - v1.0-C12.2.2
+    mapping_assessment_refs: []
+
   - versioned_id: v1.0-C11.1.1
     requirement_id: C11.1.1
     family:
