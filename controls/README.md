@@ -2,32 +2,41 @@
 
 `controls/` は「何を満たし、どう検証するか」を探すための入口です。
 まず [AISVS Familyの見取り図](family-assurance-map.md) でシステム上の関係を掴み、
-下のFamily一覧からSection、個別Controlへ進んでください。
+下のFamily一覧から対象を選び、整備済みのFamilyではSection、個別Controlへ進んでください。
 見取り図は代表的な構成を示すもので、要件の網羅図や製品の適合判定ではありません。
 
 ## Family別Control案内
 
-各FamilyのREADMEには、Categoryの保証目的、**Sectionの見取り図**、整備済みRequirementごとの
+AISVS v1.0の全12 Familyを示します。**主に確認すること**は保証の問い、
+**主な検討場面**は設計中にそのFamilyを開くきっかけとなる代表例です。
+実際の適用範囲は個別Requirementと製品の構成から判断します。
+個別ControlがあるFamilyのREADMEには、Categoryの保証目的、**Sectionの見取り図**、整備済みRequirementごとの
 「問うこと」「できてはいけないこと」と、**個別Control本文へのリンク**があります。
 個別Control本文が解釈・検証方法・証拠期待値・限界の正本です。
+Control本文が未整備のFamilyは、固定版AISVSの原文へ案内します。
 
-| Family（個別Control一覧へ） | 主に確認すること |
-|---|---|
-| [C2 Input Validation](control-records/c02-input-validation/README.md) | 入力と取得内容が、変換や複数の形式を経ても検査の想定から外れないか。 |
-| [C5 Access Control and Identity](control-records/c05-access-control-and-identity/README.md) | 主体・権限・Credential・Tenant境界を、AIを介しても維持できるか。 |
-| [C7 Model Behavior, Output Control & Safety Assurance](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md) | Model出力の形式、信頼性、安全性、出典を利用前に確認できるか。 |
-| [C8 Memory, Embeddings & Vector Database Security](control-records/c08-memory-embeddings-and-vector-database-security/README.md) | MemoryやVectorを、正しい範囲・出所・期限・信頼状態で扱えるか。 |
-| [C9 Orchestration and Agentic Security](control-records/c09-orchestration-and-agentic-security/README.md) | Agentの行動・委任・実行量・承認・停止を制御できるか。 |
-| [C10 Model Context Protocol Security](control-records/c10-model-context-protocol-security/README.md) | MCPの構成要素、要求、Transport、Tool入出力を境界ごとに検証できるか。 |
-| [C11 Adversarial Robustness](control-records/c11-adversarial-robustness/README.md) | 敵対的入力、学習Dataの推測、Model抽出、実行時異常に備えられるか。 |
-| [C12 Monitoring, Logging & Anomaly Detection](control-records/c12-monitoring-logging-and-anomaly-detection/README.md) | AI処理・変更を再構成し、異常を検知・調査できるか。 |
+| Family | 主に確認すること | 主な検討場面 |
+|---|---|---|
+| C1 Training Data Integrity & Traceability（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md)、Control未整備） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
+| [C2 Input Validation](control-records/c02-input-validation/README.md) | 入力と取得内容が、変換や複数の形式を経ても検査の想定から外れないか。 | User入力、検索文書、画像・音声などをModel Contextへ取り込むとき。 |
+| C3 Model Lifecycle Management & Change Control（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)、Control未整備） | Model Artifactと変更を検証し、許可した版だけを本番へ反映・復旧できるか。 | Model・Provider版の変更、Fine-tuning、段階的な配備とRollback。 |
+| C4 Infrastructure, Configuration & Deployment Security（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)、Control未整備） | Model実行基盤・Accelerator・Edge環境を隔離し、実行状態を検証できるか。 | Model Serving、GPU共有、Edge・Mobileへの配備。 |
+| [C5 Access Control & Identity for AI Components & Users](control-records/c05-access-control-and-identity/README.md) | 主体・権限・Credential・Tenant境界を、AIを介しても維持できるか。 | 権限付きRAG、複数Tenantでの共有基盤、Agentへの権限付与。 |
+| C6 Supply Chain Security for Models（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md)、Control未整備） | 外部由来のModel・Dataset・Adapterの出所と完全性を確認し、構成を追跡できるか。 | Third-party Artifactの取込み、AI BOMの作成、供給元の変更。 |
+| [C7 Model Behavior, Output Control & Safety Assurance](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md) | Model出力の形式、信頼性、安全性、出典を利用前に確認できるか。 | 回答の公開、出力のTool利用、RAGの引用、生成Mediaの配布。 |
+| [C8 Memory, Embeddings & Vector Database Security](control-records/c08-memory-embeddings-and-vector-database-security/README.md) | MemoryやVectorを、正しい範囲・出所・期限・信頼状態で扱えるか。 | RAG Indexの作成・検索、Agent Memoryの書込み・失効・削除。 |
+| [C9 Orchestration and Agentic Security](control-records/c09-orchestration-and-agentic-security/README.md) | Agentの行動・委任・実行量・承認・停止を制御できるか。 | Agentによる連続Tool実行、他Agentへの委任、高影響操作の承認。 |
+| [C10 Model Context Protocol (MCP) Security](control-records/c10-model-context-protocol-security/README.md) | MCPの構成要素、要求、Transport、Tool入出力を境界ごとに検証できるか。 | MCP Serverの導入・接続、Toolの公開・呼出し、下流API連携。 |
+| [C11 Adversarial Robustness](control-records/c11-adversarial-robustness/README.md)（Control本文はC11.1のみ） | 敵対的入力、学習Dataの推測、Model抽出、実行時異常に備えられるか。 | Modelの採用・更新、公開推論APIの運用、改善Feedbackの取込み。 |
+| [C12 Monitoring, Logging & Anomaly Detection](control-records/c12-monitoring-logging-and-anomaly-detection/README.md) | AI処理・変更を再構成し、異常を検知・調査できるか。 | AIサービスの本番監視・インシデント調査、Model・Dataset変更の監査。 |
 
-[AISVS Familyの見取り図](family-assurance-map.md) には12 Familyが登場します。
-この一覧は、そのうち個別Controlを整備したFamilyへの案内です。
+「Control未整備」はこのRepositoryに個別Control本文がないことを示し、
+AISVS要件の不存在や製品の適合状態を意味しません。
 
 ## 個別Control（IDから直接開く）
 
-IDが分かっている場合はここからControl本文を直接開けます。各Controlの内容と隣接要件の違いは、
+以下はCatalog登録済みのControl本文だけを載せています。IDが分かっている場合は直接開けます。
+各Controlの内容と隣接要件の違いは、
 上のFamily READMEからも確認できます。この一覧は[Catalog](catalog.yaml)の`control_ref`を辿る索引です。
 
 ### C2
