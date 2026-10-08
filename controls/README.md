@@ -1,309 +1,115 @@
-# Controls View
+# Controls — 保証項目を探す
 
-This directory is the requirement-oriented entry point.
+`controls/` は「何を満たし、どう検証するか」を探すための入口です。
+まず [AISVS Familyの見取り図](family-assurance-map.md) でシステム上の関係を掴み、
+下のFamily一覧からSection、個別Controlへ進んでください。
+見取り図は代表的な構成を示すもので、要件の網羅図や製品の適合判定ではありません。
 
-See [`plan.md`](plan.md) for the incremental plan for developing the controls knowledge base.
+## Family別Control案内
 
-## Current artifacts
+各FamilyのREADMEには、Categoryの保証目的、**Sectionの見取り図**、整備済みRequirementごとの
+「問うこと」「できてはいけないこと」と、**個別Control本文へのリンク**があります。
+個別Control本文が解釈・検証方法・証拠期待値・限界の正本です。
 
-[C2 Family overview](control-records/c02-input-validation/README.md)からC2の保証範囲と各Controlへ辿れる。
-[開発計画](plan.md)に沿いC2・C7・C12の初期整備を終え、現在は
-[C11](control-records/c11-adversarial-robustness/README.md)のControlを
-一件ずつ成熟させている。学習完了とControl maturityは区別する。
+| Family（個別Control一覧へ） | 主に確認すること |
+|---|---|
+| [C2 Input Validation](control-records/c02-input-validation/README.md) | 入力と取得内容が、変換や複数の形式を経ても検査の想定から外れないか。 |
+| [C5 Access Control and Identity](control-records/c05-access-control-and-identity/README.md) | 主体・権限・Credential・Tenant境界を、AIを介しても維持できるか。 |
+| [C7 Model Behavior, Output Control & Safety Assurance](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md) | Model出力の形式、信頼性、安全性、出典を利用前に確認できるか。 |
+| [C8 Memory, Embeddings & Vector Database Security](control-records/c08-memory-embeddings-and-vector-database-security/README.md) | MemoryやVectorを、正しい範囲・出所・期限・信頼状態で扱えるか。 |
+| [C9 Orchestration and Agentic Security](control-records/c09-orchestration-and-agentic-security/README.md) | Agentの行動・委任・実行量・承認・停止を制御できるか。 |
+| [C10 Model Context Protocol Security](control-records/c10-model-context-protocol-security/README.md) | MCPの構成要素、要求、Transport、Tool入出力を境界ごとに検証できるか。 |
+| [C11 Adversarial Robustness](control-records/c11-adversarial-robustness/README.md) | 敵対的入力、学習Dataの推測、Model抽出、実行時異常に備えられるか。 |
+| [C12 Monitoring, Logging & Anomaly Detection](control-records/c12-monitoring-logging-and-anomaly-detection/README.md) | AI処理・変更を再構成し、異常を検知・調査できるか。 |
 
-個別Controlは`control-records/<family>/<versioned-requirement>/README.md`に置き、
-解釈・検証・証拠・限界の正本とする。新しい学習コンテンツは
-`learning/<family>/<versioned-section>.md`にSection単位で置き、各Sectionの
-全Requirementを一つの講義として扱う。両者は必要時に相互リンクし、CatalogはControl本文だけを参照する。
-[Family README](control-records/c05-access-control-and-identity/README.md)は、Category、Section、
-Requirementを俯瞰して個別Controlへ辿るための入口である。
-[学習方針・進捗一覧](learning/README.md)は従来どおり独立して管理する。
+[AISVS Familyの見取り図](family-assurance-map.md) には12 Familyが登場します。
+この一覧は、そのうち個別Controlを整備したFamilyへの案内です。
 
-- [`catalog.yaml`](catalog.yaml): machine-readable control inventory with AISVS Verification
-  Levels and lifecycle metadata; it is not a copy of the standard.
-- [`schema/control-catalog.schema.json`](schema/control-catalog.schema.json): catalog
-  structure and enumerated lifecycle states.
-- [`templates/control.md`](templates/control.md): required structure for a substantive
-  Control document.
+## 個別Control（IDから直接開く）
 
-### C5 Control records
+IDが分かっている場合はここからControl本文を直接開けます。各Controlの内容と隣接要件の違いは、
+上のFamily READMEからも確認できます。この一覧は[Catalog](catalog.yaml)の`control_ref`を辿る索引です。
 
-C5の全11件について、解釈・適用範囲・脅威・検証・証拠期待値・限界を備えた
-`verifiable` Controlを整備した。初期Golden ControlはC5.2.5である。
-[C5 Family overview](control-records/c05-access-control-and-identity/README.md)では、
-Categoryから各Requirementまでの保証範囲を短い問いで俯瞰できる。
+### C2
 
-| Requirement | Level | Control |
-|---|---:|---|
-| C5.1.1 | 3 | [高Risk操作のStep-up](control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/README.md) |
-| C5.1.2 | 3 | [Agentの短命・最小Scope・署名Token](control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/README.md) |
-| C5.2.1 | 2 | [明示的AllowとDefault Deny](control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/README.md) |
-| C5.2.2 | 2 | [検索・組立でのEnd-user認可](control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/README.md) |
-| C5.2.3 | 2 | [Sensitive DataのModel固定回避](control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/README.md) |
-| C5.2.4 | 2 | [推論後の受取権限制御](control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/README.md) |
-| C5.2.5 | 2 | [Agent認可PDPの隔離](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md) |
-| C5.2.6 | 3 | [JIT特権と自動失効](control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access/README.md) |
-| C5.2.7 | 3 | [分類Labelの伝播](control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/README.md) |
-| C5.3.1 | 2 | [共有Serving状態のTenant分離](control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md) |
-| C5.3.2 | 3 | [共有計算基盤のTenant分離](control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/README.md) |
+| Section | Control本文 |
+|---|---|
+| C2.1 | [v1.0-C2.1.1](control-records/c02-input-validation/v1.0-c2.1.1-normalize-input-before-tokenization-or-embedding/README.md) · [v1.0-C2.1.2](control-records/c02-input-validation/v1.0-c2.1.2-detect-and-mitigate-encoded-input-smuggling/README.md) · [v1.0-C2.1.3](control-records/c02-input-validation/v1.0-c2.1.3-screen-and-block-model-steering-inputs/README.md) · [v1.0-C2.1.4](control-records/c02-input-validation/v1.0-c2.1.4-reject-over-limit-input-without-truncation/README.md) · [v1.0-C2.1.5](control-records/c02-input-validation/v1.0-c2.1.5-allowlist-required-input-characters/README.md) · [v1.0-C2.1.6](control-records/c02-input-validation/v1.0-c2.1.6-preserve-instruction-hierarchy-across-steps/README.md) · [v1.0-C2.1.7](control-records/c02-input-validation/v1.0-c2.1.7-render-reserved-tokens-as-literal-content/README.md) · [v1.0-C2.1.8](control-records/c02-input-validation/v1.0-c2.1.8-detect-many-shot-jailbreak-patterns/README.md) |
+| C2.2 | [v1.0-C2.2.1](control-records/c02-input-validation/v1.0-c2.2.1-screen-prompts-before-model-context/README.md) · [v1.0-C2.2.2](control-records/c02-input-validation/v1.0-c2.2.2-evaluate-content-classification-for-unsupported-languages/README.md) · [v1.0-C2.2.3](control-records/c02-input-validation/v1.0-c2.2.3-check-non-text-inputs-for-hidden-attacks/README.md) · [v1.0-C2.2.4](control-records/c02-input-validation/v1.0-c2.2.4-detect-and-block-cross-modal-attacks/README.md) |
 
-Validate the catalog and its repository-level invariants with:
+### C5
 
-```shell
-python3 -m pip install -r controls/requirements.txt
-python3 controls/scripts/validate_catalog.py
-python3 controls/tests/test_validate_catalog.py
-```
+| Section | Control本文 |
+|---|---|
+| C5.1 | [v1.0-C5.1.1](control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/README.md) · [v1.0-C5.1.2](control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/README.md) |
+| C5.2 | [v1.0-C5.2.1](control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/README.md) · [v1.0-C5.2.2](control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/README.md) · [v1.0-C5.2.3](control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/README.md) · [v1.0-C5.2.4](control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/README.md) · [v1.0-C5.2.5](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md) · [v1.0-C5.2.6](control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access/README.md) · [v1.0-C5.2.7](control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/README.md) |
+| C5.3 | [v1.0-C5.3.1](control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md) · [v1.0-C5.3.2](control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/README.md) |
 
-現在のCatalogには130件のControl本文がある。内訳はC2の12件、C5の11件、
-C7の13件、C8の11件、C9の34件、C10の23件、C11.1の5件、C12.1の4件、C12.2の6件、
-C12.3の4件、C12.4の3件、C12.5の4件。
-`verification_level`はAISVSが付けたLevel 1〜3の値であり、このRepositoryでの
-Controlの成熟度とは別である。130件の本文はすべて`verifiable`、つまり検証方法を
-説明できる段階にある。これは執筆物の状態であり、実際の製品が要件を満たすことや、
-学習が終わったことを示さない。Engineering Patternとの対応付けも主張していない。
+### C7
 
-## C8 development plan
+| Section | Control本文 |
+|---|---|
+| C7.1 | [v1.0-C7.1.1](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.1.1-validate-and-reject-model-outputs-by-schema/README.md) · [v1.0-C7.1.2](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.1.2-bound-model-output-length-and-termination/README.md) |
+| C7.2 | [v1.0-C7.2.1](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2.1-estimate-generated-answer-reliability/README.md) · [v1.0-C7.2.2](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2.2-block-or-fallback-below-confidence-threshold/README.md) · [v1.0-C7.2.3](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.2.3-additional-verification-for-high-risk-responses/README.md) |
+| C7.3 | [v1.0-C7.3.1](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.1-classify-and-block-harmful-responses/README.md) · [v1.0-C7.3.2](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.2-block-system-prompt-and-backend-data-disclosure/README.md) · [v1.0-C7.3.3](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.3-prevent-output-triggered-outbound-requests/README.md) · [v1.0-C7.3.4](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3.4-check-hidden-encoded-and-misleading-outputs/README.md) |
+| C7.4 | [v1.0-C7.4.1](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.1-attribute-rag-responses-to-source-documents/README.md) · [v1.0-C7.4.2](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.2-derive-rag-attributions-from-retrieval-metadata/README.md) · [v1.0-C7.4.3](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.3-trace-rag-claims-to-retrieved-chunks/README.md) · [v1.0-C7.4.4](control-records/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.4.4-watermark-ai-generated-media/README.md) |
 
-[C8 Family概要](control-records/c08-memory-embeddings-and-vector-database-security/README.md)に、全3節・11要件の保証範囲と
-Researchからの注意点を整理した。C8.1 Access Controls on Memory & RAG Indicesの3要件に加え、
-C8.2 Embedding Sanitization & Validationの5要件を`verifiable`まで整備した。C8.2では、Sensitive Fieldの
-Pre-embedding処理、Vector異常のProduction投入前検疫、Source検証を伴うTrusted Memory昇格、
-Retrieval操作ContentのVectorization前検査、既存Memoryとの矛盾Alertを別々の保証として扱う。
-C8.3 Memory Expiry & Revocationの3要件も`verifiable`まで整備し、期限切れのLogical Exclusion、
-宣言したScopeのMemory Reset、Forensic保持を伴うQuarantineを分離した。これによりC8全11要件の初期成熟化を完了した。
+### C8
 
-[C8 Family overview](control-records/c08-memory-embeddings-and-vector-database-security/README.md)は、
-CategoryとSectionの保証境界、および整備済みRequirementへの入口を示す。
+| Section | Control本文 |
+|---|---|
+| C8.1 | [v1.0-C8.1.1](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.1-tenant-unique-vector-identifiers-and-namespaces/README.md) · [v1.0-C8.1.2](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.2-immutable-document-metadata-tags/README.md) · [v1.0-C8.1.3](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.3-retrieval-scope-enforcement/README.md) |
+| C8.2 | [v1.0-C8.2.1](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.1-sensitive-field-handling-before-embedding/README.md) · [v1.0-C8.2.2](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.2-vector-anomaly-quarantine-before-production/README.md) · [v1.0-C8.2.3](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.3-source-validated-trusted-memory-writes/README.md) · [v1.0-C8.2.4](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.4-retrieval-manipulation-screening-before-vectorization/README.md) · [v1.0-C8.2.5](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.5-memory-contradiction-detection-and-alerting/README.md) |
+| C8.3 | [v1.0-C8.3.1](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.1-expired-vector-retrieval-exclusion/README.md) · [v1.0-C8.3.2](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.2-complete-memory-reset/README.md) · [v1.0-C8.3.3](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.3-quarantine-retention-and-retrieval-exclusion/README.md) |
 
-| Requirement | Level | Control |
-|---|---:|---|
-| C8.1.1 | 1 | [Vector IDとNamespaceをTenantごとに一意・衝突不能にする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.1-tenant-unique-vector-identifiers-and-namespaces/README.md) |
-| C8.1.2 | 2 | [Document Metadata Tagを初回Write後に不変にする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.2-immutable-document-metadata-tags/README.md) |
-| C8.1.3 | 2 | [すべてのRetrieval OperationでScopeを強制する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.3-retrieval-scope-enforcement/README.md) |
-| C8.2.1 | 1 | [Sensitive FieldをEmbedding前に検出・変換・除外する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.1-sensitive-field-handling-before-embedding/README.md) |
-| C8.2.2 | 2 | [異常なVectorをProduction Index投入前に検疫する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.2-vector-anomaly-quarantine-before-production/README.md) |
-| C8.2.3 | 2 | [Agent／Tool OutputをSource検証なしにTrusted Memoryへ書かない](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.3-source-validated-trusted-memory-writes/README.md) |
-| C8.2.4 | 3 | [Retrieval操作用ContentをVectorization前に検出・拒否・検疫する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.4-retrieval-manipulation-screening-before-vectorization/README.md) |
-| C8.2.5 | 3 | [新規Memoryと既存Memoryの矛盾を検出しAlertする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.2.5-memory-contradiction-detection-and-alerting/README.md) |
-| C8.3.1 | 2 | [期限切れVectorをRetrieval結果から除外する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.1-expired-vector-retrieval-exclusion/README.md) |
-| C8.3.2 | 2 | [定義したMemory範囲を完全にResetできるようにする](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.2-complete-memory-reset/README.md) |
-| C8.3.3 | 3 | [Quarantine Contentを保持しつつ全Retrieval結果から除外する](control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.3.3-quarantine-retention-and-retrieval-exclusion/README.md) |
+### C9
 
-## C10 development plan
+| Section | Control本文 |
+|---|---|
+| C9.1 | [v1.0-C9.1.1](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.1-per-tool-resource-quotas-and-timeouts/README.md) · [v1.0-C9.1.2](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.2-per-execution-cumulative-budgets/README.md) · [v1.0-C9.1.3](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.3-swarm-wide-agent-halt/README.md) |
+| C9.2 | [v1.0-C9.2.1](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions/README.md) · [v1.0-C9.2.2](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.2-complete-canonical-approval-display/README.md) · [v1.0-C9.2.3](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.3-trusted-action-reversibility-classification/README.md) · [v1.0-C9.2.4](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.4-enforce-reversibility-based-action-policy/README.md) · [v1.0-C9.2.5](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification/README.md) · [v1.0-C9.2.6](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.6-additive-ai-review-before-high-risk-actions/README.md) · [v1.0-C9.2.7](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation/README.md) · [v1.0-C9.2.8](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals/README.md) · [v1.0-C9.2.9](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.9-approval-issuing-key-and-credential-isolation/README.md) · [v1.0-C9.2.10](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.10-chain-wide-highest-impact-approval/README.md) |
+| C9.3 | [v1.0-C9.3.1](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation/README.md) · [v1.0-C9.3.2](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation/README.md) · [v1.0-C9.3.3](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements/README.md) · [v1.0-C9.3.4](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/README.md) · [v1.0-C9.3.5](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/README.md) · [v1.0-C9.3.6](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs/README.md) · [v1.0-C9.3.7](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources/README.md) · [v1.0-C9.3.8](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation/README.md) |
+| C9.4 | [v1.0-C9.4.1](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity/README.md) · [v1.0-C9.4.2](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution/README.md) · [v1.0-C9.4.3](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation/README.md) · [v1.0-C9.4.4](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state/README.md) |
+| C9.5 | [v1.0-C9.5.1](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization/README.md) · [v1.0-C9.5.2](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls/README.md) · [v1.0-C9.5.3](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions/README.md) · [v1.0-C9.5.4](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context/README.md) · [v1.0-C9.5.5](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy/README.md) · [v1.0-C9.5.6](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action/README.md) |
+| C9.6 | [v1.0-C9.6.1](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs/README.md) · [v1.0-C9.6.2](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout/README.md) · [v1.0-C9.6.3](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation/README.md) |
 
-[C10 Family概要](control-records/c10-model-context-protocol-security/README.md)に、全4節・23要件の保証範囲と
-Researchからの注意点を整理した。最初の代表要件はC10.2.7（Level 2：受信Tokenの
-下流APIへの転送禁止）。この代表Controlを解釈・適用境界・脅威・正常/拒否試験・
-証拠期待値・限界まで整備し、Catalogへ`verifiable`で追加した。
-C10全4 Section・23要件を同じ成熟度まで整備した。C10.4ではSchemaと内容検査、ParameterとPayload、
-Response署名、Local導入同意、Tool定義変更を別々のPass／Failとして扱う。学習進捗および製品適合とは独立する。
+### C10
 
-[C10 Family overview](control-records/c10-model-context-protocol-security/README.md)は、
-CategoryとSectionの保証境界、および整備済みRequirementへの入口を示す。
+| Section | Control本文 |
+|---|---|
+| C10.1 | [v1.0-C10.1.1](control-records/c10-model-context-protocol-security/v1.0-c10.1.1-trusted-source-and-cryptographic-component-verification/README.md) · [v1.0-C10.1.2](control-records/c10-model-context-protocol-security/v1.0-c10.1.2-allowlisted-mcp-server-admission/README.md) · [v1.0-C10.1.3](control-records/c10-model-context-protocol-security/v1.0-c10.1.3-least-privilege-local-server-sandbox/README.md) |
+| C10.2 | [v1.0-C10.2.1](control-records/c10-model-context-protocol-security/v1.0-c10.2.1-per-request-access-token-validation/README.md) · [v1.0-C10.2.2](control-records/c10-model-context-protocol-security/v1.0-c10.2.2-issuer-audience-expiration-and-scope-validation/README.md) · [v1.0-C10.2.3](control-records/c10-model-context-protocol-security/v1.0-c10.2.3-no-access-token-or-user-credential-persistence/README.md) · [v1.0-C10.2.4](control-records/c10-model-context-protocol-security/v1.0-c10.2.4-scope-filtered-tool-discovery/README.md) · [v1.0-C10.2.5](control-records/c10-model-context-protocol-security/v1.0-c10.2.5-per-invocation-tool-and-argument-authorization/README.md) · [v1.0-C10.2.6](control-records/c10-model-context-protocol-security/v1.0-c10.2.6-session-artifact-removal/README.md) · [v1.0-C10.2.7](control-records/c10-model-context-protocol-security/v1.0-c10.2.7-no-client-token-passthrough-to-downstream-apis/README.md) |
+| C10.3 | [v1.0-C10.3.1](control-records/c10-model-context-protocol-security/v1.0-c10.3.1-authenticated-encrypted-streamable-http/README.md) · [v1.0-C10.3.2](control-records/c10-model-context-protocol-security/v1.0-c10.3.2-stdio-only-in-controlled-local-environments/README.md) · [v1.0-C10.3.3](control-records/c10-model-context-protocol-security/v1.0-c10.3.3-independent-origin-and-host-validation/README.md) · [v1.0-C10.3.4](control-records/c10-model-context-protocol-security/v1.0-c10.3.4-minimum-mcp-protocol-version-enforcement/README.md) · [v1.0-C10.3.5](control-records/c10-model-context-protocol-security/v1.0-c10.3.5-sender-constrained-access-tokens/README.md) |
+| C10.4 | [v1.0-C10.4.1](control-records/c10-model-context-protocol-security/v1.0-c10.4.1-validate-tool-responses-against-schemas/README.md) · [v1.0-C10.4.2](control-records/c10-model-context-protocol-security/v1.0-c10.4.2-screen-tool-responses-for-indirect-prompt-injection/README.md) · [v1.0-C10.4.3](control-records/c10-model-context-protocol-security/v1.0-c10.4.3-reject-unrecognized-or-oversized-function-parameters/README.md) · [v1.0-C10.4.4](control-records/c10-model-context-protocol-security/v1.0-c10.4.4-strict-server-side-schema-validation/README.md) · [v1.0-C10.4.5](control-records/c10-model-context-protocol-security/v1.0-c10.4.5-transport-payload-size-limits/README.md) · [v1.0-C10.4.6](control-records/c10-model-context-protocol-security/v1.0-c10.4.6-signed-tool-responses-with-replay-protection/README.md) · [v1.0-C10.4.7](control-records/c10-model-context-protocol-security/v1.0-c10.4.7-explicit-local-server-installation-consent/README.md) · [v1.0-C10.4.8](control-records/c10-model-context-protocol-security/v1.0-c10.4.8-tool-definition-change-reapproval/README.md) |
 
-| Requirement | Level | Control |
-|---|---:|---|
-| C10.1.1 | 1 | [MCP Componentを信頼済みSourceから取得し暗号的に検証する](control-records/c10-model-context-protocol-security/v1.0-c10.1.1-trusted-source-and-cryptographic-component-verification/README.md) |
-| C10.1.2 | 2 | [Allowlistで許可したMCP Serverだけを接続・実行する](control-records/c10-model-context-protocol-security/v1.0-c10.1.2-allowlisted-mcp-server-admission/README.md) |
-| C10.1.3 | 2 | [Local MCP Serverを最小権限Sandboxで実行する](control-records/c10-model-context-protocol-security/v1.0-c10.1.3-least-privilege-local-server-sandbox/README.md) |
-| C10.2.1 | 1 | [各RequestでAccess Tokenを検証する](control-records/c10-model-context-protocol-security/v1.0-c10.2.1-per-request-access-token-validation/README.md) |
-| C10.2.2 | 1 | [Issuer・Audience・Expiration・Scopeを検証する](control-records/c10-model-context-protocol-security/v1.0-c10.2.2-issuer-audience-expiration-and-scope-validation/README.md) |
-| C10.2.3 | 1 | [Access TokenとUser Credentialを永続化しない](control-records/c10-model-context-protocol-security/v1.0-c10.2.3-no-access-token-or-user-credential-persistence/README.md) |
-| C10.2.4 | 2 | [許可Scopeに応じてTool Discoveryを制限する](control-records/c10-model-context-protocol-security/v1.0-c10.2.4-scope-filtered-tool-discovery/README.md) |
-| C10.2.5 | 2 | [各InvocationでToolとArgumentを認可する](control-records/c10-model-context-protocol-security/v1.0-c10.2.5-per-invocation-tool-and-argument-authorization/README.md) |
-| C10.2.6 | 2 | [Session終了時にArtifactを除去する](control-records/c10-model-context-protocol-security/v1.0-c10.2.6-session-artifact-removal/README.md) |
-| C10.2.7 | 2 | [受信したClient Access Tokenを下流APIへ転送しない](control-records/c10-model-context-protocol-security/v1.0-c10.2.7-no-client-token-passthrough-to-downstream-apis/README.md) |
-| C10.3.1 | 1 | [Remote MCPに認証・暗号化済みStreamable HTTPを使う](control-records/c10-model-context-protocol-security/v1.0-c10.3.1-authenticated-encrypted-streamable-http/README.md) |
-| C10.3.2 | 1 | [stdioを管理されたLocal環境だけに限定する](control-records/c10-model-context-protocol-security/v1.0-c10.3.2-stdio-only-in-controlled-local-environments/README.md) |
-| C10.3.3 | 2 | [OriginとHostを独立に検証する](control-records/c10-model-context-protocol-security/v1.0-c10.3.3-independent-origin-and-host-validation/README.md) |
-| C10.3.4 | 2 | [最低MCP Protocol Versionを強制する](control-records/c10-model-context-protocol-security/v1.0-c10.3.4-minimum-mcp-protocol-version-enforcement/README.md) |
-| C10.3.5 | 3 | [Access Tokenを送信Clientへ拘束する](control-records/c10-model-context-protocol-security/v1.0-c10.3.5-sender-constrained-access-tokens/README.md) |
-| C10.4.1 | 1 | [Tool Responseを宣言Schemaで検証する](control-records/c10-model-context-protocol-security/v1.0-c10.4.1-validate-tool-responses-against-schemas/README.md) |
-| C10.4.2 | 1 | [Tool ResponseをIndirect Prompt Injection観点で検査する](control-records/c10-model-context-protocol-security/v1.0-c10.4.2-screen-tool-responses-for-indirect-prompt-injection/README.md) |
-| C10.4.3 | 1 | [未知・過大なFunction Parameterを拒否する](control-records/c10-model-context-protocol-security/v1.0-c10.4.3-reject-unrecognized-or-oversized-function-parameters/README.md) |
-| C10.4.4 | 2 | [Strict Server-side Schema Validationを強制する](control-records/c10-model-context-protocol-security/v1.0-c10.4.4-strict-server-side-schema-validation/README.md) |
-| C10.4.5 | 2 | [Transport Payload Sizeを制限する](control-records/c10-model-context-protocol-security/v1.0-c10.4.5-transport-payload-size-limits/README.md) |
-| C10.4.6 | 2 | [Tool Response署名でReplayを検出する](control-records/c10-model-context-protocol-security/v1.0-c10.4.6-signed-tool-responses-with-replay-protection/README.md) |
-| C10.4.7 | 2 | [Local Server導入前に明示同意を求める](control-records/c10-model-context-protocol-security/v1.0-c10.4.7-explicit-local-server-installation-consent/README.md) |
-| C10.4.8 | 3 | [Tool Definition変更後は再承認まで実行を止める](control-records/c10-model-context-protocol-security/v1.0-c10.4.8-tool-definition-change-reapproval/README.md) |
+### C11
 
-## C9 Control records
+| Section | Control本文 |
+|---|---|
+| C11.1 | [v1.0-C11.1.1](control-records/c11-adversarial-robustness/v1.0-c11.1.1-model-alignment-and-safety-training/README.md) · [v1.0-C11.1.2](control-records/c11-adversarial-robustness/v1.0-c11.1.2-run-versioned-alignment-suite-on-model-updates/README.md) · [v1.0-C11.1.3](control-records/c11-adversarial-robustness/v1.0-c11.1.3-evaluate-modality-relevant-adversarial-attacks/README.md) · [v1.0-C11.1.4](control-records/c11-adversarial-robustness/v1.0-c11.1.4-harden-model-against-adversarial-inputs/README.md) · [v1.0-C11.1.5](control-records/c11-adversarial-robustness/v1.0-c11.1.5-measure-harmful-content-rate-and-flag-regressions/README.md) |
 
-[C9 Family概要](control-records/c09-orchestration-and-agentic-security/README.md)に、全6節・34要件の保証範囲、
-C5との違い、Researchからの検討観点を整理した。C9全34件について、
-解釈・適用境界・脅威・Positive/Negative Verification・証拠期待値・限界を備えた
-`verifiable` Controlを整備した。最初の代表要件はC9.5.1。
-これはRepository Artifactの完成であり、製品適合・攻撃への完全保証・学習完了を意味しない。
-[C9 Family overview](control-records/c09-orchestration-and-agentic-security/README.md)では、
-Categoryから各Requirementまでの保証範囲を短い問いで俯瞰できる。
+### C12
 
-| Requirement | Level | Control |
-|---|---:|---|
-| C9.1.1 | 1 | [ツール単位の資源上限と実行期限](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.1-per-tool-resource-quotas-and-timeouts/README.md) |
-| C9.1.2 | 1 | [実行全体の累積予算をRuntimeで強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.2-per-execution-cumulative-budgets/README.md) |
-| C9.1.3 | 2 | [Agent群全体を停止できるKill-switch](control-records/c09-orchestration-and-agentic-security/v1.0-c9.1.3-swarm-wide-agent-halt/README.md) |
-| C9.2.1 | 1 | [高影響操作を人の承認前に実行させない](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.1-human-approval-before-high-impact-actions/README.md) |
-| C9.2.2 | 2 | [承認画面に実際の操作内容を完全かつ正確に示す](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.2-complete-canonical-approval-display/README.md) |
-| C9.2.3 | 2 | [高影響操作の可逆性を信頼できる根拠で分類する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.3-trusted-action-reversibility-classification/README.md) |
-| C9.2.4 | 2 | [可逆性分類を実行制限へ結び付ける](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.4-enforce-reversibility-based-action-policy/README.md) |
-| C9.2.5 | 2 | [Agentの自己変更能力を強制可能な範囲に限定する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification/README.md) |
-| C9.2.6 | 2 | [高Risk操作のAI補助レビューを決定論的Gateに追加する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.6-additive-ai-review-before-high-risk-actions/README.md) |
-| C9.2.7 | 2 | [AI補助レビューの入力・結果・実行経路を操作から守る](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation/README.md) |
-| C9.2.8 | 3 | [承認を操作・要求者・実行Contextと一回限りの値へ暗号的に結合する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.8-cryptographically-bound-single-use-approvals/README.md) |
-| C9.2.9 | 3 | [承認を発行する鍵・資格情報をAgentから隔離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.9-approval-issuing-key-and-credential-isolation/README.md) |
-| C9.2.10 | 3 | [行動連鎖の最大影響を承認Gateへ反映する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.10-chain-wide-highest-impact-approval/README.md) |
-| C9.3.1 | 1 | [ツール実行を最小権限で隔離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.1-least-privilege-tool-execution-isolation/README.md) |
-| C9.3.2 | 1 | [ツール出力をSchemaに照らして検証する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation/README.md) |
-| C9.3.3 | 2 | [Tool Manifestに権限・資源・出力検証要件を宣言する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.3-explicit-tool-manifest-security-requirements/README.md) |
-| C9.3.4 | 2 | [Tool Manifestの制約をRuntimeが強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/README.md) |
-| C9.3.5 | 2 | [非信頼データ処理をツール呼出し能力から隔離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/README.md) |
-| C9.3.6 | 2 | [非信頼ツール出力の処理とAgent操作を構造的に分離する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs/README.md) |
-| C9.3.7 | 2 | [モデルが示した外部資源を承認済み一覧で確認する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.7-verify-model-named-external-resources/README.md) |
-| C9.3.8 | 3 | [Policy違反時にツールを自動的に封じ込める](control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.8-automatic-tool-containment-on-policy-violation/README.md) |
-| C9.4.1 | 2 | [各Agent Instanceを固有の暗号的Identityで認証する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.1-unique-cryptographic-agent-instance-identity/README.md) |
-| C9.4.2 | 2 | [Agent操作を実行連鎖へ暗号的に結び付ける](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.2-cryptographic-action-chain-attribution/README.md) |
-| C9.4.3 | 3 | [AgentのIdentity資格情報を定めた周期で更新する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.3-scheduled-agent-credential-rotation/README.md) |
-| C9.4.4 | 3 | [呼出し間に保存するAgent状態の完全性を保護する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.4.4-integrity-protection-for-persisted-agent-state/README.md) |
-| C9.5.1 | 2 | [Agentのツールと引数に対する細粒度認可](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.1-fine-grained-tool-and-parameter-authorization/README.md) |
-| C9.5.2 | 2 | [利用者の委任Contextを各下流呼出しで維持・強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.2-scope-limited-user-context-through-downstream-calls/README.md) |
-| C9.5.3 | 2 | [アクセス制御をモデルではなくApplicationで強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.3-application-enforced-authorization-outside-model-decisions/README.md) |
-| C9.5.4 | 2 | [Runtimeの秘密・資格情報をモデルから観測できなくする](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.4-keep-runtime-secrets-out-of-model-context/README.md) |
-| C9.5.5 | 2 | [Agent間のタスク委任を明示的Policyで制限する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.5-explicit-inter-agent-delegation-policy/README.md) |
-| C9.5.6 | 3 | [長時間Agentの各特権操作を現在のPolicyで再評価する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.5.6-current-authorization-for-each-privileged-action/README.md) |
-| C9.6.1 | 1 | [推論と出力を手動で停止できるようにする](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.1-manual-stop-of-inference-and-outputs/README.md) |
-| C9.6.2 | 2 | [承認期限が切れた操作を実行させない](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.2-deny-actions-after-approval-timeout/README.md) |
-| C9.6.3 | 3 | [停止指示をAgentから隔離した別経路で強制する](control-records/c09-orchestration-and-agentic-security/v1.0-c9.6.3-out-of-band-shutdown-control-isolation/README.md) |
+| Section | Control本文 |
+|---|---|
+| C12.1 | [v1.0-C12.1.1](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.1-log-ai-interactions-with-session-context/README.md) · [v1.0-C12.1.2](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.2-log-safety-filter-and-policy-decisions/README.md) · [v1.0-C12.1.3](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.3-structured-interoperable-inference-event-logs/README.md) · [v1.0-C12.1.4](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.1.4-log-rag-retrieval-queries-documents-and-sources/README.md) |
+| C12.2 | [v1.0-C12.2.1](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.1-detect-and-alert-on-known-adversarial-inputs/README.md) · [v1.0-C12.2.2](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.2-detect-unusual-conversation-and-probing-behavior/README.md) · [v1.0-C12.2.3](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.3-detect-ai-specific-attacks-with-custom-rules/README.md) · [v1.0-C12.2.4](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.4-include-offending-query-metadata-in-extraction-alerts/README.md) · [v1.0-C12.2.5](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.5-attribute-token-usage-by-user-session-feature-and-team/README.md) · [v1.0-C12.2.6](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.2.6-monitor-llm-api-traffic-for-covert-c2-activity/README.md) |
+| C12.3 | [v1.0-C12.3.1](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.1-monitor-input-distribution-drift-by-data-type/README.md) · [v1.0-C12.3.2](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.2-identify-and-flag-factually-wrong-contradictory-or-fabricated-outputs/README.md) · [v1.0-C12.3.3](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.3-track-hallucination-rate-over-time/README.md) · [v1.0-C12.3.4](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3.4-distinguish-unexplained-behavior-from-expected-drift/README.md) |
+| C12.4 | [v1.0-C12.4.1](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.4.1-evaluate-autonomous-action-triggers/README.md) · [v1.0-C12.4.2](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.4.2-audit-security-critical-proactive-actions/README.md) · [v1.0-C12.4.3](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.4.3-log-kill-switch-activations-and-override-commands/README.md) |
+| C12.5 | [v1.0-C12.5.1](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.1-record-complete-dataset-lineage/README.md) · [v1.0-C12.5.2](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.2-log-all-labeling-activities/README.md) · [v1.0-C12.5.3](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.3-immutable-audit-records-for-model-changes/README.md) · [v1.0-C12.5.4](control-records/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.5.4-tag-ingested-documents-at-write-time/README.md) |
 
-今後は利用・レビューからの改善を行う。Engineering Mappingは別の評価として扱う。
+## 資料の使い分け
 
-## Navigation and learning
+| 探したいもの | 入口 |
+|---|---|
+| 個別ControlのID、AISVS Verification Level、成熟度、参照先 | [Control Catalog](catalog.yaml) |
+| Section単位の講義、対話、学習進捗 | [学習ガイド](learning/README.md) |
+| 整備順序と今後の作業 | [Controls計画](plan.md) |
+| Control本文の構成とCatalogの形式 | [Controlテンプレート](templates/control.md)・[Catalog Schema](schema/control-catalog.schema.json) |
+| 執筆・検証時のルール | [Controls Domain Instructions](AGENTS.md) |
 
-- [AISVS Family assurance map](family-assurance-map.md):
-  three representative system views showing where the 12 families ask assurance questions;
-  not a conformance or Engineering Pattern mapping.
-- [AISVS C7 Model Behavior learning guide](learning/c07-model-behavior-output-control-and-safety-assurance/README.md):
-  output validation lectures, beginning with C7.1 and streaming trust boundaries.
-- [AISVS C2 Input Validation learning guide](learning/c02-input-validation/README.md):
-  Section-based lectures, dialogue, concrete mitigation examples, and negative tests.
-- [Common Controls learning method](learning/README.md): shared teaching,
-  dialogue-reconstruction, insight, storage, and quality rules for every AISVS
-  Category.
-- [AISVS C5 Access Control and Identity learning guide](learning/c05-access-control-and-identity/README.md):
-  legacy Requirement sequence, progress, and persistent learning notes.
-- [AISVS C10 Model Context Protocol Security learning guide](learning/c10-model-context-protocol-security/README.md):
-  completed Section-based learning notes for all four C10 Sections.
-- [AISVS C12 Monitoring, Logging & Anomaly Detection learning guide](learning/c12-monitoring-logging-and-anomaly-detection/README.md):
-  completed learning notes for all five Sections, including privacy and operating-cost trade-offs.
-- [AISVS C2 family overview](control-records/c02-input-validation/README.md):
-  input-validation assurance boundaries and Requirement navigation.
-- [AISVS C5 family overview](control-records/c05-access-control-and-identity/README.md):
-  Category, Section, and Requirement-level questions and prohibited failure states.
-- [AISVS C7 family overview](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md):
-  output-format, reliability, safety, and attribution assurance boundaries.
-- [AISVS C11 family overview](control-records/c11-adversarial-robustness/README.md):
-  alignment, privacy inference, model extraction, and runtime anomaly boundaries.
-- [AISVS C12 family overview](control-records/c12-monitoring-logging-and-anomaly-detection/README.md):
-  interaction logging, detection, drift, autonomous behavior, and lifecycle audit boundaries.
-- [AISVS C9 family overview](control-records/c09-orchestration-and-agentic-security/README.md):
-  a compact overview of what each C9 assurance layer asks and must prevent.
-
-## Control record layout
-
-Store substantive AISVS Control records under one AISVS-family directory:
-
-```text
-control-records/
-└── cNN-family-slug/
-    ├── README.md
-    └── vX.Y-cN.N.N-descriptive-control-name/
-        └── README.md
-
-learning/
-└── cNN-family-slug/
-    ├── README.md
-    └── vX.Y-cN.N-section-slug.md
-```
-
-For example, the Golden Control is stored under
-`c05-access-control-and-identity/`. The family number and versioned Requirement ID
-provide direct upstream traceability; the descriptive suffix keeps the security
-subject understandable without looking up the identifier.
-
-The Control family `README.md` is the navigation and assurance overview rendered by
-default in GitHub. Individual Requirement `README.md` files remain the canonical
-Control interpretations, and `catalog.yaml` points only to those individual files.
-
-Section learning notes are revision-aware teaching artifacts. They cover all
-Requirements in one Section but do not replace the individual Controls. Existing
-C5/C9 Requirement-level notes are retained as legacy learning history and are not
-automatically moved or merged.
-
-Within `control-records/`, use only the family and versioned Requirement levels;
-do not create Section directories such as `c05.2/`. Versioned Section directories
-are used only under `learning/` and only when a substantive lecture exists.
-Do not create empty family directories.
-
-The filesystem layout is a navigation aid. `catalog.yaml` remains authoritative for
-source version, lifecycle state, Verification Level, maturity, related Requirements, and
-Mappings. When AISVS renames or renumbers content, preserve the historical record
-and perform a semantic change review; do not silently rename or overwrite it.
-
-## Primary backbone
-
-OWASP AISVS is the primary verification/control backbone.
-
-## AISVS Research documentation
-
-When developing, interpreting, mapping, or reviewing an AISVS control, always read
-both:
-
-1. the requirement in the applicable versioned AISVS chapter; and
-2. the corresponding chapter or section page in the
-   [AISVS Research Wiki](https://github.com/OWASP/AISVS/blob/main/1.0/research/README.md).
-
-Use the Research documentation to investigate threat rationale, verification
-approaches, tooling maturity, implementation caveats, open questions, and related
-requirements. It is a required research input, but it is supporting material rather
-than the normative requirement text.
-
-If the Research documentation and the versioned requirement appear inconsistent,
-do not silently choose or merge them. Treat the versioned requirement as the AISVS
-normative source, record the discrepancy and uncertainty, and determine whether an
-upstream or repository follow-up is required.
-
-Do not copy Research pages wholesale. Record the page URL and reviewed source state,
-summarize only the relevant findings with attribution, and independently validate
-security-significant claims before using them in control interpretation,
-verification, evidence expectations, or mappings.
-
-Do not copy the entire AISVS standard into this repository. Prefer:
-
-- versioned requirement ID;
-- concise interpretation;
-- security objective and required security properties;
-- verification evidence;
-- optional references to separately maintained mapping assessments;
-- source version/status.
-
-Example conceptual record:
-
-```yaml
-source: owasp-aisvs
-requirement: v1.0-C9.4.3
-interpretation: "...repository-authored interpretation..."
-mapping_assessment_refs: []
-```
-
-Mapping assessment status and relationship details belong under `mappings/`.
-Control records may link to those canonical assessments but must not duplicate them.
-
-## Why controls are separate from engineering patterns
-
-Controls answer "what should be verified?" while engineering patterns answer "how should we build and test it?"
-
-A single pattern can satisfy or partially address many controls, and a single control can require several patterns.
-
-Develop each side independently. Mapping is a later, derived artifact and does not
-determine control maturity. Do not force a one-to-one mapping or generate Pattern
-candidates from the Control inventory. See [`../mappings/README.md`](../mappings/README.md).
+Controlの成熟度は文書の状態であり、製品の適合や学習完了を示しません。
+AISVSは検証要件の一次資料です。Control本文はその原文の代替ではなく、Repositoryの解釈です。
+AISVS Researchは脅威や検証を考えるための補助資料であり、追加の規範要件とは扱いません。
+参照している版・成熟状態は [Source Registry](../sources/registry.yaml) を確認してください。
+Engineering Patternとの関係は、両者を独立に理解した後に [Mappings](../mappings/README.md) で評価します。
