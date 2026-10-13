@@ -4,8 +4,8 @@ document_kind: "family-learning-guide"
 source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
-current_section: "C11.3"
-last_updated: "2026-10-06"
+current_section: "complete"
+last_updated: "2026-10-07"
 ---
 
 # AISVS C11 敵対的な操作に対する耐性：学習ガイド
@@ -28,12 +28,12 @@ Requirementごとの保証境界は[C11 Control俯瞰図](../../control-records/
 
 ## 軽量な進捗
 
-現在学習中のSection：C11.3。チェックは講義と対話を一巡した印であり、理解度の採点ではない。
+全4 Sectionを一巡した。チェックは講義と対話を一巡した印であり、理解度の採点ではない。
 
 - [x] [C11.1：Modelの安全性と敵対的入力への耐性](v1.0-c11.1-model-alignment-safety-and-robustness.md)
 - [x] [C11.2：学習Dataと機微な属性の推測](v1.0-c11.2-membership-inference-and-model-inversion-mitigation.md)
-- [ ] C11.3：Modelの複製
-- [ ] C11.4：実行時の異常とFeedback
+- [x] [C11.3：Modelの複製](v1.0-c11.3-model-extraction-defense.md)
+- [x] [C11.4：実行時の異常とFeedback](v1.0-c11.4-model-runtime-anomaly-detection.md)
 
 ## 一次資料
 
