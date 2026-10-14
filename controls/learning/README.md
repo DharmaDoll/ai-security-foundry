@@ -318,6 +318,7 @@ Section学習の完了は、学習者が次を自分の言葉で短く説明で�
 - [C1：Training Data Integrity and Traceability](c01-training-data-integrity-and-traceability/README.md)
 - [C2：Input Validation](c02-input-validation/README.md)
 - [C3：Model Lifecycle Management and Change Control](c03-model-lifecycle-management-and-change-control/README.md)
+- [C4：Infrastructure, Configuration and Deployment Security](c04-infrastructure-configuration-and-deployment-security/README.md)
 - [C5：Access Control and Identity](c05-access-control-and-identity/README.md)
 - [C7：Model Behavior, Output Control & Safety Assurance](c07-model-behavior-output-control-and-safety-assurance/README.md)
 - [C8：Memory, Embeddings & Vector Database Security](c08-memory-embeddings-and-vector-database-security/README.md)
