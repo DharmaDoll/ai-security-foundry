@@ -23,6 +23,7 @@ Repository interpretationを区別する。
 ## 学習上の起点から探す
 
 - [C2 学習ガイド](../../controls/learning/c02-input-validation/README.md)：入力の変換後に実際に利用される内容を検査する。
+- [C4 学習ガイド](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/README.md)：隔離の保護方向と、共有資源の利用者切替時の境界を考える。
 - [C5 学習ガイド](../../controls/learning/c05-access-control-and-identity/README.md)：Identity、権限、Data Protection、Tenant分離から得たInsightを一覧化する。
 - [C7 学習ガイド](../../controls/learning/c07-model-behavior-output-control-and-safety-assurance/README.md)：出力の検証と出典・調査可能性を考える。
 - [C8 学習ガイド](../../controls/learning/c08-memory-embeddings-and-vector-database-security/README.md)：Trusted Memoryへの昇格と利用停止・削除を分ける。
@@ -63,6 +64,8 @@ AISVSは採用済みの固定Revisionにおける学習上の文脈であり、I
 
 | Insight | 何に使うか | 起点（Control／学習） | Pattern | Framework／Guideline文脈 |
 |---|---|---|---|---|
+| [隔離には方向がある](isolation-has-a-direction.md) | 攻撃主体と保護対象を分け、双方向の保証を混同しない | [C4.1学習](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1-ai-workload-sandboxing-and-validation.md) | — | C4学習ノートに記載した固定Revision（学習の起点） |
+| [再利用は安全な引渡し](resource-reuse-is-a-security-handoff.md) | 同時利用の分離と、次の利用者へ残さない条件を分ける | [C4.2学習](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2-ai-hardware-security.md) | — | C4学習ノートに記載した固定Revision（学習の起点） |
 | [AgentのCapability Flow](web-security-to-agent-capability-flow.md) | 非信頼情報が権限へ影響する経路を追う | [C9.3.4](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/README.md)、[C9.3.5](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/README.md) | — | [AISVS v1.0 C9][aisvs-c9] |
 | [保証を診断軸として使う](assurance-properties-are-diagnostic-lenses.md) | 個別保証とSystem全体の安全性を分ける | [C5.2.5](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md)、[C9.2.7](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.7-protect-ai-action-review-from-manipulation/README.md) | — | [AISVS C5][aisvs-c5]・[C9][aisvs-c9] |
 | [Security Artifactの保証範囲](security-artifacts-have-bounded-claims.md) | 署名・Schema・Manifest等の証明範囲を越えない | [C5.2.4](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/README.md)、[C9.3.2](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.2-tool-output-schema-validation/README.md) | — | [AISVS C5][aisvs-c5]・[C9][aisvs-c9] |
