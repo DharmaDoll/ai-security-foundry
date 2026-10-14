@@ -56,11 +56,26 @@ sources:
     role: "control"
     canonical_url: "https://github.com/OWASP/AISVS"
     status: "stable"
-    current_version: "1.0"
-    development_version: "1.01-dev"
+    current_version: "1.01"
+    adopted_version: "1.0"
+    adopted_revision: "78775233666a2022dcfb82037e5e029116955c00"
+    development_versions:
+      - "1.02-dev"
+      - "2.0-dev"
+    published: "2026-10-05"
     identifier_guidance: "Prefer versioned IDs such as v1.0-C9.4.3"
-    last_verified: "2026-09-01"
-    notes: "Primary verification/control backbone. Stable release directories are intended to remain fixed while development continues in a new version directory."
+    last_verified: "2026-10-15"
+    verification_urls:
+      - "https://github.com/OWASP/AISVS#latest-stable-version"
+      - "https://github.com/OWASP/AISVS/commit/fa68bc2ec08568596f989abcf495b6fb549d4a28"
+      - "https://github.com/OWASP/AISVS/blob/55dc2203d861af14482b529c564f5b312134b165/RELEASE.md"
+    notes: >-
+      Primary verification/control backbone. current_version records the latest
+      verified upstream stable version; adopted_version and adopted_revision
+      record the existing repository baseline, not an adoption of 1.01.
+      Requirement and Research impact assessment is pending under issue #6.
+      Preserve versioned v1.0 history; do not relabel existing controls or mappings.
+      Source-state review: sources/updates/2026-10-15-aisvs-1.01-source-state.md.
 
   mitre-atlas:
     name: "MITRE ATLAS"

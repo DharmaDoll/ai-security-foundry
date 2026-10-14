@@ -474,11 +474,13 @@ Controls and engineering patterns are independent bodies of knowledge. A control
 
 ## 2. Current framework landscape
 
-The source state below was checked against `sources/registry.yaml` and the linked primary sources on 2026-09-01.
+The source landscape was initially checked on 2026-09-01. AISVS publication state
+was re-verified on 2026-10-15; other rows retain their earlier verification state.
+See `sources/registry.yaml` for each source's verification date.
 
 | Source | State used by this repository | Role in `controls/` | Treatment |
 |---|---|---|---|
-| OWASP AISVS | `v1.0`, stable; `1.01-dev` is in development | Primary verification/control backbone | Build the catalog and mature controls against stable `v1.0`; monitor but do not silently adopt `1.01-dev` |
+| OWASP AISVS | Repository baseline: `v1.0`; latest verified stable: `1.01`; development: `1.02-dev` and `2.0-dev` | Primary verification/control backbone | Preserve existing `v1.0` records; assess migration through [Issue #6](https://github.com/DharmaDoll/ai-security-foundry/issues/6) before adopting new requirement meaning or IDs |
 | MITRE ATLAS | rolling | Adversary behavior and TTP taxonomy | Use for justified threat links; never treat technique coverage as control completion |
 | OWASP GenAI LLM Top 10 | 2026, stable | LLM application risk taxonomy | Use as risk context and mapping evidence, not as control structure |
 | OWASP Top 10 for Agentic Applications | 2026, stable | Agentic application risk taxonomy | Use as agentic risk context, particularly for action and delegation controls |
@@ -486,7 +488,14 @@ The source state below was checked against `sources/registry.yaml` and the linke
 | OWASP Agentic Skills Top 10 | v1 draft/public review | Agent-skill and behavior-layer risk taxonomy | Use as provisional context only; re-review mappings when status changes |
 | OWASP AI Exchange | rolling | Supplementary security/privacy knowledge | Use for research and context, not as a normative control backbone |
 
-AISVS states that `v1.0` is its latest stable release, with a locked stable directory and ongoing work in `1.01-dev`. It defines 191 requirements across 12 chapters and assigns verification levels 1–3. Stable, development, beta, public-review, and rolling sources must remain distinguishable in every derived record.
+The repository's existing `v1.0` baseline defines 191 requirements across 12 chapters
+and assigns verification levels 1–3. Upstream now identifies `1.01` as its latest
+stable release, published on 2026-10-05, with development in `1.02-dev` and `2.0-dev`.
+The 1.01 requirement inventory and Research impact have not yet been assessed in
+full; do not carry the v1.0 count forward as a claim about 1.01.
+The [source-state review](../sources/updates/2026-10-15-aisvs-1.01-source-state.md)
+records this metadata update separately from migration. Stable, development, beta,
+public-review, and rolling sources must remain distinguishable in every derived record.
 
 AISVS Appendix B is a useful non-normative, developer-facing reorganization of the requirements. It may inform analysis, but AISVS explicitly identifies chapters C1–C12 as the normative source of truth. The repository should therefore derive requirement identity and meaning from the chapters, not from the appendix alone.
 
