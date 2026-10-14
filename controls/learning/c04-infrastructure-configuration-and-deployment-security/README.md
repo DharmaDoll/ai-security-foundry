@@ -28,6 +28,13 @@ C4.1〜C4.3の講義と対話を一巡した。チェックは学習の進捗で
 - [x] [C4.2：AIハードウェアの保護](v1.0-c4.2-ai-hardware-security.md)
 - [x] [C4.3：端末・分散環境のAI保護](v1.0-c4.3-edge-and-distributed-ai-security.md)
 
+## このFamilyから得られた横断的な洞察
+
+- [隔離には方向がある](../../../docs/insights/isolation-has-a-direction.md)：C4.1・C4.2を起点に、モデルから基盤を守る境界と、基盤からモデルを守る境界を分ける。
+- [共有資源の再利用は安全な引渡し](../../../docs/insights/resource-reuse-is-a-security-handoff.md)：C4.2.4を起点に、同時利用者との分離と次の利用者へ残さない条件を分ける。
+
+Insightは対話から得た再利用可能な整理であり、Control本文や正式なMappingではない。
+
 ## 一次資料
 
 - [AISVS v1.0 C4正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)

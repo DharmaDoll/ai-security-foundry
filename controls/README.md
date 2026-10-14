@@ -14,13 +14,15 @@ AISVS v1.0の全12 Familyを示します。**主に確認すること**は保証
 「問うこと」「できてはいけないこと」と、**個別Control本文へのリンク**があります。
 個別Control本文が解釈・検証方法・証拠期待値・限界の正本です。
 Control本文が未整備のFamilyは、固定版AISVSの原文へ案内します。
+学習資料があるFamilyは学習ガイドも併記します。学習資料の存在や学習の完了は、
+個別Controlの整備・成熟とは別です。
 
 | Family | 主に確認すること | 主な検討場面 |
 |---|---|---|
-| C1 Training Data Integrity & Traceability（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md)、Control未整備） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
+| C1 Training Data Integrity & Traceability（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md)・[学習ガイド](learning/c01-training-data-integrity-and-traceability/README.md)、Control未整備） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
 | [C2 Input Validation](control-records/c02-input-validation/README.md) | 入力と取得内容が、変換や複数の形式を経ても検査の想定から外れないか。 | User入力、検索文書、画像・音声などをModel Contextへ取り込むとき。 |
-| C3 Model Lifecycle Management & Change Control（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)、Control未整備） | Model Artifactと変更を検証し、許可した版だけを本番へ反映・復旧できるか。 | Model・Provider版の変更、Fine-tuning、段階的な配備とRollback。 |
-| C4 Infrastructure, Configuration & Deployment Security（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)、Control未整備） | Model実行基盤・Accelerator・Edge環境を隔離し、実行状態を検証できるか。 | Model Serving、GPU共有、Edge・Mobileへの配備。 |
+| C3 Model Lifecycle Management & Change Control（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)・[学習ガイド](learning/c03-model-lifecycle-management-and-change-control/README.md)、Control未整備） | Model Artifactと変更を検証し、許可した版だけを本番へ反映・復旧できるか。 | Model・Provider版の変更、Fine-tuning、段階的な配備とRollback。 |
+| C4 Infrastructure, Configuration & Deployment Security（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)・[学習ガイド](learning/c04-infrastructure-configuration-and-deployment-security/README.md)、Control未整備） | Model実行基盤・Accelerator・Edge環境を隔離し、実行状態を検証できるか。 | Model Serving、GPU共有、Edge・Mobileへの配備。 |
 | [C5 Access Control & Identity for AI Components & Users](control-records/c05-access-control-and-identity/README.md) | 主体・権限・Credential・Tenant境界を、AIを介しても維持できるか。 | 権限付きRAG、複数Tenantでの共有基盤、Agentへの権限付与。 |
 | C6 Supply Chain Security for Models（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md)、Control未整備） | 外部由来のModel・Dataset・Adapterの出所と完全性を確認し、構成を追跡できるか。 | Third-party Artifactの取込み、AI BOMの作成、供給元の変更。 |
 | [C7 Model Behavior, Output Control & Safety Assurance](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md) | Model出力の形式、信頼性、安全性、出典を利用前に確認できるか。 | 回答の公開、出力のTool利用、RAGの引用、生成Mediaの配布。 |
@@ -113,6 +115,7 @@ AISVS要件の不存在や製品の適合状態を意味しません。
 |---|---|
 | 個別ControlのID、AISVS Verification Level、成熟度、参照先 | [Control Catalog](catalog.yaml) |
 | Section単位の講義、対話、学習進捗 | [学習ガイド](learning/README.md) |
+| 設計レビューや教育に再利用できる横断的な洞察 | [Insights一覧](../docs/insights/README.md) |
 | 整備順序と今後の作業 | [Controls計画](plan.md) |
 | Control本文の構成とCatalogの形式 | [Controlテンプレート](templates/control.md)・[Catalog Schema](schema/control-catalog.schema.json) |
 | 執筆・検証時のルール | [Controls Domain Instructions](AGENTS.md) |
@@ -121,4 +124,6 @@ Controlの成熟度は文書の状態であり、製品の適合や学習完了�
 AISVSは検証要件の一次資料です。Control本文はその原文の代替ではなく、Repositoryの解釈です。
 AISVS Researchは脅威や検証を考えるための補助資料であり、追加の規範要件とは扱いません。
 参照している版・成熟状態は [Source Registry](../sources/registry.yaml) を確認してください。
+現行資料の採用版はAISVS v1.0です。上流の最新安定版1.01への差分・影響評価は
+[Issue #6](https://github.com/DharmaDoll/ai-security-foundry/issues/6)で追跡しています。
 Engineering Patternとの関係は、両者を独立に理解した後に [Mappings](../mappings/README.md) で評価します。
