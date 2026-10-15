@@ -2,7 +2,7 @@
 title: "検査するのは入口の文字列ではなく、実際に利用される内容である"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-29"
+last_updated: "2026-10-15"
 ---
 
 # 検査するのは入口の文字列ではなく、実際に利用される内容である
@@ -40,6 +40,9 @@ Candidate input / output
   既に取得していれば、後から拒否しても通信を取り消せない。
 - **Tool応答**：JSON Schemaに適合した応答でも、本文の指示をModelが次の操作命令として扱えば、
   形式検査だけではその利用境界を守れない。
+- **Modelの評価**：同じモデル名のAPIでも、Providerが接続先の版を変更したら、以前の安全性試験と
+  実際に使うモデルが対応しなくなる。量子化後の成果物にも、変更前の評価結果を自動継承しない。
+  この場合は内容のFilterではなく、実際に使う版・構成・経路に対応する再評価が必要になる。
 
 ## 設計レビューとNegative Test
 
@@ -48,6 +51,7 @@ Candidate input / output
 - Encoding隠蔽を検知したとき、最終Payloadは実際に遮断されるか。
 - 完成前の出力や危険URLを、検証より先に公開・実行・自動取得していないか。
 - 拒否した内容がRetry、Fallback、別Routeで復活しないか。正常な多言語・境界長の入力は通るか。
+- ModelやProviderの経路を、アプリのコードを変えずに差し替えた場合も再評価の契機として扱えるか。
 
 ## 限界と隣接Insight
 
@@ -64,6 +68,7 @@ Candidate input / output
 
 ## 起点となった学習記録
 
+- [C3.2：量子化後とProvider変更後の再評価](../../controls/learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.2-model-validation-and-testing.md)
 - [C2.1：Prompt Injection Defenses](../../controls/learning/c02-input-validation/v1.0-c2.1-prompt-injection-defenses.md)
 - [C7.1：Output Format Enforcement](../../controls/learning/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.1-output-format-enforcement.md)
 - [C7.3：Output Safety](../../controls/learning/c07-model-behavior-output-control-and-safety-assurance/v1.0-c7.3-output-safety.md)

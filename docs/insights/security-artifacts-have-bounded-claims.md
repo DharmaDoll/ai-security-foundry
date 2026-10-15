@@ -2,7 +2,7 @@
 title: "Security Artifactは証明できる範囲を越えて信頼しない"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-29"
+last_updated: "2026-10-15"
 ---
 
 # Security Artifactは証明できる範囲を越えて信頼しない
@@ -64,6 +64,10 @@ ManifestにNetwork禁止と書いた
 過大権限を正直に宣言した署名済みManifestは、署名・宣言としては正しいが安全ではない。悪意ある宛先を正しい型で
 表したJSONはSchemaに適合する。誤ったPolicy Decisionを正規Keyで署名することもできる。
 
+モデルの署名検証も同じである。報酬モデルの版と完全性を確認しても、利用者への迎合を過大評価するという
+採点上の欠点は残り得る。内容の妥当性は別に評価する。採点の弱点を学習が増幅する過程は
+[最適化と採点基準の洞察](optimization-can-exploit-the-evaluator.md)で扱う。
+
 したがって、Artifactごとに次を明示する。
 
 - Producerと信頼根拠。
@@ -99,6 +103,7 @@ ManifestにNetwork禁止と書いた
 
 ## 起点となった学習記録
 
+- [C3.5：報酬モデルの完全性と採点品質](../../controls/learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.5-pipeline-fine-tuning.md)
 - [C5.1.2：Agent Token](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/learning.md)
 - [C5.2.4：Post-inference Authorization](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/learning.md)
 - [C5.2.7：Classification Label Propagation](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/learning.md)
