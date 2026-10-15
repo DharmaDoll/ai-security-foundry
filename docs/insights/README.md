@@ -23,6 +23,7 @@ Repository interpretationを区別する。
 ## 学習上の起点から探す
 
 - [C2 学習ガイド](../../controls/learning/c02-input-validation/README.md)：入力の変換後に実際に利用される内容を検査する。
+- [C3 学習ガイド](../../controls/learning/c03-model-lifecycle-management-and-change-control/README.md)：採点への最適化、復旧時の構成整合性、変更後の再評価を考える。
 - [C4 学習ガイド](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/README.md)：隔離の保護方向と、共有資源の利用者切替時の境界を考える。
 - [C5 学習ガイド](../../controls/learning/c05-access-control-and-identity/README.md)：Identity、権限、Data Protection、Tenant分離から得たInsightを一覧化する。
 - [C7 学習ガイド](../../controls/learning/c07-model-behavior-output-control-and-safety-assurance/README.md)：出力の検証と出典・調査可能性を考える。
@@ -64,6 +65,9 @@ AISVSは採用済みの固定Revisionにおける学習上の文脈であり、I
 
 | Insight | 何に使うか | 起点（Control／学習） | Pattern | Framework／Guideline文脈 |
 |---|---|---|---|---|
+| [採点基準への最適化と目的のずれ](optimization-can-exploit-the-evaluator.md) | 採点役の弱点が学習・改善で増幅される過程を監視する | [C3.5学習](../../controls/learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.5-pipeline-fine-tuning.md) | — | C3学習ノートに記載した固定Revision（学習の起点） |
+| [整合した状態への復旧](recovery-restores-a-consistent-configuration.md) | ファイル単位の復旧と、検証した構成一式への復旧を区別する | [C3.3学習](../../controls/learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.3-controlled-deployment-and-rollback.md) | — | C3学習ノートに記載した固定Revision（学習の起点） |
+| [端末の推論と重要操作の認可](local-inference-is-not-action-authority.md) | モデル・実行の保護と、判定を使う側の認可を分ける | [C4.3学習](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md) | — | C4学習ノートに記載した固定Revision（学習の起点） |
 | [隔離には方向がある](isolation-has-a-direction.md) | 攻撃主体と保護対象を分け、双方向の保証を混同しない | [C4.1学習](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1-ai-workload-sandboxing-and-validation.md) | — | C4学習ノートに記載した固定Revision（学習の起点） |
 | [再利用は安全な引渡し](resource-reuse-is-a-security-handoff.md) | 同時利用の分離と、次の利用者へ残さない条件を分ける | [C4.2学習](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2-ai-hardware-security.md) | — | C4学習ノートに記載した固定Revision（学習の起点） |
 | [AgentのCapability Flow](web-security-to-agent-capability-flow.md) | 非信頼情報が権限へ影響する経路を追う | [C9.3.4](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/README.md)、[C9.3.5](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/README.md) | — | [AISVS v1.0 C9][aisvs-c9] |
