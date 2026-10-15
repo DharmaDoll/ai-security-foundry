@@ -2,7 +2,7 @@
 title: "Dataは形を変えてもProtectionを失わない"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-14"
+last_updated: "2026-10-15"
 ---
 
 # Dataは形を変えてもProtectionを失わない
@@ -74,6 +74,13 @@ Label Propagationは永久に同じLabelをコピーすることではない。P
 再識別試験、Data Owner承認等を持つTrusted Reclassificationを通す。Source Label変更後のDerived Artifactや
 CacheのFreshnessも扱う。
 
+## 復号後にも保護対象は残る
+
+暗号化したモデルをハードウェアで保護された鍵で復号しても、取得可能な一時ファイルへ平文を出せば、
+そのファイルから盗まれる。鍵の保護は復号後のDataの保護を自動的に保証しない。
+暗号化した配布物から、復号、推論、Cache、Dump、終了後の清掃まで、平文が存在する場所と読める主体を追う。
+後で一時ファイルを消すだけでは、存在中に読み出せる問題への対策にならない。
+
 ## Training入口は一つではない
 
 Direct Fine-tuningだけでなく、Feedback、Evaluation、Quality improvement、Log、ProviderのData-use設定、
@@ -108,6 +115,7 @@ Declassificationしたとみなさず、再識別可能性とBusiness Sensitivit
 
 ## 起点となった学習記録
 
+- [C4.3：復号後の一時ファイルとモデル抽出](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md)
 - [C5.2.2：Retrieval Authorization](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/learning.md)
 - [C5.2.3：Sensitive DataとModel Storage](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/learning.md)
 - [C5.2.4：Post-inference Authorization](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/learning.md)

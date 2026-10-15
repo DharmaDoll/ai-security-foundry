@@ -32,6 +32,8 @@ C4.1〜C4.3の講義と対話を一巡した。チェックは学習の進捗で
 
 - [隔離には方向がある](../../../docs/insights/isolation-has-a-direction.md)：C4.1・C4.2を起点に、モデルから基盤を守る境界と、基盤からモデルを守る境界を分ける。
 - [共有資源の再利用は安全な引渡し](../../../docs/insights/resource-reuse-is-a-security-handoff.md)：C4.2.4を起点に、同時利用者との分離と次の利用者へ残さない条件を分ける。
+- [変換後もData Protectionを保つ](../../../docs/insights/protected-data-survives-transformation.md)：C4.3.5の復号後の一時ファイルを起点に、平文が存在する場所を追う。
+- [端末の推論と重要操作の認可](../../../docs/insights/local-inference-is-not-action-authority.md)：C4.3のスマホゲームとの比較を起点に、端末内での計算と最終判断の権限を分ける。
 
 Insightは対話から得た再利用可能な整理であり、Control本文や正式なMappingではない。
 

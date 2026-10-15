@@ -2,7 +2,7 @@
 title: "不要なAuthorityを消し、残る全経路を完全仲介する"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-14"
+last_updated: "2026-10-15"
 ---
 
 # 不要なAuthorityを消し、残る全経路を完全仲介する
@@ -63,6 +63,10 @@ Agentへ「提案を書く」能力は与えても、「有効化する」「再
 Agentが自分の制限を直接変更できなくても、別Workloadの作成、Credential取得、Queueへの書込み等で同じ結果へ
 到達できれば、Capabilityは残っている。
 
+端末で推論する場合にも、計算を置く場所と重要操作を許可する場所を分けて考える。
+スマホゲームとの比較、端末の自己申告、オフライン運用の詳細は
+[端末の推論と重要操作の認可](local-inference-is-not-action-authority.md)を正本とする。
+
 ## 設計レビューへの応用
 
 - そのCapabilityは本当に通常業務に必要か。
@@ -88,6 +92,7 @@ Agentが自分の制限を直接変更できなくても、別Workloadの作成�
 
 ## 起点となった学習記録
 
+- [C4.3：スマホゲームと端末AIの比較](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md)
 - [C5.2.1：Explicit AllowとDefault Deny](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/learning.md)
 - [C5.2.5：PDP Isolation](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/learning.md)
 - [C9.2.5：Bounded Self-modification](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification/learning.md)
