@@ -65,6 +65,7 @@ AISVSは採用済みの固定Revisionにおける学習上の文脈であり、I
 
 | Insight | 何に使うか | 起点（Control／学習） | Pattern | Framework／Guideline文脈 |
 |---|---|---|---|---|
+| [安全性の数字と比較条件](security-metrics-need-comparable-conditions.md) | 試験集合・判定方法・対象境界の変更を改善と混同しない | [C11.1学習](../../controls/learning/c11-adversarial-robustness/v1.0-c11.1-model-alignment-safety-and-robustness.md)、[C11.2学習](../../controls/learning/c11-adversarial-robustness/v1.0-c11.2-membership-inference-and-model-inversion-mitigation.md) | — | C11学習ノートに記載した固定Revision（学習の起点） |
 | [採点基準への最適化と目的のずれ](optimization-can-exploit-the-evaluator.md) | 採点役の弱点が学習・改善で増幅される過程を監視する | [C3.5学習](../../controls/learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.5-pipeline-fine-tuning.md) | — | C3学習ノートに記載した固定Revision（学習の起点） |
 | [整合した状態への復旧](recovery-restores-a-consistent-configuration.md) | ファイル単位の復旧と、検証した構成一式への復旧を区別する | [C3.3学習](../../controls/learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.3-controlled-deployment-and-rollback.md) | — | C3学習ノートに記載した固定Revision（学習の起点） |
 | [端末の推論と重要操作の認可](local-inference-is-not-action-authority.md) | モデル・実行の保護と、判定を使う側の認可を分ける | [C4.3学習](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md) | — | C4学習ノートに記載した固定Revision（学習の起点） |
