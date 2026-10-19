@@ -5,6 +5,37 @@
 - Primary backbone: OWASP AISVS
 - AISVS source state reviewed: 2026-09-03
 
+### 学習コンテンツの補強計画 — 2026-10-19
+
+対象はC7、C1、C3、C4、C11の既存19 Section／72 Requirement。
+C5.1.2の学習ノートを説明の深さの参考とし、行数を揃えることを目的にしない。
+C2の直前の補強は保持し、C5・C8・C9・C10・C12の既存資料の移動や機械的な増量は行わない。
+採用SourceはAISVS v1.0固定Revision `78775233666a2022dcfb82037e5e029116955c00`のまま。
+
+| 順序 | 対象 | 補強する設計判断 | 状態 |
+|---|---|---|---|
+| 1 | C7.1〜C7.4 | Schema・終了、信頼度とImpact、出力先の副作用、出典と主張の裏付け | 教材補強・照合済み |
+| 2 | C1.1〜C1.3 | 学習Dataの必要性・来歴、Annotationの権限・完全性、Poisoning評価 | 教材補強・照合済み |
+| 3 | C3.1〜C3.5 | 実構成物の検証、変更後の再評価、復旧・環境分離、学習段階の境界 | 教材補強・照合済み |
+| 4 | C4.1〜C4.3 | 隔離の方向、Attestationの証拠と検証者、Job間と端末内の露出経路 | 教材補強・照合済み |
+| 5 | C11.1〜C11.4 | 耐性評価、Privacy推測、抽出の検知・対処、Feedbackの信頼昇格 | 教材補強・照合済み |
+
+各Batchで正規要件・対応Research・既存Control・対話を確認し、次を実施する。
+
+1. Section冒頭に全Requirementの正確な英文、Level、意味を保った日本語訳を置き、帰属・固定版を明示する。
+2. 既存Scenarioに沿って、全Requirementで攻撃者能力、越える境界、強制点、正常系・Negative Test、観測Evidence、保証しない範囲を具体化する。
+3. Researchの提案と原文要求を区別し、障害・Retry・設定変更と正規利用への影響を説明する。
+4. 既存の対話・訂正・洞察・参照先を保持する。追加演習を学習者の発言や理解確認済み記録にしない。
+5. 原文・Level・対象ID・全要件の解説、相互リンクと旧アンカー、差分を検証する。
+
+完了は教材の補強を指し、学習者の理解確認、製品試験、Control maturity、Mapping、AISVS新版採用の完了ではない。
+
+実行結果：19 Section／72 Requirementの原文・Levelを採用固定版と照合し、全件に日本語訳と要件別の設計演習を追加した。
+72件それぞれの正常系・Negative Test・Evidence・保証境界を確認し、既存の183節の説明・対話・訂正・洞察を保持した。
+対象ノートのControl相互リンク72組、ローカル参照112件、Repositoryからの流入参照171件（アンカーを含む）を確認した。
+`python3 controls/scripts/validate_catalog.py`と`git diff --check`は成功。実製品のセキュリティ試験は行っていない。
+C2の先行変更を保持し、Control本文・Catalog・Mapping・Source Registry・Engineeringは変更していない。
+
 ### 全体整備の照合 — 2026-10-19
 
 採用固定Revision `78775233666a2022dcfb82037e5e029116955c00` の12 Familyを一次資料から照合し、
