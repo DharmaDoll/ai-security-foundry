@@ -2,7 +2,7 @@
 title: "Security Artifactは証明できる範囲を越えて信頼しない"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # Security Artifactは証明できる範囲を越えて信頼しない
@@ -114,3 +114,10 @@ ManifestにNetwork禁止と書いた
 - [C12.3：Drift Detection](../../controls/learning/c12-monitoring-logging-and-anomaly-detection/v1.0-c12.3-model-data-and-performance-drift-detection.md)
 
 本書は各Artifactを弱いと評価するのではなく、保証Claimを正しい境界へ保つためのRepository interpretationである。
+
+## 関連するControl本文
+
+要件ごとの保証範囲・合否・証拠は個別Controlを参照する。以下は案内であり、Insightの規範化やMappingではない。
+
+- [v1.0-C3.5.1](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.1-versioned-integrity-verified-models-before-rlhf/README.md)
+- [v1.0-C3.5.2](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.2-automated-reward-hacking-and-overoptimization-detection/README.md)

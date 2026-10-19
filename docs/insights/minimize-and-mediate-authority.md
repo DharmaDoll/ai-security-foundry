@@ -2,7 +2,7 @@
 title: "不要なAuthorityを消し、残る全経路を完全仲介する"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # 不要なAuthorityを消し、残る全経路を完全仲介する
@@ -93,6 +93,7 @@ Agentが自分の制限を直接変更できなくても、別Workloadの作成�
 ## 起点となった学習記録
 
 - [C4.3：スマホゲームと端末AIの比較](../../controls/learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md)
+- [C4 Control概要](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/README.md)：端末や実行基盤の保護を扱う。重要操作の認可を代替する保証ではない。
 - [C5.2.1：Explicit AllowとDefault Deny](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/learning.md)
 - [C5.2.5：PDP Isolation](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/learning.md)
 - [C9.2.5：Bounded Self-modification](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.2.5-bounded-agent-self-modification/learning.md)

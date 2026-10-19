@@ -5,7 +5,7 @@ source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
 current_section: "complete"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # AISVS C3 モデルのライフサイクルと変更管理
@@ -13,6 +13,8 @@ last_updated: "2026-10-15"
 C3では、モデルを選んでから本番へ投入し、変更・復旧するまでを扱う。モデルの出所と同一性、投入前の評価、段階的な配備、開発環境の分離、追加学習の各段階を区別して学ぶ。署名が正しいことと、モデルの振る舞いが安全であることは別の保証である。
 
 講義と保存は[共通学習方針](../README.md)に従う。学習の進捗はControlの成熟度、Mapping、製品の適合判定とは独立している。
+
+[C3 Control概要](../../control-records/c03-model-lifecycle-management-and-change-control/README.md)ではC3.1〜C3.5の全15件を整備済み。
 
 ## Section一覧
 

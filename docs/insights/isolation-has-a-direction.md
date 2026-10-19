@@ -2,7 +2,7 @@
 title: "隔離は、誰から誰を守るかで意味が変わる"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # 隔離は、誰から誰を守るかで意味が変わる
@@ -72,3 +72,11 @@ Engineering Patternとの関係は未評価である。
 - モデルから基盤を守ることと、基盤からモデルを守ることは別の保証。
 - 外側からの保護があっても、内側からの漏えい経路は残る。
 - 「隔離済み」を、誰から何を守るかへ書き換える。
+
+## 関連するControl本文
+
+個別の保証範囲・合否・証拠は次のControlを参照する。案内のためのリンクであり、Insightの規範化やMappingではない。
+
+- [v1.0-C4.1.1](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.1-isolated-sandbox-for-model-execution/README.md)
+- [v1.0-C4.1.4](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.4-protect-confidential-model-weights-during-runtime/README.md)
+- [v1.0-C4.2.2](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.2-tee-hardware-isolation-encryption-and-integrity/README.md)

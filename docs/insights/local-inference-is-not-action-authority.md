@@ -2,7 +2,7 @@
 title: "端末で推論できることと、重要操作を許可できることは別である"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # 端末で推論できることと、重要操作を許可できることは別である
@@ -81,3 +81,11 @@ Engineering Patternとの関係は未評価である。
 - モデルを守る、推論を守る、操作を許可する、を分ける。
 - 認証済み端末から来た結果でも、そのまま重要操作の許可にしない。
 - 正しい実行の証拠と、正しい入力・判断の証拠は別。
+
+## 関連するControl本文
+
+個別の保証範囲・合否・証拠は次のControlを参照する。案内のためのリンクであり、Insightの規範化やMappingではない。
+
+- [v1.0-C4.3.1](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.1-strong-edge-device-authentication-to-central-infrastructure/README.md)
+- [v1.0-C4.3.2](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.2-signed-packaging-and-on-device-model-verification/README.md)
+- [v1.0-C4.3.5](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.5-packaged-model-encryption-and-trusted-runtime-decryption/README.md)

@@ -5,7 +5,7 @@ source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
 current_section: "complete"
-last_updated: "2026-10-09"
+last_updated: "2026-10-17"
 ---
 
 # AISVS C1 学習データの完全性と追跡可能性
@@ -13,6 +13,8 @@ last_updated: "2026-10-09"
 C1は、モデルの学習や追加学習に使うデータについて、何を入れるか、どこから来たか、誰がどう変更したか、汚染されていないかを学ぶ。既存LLMへ検索した文書を渡すだけのRAGは、通常はモデルの学習ではない。適用範囲を先に確かめ、学習していないシステムへC1の適合を無理に求めない。
 
 講義と保存は[共通学習方針](../README.md)に従う。学習の進捗はControlの成熟度、Mapping、製品の適合判定とは独立している。
+
+[C1 Control概要](../../control-records/c01-training-data-integrity-and-traceability/README.md)では、C1.1〜C1.3の全13件を整備している。
 
 ## Section一覧
 

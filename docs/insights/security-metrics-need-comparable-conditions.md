@@ -2,7 +2,7 @@
 title: "安全性の数字には、比較できる測定条件が必要である"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-19"
 ---
 
 # 安全性の数字には、比較できる測定条件が必要である
@@ -84,3 +84,10 @@ Repository interpretationであり、個別要件のPass条件を追加するも
 - 同じ4%でも、同じ安全性とは限らない。
 - 分母の件数だけでなく、構成・判定方法・観測境界を見る。
 - 弱点を発見したことと、製品が悪化したことを分ける。
+
+## 関連するControl本文
+
+要件ごとの評価条件・合否・証拠は次のControlを参照する。案内のためのリンクであり、Insightの規範化やMappingではない。
+
+- [v1.0-C11.2.3](../../controls/control-records/c11-adversarial-robustness/v1.0-c11.2.3-calibrate-model-outputs-to-reduce-overconfidence/README.md)
+- [v1.0-C11.2.5](../../controls/control-records/c11-adversarial-robustness/v1.0-c11.2.5-membership-inference-simulations-at-random-baseline/README.md)

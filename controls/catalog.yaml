@@ -9,6 +9,315 @@ catalog:
   upstream_revision: 78775233666a2022dcfb82037e5e029116955c00
 
 requirements:
+  - versioned_id: v1.0-C1.1.1
+    requirement_id: C1.1.1
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.1
+      title: Training Data Origin & Data Security
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-01-Training-Data-Origin-Traceability.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.1-purpose-bound-training-fields/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.1.2
+    - v1.0-C1.1.3
+    - v1.0-C1.1.4
+    - v1.0-C1.1.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.1.2
+    requirement_id: C1.1.2
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.1
+      title: Training Data Origin & Data Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-01-Training-Data-Origin-Traceability.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.2-complete-training-source-inventory/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.1.1
+    - v1.0-C1.1.3
+    - v1.0-C1.1.4
+    - v1.0-C1.1.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.1.3
+    requirement_id: C1.1.3
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.1
+      title: Training Data Origin & Data Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-01-Training-Data-Origin-Traceability.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.3-stored-and-transferred-training-data-integrity/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.1.1
+    - v1.0-C1.1.2
+    - v1.0-C1.1.4
+    - v1.0-C1.1.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.1.4
+    requirement_id: C1.1.4
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.1
+      title: Training Data Origin & Data Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-01-Training-Data-Origin-Traceability.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.4-training-data-integrity-monitoring/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.1.1
+    - v1.0-C1.1.2
+    - v1.0-C1.1.3
+    - v1.0-C1.1.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.1.5
+    requirement_id: C1.1.5
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.1
+      title: Training Data Origin & Data Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-01-Training-Data-Origin-Traceability.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.5-dataset-watermark-attribution/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.1.1
+    - v1.0-C1.1.2
+    - v1.0-C1.1.3
+    - v1.0-C1.1.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C1.2.1
+    requirement_id: C1.2.1
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.2
+      title: Data Labeling and Annotation Security
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-02-Data-Labeling-Annotation-Security.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.2.1-annotation-create-modify-approve-authorization/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.2.2
+    - v1.0-C1.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.2.2
+    requirement_id: C1.2.2
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.2
+      title: Data Labeling and Annotation Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-02-Data-Labeling-Annotation-Security.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.2.2-labeling-artifact-cryptographic-integrity/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.2.1
+    - v1.0-C1.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.2.3
+    requirement_id: C1.2.3
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.2
+      title: Data Labeling and Annotation Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-02-Data-Labeling-Annotation-Security.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.2.3-protect-sensitive-label-information-before-artifacts/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.2.1
+    - v1.0-C1.2.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C1.3.1
+    requirement_id: C1.3.1
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.3
+      title: Training Data Quality and Security Assurance
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-03-Training-Data-Quality-Security-Assurance.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.1-training-pipeline-poisoning-and-corruption-detection/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.3.2
+    - v1.0-C1.3.3
+    - v1.0-C1.3.4
+    - v1.0-C1.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.3.2
+    requirement_id: C1.3.2
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.3
+      title: Training Data Quality and Security Assurance
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-03-Training-Data-Quality-Security-Assurance.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.2-automatic-label-confidence-and-consistency-checks/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.3.1
+    - v1.0-C1.3.3
+    - v1.0-C1.3.4
+    - v1.0-C1.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.3.3
+    requirement_id: C1.3.3
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.3
+      title: Training Data Quality and Security Assurance
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-03-Training-Data-Quality-Security-Assurance.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.3-bias-evaluation-for-security-decisions/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.3.1
+    - v1.0-C1.3.2
+    - v1.0-C1.3.4
+    - v1.0-C1.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.3.4
+    requirement_id: C1.3.4
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.3
+      title: Training Data Quality and Security Assurance
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-03-Training-Data-Quality-Security-Assurance.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.4-remove-disallowed-content-before-training/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.3.1
+    - v1.0-C1.3.2
+    - v1.0-C1.3.3
+    - v1.0-C1.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C1.3.5
+    requirement_id: C1.3.5
+    family:
+      id: C1
+      title: Training Data Integrity & Traceability
+    section:
+      id: C1.3
+      title: Training Data Quality and Security Assurance
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C01-Training-Data/C01-03-Training-Data-Quality-Security-Assurance.md
+      last_verified: '2026-10-17'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.5-clean-label-poisoning-defenses/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C1.3.1
+    - v1.0-C1.3.2
+    - v1.0-C1.3.3
+    - v1.0-C1.3.4
+    mapping_assessment_refs: []
+
   - versioned_id: v1.0-C2.1.1
     requirement_id: C2.1.1
     family:
@@ -309,6 +618,678 @@ requirements:
       - v1.0-C2.2.1
       - v1.0-C2.2.3
       - v1.0-C9.5.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C3.1.1
+    requirement_id: C3.1.1
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.1
+      title: Model Authorization & Integrity
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-01-Model-Authorization-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.1-deployed-model-artifact-and-origin-inventory/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.1.2
+    - v1.0-C3.1.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.1.2
+    requirement_id: C3.1.2
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.1
+      title: Model Authorization & Integrity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-01-Model-Authorization-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.2-authorized-signatures-for-all-model-artifacts/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.1.1
+    - v1.0-C3.1.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.1.3
+    requirement_id: C3.1.3
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.1
+      title: Model Authorization & Integrity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-01-Model-Authorization-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.3-signature-verification-at-admission-and-load/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.1.1
+    - v1.0-C3.1.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C3.2.1
+    requirement_id: C3.2.1
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.2
+      title: Model Validation & Testing
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-02-Model-Validation-Testing.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.1-automated-input-safety-output-tests-before-deployment/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.2.2
+    - v1.0-C3.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.2.2
+    requirement_id: C3.2.2
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.2
+      title: Model Validation & Testing
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-02-Model-Validation-Testing.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.2-same-safety-suite-on-quantized-artifact/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.2.1
+    - v1.0-C3.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.2.3
+    requirement_id: C3.2.3
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.2
+      title: Model Validation & Testing
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-02-Model-Validation-Testing.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.3-security-reevaluation-before-provider-route-changes/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.2.1
+    - v1.0-C3.2.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C3.3.1
+    requirement_id: C3.3.1
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.3
+      title: Controlled Deployment & Rollback
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-03-Controlled-Deployment-Rollback.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.1-controlled-rollout-with-automated-rollback-triggers/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.3.2
+    - v1.0-C3.3.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.3.2
+    requirement_id: C3.3.2
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.3
+      title: Controlled Deployment & Rollback
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-03-Controlled-Deployment-Rollback.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.2-rollback-restores-complete-model-state/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.3.1
+    - v1.0-C3.3.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.3.3
+    requirement_id: C3.3.3
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.3
+      title: Controlled Deployment & Rollback
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-03-Controlled-Deployment-Rollback.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.3-parallel-model-version-runtime-state-isolation/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.3.1
+    - v1.0-C3.3.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C3.4.1
+    requirement_id: C3.4.1
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.4
+      title: Secure Development Practices
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-04-Secure-Development-Practices.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.4.1-ai-runtime-component-separation-across-environments/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.4.2
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.4.2
+    requirement_id: C3.4.2
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.4
+      title: Secure Development Practices
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-04-Secure-Development-Practices.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.4.2-training-and-fine-tuning-isolated-from-production/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.4.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C3.5.1
+    requirement_id: C3.5.1
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.5
+      title: Pipeline Fine-Tuning
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-05-Pipeline-Fine-Tuning.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.1-versioned-integrity-verified-models-before-rlhf/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.5.2
+    - v1.0-C3.5.3
+    - v1.0-C3.5.4
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.5.2
+    requirement_id: C3.5.2
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.5
+      title: Pipeline Fine-Tuning
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-05-Pipeline-Fine-Tuning.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.2-automated-reward-hacking-and-overoptimization-detection/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.5.1
+    - v1.0-C3.5.3
+    - v1.0-C3.5.4
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.5.3
+    requirement_id: C3.5.3
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.5
+      title: Pipeline Fine-Tuning
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-05-Pipeline-Fine-Tuning.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.3-verify-each-fine-tuning-stage-output-before-consumption/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.5.1
+    - v1.0-C3.5.2
+    - v1.0-C3.5.4
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C3.5.4
+    requirement_id: C3.5.4
+    family:
+      id: C3
+      title: Model Lifecycle Management & Change Control
+    section:
+      id: C3.5
+      title: Pipeline Fine-Tuning
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C03-Model-Lifecycle-Management/C03-05-Pipeline-Fine-Tuning.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.4-fine-tuning-checkpoints-registered-as-distinct-artifacts/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C3.5.1
+    - v1.0-C3.5.2
+    - v1.0-C3.5.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C4.1.1
+    requirement_id: C4.1.1
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.1
+      title: AI Workload Sandboxing & Validation
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-01-Workload-Sandboxing-Validation.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.1-isolated-sandbox-for-model-execution/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.1.2
+    - v1.0-C4.1.3
+    - v1.0-C4.1.4
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.1.2
+    requirement_id: C4.1.2
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.1
+      title: AI Workload Sandboxing & Validation
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-01-Workload-Sandboxing-Validation.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.2-safe-serialization-format-allowlist-at-model-loading/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.1.1
+    - v1.0-C4.1.3
+    - v1.0-C4.1.4
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.1.3
+    requirement_id: C4.1.3
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.1
+      title: AI Workload Sandboxing & Validation
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-01-Workload-Sandboxing-Validation.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.3-workload-attestation-before-model-loading/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.1.1
+    - v1.0-C4.1.2
+    - v1.0-C4.1.4
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.1.4
+    requirement_id: C4.1.4
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.1
+      title: AI Workload Sandboxing & Validation
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-01-Workload-Sandboxing-Validation.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.4-protect-confidential-model-weights-during-runtime/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.1.1
+    - v1.0-C4.1.2
+    - v1.0-C4.1.3
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C4.2.1
+    requirement_id: C4.2.1
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.2
+      title: AI Hardware Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-02-Hardware-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.1-pinned-signed-boot-attested-accelerator-firmware/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.2.2
+    - v1.0-C4.2.3
+    - v1.0-C4.2.4
+    - v1.0-C4.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.2.2
+    requirement_id: C4.2.2
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.2
+      title: AI Hardware Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-02-Hardware-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.2-tee-hardware-isolation-encryption-and-integrity/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.2.1
+    - v1.0-C4.2.3
+    - v1.0-C4.2.4
+    - v1.0-C4.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.2.3
+    requirement_id: C4.2.3
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.2
+      title: AI Hardware Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-02-Hardware-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.3-hardware-attestation-before-each-accelerator-workload/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.2.1
+    - v1.0-C4.2.2
+    - v1.0-C4.2.4
+    - v1.0-C4.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.2.4
+    requirement_id: C4.2.4
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.2
+      title: AI Hardware Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-02-Hardware-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.4-accelerator-memory-partitioning-and-job-sanitization/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.2.1
+    - v1.0-C4.2.2
+    - v1.0-C4.2.3
+    - v1.0-C4.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.2.5
+    requirement_id: C4.2.5
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.2
+      title: AI Hardware Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-02-Hardware-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.5-approved-accelerator-topologies-and-authenticated-endpoints/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.2.1
+    - v1.0-C4.2.2
+    - v1.0-C4.2.3
+    - v1.0-C4.2.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C4.3.1
+    requirement_id: C4.3.1
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.3
+      title: Edge & Distributed AI Security
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-03-Edge-Distributed-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.1-strong-edge-device-authentication-to-central-infrastructure/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.3.2
+    - v1.0-C4.3.3
+    - v1.0-C4.3.4
+    - v1.0-C4.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.3.2
+    requirement_id: C4.3.2
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.3
+      title: Edge & Distributed AI Security
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-03-Edge-Distributed-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.2-signed-packaging-and-on-device-model-verification/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.3.1
+    - v1.0-C4.3.3
+    - v1.0-C4.3.4
+    - v1.0-C4.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.3.3
+    requirement_id: C4.3.3
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.3
+      title: Edge & Distributed AI Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-03-Edge-Distributed-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.3-inference-process-memory-and-file-isolation/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.3.1
+    - v1.0-C4.3.2
+    - v1.0-C4.3.4
+    - v1.0-C4.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.3.4
+    requirement_id: C4.3.4
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.3
+      title: Edge & Distributed AI Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-03-Edge-Distributed-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.4-hardware-backed-encryption-for-locally-stored-models/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.3.1
+    - v1.0-C4.3.2
+    - v1.0-C4.3.3
+    - v1.0-C4.3.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C4.3.5
+    requirement_id: C4.3.5
+    family:
+      id: C4
+      title: Infrastructure, Configuration & Deployment Security
+    section:
+      id: C4.3
+      title: Edge & Distributed AI Security
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C04-Infrastructure/C04-03-Edge-Distributed-Security.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.5-packaged-model-encryption-and-trusted-runtime-decryption/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C4.3.1
+    - v1.0-C4.3.2
+    - v1.0-C4.3.3
+    - v1.0-C4.3.4
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C5.1.1
@@ -639,6 +1620,189 @@ requirements:
     related_requirements:
       - v1.0-C5.2.1
       - v1.0-C5.3.1
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C6.1.1
+    requirement_id: C6.1.1
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.1
+      title: Model Artifact Integrity
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-01-Model-Artifact-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.1.1-malicious-code-scan-before-model-import/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.2
+    - v1.0-C6.1.3
+    - v1.0-C6.1.4
+    - v1.0-C6.2.1
+    - v1.0-C6.2.2
+    - v1.0-C6.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C6.1.2
+    requirement_id: C6.1.2
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.1
+      title: Model Artifact Integrity
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-01-Model-Artifact-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.1.2-download-ai-artifacts-only-from-approved-sources/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.1
+    - v1.0-C6.1.3
+    - v1.0-C6.1.4
+    - v1.0-C6.2.1
+    - v1.0-C6.2.2
+    - v1.0-C6.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C6.1.3
+    requirement_id: C6.1.3
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.1
+      title: Model Artifact Integrity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-01-Model-Artifact-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.1.3-integrity-verifiability-for-every-third-party-model-artifact/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.1
+    - v1.0-C6.1.2
+    - v1.0-C6.1.4
+    - v1.0-C6.2.1
+    - v1.0-C6.2.2
+    - v1.0-C6.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C6.1.4
+    requirement_id: C6.1.4
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.1
+      title: Model Artifact Integrity
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-01-Model-Artifact-Integrity.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.1.4-behavioral-acceptance-before-any-nondevelopment-promotion/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.1
+    - v1.0-C6.1.2
+    - v1.0-C6.1.3
+    - v1.0-C6.2.1
+    - v1.0-C6.2.2
+    - v1.0-C6.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C6.2.1
+    requirement_id: C6.2.1
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.2
+      title: AI BOM & Supply Chain Monitoring
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-02-AI-BOM-Supply-Chain-Monitoring.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.2.1-versioned-machine-readable-ai-bom-for-every-model/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.1
+    - v1.0-C6.1.2
+    - v1.0-C6.1.3
+    - v1.0-C6.1.4
+    - v1.0-C6.2.2
+    - v1.0-C6.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C6.2.2
+    requirement_id: C6.2.2
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.2
+      title: AI BOM & Supply Chain Monitoring
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-02-AI-BOM-Supply-Chain-Monitoring.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.2.2-cryptographically-signed-ai-bom-before-deployment/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.1
+    - v1.0-C6.1.2
+    - v1.0-C6.1.3
+    - v1.0-C6.1.4
+    - v1.0-C6.2.1
+    - v1.0-C6.2.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C6.2.3
+    requirement_id: C6.2.3
+    family:
+      id: C6
+      title: Supply Chain Security for Models
+    section:
+      id: C6.2
+      title: AI BOM & Supply Chain Monitoring
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-02-AI-BOM-Supply-Chain-Monitoring.md
+      last_verified: '2026-10-18'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c06-supply-chain-security-for-models/v1.0-c6.2.3-fail-build-on-missing-ai-bom-component-metadata/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C6.1.1
+    - v1.0-C6.1.2
+    - v1.0-C6.1.3
+    - v1.0-C6.1.4
+    - v1.0-C6.2.1
+    - v1.0-C6.2.2
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C7.1.1
@@ -2636,6 +3800,310 @@ requirements:
       - v1.0-C8.2.4
       - v1.0-C8.3.1
       - v1.0-C8.3.2
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C11.2.1
+    requirement_id: C11.2.1
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.2
+      title: Membership-Inference and Model-Inversion Mitigation
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-02-Membership-Inference-Model-Inversion-Mitigation.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.2.1-no-direct-output-of-model-inferred-sensitive-attributes/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.2.2
+    - v1.0-C11.2.3
+    - v1.0-C11.2.4
+    - v1.0-C11.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.2.2
+    requirement_id: C11.2.2
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.2
+      title: Membership-Inference and Model-Inversion Mitigation
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-02-Membership-Inference-Model-Inversion-Mitigation.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.2.2-principal-and-global-inference-limits-for-extraction-threat/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.2.1
+    - v1.0-C11.2.3
+    - v1.0-C11.2.4
+    - v1.0-C11.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.2.3
+    requirement_id: C11.2.3
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.2
+      title: Membership-Inference and Model-Inversion Mitigation
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-02-Membership-Inference-Model-Inversion-Mitigation.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.2.3-calibrate-model-outputs-to-reduce-overconfidence/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.2.1
+    - v1.0-C11.2.2
+    - v1.0-C11.2.4
+    - v1.0-C11.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.2.4
+    requirement_id: C11.2.4
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.2
+      title: Membership-Inference and Model-Inversion Mitigation
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-02-Membership-Inference-Model-Inversion-Mitigation.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.2.4-differentially-private-optimization-for-sensitive-training/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.2.1
+    - v1.0-C11.2.2
+    - v1.0-C11.2.3
+    - v1.0-C11.2.5
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.2.5
+    requirement_id: C11.2.5
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.2
+      title: Membership-Inference and Model-Inversion Mitigation
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-02-Membership-Inference-Model-Inversion-Mitigation.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.2.5-membership-inference-simulations-at-random-baseline/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.2.1
+    - v1.0-C11.2.2
+    - v1.0-C11.2.3
+    - v1.0-C11.2.4
+    mapping_assessment_refs: []
+
+  - versioned_id: v1.0-C11.3.1
+    requirement_id: C11.3.1
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.3
+      title: Model-Extraction Defense
+    verification_level: 1
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-03-Model-Extraction-Defense.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.3.1-query-pattern-analysis-feeds-model-extraction-detector/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.2
+    - v1.0-C11.3.3
+    - v1.0-C11.3.4
+    - v1.0-C11.4.1
+    - v1.0-C11.4.2
+    - v1.0-C11.4.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.3.2
+    requirement_id: C11.3.2
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.3
+      title: Model-Extraction Defense
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-03-Model-Extraction-Defense.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.3.2-backend-output-boundary-calibrated-to-extraction-risk/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.1
+    - v1.0-C11.3.3
+    - v1.0-C11.3.4
+    - v1.0-C11.4.1
+    - v1.0-C11.4.2
+    - v1.0-C11.4.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.3.3
+    requirement_id: C11.3.3
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.3
+      title: Model-Extraction Defense
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-03-Model-Extraction-Defense.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.3.3-watermark-or-fingerprint-for-unauthorized-model-copies/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.1
+    - v1.0-C11.3.2
+    - v1.0-C11.3.4
+    - v1.0-C11.4.1
+    - v1.0-C11.4.2
+    - v1.0-C11.4.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.3.4
+    requirement_id: C11.3.4
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.3
+      title: Model-Extraction Defense
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-03-Model-Extraction-Defense.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.3.4-suspected-extraction-detection-triggers-response/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.1
+    - v1.0-C11.3.2
+    - v1.0-C11.3.3
+    - v1.0-C11.4.1
+    - v1.0-C11.4.2
+    - v1.0-C11.4.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.4.1
+    requirement_id: C11.4.1
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.4
+      title: Model Runtime Anomaly Detection
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-04-Model-Runtime-Anomaly-Detection.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.4.1-anomaly-screening-before-inference-for-untrusted-inputs/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.1
+    - v1.0-C11.3.2
+    - v1.0-C11.3.3
+    - v1.0-C11.3.4
+    - v1.0-C11.4.2
+    - v1.0-C11.4.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.4.2
+    requirement_id: C11.4.2
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.4
+      title: Model Runtime Anomaly Detection
+    verification_level: 2
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-04-Model-Runtime-Anomaly-Detection.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.4.2-anomaly-flags-trigger-effective-input-gating/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.1
+    - v1.0-C11.3.2
+    - v1.0-C11.3.3
+    - v1.0-C11.3.4
+    - v1.0-C11.4.1
+    - v1.0-C11.4.3
+    mapping_assessment_refs: []
+  - versioned_id: v1.0-C11.4.3
+    requirement_id: C11.4.3
+    family:
+      id: C11
+      title: Adversarial Robustness
+    section:
+      id: C11.4
+      title: Model Runtime Anomaly Detection
+    verification_level: 3
+    upstream_status: active
+    upstream_url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md
+    research_source:
+      url: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-04-Model-Runtime-Anomaly-Detection.md
+      last_verified: '2026-10-19'
+    maturity: verifiable
+    development_priority: next
+    control_ref: controls/control-records/c11-adversarial-robustness/v1.0-c11.4.3-poisoning-detection-and-human-review-for-safety-feedback/README.md
+    threat_mappings: []
+    related_requirements:
+    - v1.0-C11.3.1
+    - v1.0-C11.3.2
+    - v1.0-C11.3.3
+    - v1.0-C11.3.4
+    - v1.0-C11.4.1
+    - v1.0-C11.4.2
     mapping_assessment_refs: []
 
   - versioned_id: v1.0-C12.1.1

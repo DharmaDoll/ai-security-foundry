@@ -2,7 +2,7 @@
 title: "共有資源の再利用は、次の利用者への安全な引渡しである"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # 共有資源の再利用は、次の利用者への安全な引渡しである
@@ -77,3 +77,9 @@ C4.2の学習で区別した実行中の分離とJob間の残存状態、およ�
 - 同時に読めないことと、次に読めないことは別。
 - 終了の通知だけで、安全な引渡しは完了しない。
 - 再割当て前の条件と、清掃失敗時の扱いを設計する。
+
+## 関連するControl本文
+
+個別の保証範囲・合否・証拠は次のControlを参照する。案内のためのリンクであり、Insightの規範化やMappingではない。
+
+- [v1.0-C4.2.4](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.4-accelerator-memory-partitioning-and-job-sanitization/README.md)

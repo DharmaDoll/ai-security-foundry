@@ -2,7 +2,7 @@
 
 `controls/` は「何を満たし、どう検証するか」を探すための入口です。
 まず [AISVS Familyの見取り図](family-assurance-map.md) でシステム上の関係を掴み、
-下のFamily一覧から対象を選び、整備済みのFamilyではSection、個別Controlへ進んでください。
+下のFamily一覧から対象を選び、Section、個別Controlへ進んでください。
 見取り図は代表的な構成を示すもので、要件の網羅図や製品の適合判定ではありません。
 
 ## Family別Control案内
@@ -10,36 +10,42 @@
 AISVS v1.0の全12 Familyを示します。**主に確認すること**は保証の問い、
 **主な検討場面**は設計中にそのFamilyを開くきっかけとなる代表例です。
 実際の適用範囲は個別Requirementと製品の構成から判断します。
-個別ControlがあるFamilyのREADMEには、Categoryの保証目的、**Sectionの見取り図**、整備済みRequirementごとの
+各FamilyのREADMEには、Categoryの保証目的、**Sectionの見取り図**、Requirementごとの
 「問うこと」「できてはいけないこと」と、**個別Control本文へのリンク**があります。
 個別Control本文が解釈・検証方法・証拠期待値・限界の正本です。
-Control本文が未整備のFamilyは、固定版AISVSの原文へ案内します。
+採用済み固定Revisionの全191 Requirementに個別Control本文を整備しています。
+これは文書の整備状況であり、製品の適合やAISVS 1.01への移行を意味しません。
 学習資料があるFamilyは学習ガイドも併記します。学習資料の存在や学習の完了は、
 個別Controlの整備・成熟とは別です。
 
 | Family | 主に確認すること | 主な検討場面 |
 |---|---|---|
-| C1 Training Data Integrity & Traceability（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C01-Training-Data-Integrity-and-Traceability.md)・[学習ガイド](learning/c01-training-data-integrity-and-traceability/README.md)、Control未整備） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
+| [C1 Training Data Integrity & Traceability](control-records/c01-training-data-integrity-and-traceability/README.md)（全13件整備済み・[学習ガイド](learning/c01-training-data-integrity-and-traceability/README.md)） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
 | [C2 Input Validation](control-records/c02-input-validation/README.md) | 入力と取得内容が、変換や複数の形式を経ても検査の想定から外れないか。 | User入力、検索文書、画像・音声などをModel Contextへ取り込むとき。 |
-| C3 Model Lifecycle Management & Change Control（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)・[学習ガイド](learning/c03-model-lifecycle-management-and-change-control/README.md)、Control未整備） | Model Artifactと変更を検証し、許可した版だけを本番へ反映・復旧できるか。 | Model・Provider版の変更、Fine-tuning、段階的な配備とRollback。 |
-| C4 Infrastructure, Configuration & Deployment Security（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)・[学習ガイド](learning/c04-infrastructure-configuration-and-deployment-security/README.md)、Control未整備） | Model実行基盤・Accelerator・Edge環境を隔離し、実行状態を検証できるか。 | Model Serving、GPU共有、Edge・Mobileへの配備。 |
+| [C3 Model Lifecycle Management & Change Control](control-records/c03-model-lifecycle-management-and-change-control/README.md)（全15件整備済み・[学習ガイド](learning/c03-model-lifecycle-management-and-change-control/README.md)） | Model Artifactと変更を検証し、許可した版だけを本番へ反映・復旧できるか。 | Model・Provider版の変更、Fine-tuning、段階的な配備とRollback。 |
+| [C4 Infrastructure, Configuration & Deployment Security](control-records/c04-infrastructure-configuration-and-deployment-security/README.md)（全14件整備済み・[学習ガイド](learning/c04-infrastructure-configuration-and-deployment-security/README.md)） | Model実行基盤・Accelerator・Edge環境を隔離し、実行状態を検証できるか。 | Model Serving、GPU共有、Edge・Mobileへの配備。 |
 | [C5 Access Control & Identity for AI Components & Users](control-records/c05-access-control-and-identity/README.md) | 主体・権限・Credential・Tenant境界を、AIを介しても維持できるか。 | 権限付きRAG、複数Tenantでの共有基盤、Agentへの権限付与。 |
-| C6 Supply Chain Security for Models（[AISVS原文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md)、Control未整備） | 外部由来のModel・Dataset・Adapterの出所と完全性を確認し、構成を追跡できるか。 | Third-party Artifactの取込み、AI BOMの作成、供給元の変更。 |
+| [C6 Supply Chain Security for Models](control-records/c06-supply-chain-security-for-models/README.md) | 外部由来のModel・Dataset・Adapterの出所と完全性を確認し、構成を追跡できるか。 | Third-party Artifactの取込み、AI BOMの作成、供給元の変更。 |
 | [C7 Model Behavior, Output Control & Safety Assurance](control-records/c07-model-behavior-output-control-and-safety-assurance/README.md) | Model出力の形式、信頼性、安全性、出典を利用前に確認できるか。 | 回答の公開、出力のTool利用、RAGの引用、生成Mediaの配布。 |
 | [C8 Memory, Embeddings & Vector Database Security](control-records/c08-memory-embeddings-and-vector-database-security/README.md) | MemoryやVectorを、正しい範囲・出所・期限・信頼状態で扱えるか。 | RAG Indexの作成・検索、Agent Memoryの書込み・失効・削除。 |
 | [C9 Orchestration and Agentic Security](control-records/c09-orchestration-and-agentic-security/README.md) | Agentの行動・委任・実行量・承認・停止を制御できるか。 | Agentによる連続Tool実行、他Agentへの委任、高影響操作の承認。 |
 | [C10 Model Context Protocol (MCP) Security](control-records/c10-model-context-protocol-security/README.md) | MCPの構成要素、要求、Transport、Tool入出力を境界ごとに検証できるか。 | MCP Serverの導入・接続、Toolの公開・呼出し、下流API連携。 |
-| [C11 Adversarial Robustness](control-records/c11-adversarial-robustness/README.md)（Control本文はC11.1のみ） | 敵対的入力、学習Dataの推測、Model抽出、実行時異常に備えられるか。 | Modelの採用・更新、公開推論APIの運用、改善Feedbackの取込み。 |
+| [C11 Adversarial Robustness](control-records/c11-adversarial-robustness/README.md)（全17件整備済み） | 敵対的入力、学習Dataの推測、Model抽出、実行時異常に備えられるか。 | Modelの採用・更新、公開推論APIの運用、改善Feedbackの取込み。 |
 | [C12 Monitoring, Logging & Anomaly Detection](control-records/c12-monitoring-logging-and-anomaly-detection/README.md) | AI処理・変更を再構成し、異常を検知・調査できるか。 | AIサービスの本番監視・インシデント調査、Model・Dataset変更の監査。 |
-
-「Control未整備」はこのRepositoryに個別Control本文がないことを示し、
-AISVS要件の不存在や製品の適合状態を意味しません。
 
 ## 個別Control（IDから直接開く）
 
 以下はCatalog登録済みのControl本文だけを載せています。IDが分かっている場合は直接開けます。
 各Controlの内容と隣接要件の違いは、
 上のFamily READMEからも確認できます。この一覧は[Catalog](catalog.yaml)の`control_ref`を辿る索引です。
+
+### C1
+
+| Section | Control本文 |
+|---|---|
+| C1.1 | [v1.0-C1.1.1](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.1-purpose-bound-training-fields/README.md) · [v1.0-C1.1.2](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.2-complete-training-source-inventory/README.md) · [v1.0-C1.1.3](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.3-stored-and-transferred-training-data-integrity/README.md) · [v1.0-C1.1.4](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.4-training-data-integrity-monitoring/README.md) · [v1.0-C1.1.5](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.1.5-dataset-watermark-attribution/README.md) |
+| C1.2 | [v1.0-C1.2.1](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.2.1-annotation-create-modify-approve-authorization/README.md) · [v1.0-C1.2.2](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.2.2-labeling-artifact-cryptographic-integrity/README.md) · [v1.0-C1.2.3](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.2.3-protect-sensitive-label-information-before-artifacts/README.md) |
+| C1.3 | [v1.0-C1.3.1](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.1-training-pipeline-poisoning-and-corruption-detection/README.md) · [v1.0-C1.3.2](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.2-automatic-label-confidence-and-consistency-checks/README.md) · [v1.0-C1.3.3](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.3-bias-evaluation-for-security-decisions/README.md) · [v1.0-C1.3.4](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.4-remove-disallowed-content-before-training/README.md) · [v1.0-C1.3.5](control-records/c01-training-data-integrity-and-traceability/v1.0-c1.3.5-clean-label-poisoning-defenses/README.md) |
 
 ### C2
 
@@ -48,6 +54,24 @@ AISVS要件の不存在や製品の適合状態を意味しません。
 | C2.1 | [v1.0-C2.1.1](control-records/c02-input-validation/v1.0-c2.1.1-normalize-input-before-tokenization-or-embedding/README.md) · [v1.0-C2.1.2](control-records/c02-input-validation/v1.0-c2.1.2-detect-and-mitigate-encoded-input-smuggling/README.md) · [v1.0-C2.1.3](control-records/c02-input-validation/v1.0-c2.1.3-screen-and-block-model-steering-inputs/README.md) · [v1.0-C2.1.4](control-records/c02-input-validation/v1.0-c2.1.4-reject-over-limit-input-without-truncation/README.md) · [v1.0-C2.1.5](control-records/c02-input-validation/v1.0-c2.1.5-allowlist-required-input-characters/README.md) · [v1.0-C2.1.6](control-records/c02-input-validation/v1.0-c2.1.6-preserve-instruction-hierarchy-across-steps/README.md) · [v1.0-C2.1.7](control-records/c02-input-validation/v1.0-c2.1.7-render-reserved-tokens-as-literal-content/README.md) · [v1.0-C2.1.8](control-records/c02-input-validation/v1.0-c2.1.8-detect-many-shot-jailbreak-patterns/README.md) |
 | C2.2 | [v1.0-C2.2.1](control-records/c02-input-validation/v1.0-c2.2.1-screen-prompts-before-model-context/README.md) · [v1.0-C2.2.2](control-records/c02-input-validation/v1.0-c2.2.2-evaluate-content-classification-for-unsupported-languages/README.md) · [v1.0-C2.2.3](control-records/c02-input-validation/v1.0-c2.2.3-check-non-text-inputs-for-hidden-attacks/README.md) · [v1.0-C2.2.4](control-records/c02-input-validation/v1.0-c2.2.4-detect-and-block-cross-modal-attacks/README.md) |
 
+### C3
+
+| Section | Control本文 |
+|---|---|
+| C3.1 | [v1.0-C3.1.1](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.1-deployed-model-artifact-and-origin-inventory/README.md) · [v1.0-C3.1.2](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.2-authorized-signatures-for-all-model-artifacts/README.md) · [v1.0-C3.1.3](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.3-signature-verification-at-admission-and-load/README.md) |
+| C3.2 | [v1.0-C3.2.1](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.1-automated-input-safety-output-tests-before-deployment/README.md) · [v1.0-C3.2.2](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.2-same-safety-suite-on-quantized-artifact/README.md) · [v1.0-C3.2.3](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.3-security-reevaluation-before-provider-route-changes/README.md) |
+| C3.3 | [v1.0-C3.3.1](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.1-controlled-rollout-with-automated-rollback-triggers/README.md) · [v1.0-C3.3.2](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.2-rollback-restores-complete-model-state/README.md) · [v1.0-C3.3.3](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.3-parallel-model-version-runtime-state-isolation/README.md) |
+| C3.4 | [v1.0-C3.4.1](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.4.1-ai-runtime-component-separation-across-environments/README.md) · [v1.0-C3.4.2](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.4.2-training-and-fine-tuning-isolated-from-production/README.md) |
+| C3.5 | [v1.0-C3.5.1](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.1-versioned-integrity-verified-models-before-rlhf/README.md) · [v1.0-C3.5.2](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.2-automated-reward-hacking-and-overoptimization-detection/README.md) · [v1.0-C3.5.3](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.3-verify-each-fine-tuning-stage-output-before-consumption/README.md) · [v1.0-C3.5.4](control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.5.4-fine-tuning-checkpoints-registered-as-distinct-artifacts/README.md) |
+
+### C4
+
+| Section | Control本文 |
+|---|---|
+| C4.1 | [v1.0-C4.1.1](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.1-isolated-sandbox-for-model-execution/README.md) · [v1.0-C4.1.2](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.2-safe-serialization-format-allowlist-at-model-loading/README.md) · [v1.0-C4.1.3](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.3-workload-attestation-before-model-loading/README.md) · [v1.0-C4.1.4](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1.4-protect-confidential-model-weights-during-runtime/README.md) |
+| C4.2 | [v1.0-C4.2.1](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.1-pinned-signed-boot-attested-accelerator-firmware/README.md) · [v1.0-C4.2.2](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.2-tee-hardware-isolation-encryption-and-integrity/README.md) · [v1.0-C4.2.3](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.3-hardware-attestation-before-each-accelerator-workload/README.md) · [v1.0-C4.2.4](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.4-accelerator-memory-partitioning-and-job-sanitization/README.md) · [v1.0-C4.2.5](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2.5-approved-accelerator-topologies-and-authenticated-endpoints/README.md) |
+| C4.3 | [v1.0-C4.3.1](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.1-strong-edge-device-authentication-to-central-infrastructure/README.md) · [v1.0-C4.3.2](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.2-signed-packaging-and-on-device-model-verification/README.md) · [v1.0-C4.3.3](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.3-inference-process-memory-and-file-isolation/README.md) · [v1.0-C4.3.4](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.4-hardware-backed-encryption-for-locally-stored-models/README.md) · [v1.0-C4.3.5](control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.5-packaged-model-encryption-and-trusted-runtime-decryption/README.md) |
+
 ### C5
 
 | Section | Control本文 |
@@ -55,6 +79,13 @@ AISVS要件の不存在や製品の適合状態を意味しません。
 | C5.1 | [v1.0-C5.1.1](control-records/c05-access-control-and-identity/v1.0-c5.1.1-step-up-authentication/README.md) · [v1.0-C5.1.2](control-records/c05-access-control-and-identity/v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/README.md) |
 | C5.2 | [v1.0-C5.2.1](control-records/c05-access-control-and-identity/v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/README.md) · [v1.0-C5.2.2](control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/README.md) · [v1.0-C5.2.3](control-records/c05-access-control-and-identity/v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/README.md) · [v1.0-C5.2.4](control-records/c05-access-control-and-identity/v1.0-c5.2.4-post-inference-authorization-filtering/README.md) · [v1.0-C5.2.5](control-records/c05-access-control-and-identity/v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md) · [v1.0-C5.2.6](control-records/c05-access-control-and-identity/v1.0-c5.2.6-just-in-time-privileged-access/README.md) · [v1.0-C5.2.7](control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/README.md) |
 | C5.3 | [v1.0-C5.3.1](control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md) · [v1.0-C5.3.2](control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/README.md) |
+
+### C6
+
+| Section | Control本文 |
+|---|---|
+| C6.1 | [v1.0-C6.1.1](control-records/c06-supply-chain-security-for-models/v1.0-c6.1.1-malicious-code-scan-before-model-import/README.md) · [v1.0-C6.1.2](control-records/c06-supply-chain-security-for-models/v1.0-c6.1.2-download-ai-artifacts-only-from-approved-sources/README.md) · [v1.0-C6.1.3](control-records/c06-supply-chain-security-for-models/v1.0-c6.1.3-integrity-verifiability-for-every-third-party-model-artifact/README.md) · [v1.0-C6.1.4](control-records/c06-supply-chain-security-for-models/v1.0-c6.1.4-behavioral-acceptance-before-any-nondevelopment-promotion/README.md) |
+| C6.2 | [v1.0-C6.2.1](control-records/c06-supply-chain-security-for-models/v1.0-c6.2.1-versioned-machine-readable-ai-bom-for-every-model/README.md) · [v1.0-C6.2.2](control-records/c06-supply-chain-security-for-models/v1.0-c6.2.2-cryptographically-signed-ai-bom-before-deployment/README.md) · [v1.0-C6.2.3](control-records/c06-supply-chain-security-for-models/v1.0-c6.2.3-fail-build-on-missing-ai-bom-component-metadata/README.md) |
 
 ### C7
 
@@ -98,6 +129,9 @@ AISVS要件の不存在や製品の適合状態を意味しません。
 | Section | Control本文 |
 |---|---|
 | C11.1 | [v1.0-C11.1.1](control-records/c11-adversarial-robustness/v1.0-c11.1.1-model-alignment-and-safety-training/README.md) · [v1.0-C11.1.2](control-records/c11-adversarial-robustness/v1.0-c11.1.2-run-versioned-alignment-suite-on-model-updates/README.md) · [v1.0-C11.1.3](control-records/c11-adversarial-robustness/v1.0-c11.1.3-evaluate-modality-relevant-adversarial-attacks/README.md) · [v1.0-C11.1.4](control-records/c11-adversarial-robustness/v1.0-c11.1.4-harden-model-against-adversarial-inputs/README.md) · [v1.0-C11.1.5](control-records/c11-adversarial-robustness/v1.0-c11.1.5-measure-harmful-content-rate-and-flag-regressions/README.md) |
+| C11.2 | [v1.0-C11.2.1](control-records/c11-adversarial-robustness/v1.0-c11.2.1-no-direct-output-of-model-inferred-sensitive-attributes/README.md) · [v1.0-C11.2.2](control-records/c11-adversarial-robustness/v1.0-c11.2.2-principal-and-global-inference-limits-for-extraction-threat/README.md) · [v1.0-C11.2.3](control-records/c11-adversarial-robustness/v1.0-c11.2.3-calibrate-model-outputs-to-reduce-overconfidence/README.md) · [v1.0-C11.2.4](control-records/c11-adversarial-robustness/v1.0-c11.2.4-differentially-private-optimization-for-sensitive-training/README.md) · [v1.0-C11.2.5](control-records/c11-adversarial-robustness/v1.0-c11.2.5-membership-inference-simulations-at-random-baseline/README.md) |
+| C11.3 | [v1.0-C11.3.1](control-records/c11-adversarial-robustness/v1.0-c11.3.1-query-pattern-analysis-feeds-model-extraction-detector/README.md) · [v1.0-C11.3.2](control-records/c11-adversarial-robustness/v1.0-c11.3.2-backend-output-boundary-calibrated-to-extraction-risk/README.md) · [v1.0-C11.3.3](control-records/c11-adversarial-robustness/v1.0-c11.3.3-watermark-or-fingerprint-for-unauthorized-model-copies/README.md) · [v1.0-C11.3.4](control-records/c11-adversarial-robustness/v1.0-c11.3.4-suspected-extraction-detection-triggers-response/README.md) |
+| C11.4 | [v1.0-C11.4.1](control-records/c11-adversarial-robustness/v1.0-c11.4.1-anomaly-screening-before-inference-for-untrusted-inputs/README.md) · [v1.0-C11.4.2](control-records/c11-adversarial-robustness/v1.0-c11.4.2-anomaly-flags-trigger-effective-input-gating/README.md) · [v1.0-C11.4.3](control-records/c11-adversarial-robustness/v1.0-c11.4.3-poisoning-detection-and-human-review-for-safety-feedback/README.md) |
 
 ### C12
 

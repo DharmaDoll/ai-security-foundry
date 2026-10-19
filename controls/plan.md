@@ -5,6 +5,57 @@
 - Primary backbone: OWASP AISVS
 - AISVS source state reviewed: 2026-09-03
 
+### 全体整備の照合 — 2026-10-19
+
+採用固定Revision `78775233666a2022dcfb82037e5e029116955c00` の12 Familyを一次資料から照合し、
+全191 RequirementのID・Verification LevelとCatalog・Control本文が一致することを確認した。
+今回C1・C3・C4・C6・C11の未整備61件を追加した。学習資料のあるSectionは相互リンクを更新し、
+Family案内・直接索引・関連Insightを接続した。C6の学習資料は未作成であり、空の学習資料は作らない。
+これはControl文書の整備であり、製品適合・1.01採用・Mapping評価・人によるPattern承認を主張しない。
+最終確認結果：
+
+- 固定版12 Familyの全191 ID・Verification LevelとCatalog・本文の対応が一致し、登録漏れ・追加の架空ID・Level不一致はない。
+- 全191件がFamily案内と直接索引から開ける。Section学習とControlの相互リンク114組を確認した。
+- Repository全体のローカルMarkdown参照先1,782件に切れた参照はない。
+- `python3 controls/scripts/validate_catalog.py`、`python3 -m unittest discover -s controls/tests -v`（28件）、`git diff --check`が成功した。
+- 既存130件のCatalog項目は維持し、追加61件について必須構造・正負試験・証拠・限界を確認した。実製品の試験は行っていない。
+
+以下の日付付きCheckpointは当時の状況を示す履歴として保持する。
+
+### C11 checkpoint — 2026-10-19
+
+C11.2〜C11.4の12件を整備し、C11全17件の本文が揃った。直接出力・主体別と全体の質問制限・較正・DP最適化・在籍推定試験を分けて確認する。
+全Familyの固定版要件・Catalog・Control本文・参照リンクの最終照合を行う。全体完了はこの照合後に判断する。
+
+### C6 checkpoint — 2026-10-18
+
+[C6 Family概要](control-records/c06-supply-chain-security-for-models/README.md)と全7件を整備した。
+Import前のScan、承認Source、完全性の検証可能性、非開発環境への受入合格、BOMの内容・署名・Build失敗を分けた。
+C11.2〜C11.4の12件は未整備。全体作業は未完了。次はC11をSection単位で進める。
+
+### C4 checkpoint — 2026-10-18
+
+[C4 Family概要](control-records/c04-infrastructure-configuration-and-deployment-security/README.md)とC4.1〜C4.3の全14件を整備した。
+Sandboxの到達範囲、形式Allowlist、読込み前Attestation、実行中の重み保護を独立に検証する。
+C6、C11.2〜C11.4は未整備。全体作業は未完了。
+次はC6を整備し、C11.2〜C11.4の未整備も解消する。
+
+### C3 checkpoint — 2026-10-18
+
+[C3 Family概要](control-records/c03-model-lifecycle-management-and-change-control/README.md)とC3.1〜C3.5の全15件を整備した。
+台帳・署名対象と権限・投入時と読込み時の検証を独立に検証する。
+C4・C6およびC11.2〜C11.4は引き続き未整備。
+全未整備Controlの解消は未完了。次はC4をSection単位で進め、C6とC11.2〜C11.4も残す。
+
+### C1 checkpoint — 2026-10-17
+
+[C1 Family概要](control-records/c01-training-data-integrity-and-traceability/README.md)とC1.1〜C1.3の全13件を整備した。
+項目最小化・台帳・保存転送時の完全性・監視・利用帰属を独立に検証する。
+C3・C4・C6およびC11.2〜C11.4の未整備要件は引き続き残る。
+次は学習資料が揃うC3をSection単位で進める。Catalogには未登録の要件があるため、
+`control_ref`の欠落だけでは未整備要件を検出できない。固定版原文とFamily案内を照合する。
+関連する入口・Catalog・学習資料の参照を更新した。全未整備Controlの解消は未完了。
+
 ### C2 checkpoint — 2026-09-28
 
 C2の[保証範囲](control-records/c02-input-validation/README.md)とSection単位の開発順序を整理した。

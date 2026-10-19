@@ -2,7 +2,7 @@
 title: "検査するのは入口の文字列ではなく、実際に利用される内容である"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # 検査するのは入口の文字列ではなく、実際に利用される内容である
@@ -75,3 +75,11 @@ Candidate input / output
 - [C10.4：Schema, Message, and Input Validation](../../controls/learning/c10-model-context-protocol-security/v1.0-c10.4-schema-message-and-input-validation.md)
 
 これは上記のAISVS要件を統合・拡張した新Requirementではなく、複数の対話で共通して現れたRepositoryの設計上の解釈である。
+
+## 関連するControl本文
+
+要件ごとの保証範囲・合否・証拠は個別Controlを参照する。以下は案内であり、Insightの規範化やMappingではない。
+
+- [v1.0-C3.2.2](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.2-same-safety-suite-on-quantized-artifact/README.md)
+- [v1.0-C3.2.3](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.2.3-security-reevaluation-before-provider-route-changes/README.md)
+- [v1.0-C3.1.3](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.3-signature-verification-at-admission-and-load/README.md)

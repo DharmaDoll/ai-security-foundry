@@ -2,7 +2,7 @@
 title: "Dataは形を変えてもProtectionを失わない"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # Dataは形を変えてもProtectionを失わない
@@ -122,3 +122,10 @@ Declassificationしたとみなさず、再識別可能性とBusiness Sensitivit
 - [C5.2.7：Classification Label Propagation](../../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/learning.md)
 
 本書は上記Controlを一つへ統合せず、Data Flowを横断して繰り返し現れたRepository interpretationを保存する。
+
+## 関連するControl本文
+
+個別の保証範囲・合否・証拠は次のControlを参照する。案内のためのリンクであり、Insightの規範化やMappingではない。
+
+- [v1.0-C4.3.4](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.4-hardware-backed-encryption-for-locally-stored-models/README.md)
+- [v1.0-C4.3.5](../../controls/control-records/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3.5-packaged-model-encryption-and-trusted-runtime-decryption/README.md)

@@ -2,7 +2,7 @@
 title: "復旧するのはファイルではなく、整合したシステムの状態"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # 復旧するのはファイルではなく、整合したシステムの状態
@@ -75,3 +75,10 @@ AISVSの復旧要件へ対象を追加するものではない。正式なMappin
 - 個別に正しい部品でも、組み合わせは未検証かもしれない。
 - 復旧対象は依存関係で定義し、実際に動く構成を照合する。
 - 過去の構成への復旧と、現在の安全性の確認は別に行う。
+
+## 関連するControl本文
+
+要件ごとの保証範囲・合否・証拠は個別Controlを参照する。以下は案内であり、Insightの規範化やMappingではない。
+
+- [v1.0-C3.3.2](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.3.2-rollback-restores-complete-model-state/README.md)
+- [v1.0-C3.1.1](../../controls/control-records/c03-model-lifecycle-management-and-change-control/v1.0-c3.1.1-deployed-model-artifact-and-origin-inventory/README.md)

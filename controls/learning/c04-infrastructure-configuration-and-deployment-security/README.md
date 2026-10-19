@@ -5,7 +5,7 @@ source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
 current_section: "complete"
-last_updated: "2026-10-15"
+last_updated: "2026-10-18"
 ---
 
 # C4 AIを動かす基盤を守る
@@ -13,6 +13,8 @@ last_updated: "2026-10-15"
 モデルを動かす環境から何ができるか、そこで誰が情報を読めるかを学ぶ。C3のモデル変更管理と区別し、実行環境、AI用ハードウェア、端末上の配備を扱う。
 
 講義と保存は[共通学習方針](../README.md)に従う。学習進捗はControl成熟度、Mapping、製品適合とは独立している。v1.01への追従と影響評価は[Issue #6](https://github.com/DharmaDoll/ai-security-foundry/issues/6)で扱い、本資料のv1.0参照を暗黙に変更しない。
+
+[C4 Control概要](../../control-records/c04-infrastructure-configuration-and-deployment-security/README.md)ではC4.1〜C4.3の全14件を整備済み。
 
 | Section | 要件数 | 主な問い |
 |---|---:|---|

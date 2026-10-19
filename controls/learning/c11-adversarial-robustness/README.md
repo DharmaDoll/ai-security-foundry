@@ -5,7 +5,7 @@ source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
 current_section: "complete"
-last_updated: "2026-10-07"
+last_updated: "2026-10-19"
 ---
 
 # AISVS C11 敵対的な操作に対する耐性：学習ガイド
@@ -15,7 +15,7 @@ C11は「安全なModel」という一言を、出力の安全性、学習Data�
 
 講義と学習ノートの共通方針は[Controls Learning Documentation](../README.md)、
 Requirementごとの保証境界は[C11 Control俯瞰図](../../control-records/c11-adversarial-robustness/README.md)を参照する。
-学習の進捗はControlの成熟度や製品適合と独立している。
+全17件のControl本文を整備済み。学習の進捗はControlの成熟度や製品適合と独立している。
 
 ## Section一覧
 
