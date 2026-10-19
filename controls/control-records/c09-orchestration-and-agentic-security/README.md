@@ -36,14 +36,16 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 
 | Section | 問うこと | できてはいけないこと |
 |---|---|---|
-| C9.1 実行予算・ループ・遮断 | 個別Tool、実行全体、Agent群の消費と継続を制限・停止できるか。 | 再試行・並列・子Agentによって上限を越え、停止指示後も処理が続く。 |
-| C9.2 高影響操作の承認・可逆性 | 人が正しい対象を承認し、その承認と影響分類を実行時まで保てるか。 | Agentが承認を迂回・偽造・再利用し、自分の制限や審査を解除する。 |
-| C9.3 構成要素の隔離・Tool制約 | Toolの権限・入出力・外部資源・違反後の状態を実効的に制約できるか。 | 非信頼DataやTool出力が、直接強い操作能力へ到達する。 |
-| C9.4 Agent・Orchestrator Identity | Agent個体と実行連鎖、Credential、保存状態を信頼できる形で識別・保護できるか。 | 共通Identityや改ざん可能な記録により、誰が何をしたか分からなくなる。 |
-| C9.5 認可・委任・継続的強制 | Tool、引数、利用者からの委任を各実行時点のPolicyで制限できるか。 | モデル判断、広いCredential、古い権限、無制限な再委任で認可を越える。 |
-| C9.6 停止・安全な機能縮退 | 人の停止と承認期限切れを、Agentから独立した経路で確実に反映できるか。 | 承認がない処理、推論、出力、下流処理が停止操作後も進む。 |
+| [C9.1 実行予算・ループ・遮断](#c91-実行予算ループ遮断) | 個別Tool、実行全体、Agent群の消費と継続を制限・停止できるか。 | 再試行・並列・子Agentによって上限を越え、停止指示後も処理が続く。 |
+| [C9.2 高影響操作の承認・可逆性](#c92-高影響操作の承認可逆性) | 人が正しい対象を承認し、その承認と影響分類を実行時まで保てるか。 | Agentが承認を迂回・偽造・再利用し、自分の制限や審査を解除する。 |
+| [C9.3 構成要素の隔離・Tool制約](#c93-構成要素の隔離tool制約) | Toolの権限・入出力・外部資源・違反後の状態を実効的に制約できるか。 | 非信頼DataやTool出力が、直接強い操作能力へ到達する。 |
+| [C9.4 Agent・Orchestrator Identity](#c94-agentorchestrator-identity) | Agent個体と実行連鎖、Credential、保存状態を信頼できる形で識別・保護できるか。 | 共通Identityや改ざん可能な記録により、誰が何をしたか分からなくなる。 |
+| [C9.5 認可・委任・継続的強制](#c95-認可委任継続的強制) | Tool、引数、利用者からの委任を各実行時点のPolicyで制限できるか。 | モデル判断、広いCredential、古い権限、無制限な再委任で認可を越える。 |
+| [C9.6 停止・安全な機能縮退](#c96-停止安全な機能縮退) | 人の停止と承認期限切れを、Agentから独立した経路で確実に反映できるか。 | 承認がない処理、推論、出力、下流処理が停止操作後も進む。 |
 
-## C9.1 Requirement
+<a id="c91-requirement"></a>
+
+## C9.1 実行予算・ループ・遮断
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -51,7 +53,9 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.1.2](v1.0-c9.1.2-per-execution-cumulative-budgets/README.md) | 1 | 一回の実行に属する再帰・Token・費用等を合算して制限するか。 | 子Agent・再試行・並列呼出しを別勘定にして全体予算を越える。 |
 | [C9.1.3](v1.0-c9.1.3-swarm-wide-agent-halt/README.md) | 2 | Agent群全体の活動を一つの停止操作で止められるか。 | 親だけ停止し、子・Worker・Queue上の処理が実行を続ける。 |
 
-## C9.2 Requirement
+<a id="c92-requirement"></a>
+
+## C9.2 高影響操作の承認・可逆性
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -66,7 +70,9 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.2.9](v1.0-c9.2.9-approval-issuing-key-and-credential-isolation/README.md) | 3 | 承認発行の鍵と権限をAgent Runtimeから隔離するか。 | Agentが鍵を読むか、署名APIを自由に使って自分の承認を発行する。 |
 | [C9.2.10](v1.0-c9.2.10-chain-wide-highest-impact-approval/README.md) | 3 | 行動連鎖中の最大影響を、連鎖全体の承認Gateへ反映するか。 | 危険な一段を無害な複数段へ分解し、低い承認条件で実行する。 |
 
-## C9.3 Requirement
+<a id="c93-requirement"></a>
+
+## C9.3 構成要素の隔離・Tool制約
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -79,7 +85,9 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.3.7](v1.0-c9.3.7-verify-model-named-external-resources/README.md) | 2 | Modelが示した外部資源を、承認済みRegistry等で利用前に確認するか。 | Model出力のURL、Package、Tool、Serverを未確認でInstall・実行する。 |
 | [C9.3.8](v1.0-c9.3.8-automatic-tool-containment-on-policy-violation/README.md) | 3 | Policy違反を検出したToolを自動的に封じ込めるか。 | 違反を記録するだけで、同じToolが操作と副作用を続ける。 |
 
-## C9.4 Requirement
+<a id="c94-requirement"></a>
+
+## C9.4 Agent・Orchestrator Identity
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -88,7 +96,9 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.4.3](v1.0-c9.4.3-scheduled-agent-credential-rotation/README.md) | 3 | Agent Identity Credentialを定義した周期で更新するか。 | 一度発行した長期Credentialを更新せず使い続ける。 |
 | [C9.4.4](v1.0-c9.4.4-integrity-protection-for-persisted-agent-state/README.md) | 3 | 呼出し間に保存するAgent状態の改ざんを検出・拒否できるか。 | MemoryやCheckpointを書き換え、正規状態として次回実行へ読み込ませる。 |
 
-## C9.5 Requirement
+<a id="c95-requirement"></a>
+
+## C9.5 認可・委任・継続的強制
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -99,7 +109,9 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.5.5](v1.0-c9.5.5-explicit-inter-agent-delegation-policy/README.md) | 2 | Agent間の委任先・Task・権限を明示Policyで制限するか。 | 親Agentが持たない権限を子へ渡す、または子が無制限に再委任する。 |
 | [C9.5.6](v1.0-c9.5.6-current-authorization-for-each-privileged-action/README.md) | 3 | 長時間Sessionでも、各特権操作を現在のBackend Policyで再評価するか。 | Session開始時の権限を保持し、失効・Role変更後も特権操作を続ける。 |
 
-## C9.6 Requirement
+<a id="c96-requirement"></a>
+
+## C9.6 停止・安全な機能縮退
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|

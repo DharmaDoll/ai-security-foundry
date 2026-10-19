@@ -14,16 +14,25 @@
 
 | Section | 問うこと | できてはいけないこと |
 |---|---|---|
-| C5.1 Authentication | 高Risk操作とAgent間通信で、利用主体とCredentialを十分な強さで確認できるか。 | 盗まれたSessionや広い長期Tokenだけで、高Risk操作や複数Systemへのアクセスが成立する。 |
-| C5.2 Authorization | AI資源・検索・出力・特権を、信頼できるIdentityとPolicyで制限できるか。 | モデルの判断、暗黙の許可、失われたLabelにより権限外の資源やDataへ到達する。 |
-| C5.3 Tenant Isolation | 共有するModel Servingと計算基盤でTenant間の状態・資源を分離できるか。 | 別Tenantの状態を観測、取得、推測、または干渉できる。 |
+| [C5.1 Authentication](#c51-authentication) | 高Risk操作とAgent間通信で、利用主体とCredentialを十分な強さで確認できるか。 | 盗まれたSessionや広い長期Tokenだけで、高Risk操作や複数Systemへのアクセスが成立する。 |
+| [C5.2 Authorization](#c52-authorization) | AI資源・検索・出力・特権を、信頼できるIdentityとPolicyで制限できるか。 | モデルの判断、暗黙の許可、失われたLabelにより権限外の資源やDataへ到達する。 |
+| [C5.3 Tenant Isolation](#c53-tenant-isolation) | 共有するModel Servingと計算基盤でTenant間の状態・資源を分離できるか。 | 別Tenantの状態を観測、取得、推測、または干渉できる。 |
 
-## Requirement単位
+<a id="requirement単位"></a>
+
+## Requirement一覧
+
+## C5.1 Authentication
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
 | [C5.1.1](v1.0-c5.1.1-step-up-authentication/README.md) | 3 | 高Risk操作の直前に、現在の主体を十分な強さで再確認するか。 | 盗まれた既存Sessionだけで高Risk操作を実行できる。 |
 | [C5.1.2](v1.0-c5.1.2-short-lived-minimal-scoped-signed-agent-tokens/README.md) | 3 | Agent間・System間Tokenが短命・最小Scope・検証可能か。 | 一つの長期Credentialを、別の相手・資源・目的へ転用できる。 |
+
+## C5.2 Authorization
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C5.2.1](v1.0-c5.2.1-explicit-allow-default-deny-ai-resources/README.md) | 2 | AI資源への許可を明示し、それ以外を既定で拒否するか。 | 許可Ruleがない資源を暗黙に利用できる。 |
 | [C5.2.2](v1.0-c5.2.2-end-user-authorization-retrieval-assembly/README.md) | 2 | 検索と回答組立の各段階で、End-userの認可範囲を保つか。 | 類似度やAgentの権限だけで、利用者に許可されない文書を検索・回答へ含める。 |
 | [C5.2.3](v1.0-c5.2.3-sensitive-data-retrieval-not-model-storage/README.md) | 2 | Sensitive Dataを制御可能な検索元から必要時に取得するか。 | Sensitive DataをModel内部へ固定し、削除・認可・更新を制御できなくする。 |
@@ -31,6 +40,11 @@
 | [C5.2.5](v1.0-c5.2.5-agent-authorization-pdp-isolation/README.md) | 2 | Agentの認可を判断するPDPをAgentの支配から分離するか。 | AgentがPolicy、判断入力、判断処理を変更して自分の権限を広げる。 |
 | [C5.2.6](v1.0-c5.2.6-just-in-time-privileged-access/README.md) | 3 | 特権を必要な時・対象・期間だけ付与し、不要になれば失効させるか。 | 局所的に短いTokenを使っても、Privilege全体が常時有効なまま残る。 |
 | [C5.2.7](v1.0-c5.2.7-downstream-classification-label-propagation/README.md) | 3 | Dataの分類をDerived Artifactと下流処理まで維持するか。 | 変換・Chunk化・転送によってLabelが失われ、必要な制御を適用できない。 |
+
+## C5.3 Tenant Isolation
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C5.3.1](v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md) | 2 | 共有Model Servingの状態をTenantごとに分離するか。 | Cache、Batch、Context等を介して別Tenantの情報が混ざる。 |
 | [C5.3.2](v1.0-c5.3.2-shared-compute-tenant-isolation/README.md) | 3 | 共有計算基盤でTenant間の観測と干渉を防ぐか。 | 他TenantのMemory・Storage・資源利用を観測または変更できる。 |
 

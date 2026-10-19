@@ -8,12 +8,16 @@ C6.1・C6.2の全7件を整備済み。学習資料の有無はControl成熟度�
 
 | Section | 問うこと | できてはいけないこと |
 |---|---|---|
-| C6.1 Model Artifact Integrity | Import前のCode検査、承認Source、完全性、非開発環境への昇格前の受入合格を確認するか | Source承認や署名で振る舞いも安全とみなす |
-| C6.2 AI BOM & Supply Chain Monitoring | 版対応した機械可読BOM、配備前署名、Metadata欠落時のBuild失敗を確認するか | Schema適合や署名だけで内容の完全性を保証する |
+| [C6.1 Model Artifact Integrity](#c61-model-artifact-integrity) | Import前のCode検査、承認Source、完全性、非開発環境への昇格前の受入合格を確認するか | Source承認や署名で振る舞いも安全とみなす |
+| [C6.2 AI BOM & Supply Chain Monitoring](#c62-ai-bom--supply-chain-monitoring) | 版対応した機械可読BOM、配備前署名、Metadata欠落時のBuild失敗を確認するか | Schema適合や署名だけで内容の完全性を保証する |
 
-## Requirement
+<a id="requirement"></a>
+
+## Requirement一覧
 
 LevelはAISVS Verification Levelであり、文書成熟度や製品適合ではない。
+
+## C6.1 Model Artifact Integrity
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -21,6 +25,11 @@ LevelはAISVS Verification Levelであり、文書成熟度や製品適合では
 | [C6.1.2](v1.0-c6.1.2-download-ai-artifacts-only-from-approved-sources/README.md) | 1 | 重み・データセット・Adapterを承認した取得元へ限定するか。 | 暗黙DownloadやRedirectで未承認Sourceを使う。 |
 | [C6.1.3](v1.0-c6.1.3-integrity-verifiability-for-every-third-party-model-artifact/README.md) | 2 | すべての外部モデル構成物の完全性を検証可能にするか。 | Modelと一緒に置換できるHashだけを信頼する。 |
 | [C6.1.4](v1.0-c6.1.4-behavioral-acceptance-before-any-nondevelopment-promotion/README.md) | 2 | 開発以外へ昇格する前に振る舞いの受入試験へ合格させるか。 | 本番以外なら未合格Modelを昇格させる。 |
+
+## C6.2 AI BOM & Supply Chain Monitoring
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C6.2.1](v1.0-c6.2.1-versioned-machine-readable-ai-bom-for-every-model/README.md) | 1 | 各モデルに版管理された機械可読AI BOMを公開するか。 | 版・構成・由来を追えないBOMを提供する。 |
 | [C6.2.2](v1.0-c6.2.2-cryptographically-signed-ai-bom-before-deployment/README.md) | 2 | AI BOMへ配備前に暗号署名するか。 | Model本体の署名をBOM署名と混同する。 |
 | [C6.2.3](v1.0-c6.2.3-fail-build-on-missing-ai-bom-component-metadata/README.md) | 2 | AI BOMの構成Metadata欠落時にBuildを失敗させるか。 | Metadata不足でもBuildを成功させる。 |

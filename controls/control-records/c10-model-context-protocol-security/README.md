@@ -26,18 +26,27 @@ AISVS要件、MCP仕様の規範、Researchの提案を混同しない。
 
 | Section | 問うこと | できてはいけないこと |
 |---|---|---|
-| C10.1 Component Integrity | 導入・接続するMCP Serverの出所、許可状態、Local実行権限を制約できるか。 | 名前が一致するだけで未検証Componentを実行し、Hostの広い権限を与える。 |
-| C10.2 Authentication & Authorization | 各要求とTool操作を正しい主体・Scope・引数で認可し、Credentialの境界を保てるか。 | Sessionや接続成功だけを信頼し、Tokenを別Resourceの鍵として使い回す。 |
-| C10.3 Secure Transport | RemoteとLocalのTransportごとに、通信相手・要求先・Protocolを検証できるか。 | 暗号化だけでOrigin、Host、Protocol、実行環境まで安全とみなす。 |
-| C10.4 Schema, Message, and Input Validation | Tool定義、入力、応答、変更、再送を利用前に検証・制限できるか。 | Schema適合や署名だけで内容まで安全とみなし、変更後も以前の承認で実行する。 |
+| [C10.1 Component Integrity](#c101-component-integrity) | 導入・接続するMCP Serverの出所、許可状態、Local実行権限を制約できるか。 | 名前が一致するだけで未検証Componentを実行し、Hostの広い権限を与える。 |
+| [C10.2 Authentication & Authorization](#c102-authentication--authorization) | 各要求とTool操作を正しい主体・Scope・引数で認可し、Credentialの境界を保てるか。 | Sessionや接続成功だけを信頼し、Tokenを別Resourceの鍵として使い回す。 |
+| [C10.3 Secure Transport](#c103-secure-transport) | RemoteとLocalのTransportごとに、通信相手・要求先・Protocolを検証できるか。 | 暗号化だけでOrigin、Host、Protocol、実行環境まで安全とみなす。 |
+| [C10.4 Schema, Message, and Input Validation](#c104-schema-message-and-input-validation) | Tool定義、入力、応答、変更、再送を利用前に検証・制限できるか。 | Schema適合や署名だけで内容まで安全とみなし、変更後も以前の承認で実行する。 |
 
-## 整備済みRequirement
+<a id="整備済みrequirement"></a>
+
+## Requirement一覧
+
+## C10.1 Component Integrity
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
 | [C10.1.1](v1.0-c10.1.1-trusted-source-and-cryptographic-component-verification/README.md) | 1 | MCP Componentを信頼済みSourceから取得し、実行前に暗号的に検証するか。 | 公式らしい名前や同じ経路のChecksumだけを信じ、未承認・改ざんArtifactを実行する。 |
 | [C10.1.2](v1.0-c10.1.2-allowlisted-mcp-server-admission/README.md) | 2 | Server実体を区別できるAllowlistで、許可対象だけを接続・起動するか。 | 表示名一致、Local設定、別URL、失効済みEntryで未許可Serverを利用する。 |
 | [C10.1.3](v1.0-c10.1.3-least-privilege-local-server-sandbox/README.md) | 2 | Local ServerのFile・Network・System Accessを実行基盤で最小限に制限するか。 | Host Userと同権限の裸Processで動かし、侵害をHost全体へ拡大させる。 |
+
+## C10.2 Authentication & Authorization
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C10.2.1](v1.0-c10.2.1-per-request-access-token-validation/README.md) | 1 | MCP Serverは各RequestでAccess Tokenを検証するか。 | Session、TLS、localhost、過去の成功だけを根拠に後続Requestを通す。 |
 | [C10.2.2](v1.0-c10.2.2-issuer-audience-expiration-and-scope-validation/README.md) | 1 | Issuer、Audience、Expiration、Scopeを要求ごとに検証するか。 | 署名が正しいだけで、別Issuer・別Audience・期限切れ・Scope不足のTokenを受理する。 |
 | [C10.2.3](v1.0-c10.2.3-no-access-token-or-user-credential-persistence/README.md) | 1 | Resource ServerがAccess TokenやUser Credentialを永続化しないか。 | Log、Cache、Prompt、Session Store、Crash Dump等へ再利用可能なCredentialを残す。 |
@@ -45,11 +54,21 @@ AISVS要件、MCP仕様の規範、Researchの提案を混同しない。
 | [C10.2.5](v1.0-c10.2.5-per-invocation-tool-and-argument-authorization/README.md) | 2 | 各InvocationでToolと具体的Argument値を認可するか。 | 許可Toolなら、別Tenant・別Object・未許可PathをArgumentにしても実行する。 |
 | [C10.2.6](v1.0-c10.2.6-session-artifact-removal/README.md) | 2 | Session終了時に再利用可能なArtifactをすべて除去・無効化するか。 | 終了後も旧Session ID、Cache、Handle、Subscription、Queued Workを残す。 |
 | [C10.2.7](v1.0-c10.2.7-no-client-token-passthrough-to-downstream-apis/README.md) | 2 | Clientから受信したAccess Tokenを使い回さず、下流Resource向けの別Credentialを使うか。 | 交換失敗、Retry、Proxy、任意URL指定等で元Tokenを下流APIへ転送する。 |
+
+## C10.3 Secure Transport
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C10.3.1](v1.0-c10.3.1-authenticated-encrypted-streamable-http/README.md) | 1 | Remote MCPを認証・暗号化済みStreamable HTTPに限定するか。 | 平文、証明書未検証、認証なし、Remote stdio／Legacy RouteへFallbackする。 |
 | [C10.3.2](v1.0-c10.3.2-stdio-only-in-controlled-local-environments/README.md) | 1 | stdioを管理されたLocal親子Process境界だけで使うか。 | Remote／未信頼入力から`command`、`args`、`env`を指定してProcessを起動する。 |
 | [C10.3.3](v1.0-c10.3.3-independent-origin-and-host-validation/README.md) | 2 | 全HTTP TransportでOriginとHostを独立に検証するか。 | 片方、CORS、Loopback、TLSだけを信頼してDNS Rebinding Requestを通す。 |
 | [C10.3.4](v1.0-c10.3.4-minimum-mcp-protocol-version-enforcement/README.md) | 2 | Clientが最低Protocol Versionを持ち、下回る提案を拒否するか。 | 実装が理解できるという理由で旧Versionへ自動Fallbackする。 |
 | [C10.3.5](v1.0-c10.3.5-sender-constrained-access-tokens/README.md) | 3 | mTLSまたはDPoPでTokenを送信ClientのKeyへ拘束するか。 | Token単体、別Key／Certificate、再利用Proof、Bearer Downgradeを受理する。 |
+
+## C10.4 Schema, Message, and Input Validation
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C10.4.1](v1.0-c10.4.1-validate-tool-responses-against-schemas/README.md) | 1 | Tool Responseを宣言Schemaで検証してからModel Contextへ入れるか。 | Schema外・曖昧なResponseをRaw TextへFallbackしてModelへ渡す。 |
 | [C10.4.2](v1.0-c10.4.2-screen-tool-responses-for-indirect-prompt-injection/README.md) | 1 | Tool定義・応答をIndirect Prompt Injection観点で検査するか。 | 外部Dataを信頼Instructionとして連結し、Screeningだけを認可境界にする。 |
 | [C10.4.3](v1.0-c10.4.3-reject-unrecognized-or-oversized-function-parameters/README.md) | 1 | 未知または過大なFunction ParameterをHandler前に拒否するか。 | 宣言外Fieldを無視・転送し、上限超過をParse／副作用後に判定する。 |

@@ -22,10 +22,12 @@ C2は入力によるModelの振る舞いの誘導を扱い、用途に応じた�
 
 | Section | 問うこと | できてはいけないこと |
 |---|---|---|
-| C2.1 Prompt Injection Defenses | 隠蔽・過長・役割偽装・多数例による指示誘導を、入力境界で検出・制限できるか。 | 入力が表現やMessage境界を変えて検査をすり抜ける。 |
-| C2.2 Content & Policy Screening | 禁止内容や非テキスト・複合入力を用途別Policyで扱えるか。 | テキストだけを検査し、他の入力から同じ禁止内容を通す。 |
+| [C2.1 Prompt Injection Defenses](#c21-prompt-injection-defenses) | 隠蔽・過長・役割偽装・多数例による指示誘導を、入力境界で検出・制限できるか。 | 入力が表現やMessage境界を変えて検査をすり抜ける。 |
+| [C2.2 Content & Policy Screening](#c22-content--policy-screening) | 禁止内容や非テキスト・複合入力を用途別Policyで扱えるか。 | テキストだけを検査し、他の入力から同じ禁止内容を通す。 |
 
-## C2.1 Requirement
+<a id="c21-requirement"></a>
+
+## C2.1 Prompt Injection Defenses
 
 ResearchはUnicode隠蔽、変換順序、検出器回避、長文・多ターン攻撃を挙げるが、
 これらはNegative Testの候補であり、研究上の提案すべてがAISVSの必須条件ではない。
@@ -55,7 +57,9 @@ ResearchはUnicode隠蔽、変換順序、検出器回避、長文・多ター�
 | [C2.1.7](v1.0-c2.1.7-render-reserved-tokens-as-literal-content/README.md) | 2 | 予約特殊Tokenの文字列表現をLiteralとして扱うか。 | 入力文字列が実際のMessage境界になる。 |
 | [C2.1.8](v1.0-c2.1.8-detect-many-shot-jailbreak-patterns/README.md) | 3 | Many-shot Jailbreakの構造を検出できるか。 | 大量の例示による誘導を未評価で通す。 |
 
-## C2.2 Requirement
+<a id="c22-requirement"></a>
+
+## C2.2 Content & Policy Screening
 
 C2.2は学習済み。対応Researchを確認し、RequirementごとにControlを成熟させる。
 最初のC2.2.1は、内容分類だけでなく閾値超過時のModel投入前制御までを扱う。

@@ -8,14 +8,18 @@
 
 | Section | 問うこと | できてはいけないこと |
 |---|---|---|
-| C1.1 Training Data Origin & Data Security | 必要な項目だけを、出所・完全性・変更・利用帰属まで追えるか | 台帳やHash一つで五つの保証を済ませる |
-| C1.2 Data Labeling and Annotation Security | Labelの権限・完全性・機密性を守れるか | 出所の確かなDatasetならLabelも安全とみなす |
-| C1.3 Training Data Quality and Security Assurance | 毒入れ・誤Label・偏り・禁止Contentを評価できるか | 改ざんがないことを元から安全なことと混同する |
+| [C1.1 Training Data Origin & Data Security](#c11-training-data-origin--data-security) | 必要な項目だけを、出所・完全性・変更・利用帰属まで追えるか | 台帳やHash一つで五つの保証を済ませる |
+| [C1.2 Data Labeling and Annotation Security](#c12-data-labeling-and-annotation-security) | Labelの権限・完全性・機密性を守れるか | 出所の確かなDatasetならLabelも安全とみなす |
+| [C1.3 Training Data Quality and Security Assurance](#c13-training-data-quality-and-security-assurance) | 毒入れ・誤Label・偏り・禁止Contentを評価できるか | 改ざんがないことを元から安全なことと混同する |
 
-## Requirement
+<a id="requirement"></a>
+
+## Requirement一覧
 
 LevelはAISVS Verification Levelであり、製品適合やControl成熟度ではない。
 C1.1〜C1.3の全13件を整備済み。各Controlの保証境界と検証を個別に確認する。
+
+## C1.1 Training Data Origin & Data Security
 
 | Requirement | Level | 問うこと | できてはいけないこと |
 |---|---:|---|---|
@@ -24,9 +28,19 @@ C1.1〜C1.3の全13件を整備済み。各Controlの保証境界と検証を個
 | [C1.1.3](v1.0-c1.1.3-stored-and-transferred-training-data-integrity/README.md) | 2 | 保存・転送中の学習データの完全性を確かめるか。 | Dataと同じ権限で置換できるChecksumだけを信頼する。 |
 | [C1.1.4](v1.0-c1.1.4-training-data-integrity-monitoring/README.md) | 2 | 学習データへの無断変更と破損を監視するか。 | 学習直前の単発照合だけで保存中の監視も済んだとみなす。 |
 | [C1.1.5](v1.0-c1.1.5-dataset-watermark-attribution/README.md) | 3 | データセットのウォーターマークで利用を識別するか。 | Hashの存在だけで無断利用を識別できると主張する。 |
+
+## C1.2 Data Labeling and Annotation Security
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C1.2.1](v1.0-c1.2.1-annotation-create-modify-approve-authorization/README.md) | 1 | 注釈の作成・変更・承認を権限で制限するか。 | 権限外のAPI操作を許す。 |
 | [C1.2.2](v1.0-c1.2.2-labeling-artifact-cryptographic-integrity/README.md) | 2 | 注釈成果物の暗号学的完全性を検証するか。 | 変更したFileを検証済みとして読む。 |
 | [C1.2.3](v1.0-c1.2.3-protect-sensitive-label-information-before-artifacts/README.md) | 2 | 機微なラベル情報を成果物に入れる前に保護するか。 | 署名とアクセス制限だけで平文の機微情報を残す。 |
+
+## C1.3 Training Data Quality and Security Assurance
+
+| Requirement | Level | 問うこと | できてはいけないこと |
+|---|---:|---|---|
 | [C1.3.1](v1.0-c1.3.1-training-pipeline-poisoning-and-corruption-detection/README.md) | 2 | 学習経路で毒入れと偶発的な破損の疑いを検出するか。 | 署名やSchema検査だけで毒入れ検出済みとみなす。 |
 | [C1.3.2](v1.0-c1.3.2-automatic-label-confidence-and-consistency-checks/README.md) | 2 | 自動ラベルへ確信度の閾値と整合性検査を適用するか。 | 閾値か整合性検査の片方だけで済ませる。 |
 | [C1.3.3](v1.0-c1.3.3-bias-evaluation-for-security-decisions/README.md) | 2 | セキュリティ判断に使うモデルの偏りを評価するか。 | 全体精度だけで条件別の盲点を評価済みとする。 |
