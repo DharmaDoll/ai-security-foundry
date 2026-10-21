@@ -2,7 +2,7 @@
 
 外部Model・Dataset・Adapterを取得し、検査・照合・受入れする保証と、Model構成をAI BOMで追う保証を分ける。
 基準は[AISVS v1.0固定Revision](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md)。1.01への移行ではない。
-C6.1・C6.2の全7件を整備済み。学習資料の有無はControl成熟度を左右しない。
+C6.1・C6.2の全7件を整備済み。[学習ガイド](../../learning/c06-supply-chain-security-for-models/README.md)は講義と理解確認を扱い、Control成熟度と独立している。
 
 ## Sectionの見取り図
 

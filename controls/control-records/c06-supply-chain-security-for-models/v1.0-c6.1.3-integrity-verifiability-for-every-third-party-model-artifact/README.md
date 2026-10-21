@@ -109,6 +109,7 @@ C3.1.3は投入時と読込み時の実検証、C3.1.2は署名。本Controlの�
 
 ## References
 
+- [C6.1 Section学習資料](../../../learning/c06-supply-chain-security-for-models/v1.0-c6.1-model-artifact-integrity.md)：講義・想定問答。学習進捗とControl成熟度は独立。
 - [AISVS v1.0 C6 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md)
 - [AISVS v1.0 C6 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-01-Model-Artifact-Integrity.md)
 - [C6 Family概要](../README.md)

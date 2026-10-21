@@ -5,6 +5,27 @@
 - Primary backbone: OWASP AISVS
 - AISVS source state reviewed: 2026-09-03
 
+### C6.1の学習対話完了 — 2026-10-21
+
+Import前検査、付属Pythonコード、非開発環境への昇格前の合格、ハッシュ照合基準の信頼について実際の質疑を記録した。
+学習者の理解表明を受け、C6.1を学習完了とし、現在位置をC6.2へ更新した。C6.2の理解確認は未完了。
+Control成熟度・製品適合とは独立した学習進捗である。
+
+### C6学習教材の整備 — 2026-10-19
+
+[学習ガイド](learning/c06-supply-chain-security-for-models/README.md)、
+[C6.1の講義](learning/c06-supply-chain-security-for-models/v1.0-c6.1-model-artifact-integrity.md)、
+[C6.2の講義](learning/c06-supply-chain-security-for-models/v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)を作成した。
+対象は採用固定版AISVS v1.0の全7 Requirement。原文・日本語訳・Level、Scenario、用語、境界・攻撃経路、
+要件別の正負試験・Evidence・保証限界、運用と想定問答を備える。
+全7件のControlと相互リンクし、共通学習索引・Controls入口・C6 Family案内を更新した。
+教材作成と学習完了は別であり、学習対話・理解確認は未実施。進捗チェックは未完了のまま保持する。
+Control maturity、Catalog、Mapping、Source Registryは変更しない。
+以下の過去Checkpointの「C6学習未作成」は当時の記録として保持する。
+照合結果：固定版の全7 ID・原文・Level、日本語訳の存在、要件別解説、Control相互リンク7組を確認した。
+変更・追加ファイル内のローカル参照384件を確認し、計画書に残っていた旧C9アンカーも修正した。
+`python3 controls/scripts/validate_catalog.py`と`git diff --check`は成功。実製品試験は未実施。
+
 ### 学習コンテンツの補強計画 — 2026-10-19
 
 対象はC7、C1、C3、C4、C11の既存19 Section／72 Requirement。
@@ -495,7 +516,7 @@ Phase 4の次FamilyとしてC9を選び、[Family概要](control-records/c09-orc
 解釈・脅威・検証・証拠・限界まで整備し、Catalogに`verifiable`で追加した。
 続いてC9全34件を同じ成熟度まで整備した。要件別の適用境界、脅威、正常・拒否試験、
 証拠期待値、限界を持つ。全件のID・Levelは固定Sourceと照合し、
-一覧は[README](README.md#c9-control-records)、正規Metadataは[Catalog](catalog.yaml)を参照する。
+一覧は[README](README.md#c9)、正規Metadataは[Catalog](catalog.yaml)を参照する。
 Phase 4のC9作業は完了。残るのは利用・レビューからの改善と必要時の独立したMapping評価。
 C10/C8にはこの作業で着手しない。学習進捗とEngineering Mappingは変更しない。
 
