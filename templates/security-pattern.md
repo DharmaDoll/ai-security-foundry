@@ -92,17 +92,30 @@ Then add minimal platform/language examples only where they improve implementati
 
 ## Verification
 
+For a guide, provide the concrete checks below. An executable test suite, demo,
+or CI integration is an optional extension, not required to complete this section.
+Keep document consistency checks separate from product test results.
+
 ### Negative / abuse tests
 
-Tests that attempt to bypass the control.
+Provide a checklist of attempts to bypass the enforcement boundary:
+
+| Attempt / invariant | Expected result | Evidence and side effects to inspect | Result / evidence reference |
+|---|---|---|---|
+| Concrete operation | Rejection or bounded behavior | Response, decision record, downstream state | Untested |
+
+Use untested, passed, failed, or not applicable with a reason. Do not pre-fill
+success without execution evidence. Model refusal alone does not verify the boundary.
 
 ### Positive tests
 
-Tests that show allowed behavior still works.
+Describe allowed operations and expected results to pair with the negative cases.
 
 ### Security properties to assert
 
-List deterministic assertions that can be automated.
+State observable security outcomes. They should be checkable in the reader's
+implementation and may later be automated. Record any actual execution with its
+version, environment, and evidence; a checklist alone is not a test result.
 
 ## Observability and response
 

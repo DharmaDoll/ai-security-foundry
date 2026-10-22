@@ -73,8 +73,8 @@ Recommended lifecycle:
 2. research the domain;
 3. define threats and invariants;
 4. review the proposed architecture;
-5. implement a minimal pattern;
-6. implement security tests;
+5. write the pattern guide, diagrams, and essence samples;
+6. provide positive verification and a negative-test checklist; add executable tests when appropriate to the agreed scope;
 7. document limitations;
 8. review the result;
 9. improve templates or AGENTS.md based on lessons learned.
@@ -122,7 +122,12 @@ A mature engineering pattern should usually contain:
 * known limitations;
 * authoritative references.
 
-Not every pattern requires executable code.
+Guide completion means the design, implementation responsibilities, verification
+method, and limitations are clear and internally consistent. It does not mean a
+product has passed the described checks. Executable implementations, test suites,
+and CI are optional extensions, not outstanding work for a completed guide.
+Human review and promotion to `reviewed` or `recommended` remain separate decisions
+under the repository's review requirements.
 
 Architecture and configuration guidance may be the correct implementation artifact when application code is not the relevant security boundary.
 

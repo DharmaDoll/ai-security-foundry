@@ -15,6 +15,7 @@ records, and Pattern candidate analysis. Individual Pattern content belongs unde
 ## Candidate landscape
 
 - [Engineering Pattern Candidate Landscape](pattern-landscape.md)
+- [P1：安全なツール実行の候補レビュー](tool-execution-candidate-review.md) — 選定根拠と対象範囲。[Pattern本文（draft）](../domains/agents/secure-tool-execution/README.md)は別に管理。
 
 The Landscape compares candidates before Pattern development. It is not a catalog
 of completed Patterns and must not create placeholder content for every candidate.

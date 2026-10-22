@@ -39,6 +39,38 @@ Use case
 
 Do not jump directly from a framework requirement to code.
 
+## Reader-first presentation
+
+- Prioritize human understanding and usefulness during design and implementation.
+  Organize the explanation around a concrete problem, a structural diagram, an
+  example failure path, the essential design, and implementation choices.
+- Keep actors, resources, boundaries, and names consistent across diagrams,
+  examples, samples, and review questions. Distinguish the reasoning workflow
+  above from the order in which the reader encounters the explanation.
+- Where useful, name concrete technologies, products, and OSS, show their place
+  in the architecture, and explain which responsibility they fulfill and what
+  remains the application's responsibility. Verify capabilities with primary
+  documentation and record material version dependencies. A product name or
+  installation alone is not evidence that the property holds.
+- Prefer one coherent implementation example with a few meaningful alternatives
+  over a product catalog. Avoid implying that optional products are dependencies.
+- Keep code/configuration samples focused on the design essence. Put secondary
+  details and uncommon exceptions in linked references or an appendix for later
+  exploration, including AI-assisted follow-up. Keep security-critical assumptions,
+  limitations, and conditions that change the design decision visible in the main text.
+- Judge guide quality by whether readers can locate the enforcement point, explain
+  the failure being prevented, and identify what they must implement or confirm.
+  Passing repository tests is not a substitute for those outcomes.
+- Distinguish guide deliverables and document checks from optional executable
+  implementations, test suites, demos, and CI. Select those extensions for a
+  concrete need; their absence does not make an agreed guide deliverable incomplete.
+  Keep product test results and human maturity reviews separate from guide completion.
+- Provide a concise negative-test checklist tied to the pattern's invariants:
+  attempted action, expected result, evidence and side effects to inspect, and
+  a result field. Pair it with positive examples. Distinguish untested, passed,
+  failed, and not applicable with a reason; model refusal alone is not evidence
+  that the execution boundary rejects the action.
+
 ## Core principles
 
 * Assume LLMs and agents can behave incorrectly.

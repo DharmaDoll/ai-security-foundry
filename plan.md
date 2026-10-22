@@ -18,6 +18,12 @@ Keep the repository small until the pattern format and maintenance workflow are 
 
 Build a small set of high-value patterns before expanding coverage.
 
+The current delivery scope is the first pattern's guide, diagrams, concrete
+technology examples, essence samples, and positive/negative verification guidance.
+The [engineering plan](engineering/plan.md) records its draft and review status.
+Runnable implementations, demos, automated suites, and CI are optional extensions;
+they are not completion requirements for this delivery.
+
 These candidates come from recurring system security problems and attack scenarios,
 not from framework or control coverage targets.
 
@@ -34,7 +40,7 @@ For each pattern:
 - [ ] Insecure/failure design is shown
 - [ ] Recommended architecture is shown
 - [ ] Minimal implementation example exists where useful
-- [ ] Negative/abuse test exists
+- [ ] Positive examples and a negative/abuse checklist specify actions, expected results, and evidence
 - [ ] Observability guidance exists
 - [ ] Source versions/maturity are recorded
 
@@ -67,7 +73,7 @@ For each pattern:
 
 - [ ] Add a concise secure-design checklist
 - [ ] Add architecture-review examples
-- [ ] Add CI examples for security regression tests
+- [ ] Consider optional CI examples for security regression tests when an implementation need justifies them
 - [ ] Add discoverability index by use case
 - [ ] Add discoverability index by framework
 - [ ] Track adoption/feedback without turning framework coverage into the primary KPI

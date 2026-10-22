@@ -21,7 +21,7 @@ Avoid contributions that only restate a framework without adding engineering val
 1. Choose the most stable technology/architecture category under `engineering/`.
 2. Copy `templates/security-pattern.md`.
 3. Complete the threat model before the framework mapping.
-4. Add minimal examples/tests if the pattern depends on implementation behavior.
+4. Add diagrams and minimal samples where useful, plus positive cases and a negative-test checklist with expected results and evidence to inspect. Runnable implementations and automated tests are optional extensions for a concrete need.
 5. Add primary references.
 6. Mark new content as `draft` until reviewed.
 

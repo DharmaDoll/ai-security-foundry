@@ -303,7 +303,7 @@ If two authoritative sources disagree:
 - Keep examples minimal enough that the security property is obvious.
 - Include an insecure/failure-prone example only when it materially improves understanding.
 - Clearly label insecure examples so they are not copied accidentally.
-- Prefer runnable security tests over prose-only claims.
+- Provide concrete positive and negative verification guidance rather than prose-only safety claims. For guide deliverables, a checklist with actions, expected results, and evidence is sufficient; runnable examples, automated tests, demos, and CI are optional extensions selected for a concrete need. Do not treat an unexecuted checklist as verification evidence.
 - Separate general security invariants from framework/vendor-specific implementation details.
 - Do not introduce a dependency solely to make an example look realistic.
 - Pin or constrain dependencies when reproducibility or supply-chain integrity matters.

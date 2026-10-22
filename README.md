@@ -154,10 +154,14 @@ Start from `templates/security-pattern.md` and place the pattern under the most 
 ```text
 engineering/domains/agents/secure-tool-execution/
 ├── README.md
-├── insecure/
-├── secure/
-└── tests/
+└── negative-tests.md
 ```
+
+The first deliverable is a readable guide with diagrams, concrete technologies,
+essence samples, positive cases, and a negative-test checklist. Runnable examples,
+test suites, demos, and CI are optional future extensions chosen for a specific
+need. Document checks and product verification results are recorded separately.
+See the [current engineering plan](engineering/plan.md) for scope and progress.
 
 After the pattern is independently mature enough to compare, a separate assessment
 may map it to several controls or frameworks at once. A no-match or gap is also a

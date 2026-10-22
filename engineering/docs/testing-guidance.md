@@ -24,7 +24,21 @@ Avoid examples where the apparent fix only hides the vulnerability.
 
 Every mature engineering pattern should include verification guidance.
 
-Prefer automated tests when practical.
+For guide delivery, the required artifact is a concrete verification method.
+Runnable examples, automated suites, and CI are optional extensions selected for
+a specific implementation question and maintenance need. Their absence does not
+leave an otherwise complete guide unfinished.
+
+For reader-facing guides, provide a compact negative-test checklist with attempted
+actions, expected results, evidence and side effects to inspect, and result fields.
+Pair it with positive examples. Record untested, passed, failed, or not applicable
+with a reason. A checklist describes verification to perform; it is not a record
+of successful execution until evidence is supplied. Directly exercise the
+enforcement boundary as well as the model path: model refusal alone is insufficient.
+Check document consistency and links separately from executing product tests.
+Record execution results only for the actual implementation, version, and
+environment exercised. When an executable extension is selected, prefer automated
+checks for repeatable security outcomes.
 
 Consider:
 

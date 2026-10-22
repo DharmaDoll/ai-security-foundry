@@ -1,7 +1,7 @@
 # Engineering Pattern Candidate Landscape
 
 - Status: discovery
-- Last updated: 2026-09-04
+- Last updated: 2026-10-22
 - Scope: Pattern候補の比較のみ
 
 ## 目的と境界
@@ -9,13 +9,13 @@
 このLandscapeは、具体的なユースケースから反復するセキュリティ設計問題を抽出し、
 Pattern化する前に候補の境界、重複、再利用可能性を比較するための作業記録である。
 
-ここに記載された項目はPattern本文ではなく、Pattern lifecycle上の`draft`でもない。
-候補名と配置先は暫定であり、個別Patternのディレクトリやプレースホルダーは作成しない。
+ここに記載された項目は候補の分析記録であり、Pattern本文とその成熟度はリンク先で管理する。
+未選定候補の名前と配置先は暫定であり、ディレクトリやプレースホルダーは作成しない。
 Control IDやFramework coverageを候補の発見根拠にせず、Controls／FrameworksへのMappingも
 この段階では行わない。
 
-現在、実体のある個別Patternは存在しない。`plan.md`とルート`plan.md`に記載された名称は
-計画上の候補として比較する。
+P1を選定し、[安全なツール実行のdraft](../domains/agents/secure-tool-execution/README.md)を作成した。
+それ以外の名称は計画上の候補として比較する。
 
 ## 入力ユースケース
 
@@ -85,6 +85,13 @@ P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする�
 横断比較だけを維持し、同じ分析を複製しない。
 
 ## P1: Deterministically Authorized Tool Execution
+
+2026-10-22：[P1候補レビュー](tool-execution-candidate-review.md)へ、一次報告の確認、二つの
+業務例、不変条件・反証テスト、隣接候補との境界をまとめた。同日の対話で方針と開発着手の
+了承を得て`select`へ移行し、[Pattern本文](../domains/agents/secure-tool-execution/README.md)を作成した。
+開発者向けガイド・Mermaid図・要点サンプルを中心とし、正負のケースは読者向け確認事項として扱う。
+本文は`draft`。実行検証と人による技術レビューは未実施。
+
 
 - 暫定配置: `agents/secure-tool-execution`
 - 繰り返し発生する設計問題: AgentやLLMが生成したTool／API要求へ、Applicationや
@@ -312,7 +319,7 @@ P18 Resource budgets
 
 ## 現時点の比較結果
 
-- 計画候補を維持する: P1、P2。
+- 開発対象として選定する: P1（本文は`draft`）。計画候補を維持する: P2。
 - ATLAS evidenceにより候補を強化する: P1、P4、P6。
 - 計画候補のscopeと配置を再検討する: P4。
 - 新規候補としてLandscapeに保持する: P3、P5、P6。

@@ -25,6 +25,10 @@ Pattern maturity requirement.
 
 Use `templates/security-pattern.md` for new patterns.
 
+## Patterns
+
+- [Agentのツール実行を、利用者の権限内に閉じ込める](domains/agents/secure-tool-execution/README.md) — `draft`。注文照会・返金の構成図、具体技術、処理例と[Negative testチェックシート](domains/agents/secure-tool-execution/negative-tests.md)。
+
 ## Navigation
 
 - 横断的なEngineering資料と調査記録: [`docs/README.md`](docs/README.md)
