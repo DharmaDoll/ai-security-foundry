@@ -20,7 +20,7 @@ AISVS v1.0の全12 Familyを示します。**主に確認すること**は保証
 
 | Family | 主に確認すること | 主な検討場面 |
 |---|---|---|
-| [C1 Training Data Integrity & Traceability](control-records/c01-training-data-integrity-and-traceability/README.md)（全13件整備済み・[学習ガイド](learning/c01-training-data-integrity-and-traceability/README.md)） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
+| C1 Training Data Integrity & Traceability（全13件整備済み・[学習ガイド](learning/c01-training-data-integrity-and-traceability/README.md)） | 学習Dataの出所・改ざん・Label・品質を追跡し、検証できるか。 | Datasetの収集・受入れ、Labeling、学習・再学習。 |
 | [C2 Input Validation](control-records/c02-input-validation/README.md) | 入力と取得内容が、変換や複数の形式を経ても検査の想定から外れないか。 | User入力、検索文書、画像・音声などをModel Contextへ取り込むとき。 |
 | [C3 Model Lifecycle Management & Change Control](control-records/c03-model-lifecycle-management-and-change-control/README.md)（全15件整備済み・[学習ガイド](learning/c03-model-lifecycle-management-and-change-control/README.md)） | Model Artifactと変更を検証し、許可した版だけを本番へ反映・復旧できるか。 | Model・Provider版の変更、Fine-tuning、段階的な配備とRollback。 |
 | [C4 Infrastructure, Configuration & Deployment Security](control-records/c04-infrastructure-configuration-and-deployment-security/README.md)（全14件整備済み・[学習ガイド](learning/c04-infrastructure-configuration-and-deployment-security/README.md)） | Model実行基盤・Accelerator・Edge環境を隔離し、実行状態を検証できるか。 | Model Serving、GPU共有、Edge・Mobileへの配備。 |
