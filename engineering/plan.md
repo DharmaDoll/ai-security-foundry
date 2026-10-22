@@ -15,11 +15,13 @@
 | P1の候補確認 | 一次資料、反復性、適用条件、隣接候補との境界、不変条件と反証テスト | [具体的な候補レビュー](docs/tool-execution-candidate-review.md)を作成済み |
 | 候補範囲の人のレビュー | 上記資料の対象範囲で開発するか判断 | 完了。2026-10-22の対話で方針と開発着手を了承 |
 | Pattern設計 | 共通Templateの必須内容を本文・図・依頼例・運用・限界で説明 | [最初のdraft](domains/agents/secure-tool-execution/README.md)を作成済み |
-| 実装ガイドとサンプル | 構成図、具体技術、短い処理例、正常系とNegative testチェックシート | 作成済み。製品連携・実行検証は未実施 |
+| 実装ガイドとサンプル | 構成図、具体技術、短い処理例、正常系とNegative testチェックシート | 作成済み。[認可入力・OPA・API接続の要点](domains/agents/secure-tool-execution/implementation-notes.md)を追加。製品連携・Rego実行検証は未実施 |
 | 公開用の整理 | 図・説明・サンプルの整合性とリンクを確認し、人の技術レビューが可能なdraftとする | 文書整合性を確認。人による技術レビュー待ち |
 
 **再開地点:** [Pattern本文](domains/agents/secure-tool-execution/README.md)と
 [Negative testチェックシート](domains/agents/secure-tool-execution/negative-tests.md)の内容をレビューする。
+2026-10-22の追加依頼により、最初のPatternの認可ルールとAPI接続を要点サンプルとして具体化した。
+短いJSON・Regoと処理手順を追加し、実行可能サービス・自動テスト・CIの開発へ範囲は広げていない。
 P1は`select`、本文は`draft`。候補承認をPatternの技術レビュー完了とは扱わない。
 Mapping・新版採用・実サービス配備・他Patternの並行開発は今回の対象外。
 今回の成果物は、開発者が実装時に参照できるガイドと、要点を伝えるサンプルとする。

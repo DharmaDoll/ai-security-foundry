@@ -2,6 +2,7 @@
 
 [Pattern本文](README.md)のI1〜I5を、自分の実装で確認するためのシート。
 現在の各行は**未実施**。このRepositoryによる製品検証や安全性の認定ではない。
+[実装の要点](implementation-notes.md)に、入力・認可・API接続と各チェックの対応を示す。
 
 ## 使い方
 
