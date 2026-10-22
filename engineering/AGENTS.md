@@ -44,6 +44,14 @@ Do not jump directly from a framework requirement to code.
 - Prioritize human understanding and usefulness during design and implementation.
   Organize the explanation around a concrete problem, a structural diagram, an
   example failure path, the essential design, and implementation choices.
+- Make the core engineering decision explicit before introducing implementation
+  technologies: **what information to rely on, what to check, and where to enforce
+  the check**. Identify each information source and why it is trusted, the concrete
+  conditions to evaluate, and the component and timing that enforce the result
+  before disclosure or side effects. Use a compact table or diagram when helpful.
+  Developers should be able to implement these responsibilities with their existing
+  stack; products, libraries, and policy languages illustrate implementation choices
+  after the responsibilities are clear. Apply this principle across all domains.
 - Keep actors, resources, boundaries, and names consistent across diagrams,
   examples, samples, and review questions. Distinguish the reasoning workflow
   above from the order in which the reader encounters the explanation.

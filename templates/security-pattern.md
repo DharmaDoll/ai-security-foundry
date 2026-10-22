@@ -88,6 +88,17 @@ Scoped capability / tool
 
 State language/framework-independent requirements first.
 
+Explain **what information to rely on, what to check, and where to enforce the
+check** before introducing products, libraries, or policy languages. Readers should
+be able to identify the implementation responsibilities without knowing a particular
+tool. Use a table like this, or an equivalent diagram:
+
+| Information source and why it is trusted | Concrete condition to check | Enforcing component and timing |
+|---|---|---|
+| Source of the facts used for the decision | Values, relationships, or state to validate | Where the result is enforced before disclosure or side effects |
+
+Explain what happens when information is missing or the condition fails.
+
 Then add minimal platform/language examples only where they improve implementation clarity.
 
 ## Verification
