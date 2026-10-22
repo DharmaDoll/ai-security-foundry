@@ -138,6 +138,12 @@ Database、IPC、共有状態を通る迂回経路までCapability graphとし�
 - Schema検証を認可の代替にしていないか。
 - Reader侵害を仮定したNegative Testを実行できるか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Web SecurityからAgent Securityへ：ParameterではなくCapability Flowを追う](../../../../docs/insights/web-security-to-agent-capability-flow.md)：非信頼情報がAgentの権限行使へ影響する経路を、Toolや状態をまたいで追う。
+
 ## References
 
 - [AISVS v1.0 C9.3.5][normative]

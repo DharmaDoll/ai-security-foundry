@@ -414,6 +414,13 @@ full. No Engineering Pattern Mapping has been assessed.
   and the impact of the decisions. This Control does not mandate a universal
   process, host, account, or hardware topology.
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../../docs/insights/minimize-and-mediate-authority.md)：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+
 ## References
 
 - [OWASP AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

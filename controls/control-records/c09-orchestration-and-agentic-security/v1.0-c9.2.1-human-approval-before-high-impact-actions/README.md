@@ -140,6 +140,13 @@ ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版�
 製品試験の実施・製品適合・学習完了を意味しない。有限の試験で未知の攻撃を全て否定しない。
 Engineering PatternとMappingは独立して評価し、その存在を本Controlの成熟条件にしない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../../docs/insights/identity-authority-and-intent-are-different.md)：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+
 ## References
 
 - [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
@@ -151,4 +158,3 @@ Engineering PatternとMappingは独立して評価し、その存在を本Contro
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
-

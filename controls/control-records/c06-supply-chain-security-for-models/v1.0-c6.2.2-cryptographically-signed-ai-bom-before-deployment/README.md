@@ -107,6 +107,12 @@ C6.2.1はBOM内容・提供、C6.2.3は完全性チェック。署名済みで�
 正当なSignerによる虚偽記載やIdentity侵害は残る。署名は内容が正しいという保証ではない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [AI BOMの技術構造と実構成を確かめるための証拠](../../../../docs/insights/ai-bom-inventory-evidence-and-trust.md)：署名の正しさと、記載内容の真実性・網羅性を区別する。
+
 ## References
 
 - [C6.2 Section学習資料](../../../learning/c06-supply-chain-security-for-models/v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)：講義・想定問答。学習進捗とControl成熟度は独立。

@@ -26,6 +26,10 @@ Requirementごとの保証境界は[C11 Control俯瞰図](../../control-records/
 | C11.3 Model-Extraction Defense | 4 | APIを使ったModel複製の検知と対処 |
 | C11.4 Model Runtime Anomaly Detection | 3 | 推論前の異常検査と改善用Feedbackの保護 |
 
+## 関連する洞察
+
+- [安全性の数字には、比較できる測定条件が必要である](../../../docs/insights/security-metrics-need-comparable-conditions.md)：対象 C11.1・C11.2・C11.2.3・C11.2.5。安全性の数字と、その数字を作った試験集合・判定条件・対象を併せて評価する。
+
 ## 軽量な進捗
 
 全4 Sectionを一巡した。チェックは講義と対話を一巡した印であり、理解度の採点ではない。

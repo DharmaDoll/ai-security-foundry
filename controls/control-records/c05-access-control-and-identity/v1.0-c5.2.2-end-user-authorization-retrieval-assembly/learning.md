@@ -701,6 +701,13 @@ Identityの意味を変換する箇所を減らし、異なるACLを持つData�
   testがあるか。
 - Testが最終回答だけでなく、安全なTest環境でIntermediate dataを確認するか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+- [具体的なFlowからSecurity Invariantへ抽象化して教える](../../../../docs/insights/teach-from-concrete-flow-to-security-invariant.md)：具体的なデータの流れと失敗例から、別の場面にも使える安全条件を学ぶ。
+
 ## 17. References
 
 ### Normative／Research

@@ -167,6 +167,12 @@ Cacheの誤対応でも、正本と表示の関係が崩れ得る。本Control�
 回答への表示、各主張の支持、文書の正しさは別の保証である。
 `verifiable`は本Artifactの成熟度であり、製品の引用品質の実証ではない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Evidenceは再構成でき、かつ保護されていなければならない](../../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：操作と根拠を辿れる記録を残しつつ、調査基盤への機密情報の集積を抑える。
+
 ## References
 
 - [AISVS v1.0 C7 Normative](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md)

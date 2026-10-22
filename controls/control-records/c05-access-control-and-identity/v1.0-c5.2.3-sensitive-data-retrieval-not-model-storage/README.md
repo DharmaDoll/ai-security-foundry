@@ -161,6 +161,12 @@ Providerの学習利用条件やDataset由来が未確認なら、Passを裏付�
 例外としてSensitive学習を採る場合、別の対策をもって本要件をPassへ置換しない。
 本Artifactは検証可能な基準であり、製品適合やEngineering Mappingを主張しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+
 ## References
 
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

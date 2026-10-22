@@ -89,6 +89,12 @@ Container内のrootだけでHost rootと同一とは限らないが、広いMoun
 - 管理Socket、Metadata Service、共有Volumeなどの迂回経路はないか。
 - 隔離機構の障害時に、弱い実行方式へ自動的に切り替わらないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../../docs/insights/minimize-and-mediate-authority.md)：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+
 ## References
 
 - [AISVS v1.0 C9.3.1][normative]

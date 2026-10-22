@@ -79,6 +79,14 @@ EngineerがArchitecture Reviewを行う視座で構成する。
 - 学習者の疑問、誤答、判断不能は評価に使わず、講義またはScope説明の不足を発見する
   Signalとして使う。
 
+## 洞察への案内
+
+学習から得たInsightは、FamilyガイドのSection／Requirement一覧の直後と、関連する学習ノートから辿れるようにする。
+既存の洞察見出しを移動する場合も名前とアンカーを維持する。リンクには何の理解に役立つかを一文添える。
+個別ControlとFamily概要にも実質的に関連する洞察を案内する。配置・関係の選び方は
+[Controlsの運用方針](../AGENTS.md#control-record-organization)と[Insightsのリンク配置](../../docs/insights/README.md#controlから辿るためのリンク配置)を参照する。
+教育方法の洞察は学習側に置き、Control要件へ無理に結び付けない。
+
 ## Learning workflow
 
 Category／Familyごとに全Requirementへ一度触れるが、講義・保存・復習の単位は
@@ -335,3 +343,9 @@ Section学習の完了は、学習者が次を自分の言葉で短く説明で�
 
 C8.1は現行のSection単位方式のReferenceである。C5.1.1は旧Requirement単位方式だが、
 Source separation、Security視座、対話の保存、Scope Calibrationの深さを引き続き参考にする。
+
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [具体的なFlowからSecurity Invariantへ抽象化して教える](../../docs/insights/teach-from-concrete-flow-to-security-invariant.md)：具体的なデータの流れと失敗例から、別の場面にも使える安全条件を学ぶ。

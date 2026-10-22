@@ -48,6 +48,19 @@
 | [C5.3.1](v1.0-c5.3.1-shared-model-serving-tenant-isolation/README.md) | 2 | 共有Model Servingの状態をTenantごとに分離するか。 | Cache、Batch、Context等を介して別Tenantの情報が混ざる。 |
 | [C5.3.2](v1.0-c5.3.2-shared-compute-tenant-isolation/README.md) | 3 | 共有計算基盤でTenant間の観測と干渉を防ぐか。 | 他TenantのMemory・Storage・資源利用を観測または変更できる。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：対象 C5.1.1・C5.1.2・C5.2.5。個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../docs/insights/identity-authority-and-intent-are-different.md)：対象 C5.1.1・C5.1.2。本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../docs/insights/minimize-and-mediate-authority.md)：対象 C5.2.1・C5.2.5。不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+- [PrivilegeはToken FieldではなくEnd-to-end Lifecycleで評価する](../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md)：対象 C5.1.2・C5.2.6。権限の発行・使用・更新・失効を通して、短命Tokenでも残る権限を追う。
+- [Dataは形を変えてもProtectionを失わない](../../../docs/insights/protected-data-survives-transformation.md)：対象 C5.2.2・C5.2.3・C5.2.4・C5.2.7。要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+- [共有資源の再利用は、次の利用者への安全な引渡しである](../../../docs/insights/resource-reuse-is-a-security-handoff.md)：対象 C5.3.1。同時利用者の分離と、次の利用者へ状態を残さない条件を分ける。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../docs/insights/security-artifacts-have-bounded-claims.md)：対象 C5.1.2・C5.2.4・C5.2.7。署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+- [Tenant IsolationはRead禁止だけでなく観測と干渉を防ぐ](../../../docs/insights/shared-isolation-means-no-observation-or-interference.md)：対象 C5.3.1・C5.3.2。共有状態を通じた他Tenantの観測・干渉も、直接アクセスとは別に確認する。
+
 個別の具体例・対話・洞察は[C5学習ガイド](../../learning/c05-access-control-and-identity/README.md)から各`learning.md`を参照する。
 
 ## Source

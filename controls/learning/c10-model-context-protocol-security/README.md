@@ -58,6 +58,16 @@ LevelはAISVS Verification Levelであり、学習難易度やControl maturity�
 | C10.3 Secure Transport | 5 | L1：2、L2：2、L3：1 | Remote／Local Transport、Origin・Host、Protocol最低版、Sender-constrained Token |
 | C10.4 Schema, Message, and Input Validation | 8 | L1：3、L2：4、L3：1 | Schema・内容・Size・Replay・導入同意・Tool定義変更の検証 |
 
+## このFamilyの学習から生まれた横断的Insight
+
+- [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md)：C10.2のSession、Tool、Objectへの権限を一つとみなさない。
+- [利用停止・消去・再出現防止](../../../docs/insights/retirement-is-more-than-deletion.md)：C10.2のSession終了後に残るArtifactとWorkを確認する。
+- [信頼は利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：C10.1・C10.4の認証済みComponentとTool Contentを区別する。
+- [検査するのは実際に利用されるPayload](../../../docs/insights/validation-must-cover-effective-payload.md)：C10.4のSchema検査とModelによるContent利用を区別する。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
+
+
 ## 軽量な進捗記録
 
 現在学習中のSection：なし。C10全4 Sectionの講義と対話を一巡済み。
@@ -68,15 +78,6 @@ LevelはAISVS Verification Levelであり、学習難易度やControl maturity�
 - [x] [C10.4 Schema, Message, and Input Validation](v1.0-c10.4-schema-message-and-input-validation.md)
 
 C10.2.7のToken Pass-throughと委任Contextの違いは、C10.2のSection学習ノートへ統合した。
-
-## このFamilyの学習から生まれた横断的Insight
-
-- [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md)：C10.2のSession、Tool、Objectへの権限を一つとみなさない。
-- [利用停止・消去・再出現防止](../../../docs/insights/retirement-is-more-than-deletion.md)：C10.2のSession終了後に残るArtifactとWorkを確認する。
-- [信頼は利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：C10.1・C10.4の認証済みComponentとTool Contentを区別する。
-- [検査するのは実際に利用されるPayload](../../../docs/insights/validation-must-cover-effective-payload.md)：C10.4のSchema検査とModelによるContent利用を区別する。
-
-これらは学習の起点を示すLinkであり、正式なMappingではない。
 
 ## Sources
 

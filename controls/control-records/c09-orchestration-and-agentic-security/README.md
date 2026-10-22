@@ -119,6 +119,18 @@ Researchの追加試験案をすべて各要件の必須条件とみなさない
 | [C9.6.2](v1.0-c9.6.2-deny-actions-after-approval-timeout/README.md) | 2 | 承認期限内に成立しない操作を阻止するか。 | 期限切れ・未回答・承認基盤障害を暗黙の許可として実行する。 |
 | [C9.6.3](v1.0-c9.6.3-out-of-band-shutdown-control-isolation/README.md) | 3 | 停止指示をAgent Runtimeから隔離した別経路で強制するか。 | Agent侵害・停止拒否・同一障害によりKill-switchまで操作不能になる。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：対象 C9.2.7。個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [Bounded Autonomyには階層ごとの上限と停止意味論が必要である](../../../docs/insights/bounded-autonomy-requires-hierarchical-controls.md)：対象 C9.1.1・C9.1.2・C9.1.3。Tool・一実行・Agent群の上限と、停止後も残る副作用を区別する。
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../docs/insights/human-approval-is-a-security-protocol.md)：対象 C9.2.1・C9.2.2・C9.2.6・C9.2.7・C9.2.8・C9.2.9・C9.2.10。承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../docs/insights/identity-authority-and-intent-are-different.md)：対象 C9.2.1・C9.2.8。本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../docs/insights/minimize-and-mediate-authority.md)：対象 C9.2.5・C9.3.1・C9.3.4。不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../docs/insights/security-artifacts-have-bounded-claims.md)：対象 C9.3.2・C9.3.3・C9.3.4。署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+- [Web SecurityからAgent Securityへ：ParameterではなくCapability Flowを追う](../../../docs/insights/web-security-to-agent-capability-flow.md)：対象 C9.3.4・C9.3.5。非信頼情報がAgentの権限行使へ影響する経路を、Toolや状態をまたいで追う。
+
 個別の具体例・対話・洞察は[C9学習ガイド](../../learning/c09-orchestration-and-agentic-security/README.md)から各`learning.md`を参照する。
 
 ## Source

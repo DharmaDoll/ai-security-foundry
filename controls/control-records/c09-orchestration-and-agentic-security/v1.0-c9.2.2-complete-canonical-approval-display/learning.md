@@ -117,6 +117,12 @@ Enforcement Point（強制する場所）は、操作データから表示を作
 4. 悪意ある表示文字や長文末尾の変更でも、危険部分を隠せないか。
 5. 表示の完全性と、人の理解・操作の認可・承認後の結合を別々に評価しているか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+
 ## 参照
 
 - [AISVS固定要件本文][normative]

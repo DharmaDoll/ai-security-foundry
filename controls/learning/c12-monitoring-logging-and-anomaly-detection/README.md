@@ -32,6 +32,14 @@ C12を製品別のLog設定集ではなく、AI Systemの処理を再構成し�
 | C12.4 Proactive Security Behavior Monitoring | 3 | L2：3 | Agentの自発的行動、承認、停止操作の監査 |
 | C12.5 Training Data & Model Lifecycle Audit | 4 | L1：2、L2：2 | Dataset、Label、Model、取込文書の変更履歴 |
 
+## このFamilyの学習から生まれた横断的Insight
+
+- [再構成でき、保護されたSecurity Evidence](../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：C12.1・C12.2・C12.5のEvent、Alert、変更履歴を調査可能かつ最小限に扱う。
+- [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C12.3のDrift Signalを侵害の確証や認可Decisionと混同しない。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
+
+
 ## 軽量な進捗記録
 
 全5 Section・21 Requirementの講義と対話を保存済み。Control成熟・製品適合の完了を意味しない。
@@ -43,13 +51,6 @@ C12を製品別のLog設定集ではなく、AI Systemの処理を再構成し�
 - [x] [C12.5 Training Data & Model Lifecycle Audit](v1.0-c12.5-training-data-and-model-lifecycle-audit.md)
 
 実質的な講義と対話を保存するときだけ、版付きSectionファイルを追加する。空のSectionファイルやRequirement別のPlaceholderは作らない。
-
-## このFamilyの学習から生まれた横断的Insight
-
-- [再構成でき、保護されたSecurity Evidence](../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：C12.1・C12.2・C12.5のEvent、Alert、変更履歴を調査可能かつ最小限に扱う。
-- [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C12.3のDrift Signalを侵害の確証や認可Decisionと混同しない。
-
-これらは学習の起点を示すLinkであり、正式なMappingではない。
 
 ## Sources
 

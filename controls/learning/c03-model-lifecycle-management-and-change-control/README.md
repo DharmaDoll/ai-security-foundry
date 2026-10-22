@@ -26,6 +26,16 @@ C3では、モデルを選んでから本番へ投入し、変更・復旧する
 | C3.4 Secure Development Practices | 2 | 開発・検証・本番の境界と、学習環境の分離 |
 | C3.5 Pipeline Fine-Tuning | 4 | 追加学習の入力、各段階の成果物、Checkpointの検証と登録 |
 
+## このFamilyから得られた横断的な洞察
+
+- [採点基準への最適化と目的のずれ](../../../docs/insights/optimization-can-exploit-the-evaluator.md)：C3.5.2の対話を起点に、点数へ適応する過程を独立した評価で確認する。
+- [整合した状態への復旧](../../../docs/insights/recovery-restores-a-consistent-configuration.md)：C3.3.2を起点に、復旧後の部品の組み合わせを確認する。
+- [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C3.5.1の完全性と、採点役の評価品質を区別する。
+- [実際に利用されるPayloadを検査する](../../../docs/insights/validation-must-cover-effective-payload.md)：C3.2.2・C3.2.3の変更後の再評価を、検査対象と使用対象の対応として考える。
+
+Insightは対話から得た再利用可能な整理であり、Control本文や正式なMappingではない。
+
+
 ## 軽量な進捗
 
 C3.1〜C3.5の講義と対話を一巡した。チェックは講義と対話を一巡した印であり、Control成熟や理解度の採点ではない。
@@ -35,15 +45,6 @@ C3.1〜C3.5の講義と対話を一巡した。チェックは講義と対話を
 - [x] [C3.3：制御された配備と復旧](v1.0-c3.3-controlled-deployment-and-rollback.md)
 - [x] [C3.4：安全な開発環境](v1.0-c3.4-secure-development-practices.md)
 - [x] [C3.5：追加学習パイプライン](v1.0-c3.5-pipeline-fine-tuning.md)
-
-## このFamilyから得られた横断的な洞察
-
-- [採点基準への最適化と目的のずれ](../../../docs/insights/optimization-can-exploit-the-evaluator.md)：C3.5.2の対話を起点に、点数へ適応する過程を独立した評価で確認する。
-- [整合した状態への復旧](../../../docs/insights/recovery-restores-a-consistent-configuration.md)：C3.3.2を起点に、復旧後の部品の組み合わせを確認する。
-- [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C3.5.1の完全性と、採点役の評価品質を区別する。
-- [実際に利用されるPayloadを検査する](../../../docs/insights/validation-must-cover-effective-payload.md)：C3.2.2・C3.2.3の変更後の再評価を、検査対象と使用対象の対応として考える。
-
-Insightは対話から得た再利用可能な整理であり、Control本文や正式なMappingではない。
 
 ## 一次資料
 

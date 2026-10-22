@@ -78,6 +78,15 @@ AISVS要件、MCP仕様の規範、Researchの提案を混同しない。
 | [C10.4.7](v1.0-c10.4.7-explicit-local-server-installation-consent/README.md) | 2 | Local Server導入前に実行内容を示し、Userが取消可能か。 | 曖昧な表示や導入経路の迂回で、未承認Processを起動する。 |
 | [C10.4.8](v1.0-c10.4.8-tool-definition-change-reapproval/README.md) | 3 | Tool Definition変更を検出し、再承認までInvocationを止めるか。 | 通知だけで旧承認を流用し、変更後DefinitionをSilentにModelへ渡す。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../docs/insights/identity-authority-and-intent-are-different.md)：対象 C10.2・C10.2.1・C10.2.5。本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+- [使わせない、消す、再出現させないは別の保証である](../../../docs/insights/retirement-is-more-than-deletion.md)：対象 C10.2・C10.2.6。利用停止・消去・再出現防止を分け、全利用経路と復元経路を確認する。
+- [信頼はContainerから継承せず、利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：対象 C10.1・C10.1.1・C10.4・C10.4.2。取得経路への信頼と、内容を将来の判断材料へ昇格させる判断を分ける。
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../docs/insights/validation-must-cover-effective-payload.md)：対象 C10.4・C10.4.1。変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 未整備Requirementの行やPlaceholderは作らない。要件本文、Research、Repository解釈を確認して
 個別Controlが`verifiable`になった時点で、この一覧へ追加する。
 

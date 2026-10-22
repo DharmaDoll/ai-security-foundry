@@ -156,6 +156,12 @@ SP-1〜SP-4に反する特権取得・継続、手動終了だけの構成、迂
 常時特権の排除を推奨する記述と、対象操作のJIT要件を混同して例外を隠さない。
 `verifiable`はArtifactの成熟であり、実環境の適合やEngineering Mappingではない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [PrivilegeはToken FieldではなくEnd-to-end Lifecycleで評価する](../../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md)：権限の発行・使用・更新・失効を通して、短命Tokenでも残る権限を追う。
+
 ## References
 
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

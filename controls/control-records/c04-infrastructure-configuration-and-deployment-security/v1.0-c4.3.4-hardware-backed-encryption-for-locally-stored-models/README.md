@@ -108,6 +108,12 @@ PackageからModelとソフトウェアに埋め込んだ鍵を一緒に抜き�
 保存時保護は復号後の平文が安全なことを保証しない。C4.3.5はその復号境界を別に問う。認可済みアプリによる鍵の不正利用、物理・Side Channel攻撃も残る。 端末を物理的に管理する攻撃者への完全防御は主張しない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+
 ## References
 
 - [AISVS v1.0 C4 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)
@@ -115,7 +121,6 @@ PackageからModelとソフトウェアに埋め込んだ鍵を一緒に抜き�
 - [C4.3 Section講義](../../../learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md)
 - [C4 Family概要](../README.md)
 
-- [関連Insight：Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

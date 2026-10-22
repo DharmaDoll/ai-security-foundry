@@ -108,6 +108,12 @@ Host管理者や侵害されたHypervisorが、実行中の重み・入力を読
 機種・Mode・Measurement範囲に依存するため、部分的な証拠を未評価機器や領域へ広げない。メモリ消去はC4.2.4の残留対策でありメモリ暗号化の代替ではない。TEE内部の侵害やSide Channelは別に残る。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [隔離は、誰から誰を守るかで意味が変わる](../../../../docs/insights/isolation-has-a-direction.md)：誰から何を守る隔離かを明確にし、逆方向の保証と混同しない。
+
 ## References
 
 - [AISVS v1.0 C4 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)
@@ -115,7 +121,6 @@ Host管理者や侵害されたHypervisorが、実行中の重み・入力を読
 - [C4.2 Section講義](../../../learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2-ai-hardware-security.md)
 - [C4 Family概要](../README.md)
 
-- [関連Insight：隔離は、誰から誰を守るかで意味が変わる](../../../../docs/insights/isolation-has-a-direction.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

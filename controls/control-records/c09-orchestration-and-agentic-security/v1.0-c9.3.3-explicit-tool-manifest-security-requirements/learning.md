@@ -125,6 +125,12 @@ Manifest登録
 - 署名を、宣言内容の正しさやRuntime強制の証拠と誤認していないか。
 - C9.3.3だけのPassをSystem全体の安全性として報告していないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C9.3.3][normative]

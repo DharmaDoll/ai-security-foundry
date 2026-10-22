@@ -110,6 +110,12 @@ RLHFで読み込む全Model、Registry Alias、照合基準、検証呼出し、
 正規に版管理された報酬Modelにも誤りや偏りがある。完全性は評価品質やModelの安全性ではなく、予定した内容を使うことの保証である。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C3 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)
@@ -117,7 +123,6 @@ RLHFで読み込む全Model、Registry Alias、照合基準、検証呼出し、
 - [C3.5 Section講義](../../../learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.5-pipeline-fine-tuning.md)
 - [C3 Family概要](../README.md)
 
-- [関連Insight：Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)（Repositoryの横断的な考察。規範やMappingではない）
 
 ## Changelog
 

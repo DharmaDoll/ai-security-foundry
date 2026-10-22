@@ -34,6 +34,12 @@ LevelはAISVS Verification Levelであり、文書成熟度や製品適合では
 | [C6.2.2](v1.0-c6.2.2-cryptographically-signed-ai-bom-before-deployment/README.md) | 2 | AI BOMへ配備前に暗号署名するか。 | Model本体の署名をBOM署名と混同する。 |
 | [C6.2.3](v1.0-c6.2.3-fail-build-on-missing-ai-bom-component-metadata/README.md) | 2 | AI BOMの構成Metadata欠落時にBuildを失敗させるか。 | Metadata不足でもBuildを成功させる。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [AI BOMの技術構造と実構成を確かめるための証拠](../../../docs/insights/ai-bom-inventory-evidence-and-trust.md)：対象 C6.2・C6.2.1・C6.2.2・C6.2.3。必須情報・実構成・許可を分け、BOMの記載漏れと署名の限界を確認する。
+
 ## 隣接する保証との違い
 
 C3は本番のModel変更と学習段階、C4は実行環境、C1は学習Dataを扱う。

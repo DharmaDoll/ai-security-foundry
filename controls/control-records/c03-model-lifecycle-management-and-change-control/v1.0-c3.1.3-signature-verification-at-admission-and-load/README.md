@@ -113,6 +113,12 @@ AdmissionとLoaderの呼出し箇所を別々に追う。検証Policy、対象Sc
 侵害された署名者による正当な署名やLoader自身の侵害は残る。全署名検証が通っても、ModelやRuntimeの脆弱性・危険な振る舞いが消えるわけではない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)：変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 ## References
 
 - [AISVS v1.0 C3 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)
@@ -120,7 +126,6 @@ AdmissionとLoaderの呼出し箇所を別々に追う。検証Policy、対象Sc
 - [C3.1 Section講義](../../../learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.1-model-authorization-and-integrity.md)
 - [C3 Family概要](../README.md)
 
-- [関連Insight：検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)（Repositoryの横断的な考察。規範やMappingではない）
 
 ## Changelog
 

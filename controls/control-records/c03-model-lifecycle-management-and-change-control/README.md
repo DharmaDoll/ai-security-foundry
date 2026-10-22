@@ -61,6 +61,15 @@ LevelはAISVS Verification Levelであり、Control成熟度や製品の適合�
 | [C3.5.3](v1.0-c3.5.3-verify-each-fine-tuning-stage-output-before-consumption/README.md) | 3 | 各追加学習段階の出力を次段階の使用前に検証するか。 | 最初だけ検証して後続段階は未検証で使う。 |
 | [C3.5.4](v1.0-c3.5.4-fine-tuning-checkpoints-registered-as-distinct-artifacts/README.md) | 3 | 追加学習の各チェックポイントを別成果物として登録するか。 | Latestの上書きだけで各Checkpointを区別不能にする。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [最適化される採点基準には、目的とのずれを監視する評価が必要](../../../docs/insights/optimization-can-exploit-the-evaluator.md)：対象 C3.5・C3.5.2。評価点の改善と本来の目的の達成を分け、採点への過適応を確認する。
+- [復旧するのはファイルではなく、整合したシステムの状態](../../../docs/insights/recovery-restores-a-consistent-configuration.md)：対象 C3.1・C3.1.1・C3.3・C3.3.2。旧ファイルへの復帰と、検証済みの構成一式への復旧を区別する。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../docs/insights/security-artifacts-have-bounded-claims.md)：対象 C3.5・C3.5.1・C3.5.2。署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../docs/insights/validation-must-cover-effective-payload.md)：対象 C3.1・C3.1.3・C3.2・C3.2.2・C3.2.3。変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 ## 隣接する保証との違い
 
 台帳は対象の把握、署名は内容と署名者の結び付き、検証は実経路での拒否を支える。

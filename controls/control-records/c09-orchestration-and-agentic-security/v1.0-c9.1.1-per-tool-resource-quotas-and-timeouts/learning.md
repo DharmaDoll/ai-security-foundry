@@ -113,6 +113,12 @@ Researchも、要求の応答期限と実処理の終了、子処理、資源別
 4. 設定値と実測結果は対応し、停止遅延や外部側の未確認範囲が明示されているか。
 5. 累積予算・同時実行・認可など、別途必要な保証を見落としていないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Bounded Autonomyには階層ごとの上限と停止意味論が必要である](../../../../docs/insights/bounded-autonomy-requires-hierarchical-controls.md)：Tool・一実行・Agent群の上限と、停止後も残る副作用を区別する。
+
 ## 参照
 
 - [AISVS v1.0 C9要件本文][normative]

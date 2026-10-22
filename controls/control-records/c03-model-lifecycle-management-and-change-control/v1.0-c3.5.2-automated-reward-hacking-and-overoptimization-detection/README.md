@@ -110,6 +110,13 @@ Trainer内の検知呼出しと周期、独立ProbeのData、しきい値、評�
 検知は実験的・確率的で、独立評価自体にも偏りや抜け道がある。特定の指標の正常値を全種類の報酬ハッキング不在の証明とせず、検知後の対応と評価器更新を運用で扱う。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [最適化される採点基準には、目的とのずれを監視する評価が必要](../../../../docs/insights/optimization-can-exploit-the-evaluator.md)：評価点の改善と本来の目的の達成を分け、採点への過適応を確認する。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C3 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)
@@ -117,9 +124,7 @@ Trainer内の検知呼出しと周期、独立ProbeのData、しきい値、評�
 - [C3.5 Section講義](../../../learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.5-pipeline-fine-tuning.md)
 - [C3 Family概要](../README.md)
 
-- [関連Insight：最適化される採点基準には、目的とのずれを監視する評価が必要](../../../../docs/insights/optimization-can-exploit-the-evaluator.md)（Repositoryの横断的な考察。規範やMappingではない）
 
-- [関連Insight：Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)（Repositoryの横断的な考察。規範やMappingではない）
 
 ## Changelog
 

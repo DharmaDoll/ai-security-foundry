@@ -107,6 +107,12 @@ ModelごとのBOMがない、四情報区分が欠落、機械可読でない、
 BOMは記載の真偽やSourceの無害性を証明しない。Providerが非開示の由来は未立証として扱い、形式を埋めるだけで保証を作らない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [AI BOMの技術構造と実構成を確かめるための証拠](../../../../docs/insights/ai-bom-inventory-evidence-and-trust.md)：構成情報と実際の材料を照合し、BOMの記載漏れを確認する。
+
 ## References
 
 - [C6.2 Section学習資料](../../../learning/c06-supply-chain-security-for-models/v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)：講義・想定問答。学習進捗とControl成熟度は独立。

@@ -191,6 +191,12 @@ Researchが提案するOTel属性、Score、全文のOpt-inは補助情報であ
 Normativeの指定３項目と同一ではない。`verifiable`は本Artifactの成熟度
 であり、実製品のLog品質やRetrieval認可を証明しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Evidenceは再構成でき、かつ保護されていなければならない](../../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：操作と根拠を辿れる記録を残しつつ、調査基盤への機密情報の集積を抑える。
+
 ## References
 
 - [AISVS v1.0 C12 Normative](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)

@@ -182,6 +182,12 @@ AIの変化とみなす場合はFail。すべての変化の原因を直ちに�
 ある。説明が付いても安全性や回答の正しさを証明したことにはならない。
 `verifiable`は本書の成熟度であり、実製品の適合結果ではない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C12 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)

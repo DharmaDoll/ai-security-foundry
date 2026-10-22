@@ -190,6 +190,12 @@ Fail。記録の改ざんを後で検出できるだけで過去記録の削除�
 含めるかは製品の管理境界で明示する。`verifiable`は本書の成熟度であり、
 実製品の適合結果ではない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Evidenceは再構成でき、かつ保護されていなければならない](../../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：操作と根拠を辿れる記録を残しつつ、調査基盤への機密情報の集積を抑える。
+
 ## References
 
 - [AISVS v1.0 C12 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)

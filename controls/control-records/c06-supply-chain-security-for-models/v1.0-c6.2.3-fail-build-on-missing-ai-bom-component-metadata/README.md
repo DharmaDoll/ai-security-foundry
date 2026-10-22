@@ -107,6 +107,12 @@ BOM生成成功がBuild成功とみなされ、由来・License等が空のま�
 Metadataが埋まっていても内容の真偽や正当性は保証しない。検査器と構成一覧が共に侵害されるRisk、未知の成分を見逃すRiskは残る。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [AI BOMの技術構造と実構成を確かめるための証拠](../../../../docs/insights/ai-bom-inventory-evidence-and-trust.md)：実構成の記載漏れと必須情報の欠落を検出し、Buildを止める観点を確認する。
+
 ## References
 
 - [C6.2 Section学習資料](../../../learning/c06-supply-chain-security-for-models/v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)：講義・想定問答。学習進捗とControl成熟度は独立。

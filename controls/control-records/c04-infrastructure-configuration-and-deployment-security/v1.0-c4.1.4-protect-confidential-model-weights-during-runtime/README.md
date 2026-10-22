@@ -110,6 +110,12 @@ CPU／GPUと通信の保護機能・Production／Debug状態、鍵の受渡し�
 保護環境内の侵害で重みを正規出力へ流す攻撃やAPI経由の模倣、Side Channelは残る。単一の読出し試験の失敗だけで全攻撃への保護を証明しない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [隔離は、誰から誰を守るかで意味が変わる](../../../../docs/insights/isolation-has-a-direction.md)：誰から何を守る隔離かを明確にし、逆方向の保証と混同しない。
+
 ## References
 
 - [AISVS v1.0 C4 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)
@@ -117,7 +123,6 @@ CPU／GPUと通信の保護機能・Production／Debug状態、鍵の受渡し�
 - [C4.1 Section講義](../../../learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.1-ai-workload-sandboxing-and-validation.md)
 - [C4 Family概要](../README.md)
 
-- [関連Insight：隔離は、誰から誰を守るかで意味が変わる](../../../../docs/insights/isolation-has-a-direction.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

@@ -78,6 +78,12 @@ C2.2は学習済み。対応Researchを確認し、RequirementごとにControl�
 | [C2.2.3](v1.0-c2.2.3-check-non-text-inputs-for-hidden-attacks/README.md) | 2 | 非テキスト入力の隠蔽・攪乱と、変換後にModelが見る内容を検査するか。 | 元Fileや抽出Textだけを見て、未検査のMedia成分を検査済みと扱う。 |
 | [C2.2.4](v1.0-c2.2.4-detect-and-block-cross-modal-attacks/README.md) | 3 | 異なる入力形式の組合せで成立する攻撃を検出・遮断するか。 | 各形式だけを個別に安全と判定し、合成後の攻撃をLogのみで通す。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../docs/insights/validation-must-cover-effective-payload.md)：対象 C2.1・C2.1.1・C2.1.2。変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C02-Input-Validation.md
 
 開発順序と進捗は[Controls計画](../../plan.md)を参照する。個別Controlでは対応する[Research C2.1](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C02-User-Input-Validation/C02-01-Prompt-Injection-Defense.md)または[Research C2.2](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C02-User-Input-Validation/C02-02-Content-Policy-Screening.md)を確認する。

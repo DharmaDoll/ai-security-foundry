@@ -81,6 +81,13 @@ C12.1では、InteractionのSession相関（12.1.1）、Safety／Policy判断の
 | [C12.5.3](v1.0-c12.5.3-immutable-audit-records-for-model-changes/README.md) | 2 | すべてのModel変更に変更不能な監査記録を作るか。 | Modelを変更した者が履歴も自由に書き換えられる。 |
 | [C12.5.4](v1.0-c12.5.4-tag-ingested-documents-at-write-time/README.md) | 2 | 取込文書へ書込時にSource・Writer Identity・時刻を付けるか。 | 後付けの自己申告だけで文書の来歴を決める。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../docs/insights/security-artifacts-have-bounded-claims.md)：対象 C12.3・C12.3.4。署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+- [Security Evidenceは再構成でき、かつ保護されていなければならない](../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：対象 C12.1・C12.1.1・C12.1.4・C12.2・C12.2.4・C12.3・C12.5・C12.5.1・C12.5.3。操作と根拠を辿れる記録を残しつつ、調査基盤への機密情報の集積を抑える。
+
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md
 
 開発順序は[Controls計画](../../plan.md)を参照する。各Controlを作成する際は、

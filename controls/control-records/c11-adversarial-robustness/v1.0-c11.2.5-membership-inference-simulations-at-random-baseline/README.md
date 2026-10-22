@@ -111,6 +111,12 @@ MemberとNon-memberの構成、攻撃者の観測権限、攻撃調整Dataと評
 有限試験は未知攻撃や母集団全体での完全な非識別性を証明しない。偶然以下の観測値でも、件数・信頼区間・攻撃の強さが不足すれば保証は限定的。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [安全性の数字には、比較できる測定条件が必要である](../../../../docs/insights/security-metrics-need-comparable-conditions.md)：安全性の数字と、その数字を作った試験集合・判定条件・対象を併せて評価する。
+
 ## References
 
 - [AISVS v1.0 C11 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md)
@@ -118,7 +124,6 @@ MemberとNon-memberの構成、攻撃者の観測権限、攻撃調整Dataと評
 - [C11.2 Section講義](../../../learning/c11-adversarial-robustness/v1.0-c11.2-membership-inference-and-model-inversion-mitigation.md)
 - [C11 Family概要](../README.md)
 
-- [関連Insight：安全性の数字には、比較できる測定条件が必要である](../../../../docs/insights/security-metrics-need-comparable-conditions.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

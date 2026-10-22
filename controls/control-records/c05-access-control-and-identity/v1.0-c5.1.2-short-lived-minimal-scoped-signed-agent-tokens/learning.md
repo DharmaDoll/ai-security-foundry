@@ -635,6 +635,15 @@ Credential LifecycleとAvailabilityを全Hopで安全に成立させる難しさ
   Integrityの評価を分けたか。
 - Opaque Token等の代替Architectureを使う場合、AISVS原文との差を明示したか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../../docs/insights/identity-authority-and-intent-are-different.md)：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+- [PrivilegeはToken FieldではなくEnd-to-end Lifecycleで評価する](../../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md)：権限の発行・使用・更新・失効を通して、短命Tokenでも残る権限を追う。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 ### Normative and AISVS sources

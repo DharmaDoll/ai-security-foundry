@@ -113,6 +113,13 @@ nonceの消費と外部APIの返金は、常に一つの不可分な処理にで
 
 承認の一回性と業務処理の重複防止をつなぐところに、実装の難しさがある。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../../docs/insights/identity-authority-and-intent-are-different.md)：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+
 ## References
 
 - [AISVS v1.0 C9.2.8][normative]

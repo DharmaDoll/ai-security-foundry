@@ -33,6 +33,14 @@ CategoryとSectionの保証境界、整備済みControlへの入口を示す。
 | C8.2 Embedding Sanitization & Validation | 5 | L1：1、L2：2、L3：2 | Sensitive Field、Vector異常、Trusted Memory昇格、Retrieval操作、矛盾検出 |
 | C8.3 Memory Expiry & Revocation | 3 | L2：2、L3：1 | Expiry、Reset、Quarantineと全Retrieval経路への状態反映 |
 
+## このFamilyの学習から生まれた横断的Insight
+
+- [信頼は利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：C8.2のCandidateとTrusted Memoryを分ける。
+- [利用停止・消去・再出現防止](../../../docs/insights/retirement-is-more-than-deletion.md)：C8.3のExpiry、Reset、Quarantineを別の保証として捉える。
+
+これらは学習の起点を示すLinkであり、正式なMappingではない。
+
+
 ## 軽量な進捗記録
 
 現在学習中のSection：なし。C8全3 Sectionを一巡済み。次の講義はC10.1。
@@ -40,13 +48,6 @@ CategoryとSectionの保証境界、整備済みControlへの入口を示す。
 - [x] [C8.1 Access Controls on Memory & RAG Indices](v1.0-c8.1-access-controls-memory-rag-indices.md)
 - [x] [C8.2 Embedding Sanitization & Validation](v1.0-c8.2-embedding-sanitization-validation.md)
 - [x] [C8.3 Memory Expiry & Revocation](v1.0-c8.3-memory-expiry-revocation.md)
-
-## このFamilyの学習から生まれた横断的Insight
-
-- [信頼は利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：C8.2のCandidateとTrusted Memoryを分ける。
-- [利用停止・消去・再出現防止](../../../docs/insights/retirement-is-more-than-deletion.md)：C8.3のExpiry、Reset、Quarantineを別の保証として捉える。
-
-これらは学習の起点を示すLinkであり、正式なMappingではない。
 
 ## Sources
 

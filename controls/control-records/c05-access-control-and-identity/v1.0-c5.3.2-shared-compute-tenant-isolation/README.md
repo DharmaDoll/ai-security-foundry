@@ -167,6 +167,12 @@ Residual Riskの受容と要件充足は別であり、保証範囲から都合�
 `verifiable`は検証基準が揃ったArtifactの状態であり、全製品で容易に検証できるという意味ではない。
 Engineering Mappingは未評価である。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Tenant IsolationはRead禁止だけでなく観測と干渉を防ぐ](../../../../docs/insights/shared-isolation-means-no-observation-or-interference.md)：共有状態を通じた他Tenantの観測・干渉も、直接アクセスとは別に確認する。
+
 ## References
 
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

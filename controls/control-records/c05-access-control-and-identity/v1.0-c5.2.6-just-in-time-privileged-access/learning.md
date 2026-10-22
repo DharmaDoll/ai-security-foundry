@@ -554,6 +554,12 @@ Credential発行、Renewal／Expiry、Resource-side enforcementの6点へ分解�
 - C5.1.2のToken propertyとC5.2.6のPrivilege Lifecycleを混同していないか。
 - JITにPassしたことを、Identity、Policy、Artifact、Pipeline全体の安全と表現していないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [PrivilegeはToken FieldではなくEnd-to-end Lifecycleで評価する](../../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md)：権限の発行・使用・更新・失効を通して、短命Tokenでも残る権限を追う。
+
 ## 18. References
 
 ### Normative／Research

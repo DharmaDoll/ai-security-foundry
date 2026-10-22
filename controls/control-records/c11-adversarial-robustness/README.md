@@ -70,6 +70,12 @@ LevelはAISVSのVerification Levelであり、本RepositoryのControl成熟度�
 | [C11.4.2](v1.0-c11.4.2-anomaly-flags-trigger-effective-input-gating/README.md) | 2 | 異常と判定した入力に、定義した制限・保留等を適用するか。 | Flagだけ付けて通常どおり流す。 |
 | [C11.4.3](v1.0-c11.4.3-poisoning-detection-and-human-review-for-safety-feedback/README.md) | 3 | 安全性違反のFeedback経路に毒入れ検知と人の確認を置くか。 | 攻撃者が作った違反報告をそのまま改善Dataに使う。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [安全性の数字には、比較できる測定条件が必要である](../../../docs/insights/security-metrics-need-comparable-conditions.md)：対象 C11.1・C11.2・C11.2.3・C11.2.5。安全性の数字と、その数字を作った試験集合・判定条件・対象を併せて評価する。
+
 ## 隣接する保証との違い
 
 C2は入力を受け渡す境界、C7はModel出力を利用者や外部へ渡す境界、C12は

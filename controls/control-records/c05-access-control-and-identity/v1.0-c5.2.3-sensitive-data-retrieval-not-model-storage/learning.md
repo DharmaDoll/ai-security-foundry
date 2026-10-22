@@ -554,6 +554,12 @@ Level 1相当に前倒しする判断は合理的である。Upstream Levelと�
 - Fine-tuningの例外をC5.2.3へのPassとして扱わず、ExceptionとResidual Riskを記録したか。
 - AISVS Level 2を理由に、不可逆なData placementの判断を後回しにしていないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+
 ## 16. References
 
 ### Normative／Research

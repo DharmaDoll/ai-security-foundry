@@ -85,6 +85,12 @@ Negative Test（不正や失敗条件を意図的に試す検証）では、低R
 - 承認後に計画が変わったとき、旧承認を流用していないか。
 - 個々の可逆性だけでなく、操作の組合せが生む影響を確認したか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+
 ## References
 
 - [AISVS v1.0 C9.2.10][normative]

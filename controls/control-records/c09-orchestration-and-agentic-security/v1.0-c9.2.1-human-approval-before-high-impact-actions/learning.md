@@ -123,6 +123,13 @@ Researchも、画面上の確認と実行経路の強制、別経路からの迂
 4. モデルの文言・フラグ・包括同意を個別承認の証拠と誤認していないか。
 5. 認証、認可、承認をそれぞれ何が保証するか説明できるか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../../docs/insights/identity-authority-and-intent-are-different.md)：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+
 ## 参照
 
 - [AISVS固定要件本文][normative]

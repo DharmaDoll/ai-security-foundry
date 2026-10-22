@@ -202,6 +202,12 @@ Negative testの例は、許可された隔離検証環境でA社相当の処理
 Positive testとして、分離を保ったまま両者の正規処理が動くことも確認する。
 いずれも本ノートでは実施しておらず、単一試験の不再現を包括的な安全証明とはしない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Tenant IsolationはRead禁止だけでなく観測と干渉を防ぐ](../../../../docs/insights/shared-isolation-means-no-observation-or-interference.md)：共有状態を通じた他Tenantの観測・干渉も、直接アクセスとは別に確認する。
+
 ## 10. References
 
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md): RequirementとLevelの根拠。

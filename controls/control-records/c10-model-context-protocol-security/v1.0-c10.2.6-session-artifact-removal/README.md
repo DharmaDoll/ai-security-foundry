@@ -150,6 +150,12 @@ AISVS本文は「Session終了」とArtifact範囲を定義しないため、Sys
 
 `verifiable`はArtifactの成熟度であり、製品適合、学習完了、全媒体からの即時物理消去を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [使わせない、消す、再出現させないは別の保証である](../../../../docs/insights/retirement-is-more-than-deletion.md)：利用停止・消去・再出現防止を分け、全利用経路と復元経路を確認する。
+
 ## References
 
 - [AISVS v1.0 C10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)

@@ -165,6 +165,15 @@ Human Intent、操作の安全性、保管中のCredential保護は隣接保証�
 [RFC 9068](https://www.rfc-editor.org/rfc/rfc9068.html)。JWT採用時の検証に用い、
 各方式固有のClaim名を全実装の必須条件にはしない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../../docs/insights/identity-authority-and-intent-are-different.md)：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+- [PrivilegeはToken FieldではなくEnd-to-end Lifecycleで評価する](../../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md)：権限の発行・使用・更新・失効を通して、短命Tokenでも残る権限を追う。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

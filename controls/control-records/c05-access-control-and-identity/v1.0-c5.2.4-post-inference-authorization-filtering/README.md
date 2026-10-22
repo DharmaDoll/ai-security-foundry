@@ -224,6 +224,13 @@ Schema検証は形式検査であり、SP-1やSP-2を単独では満たさない
 Engineering Pattern Mappingは未評価。本Artifactの`verifiable`は解釈・脅威・検証・証拠期待値の
 整備を表し、製品の実証済み適合や学習完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

@@ -23,6 +23,11 @@ C6は、外部Model・Dataset・Adapterの取得から受入れまでの検査�
 | [C6.1 Model Artifact Integrity](v1.0-c6.1-model-artifact-integrity.md) | 4 | L1: 2、L2: 2 | Import前Scan、承認Source、完全性検証可能性、非開発環境への昇格前の受入合格 |
 | [C6.2 AI BOM & Supply Chain Monitoring](v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md) | 3 | L1: 1、L2: 2 | ModelとBOMの版対応、配備前署名、Metadata欠落時のBuild失敗 |
 
+## 学習から得た洞察
+
+- [AI BOMの技術構造と実構成を確かめるための証拠](../../../docs/insights/ai-bom-inventory-evidence-and-trust.md)：v1.0-C6.2.1〜C6.2.3の対話を起点に、必須項目・実構成・許可、署名の限界を整理。
+
+
 ## 軽量な学習進捗
 
 教材は作成済み。C6.1は学習対話と理解確認を終え、学習者が理解を表明した。現在位置はC6.2で、理解確認は未完了。
@@ -31,10 +36,6 @@ Control成熟度、Mapping、製品適合とは独立している。
 
 - [x] [C6.1の講義と理解確認](v1.0-c6.1-model-artifact-integrity.md)
 - [ ] [C6.2の講義と理解確認](v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)
-
-## 学習から得た洞察
-
-- [AI BOMの技術構造と実構成を確かめるための証拠](../../../docs/insights/ai-bom-inventory-evidence-and-trust.md)：v1.0-C6.2.1〜C6.2.3の対話を起点に、必須項目・実構成・許可、署名の限界を整理。
 
 ## 一次資料
 

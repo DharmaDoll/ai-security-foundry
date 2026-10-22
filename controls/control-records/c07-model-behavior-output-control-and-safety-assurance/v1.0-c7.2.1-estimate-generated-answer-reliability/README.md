@@ -173,6 +173,12 @@ Confidence推定は確率的で、評価Corpusや対象Domainに偏り得る。
 汚染されている場合は、その上での高Confidenceも危険である。
 `verifiable`は本Artifactの成熟度であり、製品の回答精度や無害性を示さない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+
 ## References
 
 - [AISVS v1.0 C7 Normative](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md)

@@ -85,6 +85,14 @@ C7.4のRAGでは、出典が回答に示されるか（C7.4.1）、その出典�
 | [C7.4.3](v1.0-c7.4.3-trace-rag-claims-to-retrieved-chunks/README.md) | 2 | RAG回答の主張を取得Chunkへ辿り、該当箇所が支えるか確認できるか。 | 文書名だけで個々の主張の裏付けが不明になる。 |
 | [C7.4.4](v1.0-c7.4.4-watermark-ai-generated-media/README.md) | 3 | 生成Mediaの最終配布物でAI生成Watermarkを検証できるか。 | 生成時の付与だけを見て、配布物では標識を確認できない。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../docs/insights/security-artifacts-have-bounded-claims.md)：対象 C7.2・C7.2.1。署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+- [Security Evidenceは再構成でき、かつ保護されていなければならない](../../../docs/insights/security-evidence-must-be-reconstructable-and-constrained.md)：対象 C7.4・C7.4.2・C7.4.3。操作と根拠を辿れる記録を残しつつ、調査基盤への機密情報の集積を抑える。
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../docs/insights/validation-must-cover-effective-payload.md)：対象 C7.1・C7.1.1・C7.3・C7.3.3・C7.3.4。変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 [normative]: https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md
 
 開発順序は[Controls計画](../../plan.md)を参照する。Control本文では対象Requirementと

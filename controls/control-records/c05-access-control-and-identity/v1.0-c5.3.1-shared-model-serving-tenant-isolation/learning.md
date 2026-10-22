@@ -304,6 +304,13 @@ Evidenceには、構成とData Flow、Tenantの確定方法、所有情報、認
 - C5.2.2、C5.2.4、C5.3.1、C5.3.2のどの保証を評価したかを説明する。
 - 「分離されている」という主張を、操作と期待結果を持つTestへ翻訳する。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [共有資源の再利用は、次の利用者への安全な引渡しである](../../../../docs/insights/resource-reuse-is-a-security-handoff.md)：同時利用者の分離と、次の利用者へ状態を残さない条件を分ける。
+- [Tenant IsolationはRead禁止だけでなく観測と干渉を防ぐ](../../../../docs/insights/shared-isolation-means-no-observation-or-interference.md)：共有状態を通じた他Tenantの観測・干渉も、直接アクセスとは別に確認する。
+
 ## 14. References
 
 - [AISVS v1.0 C5 Normative](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

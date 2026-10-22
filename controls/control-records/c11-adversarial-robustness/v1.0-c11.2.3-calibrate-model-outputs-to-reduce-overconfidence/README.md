@@ -111,6 +111,12 @@ C11.2.5は在籍推定への耐性。確信度が正確でも在籍推定が成�
 較正は情報漏えいの完全防止ではない。標本・条件・時間によって誤差があり、形式的な較正指標だけでPrivacyを主張しない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [安全性の数字には、比較できる測定条件が必要である](../../../../docs/insights/security-metrics-need-comparable-conditions.md)：安全性の数字と、その数字を作った試験集合・判定条件・対象を併せて評価する。
+
 ## References
 
 - [AISVS v1.0 C11 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C11-Adversarial-Robustness.md)
@@ -118,7 +124,6 @@ C11.2.5は在籍推定への耐性。確信度が正確でも在籍推定が成�
 - [C11.2 Section講義](../../../learning/c11-adversarial-robustness/v1.0-c11.2-membership-inference-and-model-inversion-mitigation.md)
 - [C11 Family概要](../README.md)
 
-- [関連Insight：安全性の数字には、比較できる測定条件が必要である](../../../../docs/insights/security-metrics-need-comparable-conditions.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

@@ -8,7 +8,7 @@ C9ではAgentが許可された、意図された、制限された行動を実�
 この文書は旧Requirement単位で完了した学習履歴を案内する。今後の新規学習には
 [共通学習方針](../README.md)のSection単位方式を使う。
 全体の保証範囲・ID・Levelは[章の分析](../../control-records/c09-orchestration-and-agentic-security/README.md)と
-[Control一覧](../../README.md#c9-control-records)を参照する。
+[Control一覧](../../README.md#c9)を参照する。
 [C9 Family overview](../../control-records/c09-orchestration-and-agentic-security/README.md)では、
 Category・Section・Requirementを「問うこと」と
 「できてはいけないこと」で俯瞰できる。
@@ -63,13 +63,13 @@ Insightが当該Controlだけに属する、または正式なMappingが成立�
 
 | Insight | 主な学習上の起点 |
 |---|---|
-| [Web SecurityからAgent Capability Flowへ](../../../docs/insights/web-security-to-agent-capability-flow.md) | C9.3.4、C9.3.5 |
-| [階層ごとの上限と停止](../../../docs/insights/bounded-autonomy-requires-hierarchical-controls.md) | C9.1.1〜C9.1.3 |
-| [Human ApprovalはSecurity Protocol](../../../docs/insights/human-approval-is-a-security-protocol.md) | C9.2.1、C9.2.2、C9.2.6〜C9.2.10 |
-| [保証は診断軸](../../../docs/insights/assurance-properties-are-diagnostic-lenses.md) | C9.2.7 |
-| [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md) | C9.2.1、C9.2.8 |
-| [Authorityの最小化と完全仲介](../../../docs/insights/minimize-and-mediate-authority.md) | C9.2.5、C9.3.1、C9.3.4 |
-| [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md) | C9.3.2〜C9.3.4 |
+| [Web SecurityからAgent Capability Flowへ](../../../docs/insights/web-security-to-agent-capability-flow.md) | C9.3.4、C9.3.5：非信頼情報がAgentの権限行使へ影響する経路を、Toolや状態をまたいで追う。 |
+| [階層ごとの上限と停止](../../../docs/insights/bounded-autonomy-requires-hierarchical-controls.md) | C9.1.1〜C9.1.3：Tool・一実行・Agent群の上限と、停止後も残る副作用を区別する。 |
+| [Human ApprovalはSecurity Protocol](../../../docs/insights/human-approval-is-a-security-protocol.md) | C9.2.1、C9.2.2、C9.2.6〜C9.2.10：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。 |
+| [保証は診断軸](../../../docs/insights/assurance-properties-are-diagnostic-lenses.md) | C9.2.7：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。 |
+| [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md) | C9.2.1、C9.2.8：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。 |
+| [Authorityの最小化と完全仲介](../../../docs/insights/minimize-and-mediate-authority.md) | C9.2.5、C9.3.1、C9.3.4：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。 |
+| [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md) | C9.3.2〜C9.3.4：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。 |
 
 ## Sources
 

@@ -519,6 +519,14 @@ AI固有のHigh-value Asset、適用のSituationalさ、全経路への実装複
 - C5.1.1のPassと、Authorization、Approval、Transaction Integrityの評価を分けたか。
 - AISVS Level 3とNIST AAL3を混同していないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [Identity、Authority、Intent、Transaction Integrityを分ける](../../../../docs/insights/identity-authority-and-intent-are-different.md)：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。
+- [具体的なFlowからSecurity Invariantへ抽象化して教える](../../../../docs/insights/teach-from-concrete-flow-to-security-invariant.md)：具体的なデータの流れと失敗例から、別の場面にも使える安全条件を学ぶ。
+
 ## References
 
 ### Normative and AISVS sources

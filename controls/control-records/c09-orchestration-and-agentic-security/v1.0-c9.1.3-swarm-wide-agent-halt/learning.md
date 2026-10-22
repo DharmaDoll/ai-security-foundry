@@ -122,6 +122,12 @@ Enforcement Point（強制する場所）は、各Agentの実行基盤と仕事�
 4. 停止受付と完了を区別し、未確認の構成員や停止遅延を表示・検証できるか。
 5. 完了済みの操作、進行中の外部Job、停止経路の隔離などの別保証を混同していないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Bounded Autonomyには階層ごとの上限と停止意味論が必要である](../../../../docs/insights/bounded-autonomy-requires-hierarchical-controls.md)：Tool・一実行・Agent群の上限と、停止後も残る副作用を区別する。
+
 ## 参照
 
 - [AISVS v1.0 C9要件本文][normative]

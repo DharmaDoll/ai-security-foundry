@@ -96,6 +96,13 @@ Negative Test（不正や失敗条件を意図的に試す検証）では、偽�
 設計レビューでは「誰がどの入力を操作できるか」「本文が指示や結果へ昇格する経路はないか」
 「正規Reviewer自身が騙される試験をしたか」「ゲートの成功でReviewerの失敗を隠していないか」を問う。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+
 ## References
 
 - [AISVS v1.0 C9.2.7][normative]

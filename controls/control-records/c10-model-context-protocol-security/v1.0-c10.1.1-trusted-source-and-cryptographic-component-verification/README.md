@@ -167,6 +167,12 @@ Build・Packaging境界に依存するため、評価Scopeを明示する。
 `verifiable`は本Artifactに解釈・脅威・検証・証拠期待値が揃った状態であり、製品試験の実施、
 製品適合、学習完了を意味しない。Engineering PatternとMappingは独立して評価する。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [信頼はContainerから継承せず、利用状態への昇格時に判断する](../../../../docs/insights/trust-is-granted-at-promotion.md)：取得経路への信頼と、内容を将来の判断材料へ昇格させる判断を分ける。
+
 ## References
 
 - [AISVS v1.0 C10要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C10-MCP-Security.md)

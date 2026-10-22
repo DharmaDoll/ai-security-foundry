@@ -53,6 +53,24 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 | C5.3.1 | 2 | Shared Model ServingにおけるTenant分離 |
 | C5.3.2 | 3 | Shared ComputeにおけるTenant間の観測・干渉防止 |
 
+## このFamilyの学習から生まれた横断的Insight
+
+Insightの正本は[`docs/insights/`](../../../docs/insights/README.md)に置く。以下のIDは議論の起点であり、
+Insightが当該Controlだけに属する、または正式なMappingが成立したという意味ではない。
+
+| Insight | 主な学習上の起点 |
+|---|---|
+| [保証は診断軸](../../../docs/insights/assurance-properties-are-diagnostic-lenses.md) | C5.1.1、C5.1.2、C5.2.5：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。 |
+| [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md) | C5.1.1、C5.1.2：本人性、権限、今回の意図、承認した操作との一致を分けて確認する。 |
+| [Authorityの最小化と完全仲介](../../../docs/insights/minimize-and-mediate-authority.md) | C5.2.1、C5.2.5：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。 |
+| [PrivilegeのLifecycle](../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md) | C5.1.2、C5.2.6：権限の発行・使用・更新・失効を通して、短命Tokenでも残る権限を追う。 |
+| [変換後もData Protectionを保つ](../../../docs/insights/protected-data-survives-transformation.md) | C5.2.2〜C5.2.4、C5.2.7：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。 |
+| [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md) | C5.1.2、C5.2.4、C5.2.7：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。 |
+| [Tenant間の観測と干渉](../../../docs/insights/shared-isolation-means-no-observation-or-interference.md) | C5.3.1、C5.3.2：共有状態を通じた他Tenantの観測・干渉も、直接アクセスとは別に確認する。 |
+| [具体FlowからInvariantへ教える](../../../docs/insights/teach-from-concrete-flow-to-security-invariant.md) | C5.1.1、C5.2.2、C5.2.5：具体的なデータの流れと失敗例から、別の場面にも使える安全条件を学ぶ。 |
+
+- [共有資源の再利用は、次の利用者への安全な引渡しである](../../../docs/insights/resource-reuse-is-a-security-handoff.md)：対象 C5.3.1。同時利用者の分離と、次の利用者へ状態を残さない条件を分ける。
+
 ## 軽量な進捗記録
 
 現在学習中のRequirementはなし。C5全11 Requirementの学習を一巡した。完了は、学習者が
@@ -92,22 +110,6 @@ LevelはAISVSのVerification Levelであり、このRepositoryのControl成熟�
 - [C5.2.7 Classification Label Propagation：講義、対話、Derived ArtifactとN/A境界](../../control-records/c05-access-control-and-identity/v1.0-c5.2.7-downstream-classification-label-propagation/learning.md)
 - [C5.3.1 Shared Model Serving：講義、対話、一般LLM Applicationへの適用と責任分界](../../control-records/c05-access-control-and-identity/v1.0-c5.3.1-shared-model-serving-tenant-isolation/learning.md)
 - [C5.3.2 Shared Compute：講義、対話、共有基盤の観測・干渉と保証の裏付け](../../control-records/c05-access-control-and-identity/v1.0-c5.3.2-shared-compute-tenant-isolation/learning.md)
-
-## このFamilyの学習から生まれた横断的Insight
-
-Insightの正本は[`docs/insights/`](../../../docs/insights/README.md)に置く。以下のIDは議論の起点であり、
-Insightが当該Controlだけに属する、または正式なMappingが成立したという意味ではない。
-
-| Insight | 主な学習上の起点 |
-|---|---|
-| [保証は診断軸](../../../docs/insights/assurance-properties-are-diagnostic-lenses.md) | C5.1.1、C5.1.2、C5.2.5 |
-| [Identity・Authority・Intentの分離](../../../docs/insights/identity-authority-and-intent-are-different.md) | C5.1.1、C5.1.2 |
-| [Authorityの最小化と完全仲介](../../../docs/insights/minimize-and-mediate-authority.md) | C5.2.1、C5.2.5 |
-| [PrivilegeのLifecycle](../../../docs/insights/privilege-is-a-lifecycle-not-a-token-field.md) | C5.1.2、C5.2.6 |
-| [変換後もData Protectionを保つ](../../../docs/insights/protected-data-survives-transformation.md) | C5.2.2〜C5.2.4、C5.2.7 |
-| [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md) | C5.1.2、C5.2.4、C5.2.7 |
-| [Tenant間の観測と干渉](../../../docs/insights/shared-isolation-means-no-observation-or-interference.md) | C5.3.1、C5.3.2 |
-| [具体FlowからInvariantへ教える](../../../docs/insights/teach-from-concrete-flow-to-security-invariant.md) | C5.1.1、C5.2.2、C5.2.5 |
 
 ## Sources
 

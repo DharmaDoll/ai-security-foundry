@@ -18,11 +18,6 @@ Modelの出力を、形式・信頼性・有害性・出典の異なる軸で評
 | C7.3 Output Safety | 4 | L1: 1、L2: 2、L3: 1 | 有害性・内部情報・外向き要求・隠蔽 |
 | C7.4 Source Attribution & Citation Integrity | 4 | L1: 2、L2: 1、L3: 1 | 出典と主張の追跡、生成Media |
 
-- [x] [C7.1 講義・対話](v1.0-c7.1-output-format-enforcement.md)
-- [x] [C7.2 講義・対話](v1.0-c7.2-hallucination-detection-and-mitigation.md)
-- [x] [C7.3 講義・対話](v1.0-c7.3-output-safety.md)
-- [x] [C7.4 講義・対話](v1.0-c7.4-source-attribution-and-citation-integrity.md)
-
 ## このFamilyの学習から生まれた横断的Insight
 
 - [検査するのは実際に利用されるPayload](../../../docs/insights/validation-must-cover-effective-payload.md)：C7.1・C7.3の検査後の公開・Renderingを考える。
@@ -30,6 +25,12 @@ Modelの出力を、形式・信頼性・有害性・出典の異なる軸で評
 - [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md)：C7.2のConfidenceやC7.4のCitationを過大評価しない。
 
 これらは学習の起点を示すLinkであり、正式なMappingではない。
+
+
+- [x] [C7.1 講義・対話](v1.0-c7.1-output-format-enforcement.md)
+- [x] [C7.2 講義・対話](v1.0-c7.2-hallucination-detection-and-mitigation.md)
+- [x] [C7.3 講義・対話](v1.0-c7.3-output-safety.md)
+- [x] [C7.4 講義・対話](v1.0-c7.4-source-attribution-and-citation-integrity.md)
 
 ## Sources
 

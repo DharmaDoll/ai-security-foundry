@@ -151,6 +151,14 @@ Manifest登録
 - C9.3.4のPassを、Manifestの最小性やSystem全体の安全性と混同していないか。
 - Agent化する必要のない定型処理へ不要な自律性を持たせていないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../../docs/insights/minimize-and-mediate-authority.md)：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+- [Security Artifactは証明できる範囲を越えて信頼しない](../../../../docs/insights/security-artifacts-have-bounded-claims.md)：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。
+- [Web SecurityからAgent Securityへ：ParameterではなくCapability Flowを追う](../../../../docs/insights/web-security-to-agent-capability-flow.md)：非信頼情報がAgentの権限行使へ影響する経路を、Toolや状態をまたいで追う。
+
 ## References
 
 - [AISVS v1.0 C9.3.4][normative]

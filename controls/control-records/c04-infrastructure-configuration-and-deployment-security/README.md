@@ -48,6 +48,16 @@ LevelはAISVS Verification Levelであり、文書成熟度や製品適合では
 | [C4.3.4](v1.0-c4.3.4-hardware-backed-encryption-for-locally-stored-models/README.md) | 3 | 端末保存の重みと機密パラメータをハードウェア鍵で暗号化するか。 | Modelと同じPackageへ平文鍵を置く。 |
 | [C4.3.5](v1.0-c4.3.5-packaged-model-encryption-and-trusted-runtime-decryption/README.md) | 3 | アプリ同梱モデルを暗号化し信頼境界内だけで復号するか。 | 復号したModelを抽出可能な一時Fileへ出す。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [隔離は、誰から誰を守るかで意味が変わる](../../../docs/insights/isolation-has-a-direction.md)：対象 C4.1・C4.1.1・C4.1.4・C4.2・C4.2.2。誰から何を守る隔離かを明確にし、逆方向の保証と混同しない。
+- [端末で推論できることと、重要操作を許可できることは別である](../../../docs/insights/local-inference-is-not-action-authority.md)：対象 C4.3・C4.3.1・C4.3.2・C4.3.5。端末上の推論・モデル保護と、重要操作を許す側の判断を分ける。
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../docs/insights/minimize-and-mediate-authority.md)：対象 C4.3。不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+- [Dataは形を変えてもProtectionを失わない](../../../docs/insights/protected-data-survives-transformation.md)：対象 C4.3・C4.3.4・C4.3.5。要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+- [共有資源の再利用は、次の利用者への安全な引渡しである](../../../docs/insights/resource-reuse-is-a-security-handoff.md)：対象 C4.2・C4.2.4。同時利用者の分離と、次の利用者へ状態を残さない条件を分ける。
+
 ## 隣接する保証との違い
 
 C4.1.1はModelから基盤を守る方向、C4.1.4は基盤側の主体から重みを守る方向の隔離。

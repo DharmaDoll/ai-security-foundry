@@ -66,6 +66,13 @@ Similarityは関連度であり、認可、真正性、安全性、新しさの�
 | [C8.3.2](v1.0-c8.3.2-complete-memory-reset/README.md) | 2 | 宣言したMemory範囲を完全かつ観測可能にResetできるか。 | Session履歴だけを消し、Summary、Cache、Background Writer、旧SnapshotからMemoryを復活させる。 |
 | [C8.3.3](v1.0-c8.3.3-quarantine-retention-and-retrieval-exclusion/README.md) | 3 | Quarantine Contentを調査用に保持しつつ、全Production Retrievalから除外しているか。 | Filter漏れで再取得させる、または即時削除してForensic Evidenceを失う。 |
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [使わせない、消す、再出現させないは別の保証である](../../../docs/insights/retirement-is-more-than-deletion.md)：対象 C8.3・C8.3.1・C8.3.2・C8.3.3。利用停止・消去・再出現防止を分け、全利用経路と復元経路を確認する。
+- [信頼はContainerから継承せず、利用状態への昇格時に判断する](../../../docs/insights/trust-is-granted-at-promotion.md)：対象 C8.2・C8.2.3。取得経路への信頼と、内容を将来の判断材料へ昇格させる判断を分ける。
+
 未整備Requirementの行やPlaceholderは作らない。個別Controlが`verifiable`になった時点で追加する。
 学習進捗とControl maturityは独立している。
 

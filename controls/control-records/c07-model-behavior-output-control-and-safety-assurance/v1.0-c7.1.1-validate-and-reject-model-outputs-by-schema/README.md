@@ -175,6 +175,12 @@ Schemaが緩すぎれば不正な意味内容を通す。厳しすぎれば正�
 Streamingは公開単位により検証時点が異なるため、経路ごとに説明が必要。
 `verifiable`は本Artifactの成熟度であり、製品のSchema適合や安全性を保証しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)：変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 ## References
 
 - [AISVS v1.0 C7 Normative](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C07-Model-Behavior.md)

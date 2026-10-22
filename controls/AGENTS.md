@@ -86,6 +86,24 @@ When a Family's learning produces a reusable Insight, link its canonical file
 from that Family's learning `README.md` and identify the originating Requirement
 IDs. Those links are navigation and provenance, not Control or Pattern mappings.
 
+Insight navigation must support readers entering from Controls and learning:
+
+- For a substantively related Requirement, add a `関連する洞察` section immediately
+  before `References` in its canonical Control README.
+- In the Control family overview, place the related Insight list after the
+  Requirement tables; state the relevant Section or Requirement IDs.
+- In the family learning guide, place Insight navigation immediately after the
+  Section/Requirement list. Preserve existing heading anchors when moving it.
+- In Section notes, keep a visible related-Insight list as well as useful links
+  within the discussion. Retain existing historical learning paths.
+- Each link should explain in one sentence what it helps the reader understand
+  or review. Keep the full Insight under `docs/insights/` rather than duplicating it.
+- Read the Insight and related Control before adding a relationship. Do not link
+  every Requirement merely because it belongs to a related Section. Teaching-only
+  Insights belong in learning guidance, not arbitrary Control records.
+- These are navigation links, not formal mappings, new requirements, or evidence
+  of conformance. Do not change maturity or learning completion as a result.
+
 Requirement-level learning notes created before this convention are retained as
 historical learning artifacts. Do not move or combine them as an incidental part
 of another task; consolidate them only in an explicit migration that preserves

@@ -41,6 +41,20 @@ ControlやEngineering Patternとの正式なMappingではない。Pattern側に�
 別途関係を評価し、必要な入口から同じInsightの正本へリンクする。InsightをFamilyごとに複製・移動しない。
 現時点ではEngineering Pattern本文への関係は未評価であり、この索引からPatternの存在や対応を推定しない。
 
+## Controlから辿るためのリンク配置
+
+Insightを追加・更新するときは、読者がControlから入る経路も整える。
+関連先は本文の起点・具体例・保証の関係を読んで選び、Section所属だけで全Requirementへ配布しない。
+
+- 個別Control：`References`直前の「関連する洞察」から正本へリンクする。
+- FamilyのControl概要：Requirement一覧の後に、対象Section・Requirementとともに案内する。
+- Family学習ガイド：SectionまたはRequirement一覧の直後に置く。既存見出しのアンカーを保つ。
+- Section学習ノート：対話中の参照に加え、関連資料として見つけられる入口を設ける。
+- 各リンクに「何の理解・レビューに役立つか」を一文添える。教育方法の洞察は共通学習方針や学習ガイドへ置く。
+
+リンクは案内であり、正式なMappingやControlの追加要求ではない。Insight本文を各Familyへ複製しない。
+変更後は参照先・アンカー・重複と、既存の学習進捗や成熟度が維持されていることを確認する。
+
 ## 文書に含めるもの
 
 一つのInsightは、必要な範囲で次を含める。

@@ -98,6 +98,12 @@ Agent用IdentityにはKMSの署名権限を与えず、承認Service用Identity�
 - AgentがSignerを再配置したり、別の鍵・Endpointへ差し替えたりできないか。
 - 正規署名の存在から、正規の人間判断があったと追跡できるか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+
 ## References
 
 - [AISVS v1.0 C9.2.9][normative]

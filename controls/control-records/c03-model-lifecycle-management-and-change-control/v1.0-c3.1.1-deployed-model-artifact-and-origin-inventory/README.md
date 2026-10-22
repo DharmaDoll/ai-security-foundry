@@ -112,6 +112,12 @@ C3.1.2は全Artifactへの権限ある主体の署名、C3.1.3は署名の検証
 内部Artifactを開示しないProviderでは確認可能性が限られる。台帳が正確でも、正規Sourceに悪意ある内容が含まれる可能性は残る。BOMを出力できることは完全性の証明ではない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [復旧するのはファイルではなく、整合したシステムの状態](../../../../docs/insights/recovery-restores-a-consistent-configuration.md)：旧ファイルへの復帰と、検証済みの構成一式への復旧を区別する。
+
 ## References
 
 - [AISVS v1.0 C3 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)
@@ -119,7 +125,6 @@ C3.1.2は全Artifactへの権限ある主体の署名、C3.1.3は署名の検証
 - [C3.1 Section講義](../../../learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.1-model-authorization-and-integrity.md)
 - [C3 Family概要](../README.md)
 
-- [関連Insight：復旧するのはファイルではなく、整合したシステムの状態](../../../../docs/insights/recovery-restores-a-consistent-configuration.md)（Repositoryの横断的な考察。規範やMappingではない）
 
 ## Changelog
 

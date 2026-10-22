@@ -108,6 +108,13 @@ Hardware鍵StoreがそのままModel推論全体を実行できるとは限ら�
 Hardware鍵StoreがそのままModel推論全体を実行できるとは限らない。保護環境内の侵害、物理攻撃、APIからの模倣は残る。C4.3.4の保存時鍵保護と本要件の復号場所を区別する。 端末を物理的に管理する攻撃者への完全防御は主張しない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [端末で推論できることと、重要操作を許可できることは別である](../../../../docs/insights/local-inference-is-not-action-authority.md)：端末上の推論・モデル保護と、重要操作を許す側の判断を分ける。
+- [Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)：要約・変換・復号後のデータにも、元の保護と認可が必要かを確認する。
+
 ## References
 
 - [AISVS v1.0 C4 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)
@@ -115,9 +122,7 @@ Hardware鍵StoreがそのままModel推論全体を実行できるとは限ら�
 - [C4.3 Section講義](../../../learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md)
 - [C4 Family概要](../README.md)
 
-- [関連Insight：Dataは形を変えてもProtectionを失わない](../../../../docs/insights/protected-data-survives-transformation.md)（横断的な考察。規範やMappingではない）
 
-- [関連Insight：端末で推論できることと、重要操作を許可できることは別である](../../../../docs/insights/local-inference-is-not-action-authority.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

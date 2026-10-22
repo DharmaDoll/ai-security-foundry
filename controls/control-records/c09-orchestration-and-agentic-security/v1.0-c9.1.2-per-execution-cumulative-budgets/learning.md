@@ -126,6 +126,12 @@ Researchも、小さい呼び出しの累積、並列実行の計数、課金情
 4. 並列実行・計数障害・事後課金でも、保証する予算範囲を維持できるか。
 5. 累積上限とは別に、同時実行による瞬間的な負荷を評価したか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Bounded Autonomyには階層ごとの上限と停止意味論が必要である](../../../../docs/insights/bounded-autonomy-requires-hierarchical-controls.md)：Tool・一実行・Agent群の上限と、停止後も残る副作用を区別する。
+
 ## 参照
 
 - [AISVS v1.0 C9要件本文][normative]

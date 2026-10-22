@@ -105,6 +105,12 @@ AIレビューはC9.2.1の人の承認を代替しない。また、この要件
 - レビューAIの停止や計画変更を、正常なレビュー完了として扱っていないか。
 - 操作側とレビュー側で共通の誤り・誘導経路を持っていないか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [Human ApprovalはButtonではなくSecurity Protocolである](../../../../docs/insights/human-approval-is-a-security-protocol.md)：承認の表示・主体・操作内容・実行を結び、承認の迂回や再利用を確認する。
+
 ## References
 
 - [AISVS v1.0 C9.2.6][normative]

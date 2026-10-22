@@ -110,6 +110,12 @@ C3.2.1は三種の一般的な投入前自動試験、C3.2.3はProviderのModel�
 元Suiteにない攻撃は引き続き見えず、Sampling等による結果の変動もある。量子化が常に安全性を損なうとも、一般精度維持なら安全とも言わない。具体的な許容閾値は製品のRisk判断として別に定める。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)：変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 ## References
 
 - [AISVS v1.0 C3 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)
@@ -117,7 +123,6 @@ C3.2.1は三種の一般的な投入前自動試験、C3.2.3はProviderのModel�
 - [C3.2 Section講義](../../../learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.2-model-validation-and-testing.md)
 - [C3 Family概要](../README.md)
 
-- [関連Insight：検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)（Repositoryの横断的な考察。規範やMappingではない）
 
 ## Changelog
 

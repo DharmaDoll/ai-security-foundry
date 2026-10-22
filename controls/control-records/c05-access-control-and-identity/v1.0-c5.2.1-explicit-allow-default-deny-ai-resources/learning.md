@@ -430,6 +430,12 @@ ContextのPositive Ruleとして捉える。さらにPolicy定義だけでなく
 - Decision LogでPrincipal、Action、Resource、Decision、Policy Versionを追跡できるか。
 - C5.2.1のPassと、C5.2.2、C5.2.5、C5.3、C9の評価を分けたか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../../docs/insights/minimize-and-mediate-authority.md)：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+
 ## References
 
 - [OWASP AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)

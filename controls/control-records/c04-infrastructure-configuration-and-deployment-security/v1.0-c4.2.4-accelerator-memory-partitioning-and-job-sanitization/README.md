@@ -108,6 +108,12 @@ AとBを同時に実行し、別々の合成Markerを使って相互アクセス
 機種・Mode・Measurement範囲に依存するため、部分的な証拠を未評価機器や領域へ広げない。C4.2.2の暗号化・完全性とは別の保証。Markerが見つからない一回の結果だけでは全領域の消去を証明せず、Allocator・Deviceの証拠を組み合わせる。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [共有資源の再利用は、次の利用者への安全な引渡しである](../../../../docs/insights/resource-reuse-is-a-security-handoff.md)：同時利用者の分離と、次の利用者へ状態を残さない条件を分ける。
+
 ## References
 
 - [AISVS v1.0 C4 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)
@@ -115,7 +121,6 @@ AとBを同時に実行し、別々の合成Markerを使って相互アクセス
 - [C4.2 Section講義](../../../learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.2-ai-hardware-security.md)
 - [C4 Family概要](../README.md)
 
-- [関連Insight：共有資源の再利用は、次の利用者への安全な引渡しである](../../../../docs/insights/resource-reuse-is-a-security-handoff.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 

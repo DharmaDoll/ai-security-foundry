@@ -542,6 +542,14 @@ Primary source、Architecture Evidenceへ戻して検証する。
 - AgentがDecision EvidenceをSuppressできず、独立したEvidence sourceがあるか。
 - Test結果をC5.2.5のScopeとSystem全体のRiskに分けて報告したか。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [ControlはSystem安全性の合否ではなく、Failureを切り分ける診断軸である](../../../../docs/insights/assurance-properties-are-diagnostic-lenses.md)：個別保証の合否と製品全体の危険性を分け、修正すべき境界を見つける。
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../../docs/insights/minimize-and-mediate-authority.md)：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+- [具体的なFlowからSecurity Invariantへ抽象化して教える](../../../../docs/insights/teach-from-concrete-flow-to-security-invariant.md)：具体的なデータの流れと失敗例から、別の場面にも使える安全条件を学ぶ。
+
 ## 17. References
 
 ### Normative／Research

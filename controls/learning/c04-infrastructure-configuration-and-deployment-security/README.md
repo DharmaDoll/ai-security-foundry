@@ -22,14 +22,6 @@ last_updated: "2026-10-18"
 | C4.2 AI Hardware Security | 5 | GPUなどの機器、メモリ、機器間の接続を保護できるか |
 | C4.3 Edge & Distributed AI Security | 5 | 現場端末やモバイル端末に配備したモデルを保護できるか |
 
-## 軽量な進捗
-
-C4.1〜C4.3の講義と対話を一巡した。チェックは学習の進捗であり、Control成熟や製品適合を示さない。
-
-- [x] [C4.1：AIの実行環境の隔離と検証](v1.0-c4.1-ai-workload-sandboxing-and-validation.md)
-- [x] [C4.2：AIハードウェアの保護](v1.0-c4.2-ai-hardware-security.md)
-- [x] [C4.3：端末・分散環境のAI保護](v1.0-c4.3-edge-and-distributed-ai-security.md)
-
 ## このFamilyから得られた横断的な洞察
 
 - [隔離には方向がある](../../../docs/insights/isolation-has-a-direction.md)：C4.1・C4.2を起点に、モデルから基盤を守る境界と、基盤からモデルを守る境界を分ける。
@@ -38,6 +30,16 @@ C4.1〜C4.3の講義と対話を一巡した。チェックは学習の進捗で
 - [端末の推論と重要操作の認可](../../../docs/insights/local-inference-is-not-action-authority.md)：C4.3のスマホゲームとの比較を起点に、端末内での計算と最終判断の権限を分ける。
 
 Insightは対話から得た再利用可能な整理であり、Control本文や正式なMappingではない。
+
+- [不要なAuthorityを消し、残る全経路を完全仲介する](../../../docs/insights/minimize-and-mediate-authority.md)：対象 C4.3。不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。
+
+## 軽量な進捗
+
+C4.1〜C4.3の講義と対話を一巡した。チェックは学習の進捗であり、Control成熟や製品適合を示さない。
+
+- [x] [C4.1：AIの実行環境の隔離と検証](v1.0-c4.1-ai-workload-sandboxing-and-validation.md)
+- [x] [C4.2：AIハードウェアの保護](v1.0-c4.2-ai-hardware-security.md)
+- [x] [C4.3：端末・分散環境のAI保護](v1.0-c4.3-edge-and-distributed-ai-security.md)
 
 ## 一次資料
 

@@ -110,6 +110,12 @@ Provider通知、Alias解決、Route設定、Fallback、変更検知方法と利
 Providerが実体や変更情報を開示しないと完全な変更検知はできない。Behaviorの監視だけで同一版を証明しない。版固定・通知・契約上の責任と残る観測不能範囲を記録し、無条件Passを主張しない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)：変換・組立て後に実際に使われる内容と、検査した内容のずれを確認する。
+
 ## References
 
 - [AISVS v1.0 C3 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C03-Model-Lifecycle-Management.md)
@@ -117,7 +123,6 @@ Providerが実体や変更情報を開示しないと完全な変更検知はで
 - [C3.2 Section講義](../../../learning/c03-model-lifecycle-management-and-change-control/v1.0-c3.2-model-validation-and-testing.md)
 - [C3 Family概要](../README.md)
 
-- [関連Insight：検査するのは入口の文字列ではなく、実際に利用される内容である](../../../../docs/insights/validation-must-cover-effective-payload.md)（Repositoryの横断的な考察。規範やMappingではない）
 
 ## Changelog
 

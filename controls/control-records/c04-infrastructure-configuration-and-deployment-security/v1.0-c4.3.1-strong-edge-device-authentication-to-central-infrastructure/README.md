@@ -108,6 +108,12 @@ Edge・Mobile・IoT・組込みでの対象Deviceと中央基盤・Package・Run
 認証は端末の健全性や権限の全体を証明しない。Attestation・Command認可・盗難端末への対応は隣接保証として評価する。 端末を物理的に管理する攻撃者への完全防御は主張しない。
 `verifiable`は本書の成熟度であり、実製品での適合や試験完了を意味しない。
 
+## 関連する洞察
+
+個別要件の理解・設計レビューを助ける参照であり、追加要件や正式なMappingではない。
+
+- [端末で推論できることと、重要操作を許可できることは別である](../../../../docs/insights/local-inference-is-not-action-authority.md)：端末上の推論・モデル保護と、重要操作を許す側の判断を分ける。
+
 ## References
 
 - [AISVS v1.0 C4 正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C04-Infrastructure.md)
@@ -115,7 +121,6 @@ Edge・Mobile・IoT・組込みでの対象Deviceと中央基盤・Package・Run
 - [C4.3 Section講義](../../../learning/c04-infrastructure-configuration-and-deployment-security/v1.0-c4.3-edge-and-distributed-ai-security.md)
 - [C4 Family概要](../README.md)
 
-- [関連Insight：端末で推論できることと、重要操作を許可できることは別である](../../../../docs/insights/local-inference-is-not-action-authority.md)（横断的な考察。規範やMappingではない）
 
 ## Changelog
 
