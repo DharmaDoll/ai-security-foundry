@@ -103,6 +103,19 @@ rationale, and assessment date. Mapping status is independent of Control maturit
 Describe the boundaries, data flows, identities, policy, and configuration evidence
 that must be inspected.
 
+### Practical requests to developers and operators
+
+Provide concrete, plain-language requests that a product-security reviewer can use
+in a real review. Specify the actual release/environment and evidence to inspect.
+For each request, explain the property to check, a sufficient response or observable
+result, and a follow-up when the response is incomplete. Do not substitute a generic
+"is this secure/compliant?" question. Separate this Control's checks from adjacent
+assurance, and do not solicit production secrets in repository documentation.
+
+| Request example | What to verify | Sufficient evidence or result | Follow-up if incomplete |
+|---|---|---|---|
+| `<request tied to the concrete system>` | `<assurance property>` | `<target-bound evidence>` | `<specific clarification or demonstration>` |
+
 ### Positive verification
 
 Describe allowed behavior and the observable result that demonstrates correct

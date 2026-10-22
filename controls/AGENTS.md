@@ -201,6 +201,14 @@ every AISVS Category or Family.
   assets, Trust Boundaries, Security Invariants, deterministic Enforcement Points,
   observable Pass/Fail conditions, and the assurance boundary.
 - Explain unfamiliar terms without removing security nuance.
+- Every new or substantively updated lecture and learning note must include plain-language
+  requests/questions a product-security reviewer can use with developers or operators.
+  Specify the target version/environment, evidence to request, what it establishes,
+  and a follow-up when the answer is insufficient. These are worked examples, not
+  learner quizzes. Keep adjacent assurance checks distinct from the selected requirement.
+- New or substantively updated Controls must include concrete reviewer request examples
+  under Verification; use `templates/control.md`. Add examples to existing material
+  when it is substantively revised, without changing maturity merely for their presence.
 - Separate Normative text, AISVS Research, repository interpretation, and insights
   derived from discussion.
 - Persist a meaningful session as a standalone lecture plus a faithful

@@ -4,7 +4,7 @@ document_kind: "family-learning-guide"
 source_key: "owasp-aisvs"
 source_version: "1.0"
 upstream_revision: "78775233666a2022dcfb82037e5e029116955c00"
-current_section: "C6.2"
+current_section: "complete"
 last_updated: "2026-10-22"
 ---
 
@@ -30,12 +30,12 @@ C6は、外部Model・Dataset・Adapterの取得から受入れまでの検査�
 
 ## 軽量な学習進捗
 
-教材は作成済み。C6.1は学習対話と理解確認を終え、学習者が理解を表明した。現在位置はC6.2で、理解確認は未完了。
+C6.1・C6.2の講義と実際の対話を一巡した。C6.2では署名と情報充足、欠落時のBuild失敗、ハッシュ照合と記載漏れの検出、BOMの確認と問題調査の違いを扱い、学習者の理解と次へ進む意思を確認した。現在学習中のSectionはない。
 チェックは教材の存在を表さず、Sectionを学習して本質・Pass／Fail・保証しない範囲を説明できた時に付ける。
 Control成熟度、Mapping、製品適合とは独立している。
 
 - [x] [C6.1の講義と理解確認](v1.0-c6.1-model-artifact-integrity.md)
-- [ ] [C6.2の講義と理解確認](v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)
+- [x] [C6.2の講義と理解確認](v1.0-c6.2-ai-bom-and-supply-chain-monitoring.md)
 
 ## 一次資料
 
