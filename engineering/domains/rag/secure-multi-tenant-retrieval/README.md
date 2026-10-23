@@ -25,6 +25,7 @@ tags: [retrieval, authorization, tenant-isolation, document-access, cache]
 
 具体的な組込み方は[実装ノート：文書ACL・RLS・接続プール](implementation-notes.md)へ。
 他の構成を選ぶ際は[アクセス制御方式の比較と多層防御](access-control-options.md)へ。外部認可、OpenSearch DLS、元システムへの委任、Azureの組込み権限連携と制約を整理している。
+取り込みでは[新版とACLが揃ってから検索可能にする](implementation-notes.md#更新途中の本文を検索可能にしない)。[文書・質問のEmbedding生成時の送信先](access-control-options.md#embedding生成も本文質問の送信先を確認する)も、回答モデルとは別に確認する。
 Control側から全体を捉えるには[Family・Sectionの見取り図：C8.1／C5.2と、C8.3／C5.3](../../../../mappings/aisvs-v1.0-pattern-rag-001.md#familysectionの見取り図)を参照する。
 
 ## 1. 場面：会社ごとの文書を検索して、問い合わせに答える
@@ -290,3 +291,4 @@ PostgreSQL 18＋pgvector v0.8.7を説明用の参照版とする。SQL・RLS・�
 | 2026-10-23 | 初稿。会社・文書権限の照合、断片・引用・キャッシュ、失効の説明とチェックシートを作成 | 開発者が根拠情報、照合条件、開示を止める場所を特定できるようにする |
 | 2026-10-23 | 文書ACL・RLS・接続プールの実装ノートと確認項目、Control Family・Sectionの案内を追加 | 具体的な組込み方と、既存Controlの中での位置づけを理解しやすくする |
 | 2026-10-23 | 認可方式の比較、外部認可サービスと検索の連携図、取り込み・生成段階の補助策の限界を追補 | 提示された多層防御の説明を評価し、製品や方式を一律に必須としない選択材料を示す |
+| 2026-10-23 | 方式選択の順序、取り込み途中の公開防止、Embedding送信先の確認を追補 | 更新途中の権限不整合と、回答生成前の外部送信を見落とさないようにする |
