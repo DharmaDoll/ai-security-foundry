@@ -24,6 +24,7 @@ tags: [retrieval, authorization, tenant-isolation, document-access, cache]
 実装レビューには[正常系・Negative testチェックシート](negative-tests.md)を使う。
 
 具体的な組込み方は[実装ノート：文書ACL・RLS・接続プール](implementation-notes.md)へ。
+他の構成を選ぶ際は[アクセス制御方式の比較と多層防御](access-control-options.md)へ。外部認可、OpenSearch DLS、元システムへの委任、Azureの組込み権限連携と制約を整理している。
 Control側から全体を捉えるには[Family・Sectionの見取り図：C8.1／C5.2と、C8.3／C5.3](../../../../mappings/aisvs-v1.0-pattern-rag-001.md#familysectionの見取り図)を参照する。
 
 ## 1. 場面：会社ごとの文書を検索して、問い合わせに答える
@@ -273,7 +274,7 @@ DBの読取りはスナップショットに基づくため、読取り後の取
 | [PostgreSQL Row Security Policies](https://www.postgresql.org/docs/18/ddl-rowsecurity.html) | 18版。行単位の制限、所有者・管理ロールの迂回条件 |
 | [PostgreSQL Transaction Isolation](https://www.postgresql.org/docs/18/transaction-iso.html) | 18版。読取り時点と並行した変更の扱い |
 | [pgvector README](https://github.com/pgvector/pgvector/blob/v0.8.7/README.md) | v0.8.7タグ。類似検索、フィルター、マルチテナント時の検索品質への影響 |
-| [Azure AI Search security filter方式](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search) | 更新型文書、表示更新日2026-08-24。識別子フィルターと本人確認の違い。組み込みACL機能の採用・成熟度は本例の主張に含めない |
+| [Azure AI Search security filter方式](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search) | 更新型文書、表示更新日2026-08-24。識別子フィルターと本人確認の違い。組込みACL・ラベル連携の状態と制約は[方式比較](access-control-options.md)に分けて記載 |
 
 確認日：2026-10-23。会社A・Bの業務例、キャッシュ方式とSQLの組み立ては本PJの設計解釈であり、上流の完成済みRAG実装の引用ではない。
 PostgreSQL 18＋pgvector v0.8.7を説明用の参照版とする。SQL・RLS・キャッシュ・失効の実行検証と製品連携は未実施。
@@ -288,3 +289,4 @@ PostgreSQL 18＋pgvector v0.8.7を説明用の参照版とする。SQL・RLS・�
 |---|---|---|
 | 2026-10-23 | 初稿。会社・文書権限の照合、断片・引用・キャッシュ、失効の説明とチェックシートを作成 | 開発者が根拠情報、照合条件、開示を止める場所を特定できるようにする |
 | 2026-10-23 | 文書ACL・RLS・接続プールの実装ノートと確認項目、Control Family・Sectionの案内を追加 | 具体的な組込み方と、既存Controlの中での位置づけを理解しやすくする |
+| 2026-10-23 | 認可方式の比較、外部認可サービスと検索の連携図、取り込み・生成段階の補助策の限界を追補 | 提示された多層防御の説明を評価し、製品や方式を一律に必須としない選択材料を示す |
