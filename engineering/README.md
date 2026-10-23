@@ -35,6 +35,10 @@ Use `templates/security-pattern.md` for new patterns.
 
 - [RAG検索で、利用者に許可された文書だけを渡す](domains/rag/secure-multi-tenant-retrieval/README.md) — `draft`。会社・文書権限・キャッシュ・失効の設計と[正常系・Negative testチェックシート](domains/rag/secure-multi-tenant-retrieval/negative-tests.md)。
 
+### [MCP](domains/mcp/README.md)
+
+- [MCPから下流APIを、利用者本人の権限で呼ぶ](domains/mcp/audience-bound-downstream-delegation/README.md) — `draft`。既存APIのアクセス制御を活かす構成図、OBOの要点と[正常系・Negative testチェックシート](domains/mcp/audience-bound-downstream-delegation/negative-tests.md)。
+
 ## Navigation
 
 - 横断的なEngineering資料と調査記録: [`docs/README.md`](docs/README.md)
