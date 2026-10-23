@@ -3,7 +3,7 @@
 - 作成日：2026-10-22
 - 対象：既存LandscapeのP1のみ
 - 判断：2026-10-22のユーザー対話で開発着手を了承。`retain`から`select`へ移行。
-- 現在の状態：選定根拠の記録。[Pattern本文（draft）](../domains/agents/secure-tool-execution/README.md)を作成済み。製品の検証結果ではない。
+- 現在の状態：選定根拠の記録。[Pattern本文](../domains/agents/secure-tool-execution/README.md)を作成済み。製品の検証結果ではない。
 - 候補の正本：[Landscape P1](pattern-landscape.md#p1-deterministically-authorized-tool-execution)
 - 作業進捗と再開地点：[Engineering計画](../plan.md)
 
@@ -235,4 +235,4 @@ I1〜I5は、読者が自身の実装で正常利用・越境・失効・障害�
 
 この範囲を引き継いで、[本文・構成図・技術例](../domains/agents/secure-tool-execution/README.md)と
 [Negative testチェックシート](../domains/agents/secure-tool-execution/negative-tests.md)を作成した。Framework Mappingは行っていない。
-技術レビュー担当者と長期Ownerは未割当であり、`recommended`の条件を満たしたとは扱わない。
+2026-10-23の本文の人によるレビュー承認は、[Patternのレビュー記録](../domains/agents/secure-tool-execution/README.md#human-review-2026-10-23)へ保存した。長期Ownerは未割当であり、`recommended`の条件を満たしたとは扱わない。

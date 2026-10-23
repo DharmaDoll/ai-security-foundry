@@ -1,7 +1,7 @@
 # Engineering Pattern Candidate Landscape
 
 - Status: discovery
-- Last updated: 2026-10-22
+- Last updated: 2026-10-23
 - Scope: Pattern候補の比較のみ
 
 ## 目的と境界
@@ -14,7 +14,8 @@ Pattern化する前に候補の境界、重複、再利用可能性を比較す�
 Control IDやFramework coverageを候補の発見根拠にせず、Controls／FrameworksへのMappingも
 この段階では行わない。
 
-P1を選定し、[安全なツール実行のdraft](../domains/agents/secure-tool-execution/README.md)を作成した。
+P1を選定し、[安全なツール実行のPattern](../domains/agents/secure-tool-execution/README.md)を作成した。
+続いてP2を選定し、[検索時認可のPattern](../domains/rag/secure-multi-tenant-retrieval/README.md)を`draft`として作成した。
 それ以外の名称は計画上の候補として比較する。
 
 ## 入力ユースケース
@@ -90,7 +91,7 @@ P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする�
 業務例、不変条件・反証テスト、隣接候補との境界をまとめた。同日の対話で方針と開発着手の
 了承を得て`select`へ移行し、[Pattern本文](../domains/agents/secure-tool-execution/README.md)を作成した。
 開発者向けガイド・Mermaid図・要点サンプルを中心とし、正負のケースは読者向け確認事項として扱う。
-本文は`draft`。実行検証と人による技術レビューは未実施。
+本文は2026-10-23の人によるレビュー承認で`reviewed`となった。対象版と範囲は[レビュー記録](../domains/agents/secure-tool-execution/README.md#human-review-2026-10-23)を参照。実行検証は未実施。
 
 
 - 暫定配置: `agents/secure-tool-execution`
@@ -114,6 +115,27 @@ P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする�
 
 ## P2: Authorization-aware Retrieval Isolation
 
+2026-10-23：ユーザーが、テナントを異なる会社とする説明例を確認し、「この方針で進めてください！」と開発着手を承認した。
+以下の候補確認により`retain`から`select`へ移行した。本文の人による技術レビューとは別の判断である。
+[Pattern本文](../domains/rag/secure-multi-tenant-retrieval/README.md)と[チェックシート](../domains/rag/secure-multi-tenant-retrieval/negative-tests.md)を作成済み。状態は`draft`、製品の実行検証は未実施。
+
+| 観察したシステム類型 | 繰り返される失敗経路 | 共通の設計と適用上の違い |
+|---|---|---|
+| 複数企業に提供する文書検索SaaS | 共有検索基盤が、質問に似ている他社文書を返す。質問やモデル指定の会社IDを検索権限として使う | 検証済み所属と文書の会社を照合する。会社をまたぐ検索品質への影響は、情報開示の認可とは別に扱う |
+| 一社内の部署・担当別ナレッジ検索 | 同じ会社であれば全員が読めると扱い、制限文書や権限変更前のキャッシュを返す | 文書単位の閲覧権限も照合する。グループ・担当の変更を検索経路とキャッシュへ反映する |
+
+二つの類型は本PJの設計分析であり、実被害や再現実験の報告ではない。
+技術的な裏付けとして、[pgvector v0.8.7のMultitenancy／Filtering](https://github.com/pgvector/pgvector/blob/v0.8.7/README.md#multitenancy)、
+[PostgreSQL 18のRLS](https://www.postgresql.org/docs/18/ddl-rowsecurity.html)、
+[Azure AI Searchのsecurity filter方式](https://learn.microsoft.com/en-us/azure/search/search-security-trimming-for-azure-search)を2026-10-23に確認した。
+Azure資料は更新型（表示上の更新日2026-08-24）。識別子を含むフィルターだけでは本人確認にならないことを確認した。
+製品ごとの構文は異なるが、信頼する本人・文書権限に検索を束縛し、開示前に強制する点を再利用できる。
+
+主な例は会社A・Bのサポート用RAGとし、会社内の文書権限とキャッシュ再利用も扱う。
+選定理由は、開示される資産・強制箇所・反証方法が具体的で、P1と異なる検索固有の境界があること。
+P7は文書の取り込みと出所・汚染、P5は保存されたmemoryのライフサイクルを扱うため統合しない。
+物理分離や規制上の専用環境が必要な用途は、本例の論理的な検索時認可だけでは足りない。
+
 - 暫定配置: `rag/secure-multi-tenant-retrieval`
 - 繰り返し発生する設計問題: Vector similarity、検索query、またはmodel context内の
   `tenant_id`を認可の代わりに使用し、未認可文書を検索結果へ混入させる。
@@ -121,8 +143,8 @@ P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする�
   Vector／database store、document metadataからauthorization policy、取得文書からmodel context。
 - Abuse Case: Tenant Aの利用者がTenant Bと類似した文書を検索する、modelがtenant識別子を
   改変する、または権限失効後もcacheやindexから文書が返る。
-- Security Invariant: 検索結果は、検索時点で認証済み主体に許可された文書だけで構成する。
-  Similarity、model-generated metadata、取得後のpromptは認可判断にならない。
+- Security Invariant: 開示する検索結果は、明示した権限確認時点で認証済み主体に許可された文書だけで構成する。
+  失効の反映期限を定め、期限を超えた古い許可を再利用しない。Similarity、model-generated metadata、取得後のpromptは認可判断にならない。
 - 決定論的なEnforcement Point: Retrieval service、DatabaseのRow-Level Security、または
   信頼されたPolicy Enforcement Point。認可済みcorpusへ検索範囲を限定する。
 - Negative Test: 類似する他tenant文書、偽造tenant ID、失効済みaccess、cache済み結果、
@@ -319,7 +341,7 @@ P18 Resource budgets
 
 ## 現時点の比較結果
 
-- 開発対象として選定する: P1（本文は`draft`）。計画候補を維持する: P2。
+- 開発対象として選定済み: P1（本文は`reviewed`）、P2（本文は`draft`、人による本文レビュー待ち）。
 - ATLAS evidenceにより候補を強化する: P1、P4、P6。
 - 計画候補のscopeと配置を再検討する: P4。
 - 新規候補としてLandscapeに保持する: P3、P5、P6。

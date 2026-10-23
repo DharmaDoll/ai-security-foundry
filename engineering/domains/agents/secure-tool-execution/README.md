@@ -1,14 +1,14 @@
 ---
 id: "PATTERN-AGENTS-001"
 title: "Agentのツール実行を、利用者の権限内に閉じ込める"
-status: "draft"
+status: "reviewed"
 category: "agents"
 created: "2026-10-22"
-last_reviewed: null
+last_reviewed: "2026-10-23"
 owners: []
-reviewed_by: []
-review_scope: null
-review_evidence: null
+reviewed_by: ["conversation-user"]
+review_scope: "0cd253b0ed73da4684a686ede5a41e198f64ceef の本文・実装ノート・Negative testチェックシートを設計ガイドとしてレビュー。製品の実行検証は含まない。"
+review_evidence: "README.md#human-review-2026-10-23"
 tags: [tool-execution, authorization, least-privilege]
 ---
 
@@ -18,7 +18,7 @@ tags: [tool-execution, authorization, least-privilege]
 
 このPatternは、Agentが注文照会や返金などの業務APIを使う場面の設計ガイドである。
 モデルが誤った操作を提案しても、許可されていないデータ取得や更新を実行させない境界を示す。
-状態は`draft`。人による技術レビューと実環境での検証は未実施。
+状態は`reviewed`。現在版の設計ガイドについて人によるレビュー承認を記録済み。実環境での検証は未実施。
 
 読み進める順序は、場面 → 全体図 → 失敗例 → 設計の要点 → チェックする情報と場所 → 処理例 → 確認事項。
 実装レビュー時は[Negative testチェックシート](negative-tests.md)から参照できる。
@@ -295,8 +295,21 @@ flowchart LR
 ## 10. レビュー状況・変更履歴
 
 候補範囲とガイド中心の方針は2026-10-22のユーザー対話で了承された。
-これは本文の技術レビューとは別であり、技術レビュー担当者と保守Ownerは未割当。
+2026-10-23に現在版の人によるレビュー承認を受け、`draft`から`reviewed`へ変更した。
+保守Ownerは未割当。`recommended`への移行は別途判断する。
 実行可能な試験基盤・製品連携デモは作成せず、読者向けの確認方法を提供する。
+
+<a id="human-review-2026-10-23"></a>
+
+### 人によるレビュー記録（2026-10-23）
+
+- レビュアー：本対話のユーザー（記録上の識別子：`conversation-user`）。AIによるレビューとは区別する。
+- 対象版：[0cd253b](https://github.com/DharmaDoll/ai-security-foundry/commit/0cd253b0ed73da4684a686ede5a41e198f64ceef)。
+- 対象範囲：本文、実装ノート、Negative testチェックシートの設計ガイドとしての内容。
+- 承認発言：「一旦現在の版の人間のレビューはOKとします」。対話での明示的な承認をAIが本記録へ転記した。
+- 結果：現在版を`reviewed`とする。実行試験の合格、保守Ownerの引受け、`recommended`の承認は含まない。
+
+### 変更履歴
 
 | 日付 | 変更 | 理由 |
 |---|---|---|
@@ -305,3 +318,4 @@ flowchart LR
 | 2026-10-23 | 実装ノートを組み込み位置・許可／拒否例・短い処理例の順へ再構成。OPAの選択目安と公開例を追加 | 認可の境界を先に理解できるようにし、OPAや要求IDの保存方式を必須と誤解させない |
 | 2026-10-23 | 一回の金額上限と累積額の違いを明記し、N3をタスク上限だけが拒否理由になる条件へ修正 | 保証範囲の誤読と、承認金額の不一致による上限チェック漏れの見逃しを防ぐ |
 | 2026-10-23 | 従来のアクセス制御と委任範囲の関係、情報の取得元・照合内容・強制箇所を中心に整理 | 実装技術の予備知識なしで設計判断ができるようにする |
+| 2026-10-23 | 対象コミットと人によるレビュー承認を記録し、`reviewed`へ変更 | 現在版の設計ガイドへの承認を、実行検証や推奨版への移行と区別して残す |
