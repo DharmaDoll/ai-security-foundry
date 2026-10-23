@@ -55,6 +55,10 @@ Do not jump directly from a framework requirement to code.
 - Keep actors, resources, boundaries, and names consistent across diagrams,
   examples, samples, and review questions. Distinguish the reasoning workflow
   above from the order in which the reader encounters the explanation.
+- Let readers follow one concrete request from input to outcome before comparing
+  alternatives. Align stage names across the overview, implementation example,
+  and checks. Integrate review feedback into that flow instead of accumulating
+  addenda; keep conversation-specific claim assessments out of the main guide.
 - Where useful, name concrete technologies, products, and OSS, show their place
   in the architecture, and explain which responsibility they fulfill and what
   remains the application's responsibility. Verify capabilities with primary

@@ -75,6 +75,7 @@ P1は一回の操作を認可する境界、P2は検索・文書断片・キャ�
 成果物は[PATTERN-RAG-001本文](domains/rag/secure-multi-tenant-retrieval/README.md)と[正常系・Negative testチェックシート](domains/rag/secure-multi-tenant-retrieval/negative-tests.md)。
 追加レビューコメントを受け、[文書ACL・RLS・接続プールの実装ノート](domains/rag/secure-multi-tenant-retrieval/implementation-notes.md)と確認項目を補った。
 さらに、提示された多層防御の説明を評価し、[認可方式の比較・製品制約・補助策の限界](domains/rag/secure-multi-tenant-retrieval/access-control-options.md)を追補。主なSQL例と不変条件を維持し、方式選択の材料として扱う。
+可読性レビューを受け、本文と実装例を「本人確認 → 検索 → 本文取得 → 送信 → 回答」の5段階に再構成。構成選択は3つの判断軸へ分け、チェックシートも処理の場面から参照できるよう整理した。
 全体の理解を助けるため、[Control Family・Sectionの関係案](../mappings/aisvs-v1.0-pattern-rag-001.md)を別成果物として作成。新版採用・Control解釈の変更・製品試験は行っていない。
 状態は`draft`。人による本文の技術レビュー、実行試験、作業5の次候補選定は未実施。
 

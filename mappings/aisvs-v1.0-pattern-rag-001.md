@@ -44,14 +44,14 @@ Section名はリンク先のRepository表記に合わせる。C5.2の上流名�
 ### C8.1：検索対象の範囲を強制する
 
 比較の中心は[C8.1.3のControl解釈](../controls/control-records/c08-memory-embeddings-and-vector-database-security/v1.0-c8.1.3-retrieval-scope-enforcement/README.md)。
-PatternのI1〜I5、本文第4〜5節、[実装ノート](../engineering/domains/rag/secure-multi-tenant-retrieval/implementation-notes.md)のRLS・追加取得、[チェックシート](../engineering/domains/rag/secure-multi-tenant-retrieval/negative-tests.md)のN1〜N6・N9〜N12・N14〜N16が、Trusted Scopeの強制と迂回防止を具体化する。
+PatternのI1〜I5、[質問から回答までの①〜⑤](../engineering/domains/rag/secure-multi-tenant-retrieval/README.md#3-質問から回答まで5か所で確かめる)、[実装ノート](../engineering/domains/rag/secure-multi-tenant-retrieval/implementation-notes.md)のRLS・追加取得、[チェックシート](../engineering/domains/rag/secure-multi-tenant-retrieval/negative-tests.md)のN1〜N6・N9〜N12・N14〜N16が、Trusted Scopeの強制と迂回防止を具体化する。
 Sectionには識別子の衝突防止・初回書込み後のMetadata不変性も含まれる。Patternは複合キーと管理面の分離を示すが、取り込み全体の保証は対象外。
 また、Graph・Federated検索の網羅的設計や、件数・速度からの推測防止は未完了であり、Section全体の`direct`とはしない。
 
 ### C5.2：本人の権限を検索と回答組立へ持ち越す
 
 比較の中心は[C5.2.2のControl解釈](../controls/control-records/c05-access-control-and-identity/v1.0-c5.2.2-end-user-authorization-retrieval-assembly/README.md)。
-PatternのI1〜I6、本文第4〜6節、N1〜N4・N6〜N10・N13〜N16が、本人に束縛した検索・再利用・失効確認を具体化する。
+PatternのI1〜I6、[質問から回答までの①〜⑤](../engineering/domains/rag/secure-multi-tenant-retrieval/README.md#3-質問から回答まで5か所で確かめる)と[キャッシュ・権限変更](../engineering/domains/rag/secure-multi-tenant-retrieval/README.md#6-キャッシュと権限変更をどう扱うか)、N1〜N4・N6〜N10・N13〜N16が、本人に束縛した検索・再利用・失効確認を具体化する。
 回答返却前の権限再確認も扱うが、モデルの内部知識や任意出力に含まれる機密情報の分類・認可まで保証するものではない。
 Section全体にはAI資源の既定拒否、PDPの分離、特権の期限、分類ラベル伝播などがあるため、検索パイプライン部分に限定した`partial`とする。
 
@@ -78,3 +78,4 @@ Patternの権限モデル・検索経路・失効保証、Control解釈、採用
 | 日付 | 変更 |
 |---|---|
 | 2026-10-23 | 開発済みRAG Patternと既存ControlをSection単位で比較し、中心となる部分と周辺の追加課題を記録 |
+| 2026-10-23 | Patternの構成整理に合わせて説明箇所への参照を更新。関係の強度・範囲・評価状態の変更なし |
