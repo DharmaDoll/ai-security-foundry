@@ -74,3 +74,7 @@ Illustrative shape (not a mapping assertion):
 - Record `assessed-no-match` or `gap` instead of forcing a relationship.
 - Re-review mappings after relevant upstream changes.
 - Preserve historical traceability for superseded identifiers where useful.
+
+## Assessments
+
+- [PATTERN-RAG-001とAISVS v1.0のFamily・Section](aisvs-v1.0-pattern-rag-001.md) — C8.1・C5.2を中心に、C8.3・C5.3との範囲の違いを説明する関係案。
