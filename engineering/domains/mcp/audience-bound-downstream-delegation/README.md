@@ -60,14 +60,26 @@ P3単独ではその拒否を保証しない。必要な製品では、[P1のツ
 
 ## 3. 一件の要求を追う：入口から注文APIまで
 
-次の図は利用者委任の一例。トークンA・Bは説明用の呼び名である。
+次の図は、**クライアントがAを取得する準備から、MCPがBで注文APIを呼ぶまで**を示す。
+準備には認可コードフロー＋PKCEを使う。認可先の確認とクライアント登録は済んでいるものとし、認可サーバーの発見・登録の細部は[認可仕様](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization)を参照する。
+この例ではA・Bの発行を同じ認可基盤が担う。別の認可基盤を使う構成まで同じ委任方式で動くとは仮定しない。
 
 ```mermaid
 sequenceDiagram
+    actor User as 利用者（ブラウザー）
     participant Client as 利用者のMCPクライアント
     participant MCP as MCPサーバー
     participant Auth as 認可サーバー
     participant API as 注文API
+    rect rgb(240, 245, 250)
+    Note over User,Auth: 準備：MCPを利用するためのアクセストークンAを取得
+    Client->>Auth: ブラウザー経由で認可要求（MCP向け・PKCE）
+    Auth->>User: ログイン・必要な同意を求める
+    User->>Auth: 本人確認・必要な同意
+    Auth-->>Client: ブラウザー経由で認可コードを返す
+    Client->>Auth: 認可コード＋PKCEの検証用値でトークンを要求
+    Auth-->>Client: MCP向けアクセストークンA
+    end
     Client->>MCP: ① 要求を受ける：注文1001＋MCP向けトークンA
     MCP->>MCP: ② MCP側で確かめる：Aの有効性とツール利用権限
     MCP->>Auth: ③ 下流用の資格を取得する：担当者Aとして注文照会を要求
@@ -78,6 +90,16 @@ sequenceDiagram
     MCP-->>Client: 照会結果
     Note over MCP,API: 確認失敗なら開示しない。共通管理者資格へ切り替えない
 ```
+
+A・Bはどちらも認可サーバーが発行するアクセストークンで、セッションIDではない。図の準備は有効なAをまだ持っていない場合の流れで、毎回ログインや同意が必要という意味ではない。
+
+| 項目 | 発行元 | 使う場所・役割 |
+|---|---|---|
+| トークンA | 認可サーバー | クライアントがMCPを呼ぶ際の`Authorization: Bearer ...` |
+| トークンB | 認可サーバー | MCPが注文APIを呼ぶ際の`Authorization: Bearer ...` |
+| MCPセッションID（使用する場合） | MCPサーバー | `MCP-Session-Id`で一連のやり取りを識別する。Aの代わりにはならない |
+
+MCPのセッションIDは初期化時に発行され得る別の値で、同じセッション内でも各HTTP要求にAが必要である。[セッション管理仕様](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#session-management)、[アクセストークンの送信仕様](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization#token-requirements)
 
 同じ人でも、**AはMCPで使う資格、Bは注文APIで使う資格**である。利用先を`audience`、許可する操作を`scope`と呼ぶ。
 scopeに注文照会が含まれていても、すべての注文を読めるわけではない。最後は注文APIが対象を照合する。
@@ -191,10 +213,12 @@ MCPサーバー自体が侵害されれば、保持する有効な資格を悪�
 
 構成・不変条件・確認例は本PJの設計であり、以下の仕様・製品機能を適用したもの。準拠・製品連携成功の主張ではない。
 確認日：2026-10-23。SDK依存関係は導入せず、実行可能なサンプルとしての版固定・動作検証も行っていない。
+2026-10-24にMCPの認可・セッション管理仕様を追加確認し、Aの取得過程とセッションIDとの区別を補った。
 
 | 一次資料 | 参照状態・用途 |
 |---|---|
 | [MCP Authorization](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) | 公開済みの2025-11-25仕様版。HTTP認可・利用先の検証・下流用の別トークン。最新版という主張ではない |
+| [MCP Transports：Session Management](https://modelcontextprotocol.io/specification/2025-11-25/basic/transports#session-management) | 2025-11-25仕様版。Streamable HTTPのセッションIDとアクセストークンの区別 |
 | [Microsoft Entra OBO](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-on-behalf-of-flow) | 更新型製品資料。表示更新日2025-01-04。API間の利用者委任と適用条件 |
 | [MSAL Python：トークン取得](https://learn.microsoft.com/en-us/entra/msal/python/getting-started/acquiring-tokens) | 更新型SDK資料。表示更新日2025-10-10。OBO取得とapp-only取得の区別。SDK版は未選定 |
 | [APIのscope・app role検査](https://learn.microsoft.com/en-us/entra/identity-platform/scenario-protected-web-api-verification-scope-app-roles) | 更新型製品資料。トークン検証と操作権限検査の分担、Microsoft.Identity.Webの利用例 |
@@ -206,3 +230,4 @@ MCPサーバー自体が侵害されれば、保持する有効な資格を悪�
 | 日付 | 変更 | 理由 |
 |---|---|---|
 | 2026-10-23 | 初版を`draft`で作成 | 本人の下流アクセスと既存APIの認可を主軸にし、タスク単位の制限をP1との組合せへ分離 |
+| 2026-10-24 | 図にAの取得過程を追加し、A・B・セッションIDを対比 | MCPへの認可がどこで始まるかを明確にする |
