@@ -38,8 +38,8 @@ flowchart TD
     user["利用者：注文1001を調べて"] --> app["アプリ：本人と今回の依頼範囲を保持"]
     app --> model["モデル：次の操作を提案"]
     mail["顧客メールなどの外部情報"] --> model
-    model --> call["ツール呼出要求<br/>order.lookup・注文1001"]
-    call --> gate["アプリのツール実行処理<br/>本人・依頼範囲・対象への権限を照合"]
+    model --> tool_request["ツール呼出要求<br/>order.lookup・注文1001"]
+    tool_request --> gate["アプリのツール実行処理<br/>本人・依頼範囲・対象への権限を照合"]
     app -->|"モデルの出力とは別に取得"| gate
     gate -->|"許可した要求だけ"| api["業務API：照会や更新を行う"]
     api --> result["アプリ：必要な結果だけをモデルへ返す"]
