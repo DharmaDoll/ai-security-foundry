@@ -41,7 +41,11 @@ Do not jump directly from a framework requirement to code.
 
 ## Reader-first presentation
 
-- Start with the architectural choice: can the use case be met with less authority,
+- Before comparing architectures, orient the reader: show the overall system flow,
+  the stage this Pattern addresses, the actors, and the boundary where data or
+  authority moves. Introduce necessary terms before using them in choices. Do not
+  assume readers already know the architecture that the Pattern is meant to explain.
+- Make the first design decision the architectural choice: can the use case be met with less authority,
   credential custody, shared state, network exposure, and operational burden?
   Compare only materially different options. State the reason to choose each,
   what complexity it removes or adds, and who owns the remaining risk. Do not
