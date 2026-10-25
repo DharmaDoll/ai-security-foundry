@@ -162,6 +162,14 @@ A pattern is not "recommended" merely because code compiles or a framework menti
 
 ## Security reasoning workflow
 
+Before prescribing controls for a fixed architecture, compare the smallest useful
+set of ways to meet the use case. Prefer designs that remove unnecessary authority,
+credential custody, shared state, network exposure, and operational responsibility.
+State the conditions for choosing a more complex design and its residual costs;
+fewer components or local deployment alone do not prove safety. Then explain what
+information to rely on, what to check, and where to enforce it. Apply this principle
+to Engineering Patterns without replacing independent threat/invariant reasoning.
+
 For new guidance, reason in this order:
 
 ```text
@@ -170,7 +178,7 @@ Use case
   -> assets and trust boundaries
   -> threat / attacker capability / abuse paths
   -> security invariant
-  -> architecture / control placement
+  -> architecture choices / risk reduction / control placement
   -> secure implementation
   -> negative and positive tests
   -> observability / response

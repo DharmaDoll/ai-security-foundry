@@ -12,7 +12,7 @@ Use case
 → Data flows
 → Threats and abuse cases
 → Security invariants
-→ Recommended architecture
+→ Architecture choices and risk reduction
 → Vulnerable implementation
 → Secure implementation
 → Security tests
@@ -23,6 +23,12 @@ Use case
 Do not skip directly from a framework requirement to implementation code.
 
 Do not start by asking how to maximize framework coverage.
+
+Before fixing an architecture, compare viable configurations and remove unnecessary
+authority, credential custody, shared state, exposure, or operational responsibility.
+Record why added complexity is necessary for the use case. Then locate the remaining
+checks and enforcement points. See the [repository design approach](../../docs/repository-design.md#engineering-view)
+and [reader-first guidance](../AGENTS.md#reader-first-presentation).
 
 ## Pattern Discovery
 

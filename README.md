@@ -136,6 +136,14 @@ endorsement, and source coverage or mapping success is not a maturity gate. See 
 
 ## Core design principles
 
+**Choose a simpler security boundary before adding controls.** Engineering Patterns
+first help readers choose a configuration that meets the use case with less
+unnecessary authority, credential custody, exposure, and operational burden.
+They explain when a more complex configuration is justified, then show what
+information to rely on, what to check, and where to enforce it. Local deployment
+or fewer components alone is not evidence of safety. See the
+[engineering design approach](docs/repository-design.md#engineering-view).
+
 1. **Independent discovery before mapping.** Controls come from assurance needs; patterns come from recurring system problems and attack scenarios. A mapping is a later, reviewed relationship.
 2. **Stable repository taxonomy.** Do not reorganize directories simply because a Top 10 or standard changes its taxonomy.
 3. **Version-aware evidence.** Use versioned requirement identifiers whenever the source supports them, e.g. `v1.0-C9.4.3` rather than an unversioned AISVS ID.

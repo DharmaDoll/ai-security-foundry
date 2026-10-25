@@ -15,4 +15,4 @@ Use `templates/security-pattern.md` for new patterns.
 
 ## Patterns
 
-- [MCPから下流APIを、利用者本人の権限で呼ぶ](audience-bound-downstream-delegation/README.md) — `PATTERN-MCP-001`、`draft`。注文照会を入口から追い、本人の資格の引継ぎと下流APIでの対象認可を説明する。[正常系・Negative testチェックシート](audience-bound-downstream-delegation/negative-tests.md)付き。
+- [MCPの接続構成と、下流APIを呼ぶ主体を選ぶ](audience-bound-downstream-delegation/README.md) — `PATTERN-MCP-001`、`draft`。Oktaのローカル直接認証を主例に、実行場所・権限の主体・資格の保持を選ぶ。[正常系・Negative testチェックシート](audience-bound-downstream-delegation/negative-tests.md)付き。

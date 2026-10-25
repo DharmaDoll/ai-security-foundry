@@ -26,6 +26,22 @@ Describe the developer/system scenario in concrete terms.
 
 State what is and is not covered.
 
+## Configuration choice
+
+Before fixing the implementation, compare a small set of viable ways to meet the
+use case. Explain what unnecessary authority, credential custody, shared state,
+network exposure, or operational burden can be removed. State when the more complex
+option is necessary; local deployment and fewer components alone do not prove safety.
+
+| Configuration | When to choose it | Risk or complexity removed | Remaining responsibility / cost |
+|---|---|---|---|
+| Main configuration | Concrete use-case conditions | Boundaries or privileges avoided | Who maintains the remaining protection |
+| Material alternative | Requirement that justifies it | Relevant benefit | Additional enforcement and operations |
+
+Keep this decision brief, then follow one concrete request through the main design.
+Put detailed alternative flows after the main walkthrough. If only one option is
+viable, explain the constraint instead of inventing alternatives.
+
 ## Assets
 
 - Asset 1

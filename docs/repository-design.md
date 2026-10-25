@@ -49,6 +49,16 @@ The engineering view answers:
 
 Attack scenarios and recommended design live in the same pattern.
 
+The first engineering decision is whether the proposed system shape is needed.
+Compare a small set of viable configurations by execution location, acting identity,
+credential custody, shared state, exposed interfaces, and maintenance responsibility.
+Prefer removing unnecessary risk and complexity before adding compensating controls.
+Explain which use-case requirement justifies the more complex option, what it costs,
+and what risk remains; do not assume local or centralized operation is always safer.
+After choosing the configuration, explain what information to rely on, what to
+check, and where to enforce it. A short choice table can precede the main walkthrough;
+vendor detail and uncommon alternatives follow it.
+
 A pattern represents either a security design problem that recurs across systems or
 a real attack/failure scenario that generalizes beyond one product, plus reusable
 security invariants and solution principles. Discover patterns from systems, trust
@@ -66,7 +76,7 @@ Threat / attacker capability / abuse path
   |
 Security invariant
   |
-Recommended architecture / control placement
+Architecture choices / risk reduction / control placement
   |
 Implementation
   |

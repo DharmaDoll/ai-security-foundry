@@ -31,7 +31,7 @@ Use case
 → Trust boundaries
 → Threats and abuse cases
 → Security invariants
-→ Architecture
+→ Architecture choices and risk reduction
 → Implementation
 → Security tests
 → Operational considerations
@@ -41,6 +41,12 @@ Do not jump directly from a framework requirement to code.
 
 ## Reader-first presentation
 
+- Start with the architectural choice: can the use case be met with less authority,
+  credential custody, shared state, network exposure, and operational burden?
+  Compare only materially different options. State the reason to choose each,
+  what complexity it removes or adds, and who owns the remaining risk. Do not
+  assume a local, remote, centralized, or smaller design is inherently safe.
+  Then explain what to rely on, what to check, and where to enforce the result.
 - Prioritize human understanding and usefulness during design and implementation.
   Organize the explanation around a concrete problem, a structural diagram, an
   example failure path, the essential design, and implementation choices.
@@ -55,8 +61,10 @@ Do not jump directly from a framework requirement to code.
 - Keep actors, resources, boundaries, and names consistent across diagrams,
   examples, samples, and review questions. Distinguish the reasoning workflow
   above from the order in which the reader encounters the explanation.
-- Let readers follow one concrete request from input to outcome before comparing
-  alternatives. Align stage names across the overview, implementation example,
+- Give readers a brief configuration choice before the main request walkthrough
+  when that choice changes identities or trust boundaries. Follow one concrete
+  request through the selected configuration before detailed alternative flows.
+  Align stage names across the overview, implementation example,
   and checks. Integrate review feedback into that flow instead of accumulating
   addenda; keep conversation-specific claim assessments out of the main guide.
 - Where useful, name concrete technologies, products, and OSS, show their place

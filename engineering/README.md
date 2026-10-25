@@ -25,6 +25,14 @@ Pattern maturity requirement.
 
 Use `templates/security-pattern.md` for new patterns.
 
+## 設計の入口
+
+**まず、危険や複雑さを減らせる構成を選ぶ。そのうえで、何をもとに、何を、どこでチェックするかを示す。**
+
+利用場面から、実行場所・実行主体・資格情報を預ける相手・共有状態・公開する接続口・保守責任を比較する。
+不要な権限や境界を減らせる構成を先に検討し、複雑な構成を選ぶ場合は必要性と運用負担を説明する。
+ローカルなら常に安全、部品が少なければ安全とはしない。簡潔な選択表の後に一つの要求を図と例で追い、詳細な代替方式は後段へ置く。
+
 ## Patterns
 
 ### [Agents](domains/agents/README.md)
@@ -37,7 +45,7 @@ Use `templates/security-pattern.md` for new patterns.
 
 ### [MCP](domains/mcp/README.md)
 
-- [MCPから下流APIを、利用者本人の権限で呼ぶ](domains/mcp/audience-bound-downstream-delegation/README.md) — `draft`。既存APIのアクセス制御を活かす構成図、OBOの要点と[正常系・Negative testチェックシート](domains/mcp/audience-bound-downstream-delegation/negative-tests.md)。
+- [MCPの接続構成と、下流APIを呼ぶ主体を選ぶ](domains/mcp/audience-bound-downstream-delegation/README.md) — `draft`。ローカルの直接認証・サービスアプリ・リモート委任の選び方、資格の保持場所と[正常系・Negative testチェックシート](domains/mcp/audience-bound-downstream-delegation/negative-tests.md)。
 
 ## Navigation
 

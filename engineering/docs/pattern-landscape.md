@@ -1,7 +1,7 @@
 # Engineering Pattern Candidate Landscape
 
 - Status: discovery
-- Last updated: 2026-10-23
+- Last updated: 2026-10-25
 - Scope: Pattern候補の比較のみ
 
 ## 目的と境界
@@ -16,7 +16,7 @@ Control IDやFramework coverageを候補の発見根拠にせず、Controls／Fr
 
 P1を選定し、[安全なツール実行のPattern](../domains/agents/secure-tool-execution/README.md)を作成した。
 続いてP2を選定し、[検索時認可のPattern](../domains/rag/secure-multi-tenant-retrieval/README.md)を`draft`として作成した。
-P3とP4の比較後、利用者本人として下流APIを呼ぶ範囲でP3の開発着手が承認された。[下流APIへの委任のPattern](../domains/mcp/audience-bound-downstream-delegation/README.md)を`draft`として作成した。
+P3とP4の比較後、利用者本人として下流APIを呼ぶ範囲でP3の開発着手が承認された。[MCPの構成・実行主体を選ぶPattern](../domains/mcp/audience-bound-downstream-delegation/README.md)を`draft`として作成した。
 
 ## 入力ユースケース
 
@@ -63,7 +63,7 @@ Negative Testが必要なら、別候補として保持する。複数候補で�
 | --- | --- | --- | --- |
 | P1 | Deterministically Authorized Tool Execution | Agentが社内APIを呼び出す | `agents/secure-tool-execution`を支持 |
 | P2 | Authorization-aware Retrieval Isolation | RAGが複数テナントを検索する | `rag/secure-multi-tenant-retrieval`を支持 |
-| P3 | Audience-bound Downstream Delegation | MCP Serverが下流APIへアクセスする | `mcp/audience-bound-downstream-delegation`を選定・作成 |
+| P3 | MCP Access Configuration and Acting Identity（旧 Audience-bound Downstream Delegation） | MCP Serverが下流APIへアクセスする | `mcp/audience-bound-downstream-delegation`を選定・作成 |
 | P4 | Untrusted Content-to-Action Containment | AgentがWebを読んで操作する | `llm/indirect-prompt-injection-containment`の境界を再検討 |
 | P5 | Authorized Memory Lifecycle | 長期memoryへ入力を保存する | 新規候補 |
 | P6 | Persistent Context Poisoning Containment | 長期memoryへ入力を保存する | 新規候補 |
@@ -160,13 +160,15 @@ P7は文書の取り込みと出所・汚染、P5は保存されたmemoryのラ�
 2026-10-23、ユーザーの「次に進もう」を受け、P2の作業計画にある次候補比較を実施した。
 **比較後、P3を開発対象に選定した。** P2の文書整理は完了しているが、現在版への明示的な技術レビュー承認とは区別し、`draft`を維持する。
 
-| 判断軸 | P3：下流APIへの権限委任 | P4：非信頼コンテンツから操作への誘導 |
+以下は2026-10-23の選定理由を、10-25に見直したP3の範囲へ合わせて整理した比較である。
+
+| 判断軸 | P3：MCPの構成・実行主体・資格の利用 | P4：非信頼コンテンツから操作への誘導 |
 |---|---|---|
-| 具体的な失敗 | MCPの入口で本人を確認しても、下流APIを広い共通資格情報で呼び、別会社の注文を返す | メールや文書内の指示が、利用者の依頼・承認として扱われ、送信や更新を誘発する |
-| P1・P2から増える境界 | 別サービス用のトークン取得と、下流APIでの利用者・対象の照合 | 情報の出所、読み取りと操作の分離、外部送信経路 |
-| 既存成果物との重なり | P1の操作判断と区別し、別APIへ本人の資格を引き継ぐ部分を独立して説明できる | タスク範囲と承認の偽装はP1、文書の開示はP2にも説明済み。追加する境界の絞込みが必要 |
-| 最初の説明のまとまり | 「注文1001を照会する」を、入口から下流APIの応答まで追える | ブラウザー、メール、文書のどれを主例とするか、送信制御の範囲を先に決める必要がある |
-| 今回の判断 | `select`。本人の下流アクセスと既存APIの認可に絞って開発 | `retain`。重要性は維持し、P3と同時に開発しない |
+| 具体的な失敗 | 本人として使うつもりで広いサービス資格を選ぶ、共有処理で別人の資格を使う | メールや文書内の指示が、利用者の依頼・承認として扱われ、送信や更新を誘発する |
+| P1・P2から増える境界 | 起動・資格の取得と保持・下流主体の対応。共有サービスを作らず省ける境界も判断する | 情報の出所、読み取りと操作の分離、外部送信経路 |
+| 既存成果物との重なり | P1の操作判断と区別し、配置・主体・資格を預かる責任を選べる | タスク範囲と承認の偽装はP1、文書の開示はP2にも説明済み。追加する境界の絞込みが必要 |
+| 最初の説明のまとまり | ローカルの本人認証でOktaの管理対象U1を照会し、その後にサービス主体・リモート提供を比較できる | ブラウザー、メール、文書のどれを主例とするか、送信制御の範囲を先に決める必要がある |
+| 今回の判断 | `select`。構成選択を先に示すガイドへ再構成 | `retain`。重要性は維持し、P3と同時に開発しない |
 
 P4の問題の反復性は[既存のATLAS調査](mitre-atlas-pattern-discovery-2026-08.md#p4-untrusted-content-to-action-containment)で整理済み。
 今回確認した[MSRCの多層防御の説明](https://www.microsoft.com/en-us/msrc/blog/2025/07/how-microsoft-defends-against-indirect-prompt-injection-attacks)も、外部入力の誤解釈と、認可・送信制御等による影響制限を分けている。
@@ -174,72 +176,32 @@ P4を不採用にする判断ではなく、最初に扱う独立した境界を
 
 ## P3: Audience-bound Downstream Delegation
 
-- 配置: [`mcp/audience-bound-downstream-delegation`](../domains/mcp/audience-bound-downstream-delegation/README.md)。`select`、本文は`draft`。
-- 繰り返し発生する設計問題: MCP ServerやTool brokerが受信tokenを異なる下流APIへ転送する、
-  または広いService Credentialを使用し、Confused Deputyや権限増幅を起こす。
-- 主なTrust Boundary: MCP ClientからMCP Server、MCP Serverからdownstream API、inbound
-  tokenからtoken exchange、Tool identityからresource server。
-- Abuse Case: MCP向けtokenを別audienceのAPIへ転送する、共有administrator credentialを
-  使用する、またはclient scopeを無視して下流resourceへアクセスする。
-- Security Invariant: 下流で行使される権限は、起点主体の委任範囲、MCP Toolの許可範囲、
-  下流resource policyの共通部分を超えない。別audience向けtokenを再利用してはならない。
-- 決定論的なEnforcement Point: MCP Serverのauthorization layer、Security Token Service、
-  downstream APIの対象認可。各APIのaudience・必要scopeを確認し、設定された利用者委任方式で
-  下流用資格を得る。Gatewayでトークンを検証するだけで対象認可が完成するとはしない。
-- Negative Test: 異なるaudienceへのtoken passthrough、scope拡張、tenant置換、共有Service
-  Credentialによる迂回、期限切れtokenの再利用を拒否することを確認する。
-- 他のユースケースへの再利用可能性: Plugin broker、API gateway、Service mesh、
-  Agent-to-Agent delegation、OAuth連携、内部Microserviceへ再利用できる。
-- 既存Patternへ統合できない理由: P1はmodel requestからTool実行までを扱うが、本候補は
-  Tool brokerから別resource serverまでの多段委任を扱う。Token audience、token exchange、
-  downstream principal、delegation chainという独立した境界とテストが必要になる。
+この見出し・配置パスは旧参照を維持する。現在の範囲は**MCPの接続構成と、下流APIを呼ぶ主体の選択**である。
 
-### P3の最初の範囲：担当注文の照会を下流APIへ引き継ぐ
+- 配置：[PATTERN-MCP-001](../domains/mcp/audience-bound-downstream-delegation/README.md)。`select`、本文は`draft`。
+- 反復する問題：MCPを挟む際、誰の権限で下流APIを呼ぶかが曖昧になり、広いサービス資格や別人の資格で実行する。不要な共有サービスを設けると、資格の集中・利用者分離・公開入口の管理責任も増える。
+- 入力：個人端末のMCPから管理APIを利用する構成、共有HTTP型MCPからAPIへ委任する構成、無人のサービスアプリ。Control一覧ではなく異なる主体・配置・資格管理境界を比較する。
+- 不変条件：選んだ主体の許可範囲内で実行し、資格の利用先と要求・主体・返却先の対応を保つ。判断不能時に権限を広げない。
+- 強制箇所：OS・起動設定、資格管理、MCPの操作境界、下流APIの対象認可。リモートなら入口認可と利用者別の資格・応答分離も必要。
+- 確認：権限外対象、資格の取り違え、意図しないサービス主体への切替、別宛先への送信、失効・障害を構成別に試す。
+- 隣接境界：P1は個々の操作認可、P2は検索本文の開示。P3は実行場所・主体・資格の保持と利用の選択。任意コードや端末侵害全体の隔離はP13・P14等の別候補で扱う。
 
-会社Aの担当者Aが注文1001を照会し、HTTP型MCPサーバーが本人の委任で注文APIを呼ぶ。
-注文APIの既存認可が、他社の9001・同じ会社の担当外1003を拒否する。
-**入口だけOAuth、下流は共通管理者という構成を避け、本人のアクセス制御をサービス間で保つ。**
+### 範囲変更の経緯
 
-| 決めた項目 | 開発範囲 |
+2026-10-23にHTTP型MCPから管理下APIへ本人の委任を引き継ぐ範囲で開発着手の承認を得た。
+2026-10-25、ユーザーが想定したOkta MCP Serverのローカル直接認証と区別し、構成選択を先に行う共通方針とP3の書直しを明示的に指示した。
+これを現在の範囲への開発承認として記録する。本文の技術レビュー完了とは扱わない。
+
+| 構成 | 現在の扱い |
 |---|---|
-| 対象 | 利用者のいるHTTP型MCP → 管理下の注文APIへの読取り。既存APIの利用者・注文認可を活用する |
-| 根拠情報 | 検証済みの利用者資格、API側の所属・注文権限、管理された接続先・委任設定 |
-| 強制箇所 | MCP入口の資格・ツール認可、MCP側の本人と下流資格の対応、注文APIの資格検証・対象認可 |
-| 主例 | Entra OBOとMSALで下流用資格を取得。①要求 → ②MCPの確認 → ③資格取得 → ④API呼出し → ⑤APIの対象認可を追う |
-| 対象外 | stdio、無人バッチ、任意の第三者SaaS、返金・決済。タスク単位の追加制限はP1との組合せ |
+| ローカルstdio＋本人認証 | 主例。OktaのDevice Authorizationで下流用資格を直接取得する流れ |
+| サービスアプリ資格 | 別の主体として比較。本人の権限で動くとは扱わない |
+| リモートHTTP＋本人の対応付け | 中央提供が必要な場合の選択肢。OBOは委任対応APIを使う場合の一例 |
 
-利用者が通常読める1002を「今回の依頼外だから拒否する」条件は、最初の計画から分離した。
-OAuthによる本人の委任と、エージェントに任せたタスクの範囲を混同しない。
-MCPへ注文の権限表を複製することも要求しない。
-
-**二つの構成での再利用根拠：** MCPのHTTPプロキシ型構成と、従来のWeb API A → API Bの利用者委任。
-前者はMCP公式仕様、後者はEntra OBO公式資料で境界を確認した。実インシデントの件数・製品試験の証拠ではない。
-P1は操作可否、P2は検索本文の開示、P3は別APIへ渡る資格と主体の対応を扱う。
-
-### 成果物と確認方法
-
-- [Pattern本文](../domains/mcp/audience-bound-downstream-delegation/README.md)：一件の注文照会、図、照合責務、OBOの要点、運用・限界・参照情報。
-- [確認用チェックシート](../domains/mcp/audience-bound-downstream-delegation/negative-tests.md)：正常系、別宛先・別人の資格、権限外注文、失効・障害。操作・期待結果・証拠・結果欄と依頼例を提供。
-
-下流用資格の取得は対象認可・即時失効・タスク制限を自動で完成させるものではない。
-Entra OBOは利用者委任の一方式であり、app-onlyへ適用しない。RFC 8693のToken Exchangeとは要求形式が異なり、MCP全実装にいずれかの採用を義務付ける説明にもしない。
-詳細は本文を正本とし、この選定記録へ重複した図・チェックリストを置かない。製品試験は未実施。
-
-### 一次資料の確認範囲
-
-確認日：2026-10-23。以下は仕様・製品説明の確認であり、連携の動作検証ではない。
-
-| 一次資料 | 参照状態と、今回確認したこと |
-|---|---|
-| [MCP Authorization 2025-11-25](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) | [2025-11-25公開の仕様版](https://blog.modelcontextprotocol.io/posts/2025-11-25-first-mcp-anniversary/)を参照。HTTP向け認可、宛先検証、入力トークンのパススルー禁止。最新版という主張やRepository全体の新版採用はしない |
-| [MCP Security Best Practices](https://modelcontextprotocol.io/docs/2025-11-25/tutorials/security/security_best_practices) | 版付き入口から到達する公式補足ガイド。トークンパススルーと代理権限の濫用を区別する。独立した規格の成熟度認定ではない |
-| [Microsoft Entra OBO](https://learn.microsoft.com/en-us/entra/identity-platform/v2-oauth2-on-behalf-of-flow) | 更新型の製品資料、表示更新日2025-01-04。利用者の委任、API A用とAPI B用のトークン、同意・適用制約。SDK版は未選定 |
-| [RFC 8693](https://www.rfc-editor.org/rfc/rfc8693.html) | 2020-01公開、Standards Track。Token Exchangeの要求・宛先・権限を参照。交換サービス固有の認可方針を自動で保証するものではない |
-| [MSRCの間接Prompt Injection対策](https://www.microsoft.com/en-us/msrc/blog/2025/07/how-microsoft-defends-against-indirect-prompt-injection-attacks) | 2025-07-29公開のベンダー解説。P4の比較材料として使用 |
-
-2026-10-23、OAuthで下流まで本人の権限が引き継がれる場合は構成を簡潔にする議論を経て、ユーザーが「これまでの議論も踏まえP3の実装をすすめてくれ」と指示した。
-これを以下の候補範囲への承認として`select`へ移行した：利用者のいるHTTP型MCP、管理下の注文APIへの読取り、本人の委任と既存APIの対象認可、タスク制限はP1への補足。
-作成した本文の技術レビュー承認とは区別し、P3は`draft`、P2も`draft`を維持する。
+一次資料の版・状態・採用上の注意は[本文の参照情報](../domains/mcp/audience-bound-downstream-delegation/README.md#7-参照とレビュー情報)に集約する。
+Oktaの更新型README・認証処理、MCPの2025-11-25仕様、OktaのOAuth資料、Entra OBO資料を使用し、製品間の相互接続や安全性の実証とはしない。
+[構成別の確認用チェックシート](../domains/mcp/audience-bound-downstream-delegation/negative-tests.md)は未実施。
+タスク単位の追加制限はP1との組合せとし、P2は`draft`、P4は`retain`を維持する。
 
 ## P4: Untrusted Content-to-Action Containment
 
@@ -408,7 +370,7 @@ P18 Resource budgets
 - 開発対象として選定済み: P1（本文は`reviewed`）、P2・P3（本文は`draft`、人による本文レビュー待ち）。
 - ATLAS evidenceにより候補を強化する: P1、P4、P6。
 - 計画候補のscopeと配置を再検討する: P4。
-- P3は本人の下流アクセスに範囲を絞って作成した。P4・P5・P6は候補として保持する。
+- P3は構成・実行主体の選択を先に行うガイドへ再構成した。P4・P5・P6は候補として保持する。
 - ATLASから新規候補として保持する: P7〜P15、P17〜P19。
 - System boundary Reviewから新規候補として保持する: P20。ただし独立したEvidenceを追加するまで
   Pattern開発対象には選定しない。
