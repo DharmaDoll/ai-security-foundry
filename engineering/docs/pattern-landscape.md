@@ -91,7 +91,7 @@ P7からP19の詳細比較は、上記ATLAS discovery recordを正本とする�
 業務例、不変条件・反証テスト、隣接候補との境界をまとめた。同日の対話で方針と開発着手の
 了承を得て`select`へ移行し、[Pattern本文](../domains/agents/secure-tool-execution/README.md)を作成した。
 開発者向けガイド・Mermaid図・要点サンプルを中心とし、正負のケースは読者向け確認事項として扱う。
-本文は2026-10-23の人によるレビュー承認で`reviewed`となった。対象版と範囲は[レビュー記録](../domains/agents/secure-tool-execution/README.md#human-review-2026-10-23)を参照。実行検証は未実施。
+2026-10-23の対象版は人によるレビュー承認を受けた。2026-10-25に照会・提案を主例へ改訂し、現在版は再レビュー待ちの`draft`。対象版と範囲は[レビュー記録](../domains/agents/secure-tool-execution/README.md#human-review-2026-10-23)を参照。実行検証は未実施。
 
 
 - 暫定配置: `agents/secure-tool-execution`
@@ -367,7 +367,7 @@ P18 Resource budgets
 
 ## 現時点の比較結果
 
-- 開発対象として選定済み: P1（本文は`reviewed`）、P2・P3（本文は`draft`、人による本文レビュー待ち）。
+- 開発対象として選定済み: P1・P2・P3（本文は`draft`。P1は改訂後の再レビュー、P2・P3は人による本文レビュー待ち）。
 - ATLAS evidenceにより候補を強化する: P1、P4、P6。
 - 計画候補のscopeと配置を再検討する: P4。
 - P3は構成・実行主体の選択を先に行うガイドへ再構成した。P4・P5・P6は候補として保持する。

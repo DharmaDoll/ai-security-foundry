@@ -37,7 +37,7 @@ Use `templates/security-pattern.md` for new patterns.
 
 ### [Agents](domains/agents/README.md)
 
-- [Agentのツール実行を、利用者の権限内に閉じ込める](domains/agents/secure-tool-execution/README.md) — `reviewed`。注文照会・返金の構成図、具体技術、処理例と[Negative testチェックシート](domains/agents/secure-tool-execution/negative-tests.md)。
+- [Agentのツール実行を、利用者の権限内に閉じ込める](domains/agents/secure-tool-execution/README.md) — `draft`（構成選択を改訂し、再レビュー待ち）。注文照会・返金の構成図、具体技術、処理例と[Negative testチェックシート](domains/agents/secure-tool-execution/negative-tests.md)。
 
 ### [RAG](domains/rag/README.md)
 
