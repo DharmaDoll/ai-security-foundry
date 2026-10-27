@@ -2,7 +2,7 @@
 title: "Web SecurityからAgent Securityへ：ParameterではなくCapability Flowを追う"
 document_kind: "cross-cutting-insight"
 status: "draft"
-last_updated: "2026-09-14"
+last_updated: "2026-10-27"
 ---
 
 # Web SecurityからAgent Securityへ：ParameterではなくCapability Flowを追う
@@ -119,6 +119,27 @@ Ingress
 Negative Testは「悪意あるPromptを入力したか」だけで終わらせない。Schemaに適合する攻撃値、Tool出力、保存済み
 Memory、共有Queue、子Agent等から同じ副作用へ到達できないかを試す。
 
+## 7つの接点で経路の抜けを探す
+
+[ユーザ提供メモの技術改訂版と7境界図](../../sources/user-provided/2026-10-27-agentic-seven-trust-boundaries.md)は、
+経路の探索を助ける。これはOWASPの公式な7分類と確認できたものではなく、Repositoryで評価・補正した補助モデルである。
+Component間の線があることと、Security Boundaryが実際に強制されることを区別する。
+
+| 接点 | 何が判断・権限へ影響するか | 確認する強制点 |
+|---|---|---|
+| ① User / Application | 本人の依頼と、持ち込まれた外部文書の混同 | 受付処理が本人・Tenant・依頼の範囲を確定する |
+| ② Application / LLM | Contextがモデルの選択へ影響し、提供先にも開示される | Context組立て時に送信可能な情報を選び、秘密を除く |
+| ③ LLM / Agent Logic | 出力が計画・Tool引数へ変わる | 受渡しの形式・値域検証と、モデル外の操作認可を分ける |
+| ④ Agent / Tool & API | 操作候補が実行要求になり、応答が次の候補へ戻る | 実行側で主体・Task・対象・引数・承認を確認し、応答の用途を制限する |
+| ⑤ Tool / External System | Toolの権限で実資源へ作用する | 下流資源でも操作・読取り範囲・送信先を制限する |
+| ⑥ Inter-Agent Communication | 委任と応答が別Agentの能力へ到達する | 受信側で委任Scope・期限・再委任を確認する |
+| ⑦ Memory & RAG | 保存された内容が将来のContext・操作候補へ戻る | 書込み、利用状態への昇格、検索時の開示を別々に認可する |
+
+各行に実Systemの主体・根拠Data・Enforcement Pointを当てはめる。7項目に収まるように構成を変えず、
+直接API、Queue、Error、再試行、共有State等の迂回路も追う。
+実効的な境界がない接点は、その事実を記録して権限を減らすか強制点を設ける。
+この一覧は人への表示・承認、設定更新、停止・復旧までを網羅するものではない。
+
 ## AISVS C9.3から見える保証層
 
 AISVS C9.3のRequirementを具体的なSystemへ当てはめると、Failureの場所を次のように分けて考えられる。
@@ -152,6 +173,19 @@ ReaderがEmail Credentialを持たなくても、ExecutorがReaderの自由Text�
 
 ここでSchema検証は必要になり得るが、Schema適合は認可を意味しない。正しい形式の攻撃値も存在する。
 
+同じ問題はRAGでも起きる。正規の検索Toolが攻撃者の編集できる文書を返し、その文書中の指示が
+次のContextを経て送信要求へ変わる。検索・Tool認証が正常でも、Executorが宛先と開示内容を確認しなければ
+正規Credentialで流出する。⑦→②→③→④→⑤の経路に①が必須なわけではなく、Credential窃取や権限昇格も要らない。
+文書の受信自体と、その内容を操作の根拠にすることを区別する。
+
+宛先が正しくても、担当者が読める社内情報をその相手へ渡してよいとは限らない。
+送信先だけでなく開示内容を制限し、用途が調査・下書きで足りるならAgentに送信能力を持たせない。
+人が送信する構成でも、下書きに誘導される危険と承認画面の責任は残る。
+
+検証では、正常な許可操作とSchema適合の不正要求を対にし、モデルの拒否文ではなく実行側の拒否と副作用の不在を確認する。
+署名済みMemoryや認証済みAgentから要求しても同じ制限が保たれるかを試す。
+具体的な操作・期待結果・証拠・未実施状態は[改訂メモの検証例](../../sources/user-provided/2026-10-27-agentic-seven-trust-boundaries.md#正常系negative-testの確認例)を参照する。
+
 ## 誤解しやすい点と限界
 
 - Agent Securityを既存Web Securityの用語へ置き換えるだけでは、Model固有の失敗を捉えきれない。
@@ -166,6 +200,7 @@ ReaderがEmail Credentialを持たなくても、ExecutorがReaderの自由Text�
 - 根源は既存Securityと連続しているが、非信頼入力から副作用までの経路が長く動的になった。
 - AgentはParameterではなく、非決定的なInterpreter兼Dispatcherである。
 - Parameter一覧だけでなく、Influence FlowとCapability Graphを重ねて見る。
+- 接点の受信を拒むだけでなく、情報が操作の根拠へ変わる場所と、権限を使う場所を確認する。
 - Schema、Prompt、Process分離を認可や能力分離の代替にしない。
 - Negative Testは各Data入口から許可されない副作用までをEnd-to-endで試す。
 
@@ -177,5 +212,7 @@ ReaderがEmail Credentialを持たなくても、ExecutorがReaderの自由Text�
 - [C9 Family overview](../../controls/control-records/c09-orchestration-and-agentic-security/README.md)
 - [C9.3.4学習ノート](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.4-runtime-enforcement-of-tool-manifests/learning.md)
 - [C9.3.5学習ノート](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.5-isolate-untrusted-data-processing-from-tool-capabilities/learning.md)
+- [C9.3.6 Control](../../controls/control-records/c09-orchestration-and-agentic-security/v1.0-c9.3.6-architectural-separation-of-untrusted-tool-outputs/README.md)：Tool出力の戻りから次操作への経路を詳しく確認する。
+- [ユーザ提供メモの技術改訂版](../../sources/user-provided/2026-10-27-agentic-seven-trust-boundaries.md)：2026-10-27に7接点・攻撃経路の補足を得た起点。正式なMappingではない。
 - [Repository design](../repository-design.md)
 - [AISVS v1.0 C9要件本文](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)

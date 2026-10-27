@@ -71,6 +71,33 @@ Insightが当該Controlだけに属する、または正式なMappingが成立�
 | [Authorityの最小化と完全仲介](../../../docs/insights/minimize-and-mediate-authority.md) | C9.2.5、C9.3.1、C9.3.4：不要な能力を取り除き、残した操作経路で認可を迂回できないか確認する。 |
 | [Security Artifactの保証範囲](../../../docs/insights/security-artifacts-have-bounded-claims.md) | C9.3.2〜C9.3.4：署名・Schema・Manifest等が示せる保証を、内容や判断の安全性へ広げない。 |
 
+## 境界を跨ぐ行動を組み合わせて読む
+
+[7接点の図と技術改訂メモ](../../../sources/user-provided/2026-10-27-agentic-seven-trust-boundaries.md)で
+文書・Tool応答・Memory・別Agentからの情報が操作へ戻る経路を確認し、
+[Capability FlowのInsight](../../../docs/insights/web-security-to-agent-capability-flow.md)で実Systemの主体と権限を重ねる。
+この補助モデルはAISVSの追加要件やOWASP公式の7分類ではない。既存の学習履歴・完了状態を変更するものでもない。
+
+「正規の検索結果に含まれた指示が、外部送信要求へ変わる」例を、次の順で読む。
+
+1. **Tool出力の取扱い（C9.3.2・C9.3.5・C9.3.6）**：形式検証と、出力を次の操作へ利用できる範囲の制限を分ける。
+2. **実行認可（C9.5.1・C9.5.3・C9.5.6）**：モデルの提案を、現在の本人・対象・引数のPolicyで確認する。
+3. **委任（C9.5.2・C9.5.5）**：別Agentや下流へ渡しても、利用者の委任範囲を広げない。
+4. **高影響操作の承認（C9.2.2・C9.2.8・C9.2.10）**：表示した内容・承認対象・実行内容と連鎖の影響を結ぶ。
+
+これは読む順序であり、実装で認可や承認を後回しにする指示ではない。各検証は必要な開示・副作用より前に行う。
+Memoryの書込み・利用・失効は[信頼昇格Insight](../../../docs/insights/trust-is-granted-at-promotion.md)からC8等へ進む。
+
+レビューで使う依頼例：
+
+> 対象Releaseと検証環境を固定して、検索Toolの応答に不正宛先への送信指示を入れた場合の処理を説明してください。
+> どのComponentが、どのPolicyを根拠に止めるか、正常な送信と拒否の記録を示してください。
+
+その証拠から、出力の扱いと操作認可が別の強制点で維持されたかを確認する。
+「モデルが拒否する」という回答だけなら、不正な操作候補を実行側へ直接渡しても拒否され、下流で送信されない証拠を求める。
+具体的な宛先・本文・委任の証拠依頼と保証範囲は[Family概要](../../control-records/c09-orchestration-and-agentic-security/README.md#境界を跨ぐ攻撃経路から読む)にまとめる。
+この例は製品試験未実施であり、隣接要件の保証を一つのRequirementの合否へ混ぜない。
+
 ## Sources
 
 採用済みAISVS v1.0、固定Revision `78775233666a2022dcfb82037e5e029116955c00`。

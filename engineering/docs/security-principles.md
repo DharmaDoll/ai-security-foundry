@@ -78,6 +78,12 @@ Clearly describe:
 
 Avoid designing controls for an abstract "AI system" without a concrete execution context.
 
+Before adding controls, ask whether the use case needs autonomous execution at all.
+If research and drafting suffice, remove the agent's sending capability and its path
+to sending credentials. Human-operated delivery still needs disclosure checks and
+an accurate review of the actual recipient and content. Explain which requirement
+justifies retaining a more capable design and who owns its residual risk.
+
 ## Threat Modeling
 
 Threat analysis should precede mitigation design.
@@ -111,6 +117,33 @@ Consider relevant threats including, where applicable:
 Use MITRE ATLAS, OWASP risk taxonomies, and other authoritative sources when they improve threat understanding.
 
 Do not force every pattern to map to every threat framework.
+
+### Follow information into authority
+
+For each connection, identify who can influence the incoming data, which decisions
+it can affect, and whose authority will produce the side effect. A component boundary
+in a diagram is not evidence of enforcement. Include tool responses, errors,
+inter-agent replies, memory reuse, and indirect paths through queues or shared state.
+
+| Decision | Trusted basis | Enforcement point |
+|---|---|---|
+| What enters model context | Current access policy, authenticated principal and tenant, approved disclosure scope | Retrieval and context assembly before disclosure to the model provider |
+| Which action may execute | Current policy, initiating principal and task, target and parameter constraints | Execution component before the side effect; resource-side controls constrain downstream access too |
+| Whether approval permits this action | Approval issued by an authorized actor for the actual target, recipient and content | Execution-time validation; changed actions require renewed approval |
+| What another agent may do | Authenticated delegation with bounded scope, audience and lifetime | Receiving agent's execution boundary, without expanding delegated authority |
+| How stored data may be reused | Provenance, permitted use, current access and revocation state | Separate write, promotion and retrieval gates |
+
+Schema validation establishes structure, not authorization. Authentication and
+signatures do not establish content safety; read-only access can still disclose data.
+Prompt hierarchy and filtering are supporting measures, not access-control decisions.
+Use observable requests, policy decisions and results for verification, without
+requiring access to internal chain-of-thought. Correlate these records while excluding
+secrets and unnecessary sensitive content.
+
+The [capability-flow insight](../../docs/insights/web-security-to-agent-capability-flow.md)
+explains this review method. The [edited user-provided seven-boundary note](../../sources/user-provided/2026-10-27-agentic-seven-trust-boundaries.md)
+provides a diagram and positive/negative verification examples. Its seven connections
+are a review aid, not an exhaustive taxonomy or an official framework requirement.
 
 ## Security Invariants
 

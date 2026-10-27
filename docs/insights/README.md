@@ -72,6 +72,11 @@ Rawな会話記録や単一Requirementの言い換えは置かない。同じ洞
 
 ## Insight関係索引
 
+2026-10-27の[ユーザ提供メモの技術改訂版](../../sources/user-provided/2026-10-27-agentic-seven-trust-boundaries.md)を起点に、
+[Capability Flow](web-security-to-agent-capability-flow.md)へ7接点と連鎖攻撃のレビュー方法を、
+[信頼昇格](trust-is-granted-at-promotion.md)へ保存・昇格・検索時認可・利用停止の区別を補足した。
+提供メモは外部Frameworkの正本ではなく、対話で評価・補正した資料である。
+
 この表は「何から着想したか、どこへ辿れるか」を示す入口であり、
 [正式なMapping評価](../../mappings/README.md)ではない。
 「起点（Control／学習）」は代表例で、各Insight本文の「起点となった学習記録」に関連記録を記す。
