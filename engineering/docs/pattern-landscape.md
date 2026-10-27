@@ -1,7 +1,7 @@
 # Engineering Pattern Candidate Landscape
 
 - Status: discovery
-- Last updated: 2026-10-25
+- Last updated: 2026-10-27
 - Scope: Pattern候補の比較のみ
 
 ## 目的と境界
@@ -17,6 +17,7 @@ Control IDやFramework coverageを候補の発見根拠にせず、Controls／Fr
 P1を選定し、[安全なツール実行のPattern](../domains/agents/secure-tool-execution/README.md)を作成した。
 続いてP2を選定し、[検索時認可のPattern](../domains/rag/secure-multi-tenant-retrieval/README.md)を`draft`として作成した。
 P3とP4の比較後、利用者本人として下流APIを呼ぶ範囲でP3の開発着手が承認された。[MCPの構成・実行主体を選ぶPattern](../domains/mcp/audience-bound-downstream-delegation/README.md)を`draft`として作成した。
+2026-10-27、ユーザーのP4実装指示を受け、顧客への情報開示に絞って選定し、[返信材料と送信先を制限するPattern](../domains/agents/untrusted-content-to-action-containment/README.md)を`draft`として作成した。既存Patternの本文レビュー完了を意味しない。
 
 ## 入力ユースケース
 
@@ -64,7 +65,7 @@ Negative Testが必要なら、別候補として保持する。複数候補で�
 | P1 | Deterministically Authorized Tool Execution | Agentが社内APIを呼び出す | `agents/secure-tool-execution`を支持 |
 | P2 | Authorization-aware Retrieval Isolation | RAGが複数テナントを検索する | `rag/secure-multi-tenant-retrieval`を支持 |
 | P3 | MCP Access Configuration and Acting Identity（旧 Audience-bound Downstream Delegation） | MCP Serverが下流APIへアクセスする | `mcp/audience-bound-downstream-delegation`を選定・作成 |
-| P4 | Untrusted Content-to-Action Containment | AgentがWebを読んで操作する | `llm/indirect-prompt-injection-containment`の境界を再検討 |
+| P4 | Untrusted Content-to-Action Containment（開発範囲：顧客への情報開示） | 社内調査から顧客への返信を作るAgent | `agents/untrusted-content-to-action-containment`を選定・作成。一般的な間接Prompt Injection全体には広げない |
 | P5 | Authorized Memory Lifecycle | 長期memoryへ入力を保存する | 新規候補 |
 | P6 | Persistent Context Poisoning Containment | 長期memoryへ入力を保存する | 新規候補 |
 | P7 | Provenance-Bound RAG Ingestion | ATLASのRAG poisoning Case Studies | P2とはingestionとretrievalで分離 |
@@ -201,11 +202,13 @@ P4を不採用にする判断ではなく、最初に扱う独立した境界を
 一次資料の版・状態・採用上の注意は[本文の参照情報](../domains/mcp/audience-bound-downstream-delegation/README.md#7-参照とレビュー情報)に集約する。
 Oktaの更新型README・認証処理、MCPの2025-11-25仕様、OktaのOAuth資料、Entra OBO資料を使用し、製品間の相互接続や安全性の実証とはしない。
 [構成別の確認用チェックシート](../domains/mcp/audience-bound-downstream-delegation/negative-tests.md)は未実施。
-タスク単位の追加制限はP1との組合せとし、P2は`draft`、P4は`retain`を維持する。
+タスク単位の追加制限はP1との組合せとする。このP3選定時点ではP2は`draft`、P4は`retain`。その後のP4選定は次節に記録する。
 
 ## P4: Untrusted Content-to-Action Containment
 
-- 暫定配置: `agents/untrusted-content-to-action-containment`
+以下は初期候補の観察である。実際に開発した範囲は、この節後半の「2026-10-27の選定」に限定する。
+
+- 選定した配置: [`agents/untrusted-content-to-action-containment`](../domains/agents/untrusted-content-to-action-containment/README.md)。IDは`PATTERN-AGENTS-002`、状態は`draft`。
 - 繰り返し発生する設計問題: Web、メール、文書、Tool outputなどの非信頼content内の命令が
   model planへ混入し、外部操作や機密情報送信へ変換される。
 - 主なTrust Boundary: external contentからBrowser／retriever、取得contentからmodel context、
@@ -225,6 +228,23 @@ Oktaの更新型README・認証処理、MCPの2025-11-25仕様、OktaのOAuth資
   provenance、read／write capability分離、Egress制御が必要なため、P1のNegative Testだけでは
   完結しない。計画中の`llm/indirect-prompt-injection-containment`とは重なるが、Pattern化前に
   一般的なPrompt InjectionではなくContent-to-Action境界へscopeを絞るか再検討する。
+
+### 2026-10-27の選定：社内で読める情報を、顧客へ何でも送らせない
+
+上記は当初の広い候補。開発対象は「社内情報を調べて顧客へ返信するAgent」に絞った。
+ユーザーがこの範囲の提案に続けて「P4の実装を進めなさい」と指示したことを、候補範囲と開発着手の承認として記録する。本文の技術レビューや`recommended`への承認には流用しない。
+
+| 観察・一次資料 | システムと失敗経路 | 再利用する判断・限界 |
+|---|---|---|
+| [Zendesk Ticket Comments](https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/)（API v2、更新型、2026-10-27確認） | サポート記録には公開コメントと内部メモが共存する。内部情報を読める担当者の返信生成が、その情報を顧客へ公開する経路になる | 閲覧対象と公開対象を分ける業務構造の根拠。Zendeskでの事故や防御の実証を主張しない |
+| [AnthropicのブラウザAgent研究](https://www.anthropic.com/research/prompt-injection-defenses)（2025-11-24公開、2026-10-27確認） | メールを読み返信案を作る個人向けAgentに、外部からのメールが機密メールの転送を指示する例 | 非信頼の本文を開示先・目的の決定根拠にしない境界を再利用できる。研究上の例であり、このPatternの実地検証ではない |
+
+- **独立した結果:** P1の操作許可、P2の閲覧許可が両方成立しても、許可された相手へ社内限定情報を送る漏洩は残る。P4は情報を受け取る相手と開示可能な材料を対応付ける。
+- **強制点と反証:** サーバーが業務データから返信材料を選び直し、下書き入力・本人の確認・実際の送信へ対応付ける。担当者には読める社内メモを、正規顧客への返信に混ぜる試験が反証になる。
+- **再利用性:** サポート返信と個人向けメール処理に、読取り・外部開示の分離、確認済み宛先、内容に結び付く確認を適用できる。主例はWebアプリの固定ツール構成とし、任意ブラウザ操作の実装全体には広げない。
+- **統合しない理由:** 操作ごとの認可と承認はP1を再利用するが、返信材料の開示可否とコンテキストの分離は別の設計責務。全入力の意味的な汚染追跡、汎用sandbox、永続memoryの汚染は別候補に残す。
+- **適用しない例:** 公開情報だけを固定形式で返す処理では、内部情報から外部開示への境界がない。逆に、内部情報から自由文を自動送信し完全な非漏洩保証を求める構成には、本例の人による確認は十分でない。
+- **Decision:** `select`。本文・実装ノート・正負のチェックシートを作成。独立した製品実証、本文の人によるレビュー、長期Ownerは未確保。Golden Patternとしての推奨は行わない。
 
 ## P5: Authorized Memory Lifecycle
 
@@ -367,10 +387,10 @@ P18 Resource budgets
 
 ## 現時点の比較結果
 
-- 開発対象として選定済み: P1・P2・P3（本文は`draft`。P1は改訂後の再レビュー、P2・P3は人による本文レビュー待ち）。
+- 開発対象として選定済み: P1・P2・P3・P4（本文は`draft`。P1は改訂後の再レビュー、P2・P3・P4は人による本文レビュー待ち）。
 - ATLAS evidenceにより候補を強化する: P1、P4、P6。
-- 計画候補のscopeと配置を再検討する: P4。
-- P3は構成・実行主体の選択を先に行うガイドへ再構成した。P4・P5・P6は候補として保持する。
+- P4は顧客への開示にscopeを絞って開発。一般的な非信頼コンテンツからの全操作誘導を、一つのPatternで扱う方針は採らない。
+- P3は構成・実行主体の選択を先に行うガイドへ再構成した。P5・P6は候補として保持する。
 - ATLASから新規候補として保持する: P7〜P15、P17〜P19。
 - System boundary Reviewから新規候補として保持する: P20。ただし独立したEvidenceを追加するまで
   Pattern開発対象には選定しない。

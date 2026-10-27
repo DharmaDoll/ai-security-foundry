@@ -38,6 +38,7 @@ Use `templates/security-pattern.md` for new patterns.
 ### [Agents](domains/agents/README.md)
 
 - [Agentのツール実行を、利用者の権限内に閉じ込める](domains/agents/secure-tool-execution/README.md) — `draft`（構成選択を改訂し、再レビュー待ち）。注文照会・返金の構成図、具体技術、処理例と[Negative testチェックシート](domains/agents/secure-tool-execution/negative-tests.md)。
+- [社内情報を読むAgentから、顧客へ渡す情報と宛先を制限する](domains/agents/untrusted-content-to-action-containment/README.md) — `draft`。調査と下書き・送信を分け、開示する材料、確認した本文、宛先を結び付ける。[実装例](domains/agents/untrusted-content-to-action-containment/implementation-notes.md)と[正常系・Negative test](domains/agents/untrusted-content-to-action-containment/negative-tests.md)。
 
 ### [RAG](domains/rag/README.md)
 

@@ -17,3 +17,5 @@ Use `templates/security-pattern.md` for new patterns.
 
 - [Agentのツール実行を、利用者の権限内に閉じ込める](secure-tool-execution/README.md) — `draft`（構成選択を改訂し、再レビュー待ち）。照会・提案で足りるかを選び、必要な場合だけ実行権限を追加する設計ガイド。
   [Negative testチェックシート](secure-tool-execution/negative-tests.md)で、越境・改ざん・失効・障害・迂回を確認する。
+- [社内情報を読むAgentから、顧客へ渡す情報と宛先を制限する](untrusted-content-to-action-containment/README.md) — `draft`。閲覧の許可と顧客への開示を分け、調査・返信材料・下書き・本人の確認・送信をつなぐ。
+  [実装例](untrusted-content-to-action-containment/implementation-notes.md)と[正常系・Negative test](untrusted-content-to-action-containment/negative-tests.md)を参照。
