@@ -153,12 +153,12 @@ API接続デモ・自動テスト・CIは任意の将来拡張。Mappingも別�
 | 成果物 | 内容・状態 |
 |---|---|
 | [本文](domains/agents/untrusted-content-to-action-containment/README.md) | 実行場所・資格保持・構成図を先に説明。Agentは下書きまで、人が既存画面で送る構成を主例に、①本人と対象 → ②返信材料 → ③下書き → ④確認 → ⑤送信を具体化 |
-| [実装ノート](domains/agents/untrusted-content-to-action-containment/implementation-notes.md) | 項目単位の開示、材料の保存例、送信内容の版と確認記録、Graphへの接続例、結果不明時の保留。定型通知は条件付きの代替構成 |
+| [実装ノート](domains/agents/untrusted-content-to-action-containment/implementation-notes.md) | 一件の実装例へ改訂。入力・担当者／顧客／注文の比較、二項目の材料作成、新規LLM要求、保存版の表示、編集との競合・一回の送信確保を疑似コードで提示。Graphは接続例として後段へ配置 |
 | [正常系・Negative test](domains/agents/untrusted-content-to-action-containment/negative-tests.md) | 読める社内メモの混入、宛先・確認記録の偽装、確認後の変更、失効、並行実行、プレビュー・別ツールによる外部通信。すべて未実施 |
 | 案内・整合性確認 | Engineering・Agents索引とLandscapeを更新。リンク、図・処理・チェックの対応、形式を確認。Mermaidの実描画と製品試験は未実施 |
 | 人による本文レビュー・Owner | 未確定。P4は`draft`。Mapping、実行可能サービス、自動テスト、CIは今回の成果物に含めない |
 
-**再開地点：** P4の構成選択と、開示可能な材料・宛先・本人が確認した内容の対応を人がレビューする。P1〜P3の保留中のレビューは維持し、次Patternの着手へ自動的には進まない。
+**再開地点：** P4の実装例について、開発者が入力の取得元・具体的な比較条件・処理の配置・拒否時の動作を読み取れるかレビューする。設計論の追加やP5の着手より、この実装ガイドの具体性を優先する。P1〜P3の保留中のレビューは維持し、次Patternの着手へ自動的には進まない。
 
 ## 1. 目的と境界
 
