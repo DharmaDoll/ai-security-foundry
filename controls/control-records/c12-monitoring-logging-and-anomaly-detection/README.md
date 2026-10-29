@@ -92,3 +92,7 @@ C12.1では、InteractionのSession相関（12.1.1）、Safety／Policy判断の
 
 開発順序は[Controls計画](../../plan.md)を参照する。各Controlを作成する際は、
 正規要件と該当SectionのAISVS Researchを個別に確認する。
+
+## MITRE ATLASとの対応
+
+[Content 2026.10の対応評価](../../atlas-mapping-review-2026-10.md#c12)で、対象Requirement・攻撃経路・対応の限界を確認できます。Mappingは`proposed`で、Family全体の網羅や製品適合を意味しません。

@@ -83,3 +83,7 @@ Similarityは関連度であり、認可、真正性、安全性、新しさの�
 - [AISVS v1.0 C8.1 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C08-Memory-and-Embeddings/C08-01-Access-Controls-Memory-RAG.md)
 - [AISVS v1.0 C8.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C08-Memory-and-Embeddings/C08-02-Embedding-Sanitization-Validation.md)
 - [AISVS v1.0 C8.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C08-Memory-and-Embeddings/C08-03-Memory-Expiry-Revocation-Leakage-Prevention.md)
+
+## MITRE ATLASとの対応
+
+[Content 2026.10の対応評価](../../atlas-mapping-review-2026-10.md#c8)で、対象Requirement・攻撃経路・対応の限界を確認できます。Mappingは`proposed`で、Family全体の網羅や製品適合を意味しません。

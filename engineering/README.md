@@ -52,6 +52,11 @@ Engineeringの中心は、開発者が自分のシステムへ組み込める実
 
 - [MCPの接続構成と、下流APIを呼ぶ主体を選ぶ](domains/mcp/audience-bound-downstream-delegation/README.md) — `draft`。ローカルの直接認証・サービスアプリ・リモート委任の選び方、資格の保持場所と[正常系・Negative testチェックシート](domains/mcp/audience-bound-downstream-delegation/negative-tests.md)。
 
+### [Memory](domains/memory/README.md)
+
+- [本人の回答設定を保存し、次の会話へ安全に渡す](domains/memory/authorized-memory-lifecycle/README.md) — `draft`。既存Web APIとDBで本人・会社・期限・版を照合し、取消し後の古い保存要求による復活を防ぐ。[実装例](domains/memory/authorized-memory-lifecycle/implementation-notes.md)と[正常系・Negative test](domains/memory/authorized-memory-lifecycle/negative-tests.md)。
+- [案件の引継ぎメモを、翌日の指示や承認にしない](domains/memory/persistent-context-poisoning-containment/README.md) — `draft`。自由文要約に実際の全入力を結び付け、保存・再利用で元資料とメモの版を照合する。[実装例](domains/memory/persistent-context-poisoning-containment/implementation-notes.md)と[正常系・Negative test](domains/memory/persistent-context-poisoning-containment/negative-tests.md)。
+
 ## Navigation
 
 - 横断的なEngineering資料と調査記録: [`docs/README.md`](docs/README.md)

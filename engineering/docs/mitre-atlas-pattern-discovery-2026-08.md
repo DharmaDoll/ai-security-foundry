@@ -1,5 +1,8 @@
 # MITRE ATLAS v2026.08 Pattern Discovery
 
+Historical snapshot: IDs and findings below remain tied to Content 2026.08.
+For the later change assessment, see [Content 2026.10 impact](mitre-atlas-impact-2026-10.md).
+
 ## Research record
 
 - Analysis date: 2026-09-03

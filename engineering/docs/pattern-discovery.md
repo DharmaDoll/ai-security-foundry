@@ -269,5 +269,19 @@ For an ATLAS discovery pass:
 10. re-run the discovery diff when a later ATLAS release adds or materially changes
     Techniques or Case Studies.
 
-The current applied analysis is documented in
+With Format 6.1.0, also inspect Entity and Software objects without conflating
+`attributed-to`, `reported-by`, `uses`, and `implements`. Preserve the authored
+Technique maturity and Case Study date precision; do not infer maturity from an
+incident count. Key attack-chain nodes by Case Study and `step-id`, not Technique
+ID, so repeated techniques and branches survive. Consult pinned YAML when STIX
+omits reporting or activity-purpose metadata.
+
+Distinguish collection, transfer out of the system, and subsequent model
+replication. Likewise, separate credential theft from abuse of an agent's valid
+authority. These distinctions identify different enforcement points rather than
+automatically creating additional Patterns.
+
+The original applied analysis is documented in
 [`mitre-atlas-pattern-discovery-2026-08.md`](mitre-atlas-pattern-discovery-2026-08.md).
+The [2026.10 impact assessment](mitre-atlas-impact-2026-10.md) records the later
+changes, remaining candidate gaps, and limits of this follow-up review.

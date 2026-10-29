@@ -51,3 +51,7 @@ Researchの複数Scanner、署名規格、固定版参照やProtocolの推奨は
 - [AISVS v1.0 C6正規要件](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C06-Supply-Chain.md)
 - [C6.1 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-01-Model-Artifact-Integrity.md)
 - [C6.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C06-Supply-Chain/C06-02-AI-BOM-Supply-Chain-Monitoring.md)
+
+## MITRE ATLASとの対応
+
+[Content 2026.10の対応評価](../../atlas-mapping-review-2026-10.md#c6)で、対象Requirement・攻撃経路・対応の限界を確認できます。Mappingは`proposed`で、Family全体の網羅や製品適合を意味しません。

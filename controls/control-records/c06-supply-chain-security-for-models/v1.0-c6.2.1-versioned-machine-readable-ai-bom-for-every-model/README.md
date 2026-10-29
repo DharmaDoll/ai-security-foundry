@@ -65,7 +65,9 @@ C6.2.2はBOM署名、C6.2.3は欠落時のBuild失敗。BOMの存在はどちら
 ## Threat and failure-mode rationale
 
 Model名だけのSBOMにDatasetや由来情報がなく、供給元問題の影響を追えない。
-外部脅威IDとの厳密なMappingは未評価。Research内のMappingを自動継承しない。
+ATLAS Content `2026.10`の`AML.T0010`との関係を`proposed`として評価した。
+[対応の根拠・範囲・限界](../../../atlas-mapping-review-2026-10.md#c6)を参照。
+正本はCatalogの`threat_mappings`であり、ResearchのMappingの転載や製品適合の主張ではない。
 
 ## Verification
 
@@ -125,3 +127,4 @@ BOMは記載の真偽やSourceの無害性を証明しない。Providerが非開
 | 日付 | 変更 | 根拠 | 証拠 |
 |---|---|---|---|
 | 2026-10-18 | 初版。要件固有の保証境界・性質・正負試験・証拠を定義 | 固定版AISVS v1.0と対応Research、Repository解釈 | 本文の検証設計。実製品試験は未実施 |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c6)。人のレビュー・製品試験は未実施 |

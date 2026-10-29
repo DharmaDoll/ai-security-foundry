@@ -79,9 +79,9 @@ Security Invariantは守るべき性質、Enforcement Pointはそれを実際に
 
 仲介がユーザContextを失い広い資格情報で操作するか、攻撃者が別Audience・TenantのTokenを転用する。
 
-この保証の分析では外部脅威IDを付与する追加価値を確定していない。
-攻撃者能力・失敗経路を具体化し、`threat_mappings`は空とする。
-ResearchのMappingを自動採用せず、必要時に一次Sourceの固定版で別途評価する。
+ATLAS Content `2026.10`の`AML.T0053`との関係を`proposed`として評価した。
+[対応の根拠・範囲・限界](../../../atlas-mapping-review-2026-10.md#c9)を参照。
+正本はCatalogの`threat_mappings`であり、ResearchのMappingの転載や製品適合の主張ではない。
 
 ## Verification
 
@@ -151,3 +151,4 @@ Engineering PatternとMappingは独立して評価し、その存在を本Contro
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-09 | 解釈、適用境界、脅威、検証、証拠期待値、限界を整備 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence expectations。製品試験は未実施 |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c9)。人のレビュー・製品試験は未実施 |

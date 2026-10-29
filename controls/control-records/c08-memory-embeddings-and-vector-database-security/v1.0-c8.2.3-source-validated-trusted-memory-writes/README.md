@@ -74,7 +74,9 @@ C8.2.4はEmbedding前のRetrieval操作Content、C8.2.5は既存Memoryとの矛�
 
 悪意あるDocumentやTool Responseが「remember」「trusted source」等を含み、AgentがSummaryとして保存すると、元Injectionが消えても誤ったInstruction／Factが残る。
 
-外部脅威IDは別途Mapping評価していないため`threat_mappings`は空とする。
+ATLAS Content `2026.10`の`AML.T0080.000`、`AML.T0143`との関係を`proposed`として評価した。
+[対応の根拠・範囲・限界](../../../atlas-mapping-review-2026-10.md#c8)を参照。
+正本はCatalogの`threat_mappings`であり、ResearchのMappingの転載や製品適合の主張ではない。
 
 ## Verification
 
@@ -139,3 +141,4 @@ Sourceが正規でも内容が誤ることがあり、ValidationはTruthを保�
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-24 | 初版 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence。製品試験は未実施 |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c8)。人のレビュー・製品試験は未実施 |

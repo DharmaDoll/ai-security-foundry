@@ -125,7 +125,9 @@ Routing・管理設定の変更が存在しないとは言えない。
 「どのModelがいつ使われたか」という調査の起点を失う。Researchは、
 Registry侵害時には同じRegistryの履歴も信頼できないこと、設定変更が
 Registry外で起きることを指摘する。本書はその失敗経路を検証対象にする。
-外部の脅威IDとの厳密なMappingはまだ評価していない。
+ATLAS Content `2026.10`の`AML.T0138`との関係を`proposed`として評価した。
+[対応の根拠・範囲・限界](../../../atlas-mapping-review-2026-10.md#c12)を参照。
+正本はCatalogの`threat_mappings`であり、ResearchのMappingの転載や製品適合の主張ではない。
 
 ## Verification
 
@@ -207,3 +209,4 @@ Fail。記録の改ざんを後で検出できるだけで過去記録の削除�
 | 日付 | 変更 | 根拠 | 証拠 |
 |---|---|---|---|
 | 2026-10-04 | 初版。Model変更の範囲、記録の完全性と不変性、隣接保証を分けた | AISVS固定版と本Repositoryの解釈 | 本書の必要な性質・試験・証拠。実製品での試験は未実施 |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c12)。人のレビュー・製品試験は未実施 |

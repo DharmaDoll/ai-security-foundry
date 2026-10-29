@@ -82,9 +82,24 @@ sources:
     role: "adversary"
     canonical_url: "https://atlas.mitre.org/"
     status: "rolling"
-    current_version: "rolling"
-    last_verified: "2026-09-01"
-    notes: "Primary adversary behavior/TTP taxonomy for AI-enabled systems. Treat technique/tactic changes as taxonomy changes requiring mapping review."
+    current_version: "2026.10"
+    data_format_version: "6.1.0"
+    upstream_revision: "f56c1468731d6428e5bf875263b4643b46d67437"
+    published: "2026-10-28"
+    last_verified: "2026-10-29"
+    verification_urls:
+      - "https://github.com/mitre-atlas/atlas-data/commit/f56c1468731d6428e5bf875263b4643b46d67437"
+      - "https://github.com/mitre-atlas/atlas-data/blob/f56c1468731d6428e5bf875263b4643b46d67437/dist/v6/ATLAS-2026.10.yaml"
+      - "https://github.com/mitre-atlas/atlas-data/blob/f56c1468731d6428e5bf875263b4643b46d67437/CHANGELOG.md"
+    notes: >-
+      Primary adversary behavior/TTP taxonomy. Monthly content and data-format
+      versions are independent; rolling describes the knowledge base, not the
+      maturity of every Technique. Previous local discovery and three proposed
+      threat mappings used Content 2026.08 / Format 6.0.0 at
+      41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5, despite the former registry entry
+      recording only rolling. The 2026.08-to-2026.10 semantic diff includes
+      2026.09 changes. New mapping assessments remain proposed, not validated.
+      Review: sources/updates/2026-10-29-atlas-2026.10-review.md.
 
   owasp-genai-llm-top10:
     name: "OWASP GenAI LLM Top 10 2026"

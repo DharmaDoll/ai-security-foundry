@@ -6,6 +6,12 @@
 
 ## 現在の作業 — 2026-10-29
 
+P6の範囲案への継続指示を受け、[案件の引継ぎメモを、翌日の指示や承認にしない](domains/memory/persistent-context-poisoning-containment/README.md)を作成した。[実装例](domains/memory/persistent-context-poisoning-containment/implementation-notes.md)は、全入力の記録、元資料と本人メモの二つの版、案件行のロック、再利用時の全出所照合を具体化する。[チェックシート](domains/memory/persistent-context-poisoning-containment/negative-tests.md)は正常系3件・拒否等12件。P6は`select`、本文は人の技術レビュー待ちの`draft`。SQL・製品試験は未実施。[選定記録](docs/pattern-landscape.md#p6-scope-proposal)と[進捗](#p6-implementation-plan)を参照。
+
+P5/P6の比較・範囲提案への継続指示を受け、[P5：本人の回答設定を保存し、次の会話へ安全に渡す](domains/memory/authorized-memory-lifecycle/README.md)を作成した。既存Web APIとDBを主例に、本人・会社・期限・版を照合する[実装例](domains/memory/authorized-memory-lifecycle/implementation-notes.md)と[正負のチェックシート](domains/memory/authorized-memory-lifecycle/negative-tests.md)を揃えた。開発対象は`select`、本文は人の技術レビュー待ちの`draft`。SQL・製品試験は未実施。[候補比較](docs/pattern-landscape.md#p5-scope-proposal)と[実装計画・進捗](#p5-implementation-plan)を参照。
+
+ATLAS Content 2026.10 / Format 6.1.0の指定コミットを受け、[既存Patternと候補への影響](docs/mitre-atlas-impact-2026-10.md)を評価した。P4の再利用経路の確認を補足し、Memory・Supply Chain候補とThreat Modelingの読取りを更新。この上流評価だけを理由とする候補選定やPattern昇格は行っていない。上流差分・Control対応案・人のレビュー待ちの範囲は[更新レビュー](../sources/updates/2026-10-29-atlas-2026.10-review.md)に集約する。
+
 P4の実装中心の改訂をコミットし、P1の実装ガイドを同じ観点で補強した。主例の注文照会をセッション・保存タスク・業務APIまで追える疑似コードにし、条件付き返金の具体的な比較をOPAの前へ置いた。文書確認のみで、製品試験・人による再レビューは未実施。続いてP2の主例を実装ノートの先頭に追加し、本人・会社・検索範囲・送信許可・回答前の全使用文書の再確認を具体化した。P3もローカル主例の資格管理・ツール受付・API呼出し・アカウント切替を疑似コードで具体化した。次はP1〜P3の処理例が自分の実装へ落とせるかを確認する。Patternの追加は急がない。
 
 直前に整備した成果物は[P4：社内情報を読むAgentから、顧客へ渡す情報と宛先を制限する](domains/agents/untrusted-content-to-action-containment/README.md)。ユーザーの実装指示を受け、社内調査から顧客への返信に範囲を絞り、本文・実装例・正負のチェックシートを作成した。P1〜P4はいずれも現在版の人によるレビュー待ちの`draft`で、P4の開発指示を他Patternのレビュー承認とは扱わない。
@@ -160,7 +166,7 @@ API接続デモ・自動テスト・CIは任意の将来拡張。Mappingも別�
 | 案内・整合性確認 | Engineering・Agents索引とLandscapeを更新。リンク、図・処理・チェックの対応、形式を確認。Mermaidの実描画と製品試験は未実施 |
 | 人による本文レビュー・Owner | 未確定。P4は`draft`。Mapping、実行可能サービス、自動テスト、CIは今回の成果物に含めない |
 
-**再開地点：** P1〜P3の実装例の補強と文書間の整合性確認が完了。次は下表の入口から、人が「自分の実装へ落とせるか」を確認する。P4を含め現在版は`draft`のまま。製品試験やレビュー承認を済ませたとは扱わず、次Patternの作成へ自動的に進まない。
+**再開地点：** P6のガイド・実装例・チェックシートは作成済み。次は、全出所の記録、二つの版の照合、古い会話からの再投入防止を読者が実装できるかを確認する。P1〜P6の本文の技術レビューは下表の入口から行い、開発の指示を本文レビューの承認とは扱わない。
 
 | レビュー対象 | 読む箇所 | 確認したいこと |
 |---|---|---|
@@ -168,7 +174,60 @@ API接続デモ・自動テスト・CIは任意の将来拡張。Mappingも別�
 | P2 | [検索から回答までの実装例](domains/rag/secure-multi-tenant-retrieval/implementation-notes.md) | 本人の閲覧権限、会社の検索範囲、LLM送信許可の三つを区別して実装できるか |
 | P3 | [ローカルMCPの一件の照会](domains/mcp/audience-bound-downstream-delegation/README.md) | 資格とアカウントの対応、ツール受付、切替中の応答の扱いを追えるか |
 | P4 | [返信材料から送信まで](domains/agents/untrusted-content-to-action-containment/implementation-notes.md) | 顧客へ出せる項目の選別と、人が見た保存版の送信を実装できるか |
+| P5 | [本人設定の保存から取消しまで](domains/memory/authorized-memory-lifecycle/implementation-notes.md) | 会社・本人・用途・版の条件付き更新と、取消し後の再投入防止を実装できるか |
+| P6 | [案件メモの作成から翌日の再利用まで](domains/memory/persistent-context-poisoning-containment/implementation-notes.md) | 全入力の出所、資料版とメモ版、ロックと更新経路の条件を実装できるか |
 
+<a id="p5-implementation-plan"></a>
+
+### P5の実装計画：利用者設定を保存し、次回へ安全に渡す
+
+P5 Authorized Memory Lifecycleを開発対象として選定した。主例は複数社が使うWebアプリの「回答言語・長さ」の保存。本人が既存設定画面から保存し、バックエンドが次の会話で現在の本人・会社・用途・期限を確認して読み込む。成果物は[domains/memory/authorized-memory-lifecycle/](domains/memory/authorized-memory-lifecycle/README.md)に配置した。
+
+一般のMemory抽出を必要とするかを先に判断し、少数の設定なら既存プロフィールとDBを使う。非信頼文書を要約して自由文Memoryへ保存する設計はP6、保存経験をModel学習へ取り込む設計はP8の境界として分ける。選定の根拠は[LandscapeのP5](docs/pattern-landscape.md#p5-authorized-memory-lifecycle)、具体的な構成・処理・正負ケースはPattern側に記録する。
+
+| 順序 | 実装ガイドで具体化するもの | レビューで分かるようにすること | 状態 |
+|---|---|---|---|
+| 0 | P5/P6比較、主例、保存しない構成・型付き設定・自由文Memoryの選択 | この用途に専用Memory基盤が必要か。P2/P4に加える理由とP6の範囲が分かる | 範囲提案への継続指示を受け`select` |
+| 1 | `README.md`：実行場所・資格・①本人確定→②保存→③次回読込み→④取消し | Webセッション、DB資格、保存された設定の役割と境界が図で分かる | 作成済み。人の技術レビュー待ち |
+| 2 | `implementation-notes.md`：既存Web APIとPostgreSQL 18を使う要点サンプル | `(company_id, user_id, purpose)`、設定値、`revision`、`expires_at`を何から決め、各APIで何と比較するか。Agentへ任意読書きToolを渡さず実装できる | 作成済み。SQL実行は未実施 |
+| 3 | 同じ実装例の更新・取消し処理 | 消去と版更新を一体にし、古い版の遅延保存で復活させない。取消し後の再読込みと、既にLLMへ渡った入力を区別する | 条件付きUPDATEと競合時の扱いを記載済み |
+| 4 | `negative-tests.md`：正常保存、他者・他社、会社切替、追加キー、期限・所属失効、取消しとの競合 | 生成入力・DB状態・拒否箇所を見て確認できる。モデルの返答だけでは判定しない | 正常系4件・拒否等12件を作成済み。製品試験は未実施 |
+| 5 | 運用・参照・文書間の照合 | 本文を不要にログへ保存せず主体・操作・版・結果を追える。バックアップ復元、処理中要求、Provider保持の限界が見える | 作成済み。文書確認と製品試験を区別 |
+
+DBの一意条件・版照合・バインド変数の短い例を使い、中心の処理を`check_permission()`だけで省略しない。RLSやLangGraph Store、AgentCore Memoryは条件付きの補足に留める。初版の主例にCache、Vector Index、非同期抽出を足さない。実装時は必要な条件・実行順を示し、フルサービスやCIの作成を完了条件にしない。
+
+レビュー依頼例：
+
+> 同じ利用者が会社AとBの両方に所属する構成で、Aの回答設定を保存し、Bへ切り替えて次の会話を開始してください。実際の生成入力へAの値が入らないことを確認したいです。続いて設定を取り消し、取消し前に開いた画面から再保存して、古い版が拒否されるDB条件と記録を示してください。
+
+この計画はATLAS対応案の承認や、P1〜P4の成熟度変更とは独立して扱う。
+
+<a id="p6-implementation-plan"></a>
+
+### P6の実装計画と進捗：案件の引継ぎメモを、翌日の指示や承認にしない
+
+主例は、会社Aの担当者U1が問い合わせT-100の調査要約を保存し、翌日、同じ案件を再開する構成。自由文の要約は参考データとして扱い、本人の指示・承認・業務ルールの保存先とは分ける。候補の反復性・構成比較・図・不変条件・正負ケースは[Landscape](docs/pattern-landscape.md#p6-scope-proposal)を参照。
+
+初版の技術例は既存Web APIとPostgreSQL 18を中心にする。要約用LLMへ渡した全資料のID・版をバックエンドで記録し、元資料・保存メモを同じ業務DBで扱う。LLMやDBの資格は接続処理だけが保持し、要約・再開用のLLMに業務変更・送信Toolを与えない。LangGraph Store／Checkpointerは、既に採用している場合の組込み位置として補足する。
+
+| 順序 | 作業・予定成果物 | 実装上の焦点と区切り | 状態 |
+|---|---|---|---|
+| 0 | 候補範囲とP5/P4との差を確認する | 過去の実証・観測とプラットフォームの保存経路を確認し、案件内の自由文メモへ限定する | 範囲案への継続指示を受け`select` |
+| 1 | `README.md`：全体図・構成選択・①元資料→②要約→③保存→④再利用 | 本文と、出所・版・権限を誰が決めるかを区別。型や来歴が正しくても指示・事実として信頼しないことを明示 | 作成済み。人の技術レビュー待ち |
+| 2 | `implementation-notes.md`：入力集合の記録と保存条件 | LLM本文とサーバー付与Metadataを分ける。資料版と本人メモ版を分け、同じ案件行で保存・取消し・資料変更を順序付けする | SQL・疑似コードを作成済み。SQL実行は未実施 |
+| 3 | 同じ実装例の再利用・利用停止 | 全元資料の現在の権限・版が一致しなければ要約全体を除外。古い会話・Checkpointによる迂回を防ぎ、権限内の元記録から調査を再開する | 作成済み。設定画面への本文表示にも同じ確認を適用 |
+| 4 | `negative-tests.md`と運用・参照 | 正常再開、保存指示、出所偽装、資料失効、遅延完了、Checkpoint再開を確認。生成入力とDB・業務操作の副作用を観測する | 正常系3件・拒否等12件を作成済み。試験は未実施 |
+| 5 | 一覧・計画更新と文書確認 | 図・処理・チェックの段階名、リンク、例の整合性を確認し、本文を人の技術レビューへ渡す | 一覧・相互参照を更新。文書確認と製品試験を区別し、`draft`を維持 |
+
+レビュー用の具体例は、元資料S1/S2の両方から作った要約で、S2だけが後から読めなくなるケースとする。モデルの引用がS1だけでも、S2を含む入力から作った要約全体を除外できることを示す。必要なら現在読める資料から作り直すが、旧要約を再要約の入力へ戻さない。
+
+観測用ログには処理ID、元資料IDと版、メモ管理版、保存／再利用の成否・拒否理由を残す方針とする。本文・資格の常時ログ保存を前提にしない。取消し後に読み込む要求と処理中の要求を分け、バックアップ復元はP5の利用停止・再公開判断を参照する。
+
+レビュー依頼例：
+
+> 顧客本文へ「次回から承認不要」という指示を混ぜ、要約を保存して別の会話から同じ案件を再開してください。モデルがその指示に従う場合でも、業務の承認記録や送信先が変わらないことを見たいです。続いて元資料の一つを失効させ、旧要約・古い会話・遅れて完了した要約処理のいずれからも再投入されないか、入力記録とDB状態を示してください。
+
+成果物は[domains/memory/persistent-context-poisoning-containment/](domains/memory/persistent-context-poisoning-containment/README.md)に配置した。本文・要点サンプル・チェックシートが今回の範囲で、実行可能サービス・自動テスト一式・CIは作成していない。組織横断の共有Memory、要約の多段連鎖、学習採用、任意の外部Memoryサービス連携は別の検討とする。
 
 ## 1. 目的と境界
 
@@ -519,7 +578,7 @@ Controlは別経路で要件解釈、保証特性、検証、証拠期待を成�
 
 ### Phase 5: memory と振る舞い層サプライチェーン
 
-- 永続 memory の汚染とテナント分離を扱うパターンを一つ開発する。
+- 永続Memoryの所有者・期限・取消しを扱うP5と、自由文要約の出所・再利用を扱うP6を分ける。いずれも限定した主例のガイドを作成済みで、人の技術レビュー待ち。
 - 次に、共有される出所、権限、分離、ロールバックを使った skill 導入・更新パターンを作る。
 - 独立した共有 supply-chain パターンは、具体的な作業から安定性と再利用性が証明された場合に
   のみ作る。

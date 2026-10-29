@@ -66,7 +66,9 @@ C11.2.3の較正とは目的が異なる。C7の出力安全性・Schema処理�
 ## Threat and failure-mode rationale
 
 詳細なScoreや内部Traceを質問と組み合わせて教師Dataとし、Modelの能力・構造を模倣する。
-外部脅威IDとの厳密なMappingは未評価。Research内のMappingを自動継承しない。
+ATLAS Content `2026.10`の`AML.T0005.001`との関係を`proposed`として評価した。
+[対応の根拠・範囲・限界](../../../atlas-mapping-review-2026-10.md#c11)を参照。
+正本はCatalogの`threat_mappings`であり、ResearchのMappingの転載や製品適合の主張ではない。
 
 ## Verification
 
@@ -120,3 +122,4 @@ C11.2.3の較正とは目的が異なる。C7の出力安全性・Schema処理�
 | 日付 | 変更 | 根拠 | 証拠 |
 |---|---|---|---|
 | 2026-10-19 | 初版。要件固有の保証境界・性質・正負試験・証拠を定義 | 固定版AISVS v1.0と対応Research、Repository解釈 | 本文の検証設計。実製品試験は未実施 |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c11)。人のレビュー・製品試験は未実施 |

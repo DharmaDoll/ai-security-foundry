@@ -22,6 +22,7 @@ of completed Patterns and must not create placeholder content for every candidat
 
 ## Research records
 
+- [MITRE ATLAS 2026.10 impact](mitre-atlas-impact-2026-10.md) — 既存Pattern、Memory・Supply Chain候補、Threat Modelingへの影響。旧版の発見記録は保持。
 - [MITRE ATLAS v2026.08 Pattern Discovery](mitre-atlas-pattern-discovery-2026-08.md)
 
 Research records preserve the source snapshot, method, evidence, exclusions, and

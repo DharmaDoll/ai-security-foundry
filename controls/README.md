@@ -161,3 +161,7 @@ AISVS Researchは脅威や検証を考えるための補助資料であり、追
 現行資料の採用版はAISVS v1.0です。上流の最新安定版1.01への差分・影響評価は
 [Issue #6](https://github.com/DharmaDoll/ai-security-foundry/issues/6)で追跡しています。
 Engineering Patternとの関係は、両者を独立に理解した後に [Mappings](../mappings/README.md) で評価します。
+
+## MITRE ATLASの対応評価
+
+[Content 2026.10への更新案](atlas-mapping-review-2026-10.md)に、C5の既存関係の移行とC6・C8・C9・C11・C12の対応根拠・限界をまとめています。正式な情報はCatalog、上流差分と人のレビュー状況はリンク先の更新レビューを参照してください。

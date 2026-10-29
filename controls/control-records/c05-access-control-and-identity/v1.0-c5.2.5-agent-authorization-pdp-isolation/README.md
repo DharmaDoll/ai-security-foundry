@@ -246,13 +246,18 @@ as adjacent assurance because their absence can make the system insecure without
 necessarily placing the PDP itself under Agent control.
 
 The following threat links are proposed. ATLAS is a rolling adversary knowledge
-base; these relationships use the pinned `2026.08` snapshot and require reassessment
+base; these relationships use the pinned `2026.10` snapshot and require reassessment
 when that source state or this Control changes materially.
 
 | Source snapshot | ID | Relationship | Strength | Rationale |
 |---|---|---|---|---|
-| MITRE ATLAS `2026.08` | `AML.T0053` AI Agent Tool Invocation | mitigates | partial | PDP isolation prevents a compromised Agent from rewriting or replacing its decision authority. It does not guarantee that every Tool uses that authority or that Policy is correct. |
-| MITRE ATLAS `2026.08` | `AML.T0051` LLM Prompt Injection | context | context | Prompt Injection is one route to Agent-runtime influence. Isolation limits the resulting control-plane compromise; it does not prevent or detect Prompt Injection. |
+| MITRE ATLAS `2026.10` | `AML.T0053` AI Agent Tool Invocation | mitigates | partial | PDP isolation prevents a compromised Agent from rewriting or replacing its decision authority. It does not guarantee that every Tool uses that authority or that Policy is correct. |
+| MITRE ATLAS `2026.10` | `AML.T0051` LLM Prompt Injection | context | context | Prompt Injection is one route to Agent-runtime influence. Isolation limits the resulting control-plane compromise; it does not prevent or detect Prompt Injection. |
+
+The 2026.10 reassessment retains these strengths; the updated Tool Invocation
+description explicitly includes abuse of an agent's own or user-delegated authority.
+The [migration review](../../../atlas-mapping-review-2026-10.md#c5) preserves the
+previous snapshot and rationale. These relationships remain `proposed`.
 
 Representative in-scope failure modes include:
 
@@ -427,7 +432,7 @@ full. No Engineering Pattern Mapping has been assessed.
 - [OWASP AISVS C5.2 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-02-AI-Resource-Authorization-Classification.md)
 - [OWASP AISVS v1.0 C9 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C09-Orchestration-and-Agentic-Action.md)
 - [OWASP AISVS v1.0 C12 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C12-Monitoring-and-Logging.md)
-- [MITRE ATLAS `2026.08` source snapshot](https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml)
+- [MITRE ATLAS `2026.10` source snapshot](https://github.com/mitre-atlas/atlas-data/blob/f56c1468731d6428e5bf875263b4643b46d67437/dist/v6/ATLAS-2026.10.yaml)
 - [NIST SP 800-207, Zero Trust Architecture](https://doi.org/10.6028/NIST.SP.800-207)
 
 ## Changelog
@@ -439,3 +444,4 @@ learning progress or prove that any product implements the Control.
 |---|---|---|---|
 | 2026-09-03 | Initial verifiable draft | Codex authoring agent | Commit `5921431` |
 | 2026-09-04 | Separated PDP isolation from adjacent authorization, complete-mediation, and audit properties | Maintainer feedback and Codex revision | Commit `f2bb9c2` |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c5)。人のレビュー・製品試験は未実施 |

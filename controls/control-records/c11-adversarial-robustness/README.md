@@ -96,3 +96,7 @@ Telemetryを使っても、各RequirementのPass条件は混ぜない。C9の実
 
 - [C11.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-03-Model-Extraction-Defense.md)
 - [C11.4 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C11-Adversarial-Robustness/C11-04-Model-Runtime-Anomaly-Detection.md)
+
+## MITRE ATLASとの対応
+
+[Content 2026.10の対応評価](../../atlas-mapping-review-2026-10.md#c11)で、対象Requirement・攻撃経路・対応の限界を確認できます。Mappingは`proposed`で、Family全体の網羅や製品適合を意味しません。

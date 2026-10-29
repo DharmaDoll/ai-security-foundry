@@ -85,7 +85,9 @@ C5.2.2はEnd-user認可をRetrieval／Assemblyに維持する広いControlであ
 攻撃者またはPrompt-injected Agentは別Tenant／UserのDocumentに似たQueryを送り、Client Filterを省略・変更する。Broad Service Credential、
 Post-filter、Graph Expansion、Semantic Cache Hit、Fallback Searchの一つでもScopeを再評価しなければUnauthorized Dataへ到達する。
 
-外部脅威IDは別途Mapping評価していないため`threat_mappings`は空とする。
+ATLAS Content `2026.10`の`AML.T0085.000`、`AML.T0085.002`との関係を`proposed`として評価した。
+[対応の根拠・範囲・限界](../../../atlas-mapping-review-2026-10.md#c8)を参照。
+正本はCatalogの`threat_mappings`であり、ResearchのMappingの転載や製品適合の主張ではない。
 
 ## Verification
 
@@ -151,3 +153,4 @@ Filterable ANN、Post-filter、In-database Authorizationの能力は製品によ
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-24 | 初版 | AISVS固定Revision、Repository interpretation | 本書SP・N・Evidence。製品試験は未実施 |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c8)。人のレビュー・製品試験は未実施 |

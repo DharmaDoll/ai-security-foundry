@@ -294,17 +294,18 @@ The likely impacts are cross-tenant disclosure, Model behavior influenced by
 another tenant's data or adapter, operation corruption, loss of integrity, and
 serving-layer denial of service.
 
-MITRE ATLAS `AML.T0057`, LLM Data Leakage, is a partial mapping because its snapshot
-explicitly includes information from other users as possible leaked data. C5.3.1
-reduces one infrastructure path to that outcome, but `AML.T0057` can also occur
-through training data, connected data sources, Prompt Injection, or other failures
-outside shared Model-serving isolation.
+MITRE ATLAS Content `2026.10` `AML.T0085.002`, Conversation Context and Memory,
+is a proposed partial mapping for cross-tenant collection of prompts, responses,
+and cached conversation state in shared serving infrastructure. It does not cover
+every conversation-history interface, same-tenant disclosure, or information in
+trained model weights. The former `2026.08` `AML.T0057` relationship was broader;
+the [migration review](../../../atlas-mapping-review-2026-10.md#c5) preserves it
+and explains why this is a scoped reassessment, not a mechanical rename.
 
 No mapping to `AML.T0024`, Exfiltration via AI Inference API, is asserted in this
-revision. That technique principally describes extracting private training
-information or the Model through inference access. It is useful research context
-but does not precisely identify the cross-tenant serving-state boundary tested by
-C5.3.1.
+revision. In Content 2026.10 it describes the inference-response transfer channel,
+separately from gathering outputs or inferring training information. It does not
+by itself identify the cross-tenant serving-state boundary tested by C5.3.1.
 
 ## Verification
 
@@ -457,10 +458,11 @@ explicit Mapping assessment.
 
 - [OWASP AISVS v1.0 C5 normative chapter](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/en/0x10-C05-Access-Control-and-Identity.md)
 - [OWASP AISVS v1.0 C5.3 Research](https://github.com/OWASP/AISVS/blob/78775233666a2022dcfb82037e5e029116955c00/1.0/research/chapters/C05-Access-Control/C05-03-Multi-Tenant-Isolation.md)
-- [MITRE ATLAS 2026.08 snapshot: AML.T0057 LLM Data Leakage](https://github.com/mitre-atlas/atlas-data/blob/41d4f5ca4112f0e492ffaa3ebff07dc80a75afa5/dist/v6/ATLAS-2026.08.yaml)
+- [MITRE ATLAS 2026.10 snapshot: AML.T0085.002 Conversation Context and Memory](https://github.com/mitre-atlas/atlas-data/blob/f56c1468731d6428e5bf875263b4643b46d67437/dist/v6/ATLAS-2026.10.yaml)
 
 ## Changelog
 
 | Date | Change | Source or maintainer | Evidence |
 |---|---|---|---|
 | 2026-09-04 | Initial verifiable Control | OWASP AISVS v1.0 normative and Research sources; repository interpretation | Current change set |
+| 2026-10-29 | ATLAS Content 2026.10との対応を評価。要件解釈・成熟度は維持 | 固定版ATLASとRepository独自の比較 | [対応案](../../../atlas-mapping-review-2026-10.md#c5)。人のレビュー・製品試験は未実施 |
